@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnus Lixenstrand</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+
+
+    <section id="header">
+  
+ 
+        <nav>
+          <ul>
+        <li> <a href="{{ url_for('home') }}"> <h1><span class="fa-solid fa-puzzle-piece" aria-hidden="true"></span> Magnus Lixenstrand</h1> </a> </li>
+            <li> <a href="{{ url_for('home') }}#project" > Projects </a> </li>
+
+            <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+      
+            <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
+            
+            <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
+            
+              <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
+              </span> <span class="sr-only"> LinkdIn </span>
+              </a></li>
+            
+        <li> <a href="https://github.com/lixenstrand" target="_blank">  
+          <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
+          <span class="sr-only">Github </span></a></li>
+        
+            <li><a href="https://drive.google.com/drive/folders/1yl716xC0HruaK0iyBnRXC1dqgPmXObIe?usp=drive_link" target="_blank" class="button">Resume </a></li>
+            </ul>
+        </nav>
+        
+      </section>
+
+
+
+      <!-- instructions in JavaScript block -->
+<section id=intro>
+    <p class="name">Hi, my name is <span>Magnus Lixenstrand.</span></p>
+    <br>
+    <h2>I create and problemsolve.</h2>
+    
+    <p>I'm a developer and a steeltradar, specializing in problemsolving with tools like Javascript, Python, HTML, CSS, VBA, Excel etc.</p>
+    
+     <p>Currently, I'm working at <a href="https://nordmet.se" target="_blank">Nordmet</a> as a steel tradar and studying frontend and backend developing</p>
+    
+    </section>
+    
+
+
+    <div class="gradient-project"></div>
+    
+
+
+    
+    <div class=projectBackground>
+
+        <section id="projects">
+        
+        <h1>Projects I'm proud of</h1>
+        
+         <article id="first">
+
+            <div class="text">
+                <h4>Latest Project</h4>
+                <h3>Inquiry tool for steel</h3>
+                
+                <div class="blackBox">
+                    <p>This tool is designed to streamline the process of filtering suppliers and contacts for steel inquiries, making it quick and easy to find the right resources. This tool is uniquely developed to support multi-language capabilities, ensuring users can efficiently draft an inquiry email about various steel grades with just the click of a button.</p>
+                
+                    <p>The tool accommodates both manual entry on the website and an integrated function that allows for automatic inquiry generation directly from an Excel calculation tool. This innovative feature ensures a seamless transition from calculation to communication, significantly enhancing the efficiency of the procurement process.</p>
+                
+                    <p>The core components of this tool include its intuitive user interface, multi-language support, and the seamless integration with Excel, all aimed at simplifying the complexities involved in sourcing steel.</p>
+                </div>
+                
+                    
+                <h4>Technologies used include:</h4>
+                <ul>
+                    <li>
+                        Javascript |
+                    </li>
+                    <li>
+                        Python |
+                    </li>
+                    <li>
+                        SQL |
+                    </li>
+                    <li>
+                        HTML |
+                    </li>
+                    <li>
+                        CSS 
+                    </li>
+                </ul>
+
+            </div>
+
+        <img src="{{ url_for('static', filename='images/Inquiry.png') }}" alt="Screenshot Ïnquiry tool for steel." />
+          
+          </article>
+
+
+          <article id="second">
+
+            <div class="text">
+                <h3>Offer and order calculator</h3>
+                <div class="blackBox">
+                    <p>This project is a meticulously crafted Excel template designed to calculate steel costs, shipping expenses, and more.</p>
+                    
+                    <p>Leveraging various APIs, it integrates real-time freight rates into the calculation, ensuring accurate and up-to-date pricing. This innovative tool seamlessly generates comprehensive offers directly within the Fortnox business system, based on the data input into the Excel template.</p>
+                    
+                    <p>The integration facilitates a smooth transition from initial cost estimation to the creation of detailed offers, streamlining the entire procurement process. By automating these calculations, the calculator not only saves time but also enhances accuracy and efficiency in offer generation and order processing.</p>
+                </div>
+                
+                    
+                <h4>Technologies used include:</h4>
+                <ul>
+                    <li>
+                        Python |
+                    </li>
+                    <li>
+                        SQL |
+                    </li>
+                    <li>
+                        VBA |
+                    </li>
+                    <li> 
+                        Excel 
+                    </li>
+           
+                </ul>
+
+            </div>
+
+        <img src="{{ url_for('static', filename='images/excel_calc.png') }}" alt="Screenshot excel calculator" />
+          
+          </article>
+
+
+
+          <article id="third">
+
+            <div class="text">
+                <h3>Internal company website</h3>
+                <div class="blackBox">
+                    <p>The project centers around the development of an internal website for a company, designed as a tailor-made, all-in-one system to meet the unique business needs. At its core, the website features a basic CRM (Customer Relationship Management) system that allows for efficient management of customer interactions and data.</p>
+                
+                    <p>Additionally, it incorporates certificate management, facilitating the tracking and organization of necessary compliance documents. A key component of the platform is the transporter registry, which, along with logistics planning capabilities, streamlines the process of managing shipments and logistics operations.</p>
+                                
+                    <p>The ultimate goal was to create a customized, all-encompassing system that supports the diverse needs of the company, from customer management to logistics planning, ensuring a more cohesive and efficient workflow.</p>
+                </div>
+                    
+                <h4>Technologies used include:</h4>
+                <ul>
+                    <li>
+                        Javascript |
+                    </li>
+                    <li>
+                        Python |
+                    </li>
+                    <li>
+                        SQL |
+                    </li>
+                    <li>
+                        HTML |
+                    </li>
+                    <li>
+                        CSS 
+                    </li>
+                </ul>
+
+            </div>
+
+        <img src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website" />
+          
+          </article>
+
+          
+        </section>
+          
+        </div>
+
+
+
+
+    
+    <div class="gradient"></div>
+
+
+
+
+    <section id="contact">
+
+        <h2>Contact me </h2>
+        
+        <p>I'm always interested in hearing about new opportunities where I have a chance of making a difference and learning new things</p>
+        
+        <button class="contactButton contactPopUp">Contact me</button>
+
+      </section>
+      
+
+
+    <div class="gradientTheOtherWay"></div>
+
+
+    
+<section class=footer>
+
+    <footer>
+   
+      <ul>
+          <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
+          
+            <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
+            </span> <span class="sr-only"> LinkdIn </span>
+            </a></li>
+     <li> <a href="https://github.com/lixenstrand" target="_blank">  
+        <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
+        <span class="sr-only">Github </span></a></li>
+    
+      </ul>
+    
+    <p> <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal> <p> 
+      
+      </footer>
+      
+    </section>
+    
+
+
+
+ 
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+    
+</body>
+</html>

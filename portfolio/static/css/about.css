@@ -1,0 +1,337 @@
+
+ 
+/* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
+:root {
+    --black: #0D0D0D;
+    --dkblue: #73321A;
+    --plum: #A68877;
+    --hotmag: #BF6836;
+    --magenta: #D9C7B8;
+    --aqua: #D9965B;
+    --white: #f7f8fa;
+    --font-size: 1.3rem;
+    --mono: "Oxygen mono", monospace;
+    --sans: "Oxygen", sans-serif;
+}
+
+/* border box model: https://css-tricks.com/box-sizing/ */
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+body {
+   padding: 0;
+   margin: 0;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-style: normal;
+  background-color: var(--black);
+  color: var(--white);
+  font-size: var(--font-size);
+}
+
+
+#header  {
+    margin-bottom: 8rem;
+
+
+
+}
+
+
+.gradient {
+  background: linear-gradient(90deg, var(--dkblue), var(--magenta));
+  padding: 2px;
+  text-align: center;
+ /* color: var(--white);*/
+}
+
+
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+a {
+  color: var(--magenta)
+}
+
+a:hover {
+  color: var(--hotmag);
+  text-decoration: none;
+}
+
+
+
+/*nav styles */
+
+nav {
+
+    font-family: var(--mono);
+    font-size: 80%;
+    padding: 1rem;
+      
+    }
+    
+    nav h1 a {
+    
+    font-family: var(--sans);
+    
+    
+    }
+    
+    nav ul {
+      
+      list-style: none; 
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    nav li:first-child {
+    
+    flex-basis: 100%;
+    text-align: center;
+    
+    }
+    
+    
+    nav [class*="fa-"] {
+    
+    font-size: 150%;
+     color:  var(--magenta);
+    }
+    
+    nav h1 [class*="fa-"] {
+      font-size: 100%;
+      color: var(--aqua);
+    }
+    
+    
+    
+    
+    nav a {
+    
+    color: var(--white);
+      text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    nav a:hover,
+    nav [class*="fa-"]:hover {
+      color: var(--hotmag);
+    }
+    
+    
+    .button {
+    
+    background-color: var(--magenta);
+      padding: 0.25rem;
+      border-radius: 5px;
+      color: var(--black);
+    }
+    
+    .button:hover {
+    
+    color: var(--black);
+    background-color: var(--hotmag);
+    }
+    
+
+
+
+
+/* about styles */
+
+
+.aboutBackground {
+
+    background-color: var(--dkblue);
+    }
+
+    article {
+      padding-bottom: 2rem;
+    }
+    
+    #projects {
+      padding: 4rem 1rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    }
+    
+    
+    #projects h1 {
+     font-size: 2.5rem;
+     margin-bottom: calc(2.5rem * 1.5);
+        font-family: var(--mono);
+    }
+    
+
+    
+    #projects h4 {
+      font-size: 1.3rem;
+    
+      font-family: var(--mono);
+    }
+    
+    .blackBox {
+    background-color: var(--black);
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
+    -moz-box-shadow: 1px 15px 31.5px -6px #000000;
+    box-shadow: 1px 15px 31.5px -6px #000000;
+    }
+
+    
+    #projects ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-size: 1rem;
+    font-family: var(--mono);
+    }
+    
+    #projects img {
+    
+    margin: 2rem 0 4rem 0;
+    border-left: 1px solid var(--aqua);
+    border-top: 1px solid var(--aqua);
+    border-radius: 25px;
+     padding: 1rem;
+     -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
+     -moz-box-shadow: 1px 15px 31.5px -6px #000000;
+     box-shadow: 1px 15px 31.5px -6px #000000;
+    }
+
+
+    
+    #first img  {
+        width: 100%;
+    }
+
+
+
+    @media (min-width: 550px) {
+        article {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 1rem;
+        }
+
+        #projects #first img {
+            grid-column: 5 / 11;
+            grid-row: 1/2;
+           
+        }
+        #first .text {
+            grid-column: 8/1;
+            grid-row: 1/2;
+            order: 1;
+            text-align: left;
+            font-family: var(--mono)
+        }
+        #projects #first ul {
+            justify-content: flex-start;
+        }
+
+    
+
+    }
+    
+
+/* footer styles */
+
+footer {
+  padding: 8rem 1rem 2rem 1rem;
+  font-family: var(--mono);
+  font-size: 80%;
+  color: var(--white);
+}
+
+
+footer h1  {
+font-family: var(--sans);
+
+text-align: center;
+}
+
+footer ul {
+  list-style-type: none;
+  margin: 0;
+  padding-top: 2.5rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+footer [class*="fa-"] {
+list-style-type: none;
+
+padding: 0;
+margin: 0;
+display: flex;
+flex-flow: row wrap;
+justify-content: center;
+gap: 3rem;
+font-size: 3rem;
+ color:  var(--magenta);
+
+}
+
+
+footer a {
+    text-decoration: none; /* Tar bort understrykningen från länkar */
+  }
+
+footer [class*="fa-"]:hover {
+ color:  var(--hotmag);
+ list-style-type: none;
+text-decoration: none; 
+
+
+}
+
+footer p {
+text-align: center;
+}
+
+
+
+
+
+
+@media (min-width: 850px) {
+  nav {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  nav li:first-child {
+    flex-basis: auto;
+    text-align: left;
+    margin-right: auto;
+  }
+}

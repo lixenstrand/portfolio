@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnus Lixenstrand</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+
+
+
+    <section id="header">
+  
+ 
+        <nav>
+          <ul>
+        <li> <a href="{{ url_for('home') }}"> <h1><span class="fa-solid fa-puzzle-piece" aria-hidden="true"></span> Magnus Lixenstrand</h1> </a> </li>
+            <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
+            <li><a href="{{ url_for('about_page') }}" > About </a> </li>
+      
+            <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
+            
+            <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
+            
+              <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
+              </span> <span class="sr-only"> LinkdIn </span>
+              </a></li>
+            
+        <li> <a href="https://github.com/lixenstrand" target="_blank">  
+          <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
+          <span class="sr-only">Github </span></a></li>
+        
+            <li><a href="https://drive.google.com/drive/folders/1yl716xC0HruaK0iyBnRXC1dqgPmXObIe?usp=drive_link" target="_blank" class="button">Resume </a></li>
+            </ul>
+        </nav>
+        
+      </section>
+
+
+    <div class="gradient"></div>
+    
+    
+    <div class=aboutBackground>
+
+        <section id="projects">
+        
+        <h1>The highlights</h1>
+        
+         <article id="first">
+
+            <div class="text">
+                <div class="blackBox">
+                    <p>I'm based in Jönköping, Sweden, and have been working in sales for over a decade. 
+                        My interest in technology has always been a significant part of my life, often using it to 
+                        solve personal challenges. Recently, I've decided to further embrace this passion by 
+                        pursuing studies in both front-end and back-end development after work hours. This decision 
+                        stems from my desire to tackle even larger problems in the future.</p>
+                
+                    <p>Traveling the world with my partner is one of our shared dreams; both of us have a deep love 
+                        for exploring new places and experiencing different cultures. When I'm not working or studying, 
+                        I spend a considerable amount of time coding (sorry, Jessica &#128513;) and staying active, as I believe 
+                        in the importance of maintaining physical health.</p>
+                
+                    <p>My eagerness to learn new things and reluctance to back down from a challenge define who I am.
+                         My journey into the world of programming is not just about career advancement but also about 
+                         fulfilling a personal quest for knowledge and making a significant impact through technology.</p>
+                </div>
+                
+                    
+                <h4 class="favoritTech">Favorite Technologies:</h4>
+                <ul>
+                    <li>
+                        Javascript |
+                    </li>
+                    <li>
+                        Python
+                    </li>
+                </ul>
+
+                <h4 class=hobbies">My hobbies:</h4>
+                <ul>
+                    <li>
+                        Traveling |
+                    </li>
+                    <li>
+                        Coding |
+                    </li>
+                    <li>
+                        fitness classes |
+                    </li>
+                    <li>
+                        Reading
+                    </li>
+                   
+                </ul>
+
+            </div>
+
+        <img src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
+          
+            </article>
+        </section>
+          
+        </div>
+
+
+
+
+    
+    <div class="gradient"></div>
+
+
+
+    
+<section class=footer>
+
+    <footer>
+   
+      <ul>
+          <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
+          
+            <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
+            </span> <span class="sr-only"> LinkdIn </span>
+            </a></li>
+     <li> <a href="https://github.com/lixenstrand" target="_blank">  
+        <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
+        <span class="sr-only">Github </span></a></li>
+    
+      </ul>
+    
+    <p> <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal> <p> 
+      
+      </footer>
+      
+    </section>
+    
+
+
+    
+</body>
+</html>
