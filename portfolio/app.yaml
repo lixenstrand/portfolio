@@ -1,0 +1,6 @@
+runtime: python311  # Använd den Python-version som stöds och som du utvecklar för.
+entrypoint: gunicorn -b :$PORT app:app
+
+handlers:
+- url: /.*
+  script: auto
