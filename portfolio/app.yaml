@@ -1,6 +1,9 @@
 runtime: python311  # Använd den Python-version som stöds och som du utvecklar för.
-entrypoint: gunicorn -b :$PORT app:app
+entrypoint: gunicorn -b :$PORT main:app
 
 handlers:
-- url: /.*
-  script: auto
+- url: /(.*\.(html))
+  static_files: \1
+  upload: (.*\.(html))
+  secure: always
+  redirect_http_response_code: 301

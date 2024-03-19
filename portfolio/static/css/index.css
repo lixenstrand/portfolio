@@ -1,6 +1,24 @@
+ @font-face {
+    font-family: 'Oxygen Mono';
+    src: url('../fonts/OxygenMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
- 
-/* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
+@font-face {
+    font-family: 'Oxygen';
+    src: url('../fonts/Oxygen-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Oxygen';
+    src: url('../fonts/Oxygen-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 :root {
     --black: #0D0D0D;
     --dkblue: #73321A;
@@ -14,7 +32,9 @@
     --sans: "Oxygen", sans-serif;
 }
 
-/* border box model: https://css-tricks.com/box-sizing/ */
+
+
+
 html {
     box-sizing: border-box;
 }
@@ -113,12 +133,18 @@ nav {
     text-align: center;
     
     }
-    
-    
-    nav [class*="fa-"] {
-    
-    font-size: 150%;
-     color:  var(--magenta);
+
+    nav .fa- {
+        height: 2rem;
+        width: auto;
+        vertical-align: middle;
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    }
+
+    nav .colorful {
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+        position: relative;
+        top: -6px;
     }
     
     nav h1 [class*="fa-"] {
@@ -139,17 +165,27 @@ nav {
     }
     
     nav a:hover,
-    nav [class*="fa-"]:hover {
+    nav .fa-:hover {
       color: var(--hotmag);
     }
+
+    nav .fa-:hover {
+      filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
+ nav .colorful:hover {
+       filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
     
     
     .button {
     
-    background-color: var(--magenta);
+    background-color: deepskyblue;
       padding: 0.25rem;
       border-radius: 5px;
       color: var(--black);
+        border: none;
     }
     
     .button:hover {
@@ -157,6 +193,18 @@ nav {
     color: var(--black);
     background-color: var(--hotmag);
     }
+
+
+.button-pulse {
+  animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
+  box-shadow: 0 0 0 0 powderblue;
+    will-change: transform;
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+  }
+}
     
 
 
@@ -166,7 +214,7 @@ nav {
 #intro {
    
   padding: 4rem 1rem 10rem 1rem;
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -212,7 +260,7 @@ font-family: var(--mono);
     
     #projects {
       padding: 4rem 1rem;
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
     }
     
@@ -351,6 +399,7 @@ font-family: var(--mono);
 
 #contact {
 background-color: var(--aqua);
+padding: 1rem 1rem;
 }
 
 
@@ -373,10 +422,50 @@ color: var(--black);
 }
 
 
+
+.button-wiggle {
+  animation: wiggle 4s 2s infinite ease-in-out;
+    will-change: transform;
+}
+
+@keyframes wiggle {
+	5%,
+	50% {
+		transform: scale(1) translateZ(0);;
+	}
+	10% {
+		transform: scale(0.9) translateZ(0);;
+	}
+	15% {
+		transform: scale(1.15) translateZ(0);;
+	}
+	20% {
+		transform: scale(1.15) rotate(-5deg) translateZ(0);;
+	}
+	25% {
+		transform: scale(1.15) rotate(5deg) translateZ(0);;
+	}
+	30% {
+		transform: scale(1.15) rotate(-3deg) translateZ(0);;
+	}
+	35% {
+		transform: scale(1.15) rotate(2deg) translateZ(0);;
+	}
+	40% {
+		transform: scale(1.15) rotate(0) translateZ(0);;
+	}
+}
+
+
+
+
+
+
 .contactPopUp {
-  background-color: var(--magenta);
-  display: flex;
-  justify-content: center;
+     background-color: deepskyblue;
+     display: flex;
+    justify-content: center;
+    border: none;
     align-items: center;
     padding: 1rem 5rem;
     border-radius: 10px;
@@ -384,9 +473,10 @@ color: var(--black);
     font-size: 1rem;
     line-height: 1.5;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
     cursor: pointer;
-    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: .5s all ease-in-out;
+    transform: translateZ(0);
 }
 
 .contactPopUp:hover {
@@ -433,7 +523,7 @@ footer ul {
 }
 
 
-footer [class*="fa-"] {
+footer .fa- {
 list-style-type: none;
 padding: 0;
 margin: 0;
@@ -442,20 +532,24 @@ flex-flow: row wrap;
 justify-content: center;
 gap: 3rem;
 font-size: 3rem;
- color:  var(--magenta);
+    height: 3rem;
+        width: auto;
+        vertical-align: middle;
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    }
 
-}
 
 
 footer a {
     text-decoration: none; /* Tar bort understrykningen från länkar */
   }
 
-footer [class*="fa-"]:hover {
+footer .fa-:hover {
  color:  var(--hotmag);
+    filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
+
  list-style-type: none;
 text-decoration: none; 
-
 
 }
 
@@ -470,7 +564,7 @@ text-align: center;
 
 @media (min-width: 850px) {
   nav {
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   nav li:first-child {
@@ -501,7 +595,8 @@ text-align: center;
 }
 
 .custom-cancel-button {
-    color: white !important; 
+    background-color: var(--aqua) !important;
+    color: white; !important;
 }
 
 .swal2-input {
@@ -521,7 +616,6 @@ text-align: center;
     font-size: 1.3rem;
     color: white;
     border: 1px solid #BF6836;
-    width: 400px;
 }
 
 /* Lägg till din font-definition någonstans i din CSS */
@@ -532,24 +626,69 @@ text-align: center;
 
 
 
-/* Anpassa storleken på SweetAlert2-dialogen för skärmar som är mindre än 600px breda */
 @media (max-width: 600px) {
-  .swal2-popup {
-    font-size: 12px !important; /* Minskar fontstorleken */
-    width: auto !important; /* Gör bredden automatisk baserat på innehållet */
-    max-width: 300px !important; /* Sätter en maxbredd */
-  }
+    .swal2-popup {
+        font-size: 1rem !important; /* Använd rem istället för px för bättre skalning */
+        width: 90% !important; /* Bredden ska vara en procentandel av skärmen */
+        max-width: 300px !important; /* Öka maxbredden om det behövs */
+        box-sizing: border-box; /* Se till att padding och border räknas in i bredden */
+    }
 
-  .swal2-title {
-    font-size: 16px !important; /* Minskar storleken på titelns font */
-  }
+    .swal2-title {
+        font-size: 1.2rem !important; /* Öka lite för bättre läsbarhet */
+    }
 
-  .swal2-content {
-    font-size: 14px !important; /* Minskar storleken på innehållets font */
-  }
+    .swal2-content {
+        font-size: 0.9rem !important; /* Något mindre för innehållet */
+    }
 
-  .swal2-styled.swal2-confirm,
-  .swal2-styled.swal2-cancel {
-    font-size: 12px !important; /* Minskar knapparnas fontstorlek */
-  }
+    .swal2-styled.swal2-confirm,
+    .swal2-styled.swal2-cancel {
+        font-size: 0.9rem !important; /* Något mindre för knapparna */
+    }
+
+    .swal2-input,
+    .swal2-textarea {
+        font-size: 0.9rem !important; /* Mindre fontstorlek på input och textarea */
+        padding: 0.4rem !important; /* Minska padding för att spara utrymme */
+    }
+
+    /* Eventuella ytterligare stiljusteringar för andra SweetAlert2-komponenter */
+}
+
+
+/* Media queries för mobilskärmar */
+@media screen and (max-width: 600px) {
+    #projects {
+        /* Justera bredden och kanske padding för att maximera utrymmet */
+        width: 100%;
+        padding: 0 10px;
+    }
+
+
+    #projects .text,
+    #projects img {
+        /* Gör text och bilder staplade istället för sida vid sida */
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .gradient-project,
+    .gradient,
+    .gradientTheOtherWay {
+        /* Se till att gradient-bakgrundarna sträcker sig full bredd */
+        width: 100%;
+    }
+
+    .blackBox {
+        /* Justera bredden och kanske padding för att maximera utrymmet */
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Det kan också vara viktigt att ställa in max-width på bilder så att de inte sträcker sig utanför sina behållare */
+img {
+    max-width: 100%;
+    height: auto;
+}
 }

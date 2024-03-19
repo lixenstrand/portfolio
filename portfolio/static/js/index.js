@@ -28,6 +28,7 @@ function init() {
                                 };
 
                             // Använd fetch för att skicka en POST-begäran till /send_mail endpointen
+                                console.log(emailData);
                             fetch('/send_mail', {
                                         method: 'POST',
                                         headers: {
@@ -59,19 +60,11 @@ function init() {
             }
 
 
-function sendEmail(name, email, message) {
-    
-}
-
-
 
 function ValidateEmail(mail) 
 {
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-  {
-    return (true)
-  }
-    return (false)
+ return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
+
 }
 
 

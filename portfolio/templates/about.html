@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magnus Lixenstrand</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
 
+    <title>About Magnus</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 </head>
 <body>
@@ -21,23 +18,32 @@
  
         <nav>
           <ul>
-        <li> <a href="{{ url_for('home') }}"> <h1><span class="fa-solid fa-puzzle-piece" aria-hidden="true"></span> Magnus Lixenstrand</h1> </a> </li>
-            <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
+            <li>
+                <a href="{{ url_for('home') }}">
+                    <h1>
+                        <img src="{{ url_for('static', filename='icon/puzzle-piece-solid.svg') }}" alt="Puzzle Piece" class="colorful" style="height: 1.5rem; width: auto; vertical-align: middle;">
+                        Magnus Lixenstrand
+                    </h1>
+                </a>
+            </li>
+              <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
             <li><a href="{{ url_for('about_page') }}" > About </a> </li>
       
             <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
-            
-            <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
-            
-              <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
-              </span> <span class="sr-only"> LinkdIn </span>
-              </a></li>
-            
-        <li> <a href="https://github.com/lixenstrand" target="_blank">  
-          <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
-          <span class="sr-only">Github </span></a></li>
+
+              <li>
+                <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                    <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                </a>
+                 </li>
+
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
         
-            <li><a href="https://drive.google.com/drive/folders/1yl716xC0HruaK0iyBnRXC1dqgPmXObIe?usp=drive_link" target="_blank" class="button">Resume </a></li>
+            <li><a href="https://drive.google.com/drive/folders/1yl716xC0HruaK0iyBnRXC1dqgPmXObIe?usp=drive_link" target="_blank" class="button button-pulse">Resume </a></li>
             </ul>
         </nav>
         
@@ -124,14 +130,16 @@
     <footer>
    
       <ul>
-          <li> <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"> 
-          
-            <span class="fa-brands fa-linkedin fa-sm" aria-hidden="true">   
-            </span> <span class="sr-only"> LinkdIn </span>
-            </a></li>
-     <li> <a href="https://github.com/lixenstrand" target="_blank">  
-        <span class="fa-brands fa-square-github" aria-hidden="true"></span> 
-        <span class="sr-only">Github </span></a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+            </a>
+        </li>
+     <li>
+            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+            </a>
+        </li>
     
       </ul>
     

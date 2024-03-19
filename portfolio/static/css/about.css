@@ -1,4 +1,25 @@
 
+ @font-face {
+    font-family: 'Oxygen Mono';
+    src: url('../fonts/OxygenMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Oxygen';
+    src: url('../fonts/Oxygen-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Oxygen';
+    src: url('../fonts/Oxygen-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
  
 /* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
 :root {
@@ -106,11 +127,19 @@ nav {
     }
     
     
-    nav [class*="fa-"] {
-    
-    font-size: 150%;
-     color:  var(--magenta);
+    nav .fa- {
+        height: 2rem;
+        width: auto;
+        vertical-align: middle;
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
     }
+
+ nav .colorful {
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+        position: relative;
+        top: -6px;
+    }
+
     
     nav h1 [class*="fa-"] {
       font-size: 100%;
@@ -133,14 +162,24 @@ nav {
     nav [class*="fa-"]:hover {
       color: var(--hotmag);
     }
+
+
+      nav .fa-:hover {
+      filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
+       nav .colorful:hover {
+       filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
     
     
     .button {
-    
-    background-color: var(--magenta);
+    background-color: deepskyblue;
       padding: 0.25rem;
       border-radius: 5px;
       color: var(--black);
+        border: none;
     }
     
     .button:hover {
@@ -148,7 +187,18 @@ nav {
     color: var(--black);
     background-color: var(--hotmag);
     }
-    
+
+
+    .button-pulse {
+  animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
+  box-shadow: 0 0 0 0 powderblue;
+    will-change: transform;
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+  }
+}
 
 
 
@@ -288,7 +338,7 @@ footer ul {
 }
 
 
-footer [class*="fa-"] {
+footer .fa- {
 list-style-type: none;
 
 padding: 0;
@@ -298,7 +348,10 @@ flex-flow: row wrap;
 justify-content: center;
 gap: 3rem;
 font-size: 3rem;
- color:  var(--magenta);
+    height: 3rem;
+        width: auto;
+        vertical-align: middle;
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
 
 }
 
@@ -307,11 +360,12 @@ footer a {
     text-decoration: none; /* Tar bort understrykningen från länkar */
   }
 
-footer [class*="fa-"]:hover {
+footer .fa-:hover {
  color:  var(--hotmag);
- list-style-type: none;
-text-decoration: none; 
+    filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
 
+ list-style-type: none;
+text-decoration: none;
 
 }
 
