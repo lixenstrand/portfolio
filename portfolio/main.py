@@ -1,14 +1,19 @@
+from dotenv import load_dotenv
+
 from flask import Flask, request, render_template
 from flask_mail import Mail, Message
+import os
+
+load_dotenv()  # Tar automatiskt .env-filen och läser in dess värden som miljövariabler
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
-# Konfigurera Flask-Mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'mlixenstrand@gmail.com'
-app.config['MAIL_PASSWORD'] = 'qhkp vicq odna aubj'
+# Använd os.environ.get för att läsa miljövariabler
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True') == 'True'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
 
 
@@ -25,22 +30,22 @@ def about_page():
 @app.route('/send_mail', methods=['POST'])
 def send_mail():
     try:
-        # Försök hämta JSON-data från förfrågan
+
         data = request.get_json()
-        # Kontrollera om data inte kunde hämtas
+
         if data is None:
             return 'Inga data skickades!', 400
 
-        # Hämta data från JSON
-        name = data.get('name')  # Använd .get för att undvika KeyError om nyckeln inte finns
+
+        name = data.get('name')
         email = data.get('email')
         message = data.get('message')
 
-        # Validera att all nödvändig information finns
+
         if not all([name, email, message]):
             return 'Alla fält är inte ifyllda!', 400
 
-        # Konfigurera och skicka e-postmeddelandet
+
         subject = f"{name} har skrivit i Kontaktformuläret"
         recipient = ['magnus@nordmet.se']
         msg = Message(subject, sender=email, recipients=recipient)
@@ -49,7 +54,7 @@ def send_mail():
 
         return 'E-postmeddelandet skickades!', 200
     except Exception as e:
-        # Logga undantaget för debugging
+
         print(e)
         return str(e), 500
 

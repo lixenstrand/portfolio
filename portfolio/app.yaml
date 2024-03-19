@@ -7,3 +7,10 @@ handlers:
   upload: (.*\.(html))
   secure: always
   redirect_http_response_code: 301
+
+env_variables:
+  MAIL_SERVER: 'smtp.gmail.com'
+  MAIL_PORT: '587'
+  MAIL_USE_TLS: 'True'
+  MAIL_USERNAME: 'din_gmail_användare'
+  MAIL_PASSWORD: 'ditt_gmail_lösenord'

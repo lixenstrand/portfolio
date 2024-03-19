@@ -59,11 +59,11 @@ body {
 
 
 #header  {
-    margin-bottom: 8rem;
-
-
+    margin: 0 auto 8rem;
+    max-width: 1200px;
 
 }
+
 
 
 .gradient {
@@ -97,6 +97,7 @@ nav {
     font-family: var(--mono);
     font-size: 80%;
     padding: 1rem;
+    max-width: 1200px;
       
     }
     
@@ -213,6 +214,8 @@ nav {
 
     article {
       padding-bottom: 2rem;
+        margin: 0 auto;
+        max-width: 1200px;
     }
     
     #projects {
@@ -303,10 +306,19 @@ nav {
         #projects #first ul {
             justify-content: flex-start;
         }
-
-    
-
     }
+
+ @media (min-width: 850px) {
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  nav li:first-child {
+    flex-basis: auto;
+    text-align: left;
+    margin-right: auto;
+  }
+}
     
 
 /* footer styles */
