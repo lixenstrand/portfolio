@@ -1,20 +1,29 @@
 from dotenv import load_dotenv
-
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from flask_mail import Mail, Message
 import os
 
-load_dotenv()  # Tar automatiskt .env-filen och läser in dess värden som miljövariabler
+load_dotenv()
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
-# Använd os.environ.get för att läsa miljövariabler
+
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
 app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True') == 'True'
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
+
+
+#@app.before_request
+#def redirect_nonwww():
+#    if request.host.startswith('www.'):
+#        return  # Ingenting att göra om det redan är www
+#    else:
+#        new_url = 'https://www.' + request.host + request.path
+#        return redirect(new_url, code=301)
+
 
 
 @app.route('/')

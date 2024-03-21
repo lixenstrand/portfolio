@@ -58,6 +58,15 @@ body {
 }
 
 
+    .hamburger {
+        display: none;
+    }
+
+       .home-mobile {
+        display: none;
+    }
+
+
 #header  {
     margin: 0 auto 8rem;
     max-width: 1200px;
@@ -141,6 +150,14 @@ nav {
         top: -6px;
     }
 
+    nav a .home-mobile {
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    }
+
+    nav a .home-mobile:hover {
+         filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
     
     nav h1 [class*="fa-"] {
       font-size: 100%;
@@ -202,6 +219,166 @@ nav {
 }
 
 
+
+@media (min-width: 769px) {
+    .logoName {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 768px) {
+
+
+    nav a .home-mobile {
+        display: block;
+        cursor: pointer;
+        position: absolute; /* Fixerar elementet i förhållande till viewporten */
+        top: 30px;
+        left: 25px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
+        z-index: 1000; /* Ser till att menyn ligger över andra element */
+
+}
+
+
+      .h2-min {
+        font-size: 100vw;
+    }
+
+
+
+    .logoName {
+        visibility: hidden;
+    }
+
+    .hamburger {
+    display: block;
+    cursor: pointer;
+    position: absolute; /* Fixerar elementet i förhållande till viewporten */
+    top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
+    right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
+    z-index: 1000; /* Ser till att menyn ligger över andra element */
+    padding: 10px; /* Lägger till utrymme runt hamburgarens inre innehåll */
+}
+
+.bar {
+    display: block;
+    width: 35px; /* Du kan behöva justera denna bredd beroende på design */
+    height: 4px; /* Du kan behöva justera denna höjd beroende på design */
+    background-color: var(--white);
+    margin: 5px auto; /* Centrerar strecken inuti `.hamburger` containern */
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        display: flex; /* Aktiverar flexbox */
+        flex-wrap: wrap; /* Tillåter innehållet att flytta till nästa rad om det inte får plats */
+        justify-content: center; /* Centrerar items horisontellt */
+        align-items: center; /* Centrerar items vertikalt */
+        padding: 0; /* Tar bort standard padding */
+        list-style: none; /* Tar bort list-markörer */
+        margin: 0 auto; /* Centrerar listan och tar bort standardmarginal */
+        background-color: var(--black);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-menu li {
+        margin: 16px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+}
+
+ .hero-text {
+    font-family: var(--sans);
+        margin: 0 auto;
+        max-width: 1200px;
+  font-size: 4rem;
+  color: var(--aqua);
+    }
+
+
+ .aboutMeHeader {
+
+    margin-left: 20px;
+  font-family: var(--sans);
+  font-size: 4rem;
+  color: var(--aqua);
+  display: block;
+}
+
+ .smallScreenCapitalize
+    {
+    text-transform: lowercase; /* standard */
+    }
+
+
+
+ @media (max-width: 768px) {
+
+  .header:first-letter {
+    text-transform: uppercase; /* Gör endast första bokstaven stor */
+  }
+  .smallScreenCapitalize {
+    text-transform: capitalize; /* Säkerställ att resten av texten är i små bokstäver */
+      color: var(--hotmag);
+      display: block;
+  }
+}
+
+
+
+ .arrow {
+  background: var(--black);
+  height: 35vh;
+  position: relative;
+  width: 100%;
+}
+
+.arrow::before {
+    font-family: var(--mono);
+  animation: bounce 1s ease infinite;
+  bottom: 2rem;
+  color: #fff;
+  content: '╲╱';
+  font-size: 2rem;
+  height: 4rem;
+  left: 50%;
+  letter-spacing: -1px;
+  line-height: 4rem;
+  margin-left: -3rem;
+  opacity: 0.8;
+  position: absolute;
+  text-align: center;
+  width: 6rem;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-50%);
+  }
+}
 
 
 /* about styles */

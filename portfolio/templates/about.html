@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
+    <meta name="description" content="Magnus Lixenstrand is a full-stack developer based in Jönköping, Sweden.">
+    <meta name="keywords" content="Magnus Lixenstrand, full-stack developer, Jönköping, Sweden, front-end, back-end, web development, programming">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XVMGYMNKLV');
+    </script>
 
     <title>About Magnus</title>
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 </head>
 <body>
@@ -17,38 +30,64 @@
   
  
         <nav>
+            <div class="nav-bar">
+                <div class="nav-menu">
           <ul>
-            <li>
-                <a href="{{ url_for('home') }}">
-                    <h1>
-                        <img src="{{ url_for('static', filename='icon/puzzle-piece-solid.svg') }}" alt="Puzzle Piece" class="colorful" style="height: 1.5rem; width: auto; vertical-align: middle;">
-                        Magnus Lixenstrand
-                    </h1>
-                </a>
+            <li class="logoName">
+                 <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+            </a>
             </li>
-              <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
-            <li><a href="{{ url_for('about_page') }}" > About </a> </li>
-      
+
+            <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
+
+            <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+
             <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
 
-              <li>
-                <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
-                    <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
-                </a>
-                 </li>
+            <li>
+            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+            </a>
+        </li>
 
-                <li>
-                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
-                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
-                    </a>
-                </li>
-        
+        <li>
+            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+            </a>
+        </li>
+
             <li><a href="https://drive.google.com/drive/folders/1yl716xC0HruaK0iyBnRXC1dqgPmXObIe?usp=drive_link" target="_blank" class="button button-pulse">Resume </a></li>
             </ul>
+                </div>
+        </div>
+
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile" style="height: 1.8rem; width: auto; vertical-align: middle;">
+            </a>
+
+            <div class="hamburger">
+
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+
+            </div>
+
         </nav>
         
       </section>
 
+    <section id="hero">
+
+     <div class="hero-text">
+            <h1 class="aboutMeHeader">The <span class="smallScreenCapitalize">highlights</span></h1>
+        </div>
+
+        <div class="arrow"></div>
+           <br>
+
+         </section>
 
     <div class="gradient"></div>
     
@@ -57,12 +96,12 @@
 
         <section id="projects">
         
-        <h1>The highlights</h1>
+
         
          <article id="first">
 
             <div class="text">
-                <div class="blackBox">
+                <div class="blackBox" data-aos="fade-right" data-aos-offset="400">
                     <p>I'm based in Jönköping, Sweden, and have been working in sales for over a decade. 
                         My interest in technology has always been a significant part of my life, often using it to 
                         solve personal challenges. Recently, I've decided to further embrace this passion by 
@@ -80,8 +119,8 @@
                 </div>
                 
                     
-                <h4 class="favoritTech">Favorite Technologies:</h4>
-                <ul>
+                <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="1">Favorite Technologies:</h4>
+                <ul data-aos="fade-bottom" data-aos-offset="0">
                     <li>
                         Javascript |
                     </li>
@@ -90,8 +129,8 @@
                     </li>
                 </ul>
 
-                <h4 class=hobbies">My hobbies:</h4>
-                <ul>
+                <h4 class=hobbies data-aos="fade-bottom" data-aos-offset="0">My hobbies:</h4>
+                <ul data-aos="fade-bottom" data-aos-offset="0">
                     <li>
                         Traveling |
                     </li>
@@ -109,7 +148,7 @@
 
             </div>
 
-        <img src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
+        <img data-aos="fade-left" data-aos-offset="400" src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
           
             </article>
         </section>
@@ -148,9 +187,11 @@
       </footer>
       
     </section>
-    
 
 
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
     
 </body>
 </html>

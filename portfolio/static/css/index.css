@@ -56,6 +56,11 @@ body {
   font-size: var(--font-size);
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 
 
 .gradient-project {
@@ -116,7 +121,7 @@ nav {
     }
     
     nav ul {
-      
+
       list-style: none; 
       margin: 0;
       padding: 0;
@@ -146,6 +151,15 @@ nav {
         position: relative;
         top: -6px;
     }
+
+    nav a .home-mobile {
+        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    }
+
+    nav a .home-mobile:hover {
+         filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
+    }
+
     
     nav h1 [class*="fa-"] {
       font-size: 100%;
@@ -177,10 +191,16 @@ nav {
        filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
     }
 
-    
+    .hamburger {
+        display: none;
+    }
+
+    .home-mobile {
+        display: none;
+    }
+
     
     .button {
-    
     background-color: deepskyblue;
       padding: 0.25rem;
       border-radius: 5px;
@@ -205,6 +225,92 @@ nav {
     box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
   }
 }
+
+@media (min-width: 769px) {
+    .logoName {
+        visibility: visible;
+
+    }
+}
+
+@media (max-width: 768px) {
+
+    nav a .home-mobile {
+        display: block;
+    cursor: pointer;
+    position: absolute; /* Fixerar elementet i förhållande till viewporten */
+        top: 30px;
+    left: 25px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
+    z-index: 1000; /* Ser till att menyn ligger över andra element */
+
+}
+
+    .logoName {
+        visibility: hidden;
+    }
+
+    .hamburger {
+    display: block;
+    cursor: pointer;
+    position: absolute; /* Fixerar elementet i förhållande till viewporten */
+    top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
+    right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
+    z-index: 1000; /* Ser till att menyn ligger över andra element */
+    padding: 10px; /* Lägger till utrymme runt hamburgarens inre innehåll */
+}
+
+.bar {
+    display: block;
+    width: 35px; /* Du kan behöva justera denna bredd beroende på design */
+    height: 4px; /* Du kan behöva justera denna höjd beroende på design */
+    background-color: var(--white);
+    margin: 5px auto; /* Centrerar strecken inuti `.hamburger` containern */
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        display: flex; /* Aktiverar flexbox */
+        flex-wrap: wrap; /* Tillåter innehållet att flytta till nästa rad om det inte får plats */
+        justify-content: center; /* Centrerar items horisontellt */
+        align-items: center; /* Centrerar items vertikalt */
+        padding: 0; /* Tar bort standard padding */
+        list-style: none; /* Tar bort list-markörer */
+        margin: 0 auto; /* Centrerar listan och tar bort standardmarginal */
+        background-color: var(--black);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-menu li {
+        margin: 16px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+}
+
+
+
     
 
 
@@ -242,7 +348,68 @@ font-family: var(--mono);
 }
 
 
+    #element {
+        min-height: 1.2em;
+        line-height: 50px;
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: 1px solid transparent;
+    }
 
+
+.rolling-text {
+    color: var(--aqua);
+    font-size: 4rem;
+  opacity: 0;
+  visibility: hidden;
+    font-family: var(--sans);
+    transition: visibility 0s, opacity 2s ease-in-out; /* Gör övergången mjuk */
+}
+
+
+
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    25%, 75% {
+        opacity: 1;
+    }
+}
+
+
+
+ .arrow {
+  background: var(--black);
+  height: 1vh;
+  position: relative;
+  width: 100%;
+}
+
+.arrow::before {
+  animation: bounce 1s ease infinite;
+  bottom: 2rem;
+  color: #fff;
+  content: '╲╱';
+  font-size: 2rem;
+  height: 4rem;
+  left: 50%;
+  letter-spacing: -1px;
+  line-height: 4rem;
+  margin-left: -3rem;
+  opacity: 0.8;
+  position: absolute;
+  text-align: center;
+  width: 6rem;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-50%);
+  }
+}
 
 
 
@@ -349,7 +516,11 @@ font-family: var(--mono);
             grid-row: 1/2;
             order: 2;
             text-align: right;
-            font-family: var(--mono)
+            font-family: var(--mono);
+
+        }
+        #projects #first .blackBox {
+            z-index: 1000000;
         }
         #projects #first ul {
             justify-content: flex-end;
@@ -358,6 +529,8 @@ font-family: var(--mono);
         #projects #second img {
             grid-column: 5 / 11;
             grid-row: 1/2;
+            z-index: 0;
+
         }
 
         #second .text {
@@ -367,6 +540,11 @@ font-family: var(--mono);
             text-align: left;
             font-family: var(--mono)
         }
+
+        #projects #second .blackBox {
+            z-index: 1000000;
+        }
+
         #projects #second ul {
             justify-content: flex-start;
         }
@@ -618,11 +796,6 @@ text-align: center;
     border: 1px solid #BF6836;
 }
 
-/* Lägg till din font-definition någonstans i din CSS */
-@font-face {
-    font-family: 'Oxygen Mono';
-    src: url("https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Oxygen:wght@300;400;700&display=swap") format('truetype');
-}
 
 
 

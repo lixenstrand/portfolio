@@ -12,5 +12,5 @@ env_variables:
   MAIL_SERVER: 'smtp.gmail.com'
   MAIL_PORT: '587'
   MAIL_USE_TLS: 'True'
-  MAIL_USERNAME: 'din_gmail_användare'
-  MAIL_PASSWORD: 'ditt_gmail_lösenord'
+  MAIL_USERNAME: 'mlixenstrand@gmail.com'
+  MAIL_PASSWORD: 'qhkp vicq odna aubj'
