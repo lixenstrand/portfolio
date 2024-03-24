@@ -23,7 +23,7 @@ mail = Mail(app)
 #    else:
 #        new_url = 'https://www.' + request.host + request.path
 #        return redirect(new_url, code=301)
-
+#
 
 
 @app.route('/')
@@ -34,6 +34,11 @@ def home():
 @app.route('/about')
 def about_page():
     return render_template('about.html')
+
+
+@app.route('/resume')
+def resume_page():
+    return render_template('resume.html')
 
 
 @app.route('/send_mail', methods=['POST'])

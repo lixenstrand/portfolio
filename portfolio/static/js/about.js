@@ -26,7 +26,7 @@ document.querySelectorAll('.nav-menu li').forEach(n => n.addEventListener('click
 window.addEventListener('scroll', () => {
     const arrow = document.querySelector('.arrow');
 
-    // Kontrollerar om klassen 'active' är tillagd och tar bort den vid scroll
+
     if (hamburger.classList.contains('active')) {
         hamburger.classList.remove('active');
     }
@@ -34,14 +34,11 @@ window.addEventListener('scroll', () => {
         navMenu.classList.remove('active');
     }
 
-    // Använd en skalfaktor för att justera hur snabbt opacity minskar med scroll
-    // Exempel: En mindre värde som 100 gör att pilen blir genomskinlig snabbare
-    const opacityScaleFactor = 300; // Justera detta värde efter behov
+    const opacityScaleFactor = 300;
 
-    // Beräknar nytt opacity baserat på scroll position och skalfaktorn
     let opacity = 1 - window.scrollY / opacityScaleFactor;
 
-    // Säkerställer att opacity-värdet ligger mellan 0 och 1
+
     opacity = Math.max(0, Math.min(1, opacity));
 
     if (arrow) {
@@ -52,17 +49,15 @@ window.addEventListener('scroll', () => {
 
  AOS.init();
 
-  // You can also pass an optional settings object
-// below listed default settings
+
 AOS.init({
-    // Global settings:
-    // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-    offset: 290, // offset (in px) from the original trigger point
-    delay: 0, // values from 0 to 3000, with step 50ms
-    duration: 1200, // values from 0 to 3000, with step 50ms
-    easing: 'ease', // default easing for AOS animations
-    once: false, // whether animation should happen only once - while scrolling down
-    mirror: true, // whether elements should animate out while scrolling past them
+
+    offset: 290,
+    delay: 0,
+    duration: 1200,
+    easing: 'ease',
+    once: false,
+    mirror: true,
 })
 
 

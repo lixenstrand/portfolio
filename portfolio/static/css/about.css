@@ -57,6 +57,11 @@ body {
   font-size: var(--font-size);
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 
     .hamburger {
         display: none;
@@ -501,7 +506,7 @@ nav {
 /* footer styles */
 
 footer {
-  padding: 8rem 1rem 2rem 1rem;
+  padding: 1rem 1rem 2rem 1rem;
   font-family: var(--mono);
   font-size: 80%;
   color: var(--white);
