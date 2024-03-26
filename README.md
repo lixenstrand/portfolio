@@ -16,3 +16,15 @@ This website is built with the following technologies:
 - **Frontend:** HTML, Vanilla CSS, Vanilla JavaScript
 - **Backend:** Python with [Flask](https://flask.palletsprojects.com/)
 - **Deployment:** [Google App Engine](https://cloud.google.com/appengine)
+
+
+
+## Contact
+
+For questions and collaborations, you can reach me at:
+
+
+- **LinkedIn:** https://www.linkedin.com/in/magnus-lixenstrand
+
+
+Thank you for taking the time to explore my project!
