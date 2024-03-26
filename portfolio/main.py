@@ -16,14 +16,14 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
 
 
-#@app.before_request
-#def redirect_nonwww():
-#    if request.host.startswith('www.'):
-#        return  # Ingenting att göra om det redan är www
-#    else:
-#        new_url = 'https://www.' + request.host + request.path
-#        return redirect(new_url, code=301)
-#
+@app.before_request
+def redirect_nonwww():
+    if request.host.startswith('www.'):
+        return  # Ingenting att göra om det redan är www
+    else:
+        new_url = 'https://www.' + request.host + request.path
+        return redirect(new_url, code=301)
+
 
 
 @app.route('/')
@@ -41,7 +41,7 @@ def resume_page():
     return render_template('resume.html')
 
 
-@app.route('/send_mail', methods=['POST'])
+@app.route('/send_mail', methods = ['POST'])
 def send_mail():
     try:
 
@@ -58,7 +58,6 @@ def send_mail():
 
         if not all([name, email, message]):
             return 'Alla fält är inte ifyllda!', 400
-
 
         subject = f"{name} har skrivit i Kontaktformuläret"
         recipient = ['magnus@nordmet.se']

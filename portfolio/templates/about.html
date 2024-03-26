@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
     <meta name="description" content="Magnus Lixenstrand is a full-stack developer based in Jönköping, Sweden.">
-    <meta name="keywords" content="Magnus Lixenstrand, full-stack developer, Jönköping, Sweden, front-end, back-end, web development, programming">
+    <meta name="keywords"
+        content="Magnus Lixenstrand, full-stack developer, Jönköping, Sweden, front-end, back-end, web development, programming">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-XVMGYMNKLV');
+        gtag('config', 'G-XVMGYMNKLV');
     </script>
 
     <title>About Magnus</title>
@@ -22,48 +24,55 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 </head>
+
 <body>
 
 
 
     <section id="header">
-  
- 
+
+
         <nav>
             <div class="nav-bar">
                 <div class="nav-menu">
-          <ul>
-            <li class="logoName">
-                 <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
-            </a>
-            </li>
+                    <ul>
+                        <li class="logoName">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
+                                    class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                            </a>
+                        </li>
 
-            <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
+                        <li> <a href="{{ url_for('home') }}#projects"> Projects </a> </li>
 
-            <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+                        <li><a href="{{ url_for('about_page') }}"> About </a> </li>
 
-            <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
+                        <li><a href="{{ url_for('home') }}#contact"> Contact </a></li>
 
-            <li>
-            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
-                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
-            </a>
-        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
+                                aria-label="LinkedIn">
+                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
+                                    alt="LinkedIn">
+                            </a>
+                        </li>
 
-        <li>
-            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
-                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
-            </a>
-        </li>
+                        <li>
+                            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
+                                    alt="Github">
+                            </a>
+                        </li>
 
-            <li><a href="https://drive.google.com/file/d/1TdVcvBpaRA-rB7l2ITmYo09_LNyP79_n/preview" target="_blank" class="button button-pulse">Resume</a></li>
-            </ul>
+                        <li><a href="https://drive.google.com/file/d/1TdVcvBpaRA-rB7l2ITmYo09_LNyP79_n/preview"
+                                target="_blank" class="button button-pulse">Resume</a></li>
+                    </ul>
                 </div>
-        </div>
+            </div>
 
             <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
+                    style="height: 1.8rem; width: auto; vertical-align: middle;">
             </a>
 
             <div class="hamburger">
@@ -75,123 +84,131 @@
             </div>
 
         </nav>
-        
-      </section>
+
+    </section>
 
     <section id="hero">
 
-     <div class="hero-text">
+        <div class="hero-text">
             <h1 class="aboutMeHeader">The <span class="smallScreenCapitalize">highlights</span></h1>
         </div>
 
         <div class="arrow"></div>
-           <br>
+        <br>
 
-         </section>
+    </section>
 
     <div class="gradient"></div>
-    
-    
+
+
     <div class=aboutBackground>
 
         <section id="projects">
-        
 
-        
-         <article id="first">
 
-            <div class="text">
-                <div class="blackBox" data-aos="fade-right" data-aos-offset="400">
-                    <p>I'm based in Jönköping, Sweden, and have been working in sales for over a decade. 
-                        My interest in technology has always been a significant part of my life, often using it to 
-                        solve personal challenges. Recently, I've decided to further embrace this passion by 
-                        pursuing studies in both front-end and back-end development after work hours. This decision 
-                        stems from my desire to tackle even larger problems in the future.</p>
-                
-                    <p>Traveling the world with my partner is one of our shared dreams; both of us have a deep love 
-                        for exploring new places and experiencing different cultures. When I'm not working or studying, 
-                        I spend a considerable amount of time coding (sorry, Jessica &#128513;) and staying active, as I believe 
-                        in the importance of maintaining physical health.</p>
-                
-                    <p>My eagerness to learn new things and reluctance to back down from a challenge define who I am.
-                         My journey into the world of programming is not just about career advancement but also about 
-                         fulfilling a personal quest for knowledge and making a significant impact through technology.</p>
+
+            <article id="first">
+
+                <div class="text">
+                    <div class="blackBox" data-aos="fade-right" data-aos-offset="400">
+                        <p>I'm based in Jönköping, Sweden, and have been working in sales for over a decade.
+                            My interest in technology has always been a significant part of my life, often using it to
+                            solve personal challenges. Recently, I've decided to further embrace this passion by
+                            pursuing studies in both front-end and back-end development after work hours. This decision
+                            stems from my desire to tackle even larger problems in the future.</p>
+
+                        <p>Traveling the world with my partner is one of our shared dreams; both of us have a deep love
+                            for exploring new places and experiencing different cultures. When I'm not working or
+                            studying,
+                            I spend a considerable amount of time coding (sorry, Jessica &#128513;) and staying active,
+                            as I believe
+                            in the importance of maintaining physical health.</p>
+
+                        <p>My eagerness to learn new things and reluctance to back down from a challenge define who I
+                            am.
+                            My journey into the world of programming is not just about career advancement but also about
+                            fulfilling a personal quest for knowledge and making a significant impact through
+                            technology.</p>
+                    </div>
+
+
+                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="1">Favorite Technologies:</h4>
+                    <ul data-aos="fade-bottom" data-aos-offset="0">
+                        <li>
+                            Javascript |
+                        </li>
+                        <li>
+                            Python
+                        </li>
+                    </ul>
+
+                    <h4 class=hobbies data-aos="fade-bottom" data-aos-offset="0">My hobbies:</h4>
+                    <ul data-aos="fade-bottom" data-aos-offset="0">
+                        <li>
+                            Traveling |
+                        </li>
+                        <li>
+                            Coding |
+                        </li>
+                        <li>
+                            fitness classes |
+                        </li>
+                        <li>
+                            Reading
+                        </li>
+
+                    </ul>
+
                 </div>
-                
-                    
-                <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="1">Favorite Technologies:</h4>
-                <ul data-aos="fade-bottom" data-aos-offset="0">
-                    <li>
-                        Javascript |
-                    </li>
-                    <li>
-                        Python
-                    </li>
-                </ul>
 
-                <h4 class=hobbies data-aos="fade-bottom" data-aos-offset="0">My hobbies:</h4>
-                <ul data-aos="fade-bottom" data-aos-offset="0">
-                    <li>
-                        Traveling |
-                    </li>
-                    <li>
-                        Coding |
-                    </li>
-                    <li>
-                        fitness classes |
-                    </li>
-                    <li>
-                        Reading
-                    </li>
-                   
-                </ul>
+                <img data-aos="fade-left" data-aos-offset="400"
+                    src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
 
-            </div>
-
-        <img data-aos="fade-left" data-aos-offset="400" src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
-          
             </article>
         </section>
-          
-        </div>
+
+    </div>
 
 
 
 
-    
+
     <div class="gradient"></div>
 
 
 
-    
-<section class=footer>
 
-    <footer>
-   
-      <ul>
-          <li>
-            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
-                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
-            </a>
-        </li>
-     <li>
-            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
-                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
-            </a>
-        </li>
-    
-      </ul>
-    
-    <p> <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal> <p> 
-      
-      </footer>
-      
+    <section class=footer>
+
+        <footer>
+
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
+
+            </ul>
+
+            <p>
+                <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
+            <p>
+
+        </footer>
+
     </section>
 
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="{{ url_for('static', filename='js/about.js') }}"></script>
-    
+    <script src="{{ url_for('static', filename='js/about.js') }}"></script>
+
 </body>
+
 </html>

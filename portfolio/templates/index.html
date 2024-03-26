@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="hksh30XchufP4nt-OZPrmTf3SwEe36Y_28Ujf0i0wFY" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Magnus Lixenstrand is a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML, CSS, VBA, Excel etc.">
-    <meta name="keywords" content="Magnus Lixenstrand, developer, steel trader, Javascript, Python, HTML, CSS, VBA, Excel">
+    <meta name="description"
+        content="Magnus Lixenstrand is a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML, CSS, VBA, Excel etc.">
+    <meta name="keywords"
+        content="Magnus Lixenstrand, developer, steel trader, Javascript, Python, HTML, CSS, VBA, Excel">
     <meta name="author" content="Magnus Lixenstrand">
 
 
@@ -17,57 +20,64 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-XVMGYMNKLV');
+        gtag('config', 'G-XVMGYMNKLV');
     </script>
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
+
 <body>
 
 
 
     <section id="header">
-  
- 
+
+
         <nav>
             <div class="nav-bar">
                 <div class="nav-menu">
-          <ul>
-            <li class="logoName">
-                 <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
-            </a>
+                    <ul>
+                        <li class="logoName">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
+                                    class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                            </a>
 
-            <li> <a href="{{ url_for('home') }}#projects" > Projects </a> </li>
+                        <li> <a href="{{ url_for('home') }}#projects"> Projects </a> </li>
 
-            <li><a href="{{ url_for('about_page') }}"> About </a> </li>
-      
-            <li><a href="{{ url_for('home') }}#contact" > Contact </a></li>
-            
-            <li>
-            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
-                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
-            </a>
-        </li>
-            
-        <li>
-            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
-                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
-            </a>
-        </li>
-        
-            <li><a href="https://drive.google.com/file/d/1TdVcvBpaRA-rB7l2ITmYo09_LNyP79_n/preview" target="_blank" class="button button-pulse">Resume</a></li>
-            </ul>
+                        <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+
+                        <li><a href="{{ url_for('home') }}#contact"> Contact </a></li>
+
+                        <li>
+                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
+                                aria-label="LinkedIn">
+                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
+                                    alt="LinkedIn">
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
+                                    alt="Github">
+                            </a>
+                        </li>
+
+                        <li><a href="https://drive.google.com/file/d/1TdVcvBpaRA-rB7l2ITmYo09_LNyP79_n/preview"
+                                target="_blank" class="button button-pulse">Resume</a></li>
+                    </ul>
                 </div>
-        </div>
+            </div>
 
 
             <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
+                    style="height: 1.8rem; width: auto; vertical-align: middle;">
             </a>
 
             <div class="hamburger">
@@ -79,153 +89,167 @@
             </div>
 
         </nav>
-        
-      </section>
+
+    </section>
 
 
 
-      <!-- instructions in JavaScript block -->
-<section id=intro>
-    <p class="name">Hi, my name is <span>Magnus Lixenstrand.</span></p>
-    <h2 id="element"></h2>
+    <!-- instructions in JavaScript block -->
+    <section id=intro>
+        <p class="name">Hi, my name is <span>Magnus Lixenstrand.</span></p>
+        <h2 id="element"></h2>
 
-    
-    <p>I'm a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML, CSS, VBA, Excel etc.</p>
-    
-     <p>Currently, I'm working at <a href="https://nordmet.se" target="_blank">Nordmet</a> as a steel trader and studying frontend and backend developing</p>
-    
+
+        <p>I'm a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML,
+            CSS, VBA, Excel etc.</p>
+
+        <p>Currently, I'm working at <a href="https://nordmet.se" target="_blank">Nordmet</a> as a steel trader and
+            studying frontend and backend developing</p>
+
     </section>
 
     <div class="arrow"></div>
 
     <div class="gradient-project"></div>
-    
 
 
-    
+
+
     <div class=projectBackground>
 
         <section id="projects">
-        
-        <h1 data-aos="fade-bottom">Projects I'm proud of</h1>
-        
-         <article id="first">
 
-            <div class="text">
-                <h4 class="animated" data-aos="fade-left">Latest Project</h4>
-                <h3 class="animated" data-aos="fade-left">Inquiry tool for steel</h3>
-                
-                <div class="blackBox animated" data-aos="fade-left">
+            <h1 data-aos="fade-bottom">Projects I'm proud of</h1>
 
-                    <p>This multi-language tool streamlines the steel inquiry process, allowing users to quickly access and easily draft inquiries through both the
-                    website and Excel with a single click.</p>
-                    <p> It searches through historical data as well as previously manually entered information to provide a comprehensive overview of steel products, including details on dimensions, quantities, and suppliers.</p>
+            <article id="first">
+
+                <div class="text">
+                    <h4 class="animated" data-aos="fade-left">Latest Project</h4>
+                    <h3 class="animated" data-aos="fade-left">Inquiry tool for steel</h3>
+
+                    <div class="blackBox animated" data-aos="fade-left">
+
+                        <p>This multi-language tool streamlines the steel inquiry process, allowing users to quickly
+                            access and easily draft inquiries through both the
+                            website and Excel with a single click.</p>
+                        <p> It searches through historical data as well as previously manually entered information to
+                            provide a comprehensive overview of steel products, including details on dimensions,
+                            quantities, and suppliers.</p>
+                    </div>
+
+
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                        <li>
+                            Javascript |
+                        </li>
+                        <li>
+                            Python |
+                        </li>
+                        <li>
+                            SQL |
+                        </li>
+                        <li>
+                            HTML |
+                        </li>
+                        <li>
+                            CSS
+                        </li>
+                    </ul>
+
                 </div>
-                
-                    
-                <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
-                <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
-                    <li>
-                        Javascript |
-                    </li>
-                    <li>
-                        Python |
-                    </li>
-                    <li>
-                        SQL |
-                    </li>
-                    <li>
-                        HTML |
-                    </li>
-                    <li>
-                        CSS 
-                    </li>
-                </ul>
+                <img data-aos="fade-right" data-aos-offset="400"
+                    src="{{ url_for('static', filename='images/Inquiry.png') }}"
+                    alt="Screenshot Inquiry tool for steel." />
 
-            </div>
-        <img data-aos="fade-right" data-aos-offset="400" src="{{ url_for('static', filename='images/Inquiry.png') }}" alt="Screenshot Inquiry tool for steel." />
-
-          </article>
+            </article>
 
 
-          <article id="second">
+            <article id="second">
 
-            <div class="text">
-                <h3 data-aos="fade-right" data-aos-offset="200">Offer and order calculator</h3>
-                <div class="blackBox animated" data-aos="fade-right" data-aos-offset="300" >
-                    <p>This projects calculates steel costs and shipping expenses, leveraging APIs for real-time freight rates.</p>
-                    <p>Integrated with Fortnox, it generates offers from Excel data, streamlining procurement from cost estimation to order processing, enhancing efficiency and accuracy. </p>
+                <div class="text">
+                    <h3 data-aos="fade-right" data-aos-offset="200">Offer and order calculator</h3>
+                    <div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
+                        <p>This projects calculates steel costs and shipping expenses, leveraging APIs for real-time
+                            freight rates.</p>
+                        <p>Integrated with Fortnox, it generates offers from Excel data, streamlining procurement from
+                            cost estimation to order processing, enhancing efficiency and accuracy. </p>
+                    </div>
+
+
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                        <li>
+                            Python |
+                        </li>
+                        <li>
+                            SQL |
+                        </li>
+                        <li>
+                            VBA |
+                        </li>
+                        <li>
+                            Excel
+                        </li>
+
+                    </ul>
+
                 </div>
-                
-                    
-                <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0" >Technologies used include:</h4>
-                <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
-                    <li>
-                        Python |
-                    </li>
-                    <li>
-                        SQL |
-                    </li>
-                    <li>
-                        VBA |
-                    </li>
-                    <li> 
-                        Excel 
-                    </li>
-           
-                </ul>
 
-            </div>
+                <img class="animated" data-aos="fade-left data-aos-offset=" 400"
+                    src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator" />
 
-        <img class="animated" data-aos="fade-left data-aos-offset="400" src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator" />
-          
-          </article>
+            </article>
 
 
 
-          <article id="third">
+            <article id="third">
 
-            <div class="text">
-                <h3 class="animated" data-aos="fade-left" data-aos-offset="100" >Internal company website</h3>
-                <div class="blackBox animated"  data-aos="fade-left" data-aos-offset="300">
-                <p>This project is an internal company website, featuring a custom CRM for efficient customer data management, certificate tracking for compliance, and a transporter registry for logistics operations. </p>
-                   <p> Designed as an all-in-one solution, it aims to streamline workflow from customer management to logistics, creating a cohesive system for diverse business needs.</p>
+                <div class="text">
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Internal company website</h3>
+                    <div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
+                        <p>This project is an internal company website, featuring a custom CRM for efficient customer
+                            data management, certificate tracking for compliance, and a transporter registry for
+                            logistics operations. </p>
+                        <p> Designed as an all-in-one solution, it aims to streamline workflow from customer management
+                            to logistics, creating a cohesive system for diverse business needs.</p>
+                    </div>
+
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                        <li>
+                            Javascript |
+                        </li>
+                        <li>
+                            Python |
+                        </li>
+                        <li>
+                            SQL |
+                        </li>
+                        <li>
+                            HTML |
+                        </li>
+                        <li>
+                            CSS
+                        </li>
+                    </ul>
+
                 </div>
-                    
-                <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
-                <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
-                    <li>
-                        Javascript |
-                    </li>
-                    <li>
-                        Python |
-                    </li>
-                    <li>
-                        SQL |
-                    </li>
-                    <li>
-                        HTML |
-                    </li>
-                    <li>
-                        CSS 
-                    </li>
-                </ul>
 
-            </div>
+                <img class="animated" data-aos="fade-right" data-aos-offset="400"
+                    src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website" />
 
-        <img class="animated" data-aos="fade-right" data-aos-offset="400"  src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website" />
-          
-          </article>
+            </article>
 
-          
+
         </section>
-          
-        </div>
+
+    </div>
 
 
 
 
-    
+
     <div class="gradient"></div>
 
 
@@ -234,47 +258,51 @@
     <section id="contact">
 
         <h2 data-aos="fade-top" data-aos-offset="240">Contact me </h2>
-        
-        <p data-aos="fade-bottom" data-aos-offset="240">I'm always interested in hearing about new opportunities where I have a chance of making a difference and learning new things</p>
-        
-        <button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Contact me</button>
 
-      </section>
-      
+        <p data-aos="fade-bottom" data-aos-offset="240">I'm always interested in hearing about new opportunities where I
+            have a chance of making a difference and learning new things</p>
+
+        <button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Contact
+            me</button>
+
+    </section>
+
 
 
     <div class="gradientTheOtherWay"></div>
 
 
-    
-<section class=footer>
 
-    <footer>
-   
-      <ul>
-          <li>
-            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
-                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
-            </a>
-        </li>
-     <li>
-            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
-                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
-            </a>
-        </li>
-    
-      </ul>
-    
-    <p> <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal> <p> 
-      
-      </footer>
-      
+    <section class=footer>
+
+        <footer>
+
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
+
+            </ul>
+
+            <p>
+                <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
+            <p>
+
+        </footer>
+
     </section>
-    
 
 
 
- 
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -282,12 +310,13 @@
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
-<script>
+    <script>
 
 
 
 
-</script>
-    
+    </script>
+
 </body>
+
 </html>
