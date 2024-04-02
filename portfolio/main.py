@@ -16,13 +16,13 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
 
 
-@app.before_request
-def redirect_nonwww():
-    if request.host.startswith('www.'):
-        return  # Ingenting att göra om det redan är www
-    else:
-        new_url = 'https://www.' + request.host + request.path
-        return redirect(new_url, code=301)
+#@app.before_request
+#def redirect_nonwww():
+#    if request.host.startswith('www.'):
+#        return  # Ingenting att göra om det redan är www
+#    else:
+#        new_url = 'https://www.' + request.host + request.path
+#        return redirect(new_url, code=301)
 
 
 
