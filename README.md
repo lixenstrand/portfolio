@@ -5,7 +5,7 @@ Welcome to the repository for my personal portfolio website! This site is design
 ## Features
 
 - **Personal Introduction:** A brief introduction to who I am and what I do.
-- **Project Portfolio:** An overview of selected projects I'm extra proud of on, complete with descriptions and technology stacks. Since the showcased projects are connected to my work I've choosen not to give out live demo.
+- **Project Portfolio:** An overview of selected projects I'm extra proud of, complete with descriptions and technology stacks. Since the showcased projects are connected to my work I've chosen not to give out live demos.
 - **Contact Form:** An easy way for visitors to contact me for job offers, project inquiries, or just to say hello.
 - **Responsive Design:** The site is designed to work smoothly across devices of all sizes, from mobiles to large screens.
 
