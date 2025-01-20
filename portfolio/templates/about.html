@@ -43,11 +43,11 @@
                             </a>
                         </li>
 
-                        <li> <a href="{{ url_for('home') }}#projects"> Projects </a> </li>
+                        <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
 
-                        <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+                        <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
 
-                        <li><a href="{{ url_for('home') }}#contact"> Contact </a></li>
+                        <li><a href="{{ url_for('home') }}#contact"> Kontakt </a></li>
 
                         <li>
                             <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
@@ -64,8 +64,9 @@
                             </a>
                         </li>
 
-                        <li><a href="https://drive.google.com/file/d/1TdVcvBpaRA-rB7l2ITmYo09_LNyP79_n/preview"
-                                target="_blank" class="button button-pulse">Resume</a></li>
+                        <li><a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank"
+                                class="button button-pulse">CV</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -90,7 +91,7 @@
     <section id="hero">
 
         <div class="hero-text">
-            <h1 class="aboutMeHeader">The <span class="smallScreenCapitalize">highlights</span></h1>
+            <h1 class="aboutMeHeader">Kort om <span class="smallScreenCapitalize">mig</span></h1>
         </div>
 
         <div class="arrow"></div>
@@ -101,7 +102,7 @@
     <div class="gradient"></div>
 
 
-    <div class=aboutBackground>
+    <div class="aboutBackground">
 
         <section id="projects">
 
@@ -111,29 +112,27 @@
 
                 <div class="text">
                     <div class="blackBox" data-aos="fade-right" data-aos-offset="400">
-                        <p>I'm based in Jönköping, Sweden, and have been working in sales for over a decade.
-                            My interest in technology has always been a significant part of my life, often using it to
-                            solve personal challenges. Recently, I've decided to further embrace this passion by
-                            pursuing studies in both front-end and back-end development after work hours. This decision
-                            stems from my desire to tackle even larger problems in the future.</p>
+                        <p>Jag bor i Jönköping och har arbetat inom försäljning i över ett decennium. Mitt intresse för
+                            teknik har
+                            alltid varit en betydande del av mitt liv, och jag använder ofta teknologi för att lösa
+                            personliga utmaningar
+                            och utmaningar jag stöter på i mitt yrkesliv, ofta handlar det om att automatisera uppgifter
+                            för att spara tid
+                            och pengar. Nyligen har jag beslutat att omfamna denna passion ytterligare genom att studera
+                            både
+                            frontend- och backend-utveckling.</p>
+                        <p>En annan stor passion i livet är att resa, vilket jag gärna gör med min sambo. Det som lockar
+                            är att ha äventyr
+                            och upptäcka andra kulturer runt om i världen.</p>
+                        <p>Min iver att lära mig nya saker och min ovilja att ge upp inför en utmaning definierar vem
+                            jag är.</p>
 
-                        <p>Traveling the world with my partner is one of our shared dreams; both of us have a deep love
-                            for exploring new places and experiencing different cultures. When I'm not working or
-                            studying,
-                            I spend a considerable amount of time coding (sorry, Jessica &#128513;) and staying active,
-                            as I believe
-                            in the importance of maintaining physical health.</p>
 
-                        <p>My eagerness to learn new things and reluctance to back down from a challenge define who I
-                            am.
-                            My journey into the world of programming is not just about career advancement but also about
-                            fulfilling a personal quest for knowledge and making a significant impact through
-                            technology.</p>
                     </div>
 
 
-                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="1">Favorite Technologies:</h4>
-                    <ul data-aos="fade-bottom" data-aos-offset="0">
+                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="400">Favorit teknologier:</h4>
+                    <ul data-aos="fade-bottom" data-aos-offset="405">
                         <li>
                             Javascript |
                         </li>
@@ -142,28 +141,27 @@
                         </li>
                     </ul>
 
-                    <h4 class=hobbies data-aos="fade-bottom" data-aos-offset="0">My hobbies:</h4>
-                    <ul data-aos="fade-bottom" data-aos-offset="0">
+                    <h4 class="hobbies" data-aos="fade-bottom" data-aos-offset="410">Mina hobbies:</h4>
+                    <ul data-aos="fade-bottom" data-aos-offset="415">
                         <li>
-                            Traveling |
+                            Resa |
                         </li>
                         <li>
-                            Coding |
+                            Koda |
                         </li>
                         <li>
-                            fitness classes |
+                            Träna |
                         </li>
                         <li>
-                            Reading
+                            Läsa
                         </li>
 
                     </ul>
 
+
+                    <img data-aos="fade-left" data-aos-offset="400"
+                        src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
                 </div>
-
-                <img data-aos="fade-left" data-aos-offset="400"
-                    src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="A picture of the author" />
-
             </article>
         </section>
 
@@ -178,7 +176,7 @@
 
 
 
-    <section class=footer>
+    <section class="footer">
 
         <footer>
 
@@ -198,7 +196,7 @@
 
             <p>
                 <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
-            <p>
+            </p>
 
         </footer>
 

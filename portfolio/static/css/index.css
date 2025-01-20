@@ -1,4 +1,4 @@
- @font-face {
+@font-face {
     font-family: 'Oxygen Mono';
     src: url('../fonts/OxygenMono-Regular.ttf') format('truetype');
     font-weight: normal;
@@ -32,9 +32,6 @@
     --sans: "Oxygen", sans-serif;
 }
 
-
-
-
 html {
     box-sizing: border-box;
 }
@@ -44,230 +41,202 @@ html {
     box-sizing: inherit;
 }
 
-
 body {
-   padding: 0;
-   margin: 0;
-  font-family: var(--mono);
-  font-weight: 400;
-  font-style: normal;
-  background-color: var(--black);
-  color: var(--white);
-  font-size: var(--font-size);
+    padding: 0;
+    margin: 0;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: var(--font-size);
 }
 
 html, body {
-  max-width: 100%;
-  overflow-x: hidden;
+    max-width: 100%;
+    overflow-x: hidden;
 }
-
-
 
 .gradient-project {
     background: linear-gradient(90deg, var(--dkblue), var(--magenta));
     padding: 2px;
     text-align: center;
    /* color: var(--white);*/
-  }
-
-
-.gradient {
-  background: linear-gradient(90deg, var(--dkblue), var(--magenta));
-  padding: 2px;
-  text-align: center;
- /* color: var(--white);*/
 }
 
+.gradient {
+    background: linear-gradient(90deg, var(--dkblue), var(--magenta));
+    padding: 2px;
+    text-align: center;
+   /* color: var(--white);*/
+}
 
 .gradientTheOtherWay {
     background: linear-gradient(90deg, var(--magenta), var(--aqua));
     padding: 2px;
     text-align: center;
    /* color: var(--white);*/
-  }
-  
-
+}
 
 h1, h2, h3 {
-  margin: 0;
+    margin: 0;
 }
 
 a {
-  color: var(--magenta)
+    color: var(--magenta);
 }
 
 a:hover {
-  color: var(--hotmag);
-  text-decoration: none;
+    color: var(--hotmag);
+    text-decoration: none;
 }
 
-
-
-/*nav styles */
+/* Nav-stilar */
 
 nav {
-
     font-family: var(--mono);
     font-size: 80%;
     padding: 1rem;
-      
-    }
-    
-    nav h1 a {
-    
-    font-family: var(--sans);
-    
-    
-    }
-    
-    nav ul {
+}
 
-      list-style: none; 
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-    }
-    
-    nav li:first-child {
-    
+nav h1 a {
+    font-family: var(--sans);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav li:first-child {
     flex-basis: 100%;
     text-align: center;
-    
-    }
+}
 
-    nav .fa- {
-        height: 2rem;
-        width: auto;
-        vertical-align: middle;
-        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
-    }
+nav .fa- {
+    height: 2rem;
+    width: auto;
+    vertical-align: middle;
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+}
 
-    nav .colorful {
-        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
-        position: relative;
-        top: -6px;
-    }
+nav .colorful {
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    position: relative;
+    top: -6px;
+}
 
-    nav a .home-mobile {
-        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
-    }
+nav a .home-mobile {
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+}
 
-    nav a .home-mobile:hover {
-         filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
-    }
+nav a .home-mobile:hover {
+    filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
+}
 
-    
-    nav h1 [class*="fa-"] {
-      font-size: 100%;
-      color: var(--aqua);
-    }
-    
-    
-    
-    
-    nav a {
-    
+nav h1 [class*="fa-"] {
+    font-size: 100%;
+    color: var(--aqua);
+}
+
+nav a {
     color: var(--white);
-      text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    nav a:hover,
-    nav .fa-:hover {
-      color: var(--hotmag);
-    }
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    nav .fa-:hover {
-      filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
-    }
+nav a:hover,
+nav .fa-:hover {
+    color: var(--hotmag);
+}
 
- nav .colorful:hover {
-       filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%)
-    }
+nav .fa-:hover {
+    filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
+}
 
-    .hamburger {
-        display: none;
-    }
+nav .colorful:hover {
+    filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
+}
 
-    .home-mobile {
-        display: none;
-    }
+.hamburger {
+    display: none;
+}
 
-    
-    .button {
+.home-mobile {
+    display: none;
+}
+
+.button {
     background-color: deepskyblue;
-      padding: 0.25rem;
-      border-radius: 5px;
-      color: var(--black);
-        border: none;
-    }
-    
-    .button:hover {
-    
+    padding: 0.25rem;
+    border-radius: 5px;
+    color: var(--black);
+    border: none;
+}
+
+.button:hover {
     color: var(--black);
     background-color: var(--hotmag);
-    }
-
+}
 
 .button-pulse {
-  animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
-  box-shadow: 0 0 0 0 powderblue;
+    animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 0 powderblue;
     will-change: transform;
 }
 @keyframes pulse {
-  to {
-    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
-  }
-}
-
-@media (min-width: 769px) {
-    .logoName {
-        visibility: visible;
-
+    to {
+        box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 840px) {
+    .logoName {
+        visibility: visible;
+    }
+}
 
+@media (max-width: 839px) {
     nav a .home-mobile {
         display: block;
-    cursor: pointer;
-    position: absolute; /* Fixerar elementet i förhållande till viewporten */
+        cursor: pointer;
+        position: absolute; /* Fixar elementet i förhållande till viewporten */
         top: 30px;
-    left: 25px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
-    z-index: 1000; /* Ser till att menyn ligger över andra element */
-
-}
+        left: 25px; /* Ökar avståndet från vänster för att göra ikonen mer synlig */
+        z-index: 1000; /* Ser till att menyn ligger över andra element */
+    }
 
     .logoName {
         visibility: hidden;
     }
 
     .hamburger {
-    display: block;
-    cursor: pointer;
-    position: absolute; /* Fixerar elementet i förhållande till viewporten */
-    top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
-    right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
-    z-index: 1000; /* Ser till att menyn ligger över andra element */
-    padding: 10px; /* Lägger till utrymme runt hamburgarens inre innehåll */
-}
+        display: block;
+        cursor: pointer;
+        position: absolute; /* Fixar elementet i förhållande till viewporten */
+        top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
+        right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
+        z-index: 1000; /* Ser till att menyn ligger över andra element */
+        padding: 10px; /* Lägger till utrymme runt hamburgarens inre innehåll */
+    }
 
-.bar {
-    display: block;
-    width: 35px; /* Du kan behöva justera denna bredd beroende på design */
-    height: 4px; /* Du kan behöva justera denna höjd beroende på design */
-    background-color: var(--white);
-    margin: 5px auto; /* Centrerar strecken inuti `.hamburger` containern */
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
+    .bar {
+        display: block;
+        width: 35px; /* Anpassa bredden efter behov */
+        height: 4px; /* Anpassa höjden efter behov */
+        background-color: var(--white);
+        margin: 5px auto; /* Centrerar strecken inuti .hamburger */
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
 
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
@@ -283,20 +252,16 @@ nav {
 
     .nav-menu {
         position: fixed;
-        left: -100%;
-        top: 70px;
-        gap: 0;
-        display: flex; /* Aktiverar flexbox */
-        flex-wrap: wrap; /* Tillåter innehållet att flytta till nästa rad om det inte får plats */
-        justify-content: center; /* Centrerar items horisontellt */
-        align-items: center; /* Centrerar items vertikalt */
-        padding: 0; /* Tar bort standard padding */
-        list-style: none; /* Tar bort list-markörer */
-        margin: 0 auto; /* Centrerar listan och tar bort standardmarginal */
-        background-color: var(--black);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
+        top: -200%; /* Startposition utanför skärmen (uppifrån) */
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--black);
+        padding-top: 20%;
+        display: flex;
+        transition: top 0.5s, opacity 0.2s; /* Övergång för top och opacity */
+        align-items: center; /* Centrera innehållet vertikalt */
+        justify-content: center; /* Centrera innehållet horisontellt */
     }
 
     .nav-menu li {
@@ -304,71 +269,71 @@ nav {
     }
 
     .nav-menu.active {
-        left: 0;
+        top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+        opacity: 1; /* Opacitet ändras till 1 när aktiv */
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        align-items: center; /* Centrera innehållet vertikalt */
+        justify-content: center; /* Centrera innehållet horisontellt */
+        z-index: 999; /* Ser till att menyn ligger över andra element */
     }
 
+    .nav-menu ul {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center; /* Centrera innehållet vertikalt */
+        gap: 1rem;
+    }
 }
 
-
-
-    
-
-
-/*intro style */
-
+/* Intro-stilar */
 
 #intro {
-   
-  padding: 4rem 1rem 10rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 4rem 1rem 10rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #intro p {
-font-family: var(--mono);
-  font-size: 1rem;
-  line-height: 1.5;
+    font-family: var(--mono);
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 #intro .name {
-  font-family: var(--mono);
+    font-family: var(--mono);
 }
 
 .name span {
-  
-  font-family: var(--sans);
-  font-size: 4rem;
-  color: var(--aqua);
-  display: block;
+    font-family: var(--sans);
+    font-size: 4rem;
+    color: var(--aqua);
+    display: block;
 }
 
 #intro h2 {
-  font-size: 4rem;
-  font-weight: normal;
+    font-size: 3rem;
+    font-weight: normal;
 }
 
-
-    #element {
-        min-height: 1.2em;
-        line-height: 50px;
-        display: block;
-        margin: 0;
-        padding: 0;
-        border: 1px solid transparent;
-    }
-
+#element {
+    min-height: 1.2em;
+    line-height: 50px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+}
 
 .rolling-text {
     color: var(--aqua);
     font-size: 4rem;
-  opacity: 0;
-  visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
     font-family: var(--sans);
     transition: visibility 0s, opacity 2s ease-in-out; /* Gör övergången mjuk */
 }
-
-
-
 
 @keyframes fadeInOut {
     0%, 100% {
@@ -379,76 +344,69 @@ font-family: var(--mono);
     }
 }
 
-
-
- .arrow {
-  background: var(--black);
-  height: 1vh;
-  position: relative;
-  width: 100%;
+.arrow {
+    background: var(--black);
+    height: 1vh;
+    position: relative;
+    width: 100%;
 }
 
 .arrow::before {
-  animation: bounce 1s ease infinite;
-  bottom: 2rem;
-  color: #fff;
-  content: '╲╱';
-  font-size: 2rem;
-  height: 4rem;
-  left: 50%;
-  letter-spacing: -1px;
-  line-height: 4rem;
-  margin-left: -3rem;
-  opacity: 0.8;
-  position: absolute;
-  text-align: center;
-  width: 6rem;
+    animation: bounce 1s ease infinite;
+    bottom: 2rem;
+    color: #fff;
+    content: '╲╱';
+    font-size: 2rem;
+    height: 4rem;
+    left: 50%;
+    letter-spacing: -1px;
+    line-height: 4rem;
+    margin-left: -3rem;
+    opacity: 0.8;
+    position: absolute;
+    text-align: center;
+    width: 6rem;
 }
 
 @keyframes bounce {
-  50% {
-    transform: translateY(-50%);
-  }
+    50% {
+        transform: translateY(-50%);
+    }
 }
 
-
-
-/* Projects styles */
-
+/* Projects-stilar */
 
 .projectBackground {
-
     background-color: var(--dkblue);
-    }
+}
 
-    article {
-      padding-bottom: 2rem;
-    }
-    
-    #projects {
-      padding: 4rem 1rem;
+article {
+    padding-bottom: 2rem;
+}
+
+#projects {
+    padding: 4rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
-    }
-    
-    
-    #projects h1 {
-     font-size: 2.5rem;
-     margin-bottom: calc(2.5rem * 1.5);
-    }
-    
-    #projects h3 {
+}
+
+#projects h1 {
+    font-size: 2.5rem;
+    margin-bottom: calc(2.5rem * 1.5);
+}
+
+#projects h3 {
     color: var(--aqua);
-     margin: 0;
-     font-family: var(--mono)
-    }
-    
-    #projects h4 {
-      font-size: 1rem;
-      font-family: var(--mono);
-    }
-    
-    .blackBox {
+    margin: 0;
+    font-family: var(--mono);
+}
+
+#projects h4 {
+    font-size: 1rem;
+    font-family: var(--mono);
+}
+
+.blackBox {
     background-color: var(--black);
     padding: 1rem;
     border-radius: 10px;
@@ -458,9 +416,9 @@ font-family: var(--mono);
     -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
     -moz-box-shadow: 1px 15px 31.5px -6px #000000;
     box-shadow: 1px 15px 31.5px -6px #000000;
-    }
-    
-    #projects ul {
+}
+
+#projects ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -470,178 +428,174 @@ font-family: var(--mono);
     gap: 1rem;
     font-size: 1rem;
     font-family: var(--mono);
-    }
-    
-    #projects img {
-    
+}
+
+#projects img {
     margin: 2rem 0 4rem 0;
     border-left: 1px solid var(--aqua);
     border-top: 1px solid var(--aqua);
     border-radius: 25px;
-     padding: 1rem;
-     -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-     -moz-box-shadow: 1px 15px 31.5px -6px #000000;
-     box-shadow: 1px 15px 31.5px -6px #000000;
+    padding: 1rem;
+    -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
+    -moz-box-shadow: 1px 15px 31.5px -6px #000000;
+    box-shadow: 1px 15px 31.5px -6px #000000;
+}
+
+#first img  {
+    width: 100%;
+}
+
+#second img {
+    width: 100%;
+}
+
+#third img {
+    width: 100%;
+}
+
+#fourth img {
+    width: 100%;
+}
+
+/* Media query för desktop-läge med grid-layout (min-width: 550px) */
+@media (min-width: 550px) {
+    article {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 1rem;
     }
 
-
-    
-    #first img  {
-        width: 100%;
+    /* Första artikeln */
+    #projects #first img {
+        grid-column: 1 / 6;
+        grid-row: 1/2;
+    }
+    #first .text {
+        grid-column: 5/11;
+        grid-row: 1/2;
+        order: 2;
+        text-align: right;
+        font-family: var(--mono);
+    }
+    #projects #first .blackBox {
+        z-index: 1000000;
+    }
+    #projects #first ul {
+        justify-content: flex-end;
     }
 
-    #second img {
-        width: 100%;
+    /* Andra artikeln */
+    #projects #second img {
+        grid-column: 5 / 11;
+        grid-row: 1/2;
+        z-index: 0;
+    }
+    #second .text {
+        grid-column: 1/6;
+        grid-row: 1/2;
+        order: 1;
+        text-align: left;
+        font-family: var(--mono);
+    }
+    #projects #second .blackBox {
+        z-index: 1000000;
+    }
+    #projects #second ul {
+        justify-content: flex-start;
     }
 
-    #third img {
-        width: 100%;
+    /* Tredje artikeln */
+    #projects #third img {
+        grid-column: 1 / 6;
+        grid-row: 1/2;
+    }
+    #third .text {
+        grid-column: 5/11;
+        grid-row: 1/2;
+        order: 2;
+        text-align: right;
+        font-family: var(--mono);
+    }
+    #projects #third ul {
+        justify-content: flex-end;
     }
 
-
-    @media (min-width: 550px) {
-        article {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 1rem;
-        }
-
-        #projects #first img {
-            grid-column: 1 / 6;
-            grid-row: 1/2;
-           
-        }
-        #first .text {
-            grid-column: 5/11;
-            grid-row: 1/2;
-            order: 2;
-            text-align: right;
-            font-family: var(--mono);
-
-        }
-        #projects #first .blackBox {
-            z-index: 1000000;
-        }
-        #projects #first ul {
-            justify-content: flex-end;
-        }
-
-        #projects #second img {
-            grid-column: 5 / 11;
-            grid-row: 1/2;
-            z-index: 0;
-
-        }
-
-        #second .text {
-            grid-column: 1/6;
-            grid-row: 1/2;
-            order: 1;
-            text-align: left;
-            font-family: var(--mono)
-        }
-
-        #projects #second .blackBox {
-            z-index: 1000000;
-        }
-
-        #projects #second ul {
-            justify-content: flex-start;
-        }
-
-        #projects #third img {
-            grid-column: 1 / 6;
-            grid-row: 1/2;
-           
-        }
-        #third .text {
-            grid-column: 5/11;
-            grid-row: 1/2;
-            order: 2;
-            text-align: right;
-            font-family: var(--mono)
-        }
-        #projects #third ul {
-            justify-content: flex-end;
-        }
-
-    
-
+    /* Fjärde artikeln – layoutexempel med bilden till höger (likt andra artikeln) */
+    #projects #fourth img {
+        grid-column: 5 / 11;
+        grid-row: 1/2;
     }
-    
+    #fourth .text {
+        grid-column: 1/6;
+        grid-row: 1/2;
+        order: 1;
+        text-align: left;
+        font-family: var(--mono);
+    }
+    #projects #fourth ul {
+        justify-content: flex-start;
+    }
+}
 
-
-
-
-/* contact styles */
+/* Contact-stilar */
 
 #contact {
-background-color: var(--aqua);
-padding: 1rem 1rem;
+    background-color: var(--aqua);
+    padding: 1rem 1rem;
 }
-
 
 #contact h2 {
-text-align: center;
-padding: 2rem;
-font-size: 2rem;
-color: var(--black);
+    text-align: center;
+    padding: 2rem;
+    font-size: 2rem;
+    color: var(--black);
 }
-
 
 #contact p {
-text-align: center;
-font-family: var(--mono);
-margin: 0 auto;
-width: 400px;
-padding: 2rem;
-font-size: 1.5rem;
-color: var(--black);
+    text-align: center;
+    font-family: var(--mono);
+    margin: 0 auto;
+    width: 400px;
+    padding: 2rem;
+    font-size: 1.5rem;
+    color: var(--black);
 }
 
-
-
 .button-wiggle {
-  animation: wiggle 4s 2s infinite ease-in-out;
+    animation: wiggle 4s 2s infinite ease-in-out;
     will-change: transform;
 }
 
 @keyframes wiggle {
-	5%,
-	50% {
-		transform: scale(1) translateZ(0);;
-	}
-	10% {
-		transform: scale(0.9) translateZ(0);;
-	}
-	15% {
-		transform: scale(1.15) translateZ(0);;
-	}
-	20% {
-		transform: scale(1.15) rotate(-5deg) translateZ(0);;
-	}
-	25% {
-		transform: scale(1.15) rotate(5deg) translateZ(0);;
-	}
-	30% {
-		transform: scale(1.15) rotate(-3deg) translateZ(0);;
-	}
-	35% {
-		transform: scale(1.15) rotate(2deg) translateZ(0);;
-	}
-	40% {
-		transform: scale(1.15) rotate(0) translateZ(0);;
-	}
+    5%, 50% {
+        transform: scale(1) translateZ(0);
+    }
+    10% {
+        transform: scale(0.9) translateZ(0);
+    }
+    15% {
+        transform: scale(1.15) translateZ(0);
+    }
+    20% {
+        transform: scale(1.15) rotate(-5deg) translateZ(0);
+    }
+    25% {
+        transform: scale(1.15) rotate(5deg) translateZ(0);
+    }
+    30% {
+        transform: scale(1.15) rotate(-3deg) translateZ(0);
+    }
+    35% {
+        transform: scale(1.15) rotate(2deg) translateZ(0);
+    }
+    40% {
+        transform: scale(1.15) rotate(0) translateZ(0);
+    }
 }
 
-
-
-
-
-
 .contactPopUp {
-     background-color: deepskyblue;
-     display: flex;
+    background-color: deepskyblue;
+    display: flex;
     justify-content: center;
     border: none;
     align-items: center;
@@ -658,102 +612,85 @@ color: var(--black);
 }
 
 .contactPopUp:hover {
-  background-color: var(--hotmag);
-  color: var(--black);
-  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+    background-color: var(--hotmag);
+    color: var(--black);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 
 #contact p:last-child {
-  margin-top: 3rem;
+    margin-top: 3rem;
 }
 
-
-
-
-/* footer styles */
+/* Footer-stilar */
 
 footer {
-  padding: 8rem 1rem 2rem 1rem;
-  font-family: var(--mono);
-  font-size: 80%;
-  color: var(--white);
+    padding: 8rem 1rem 2rem 1rem;
+    font-family: var(--mono);
+    font-size: 80%;
+    color: var(--white);
 }
 
-
-footer h1  {
-font-family: var(--sans);
-
-text-align: center;
+footer h1 {
+    font-family: var(--sans);
+    text-align: center;
 }
 
 footer ul {
-  list-style-type: none;
-  margin: 0;
-  padding-top: 2.5rem;
-  padding-bottom: 1rem;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+    list-style-type: none;
+    margin: 0;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
-
 footer .fa- {
-list-style-type: none;
-padding: 0;
-margin: 0;
-display: flex;
-flex-flow: row wrap;
-justify-content: center;
-gap: 3rem;
-font-size: 3rem;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 3rem;
+    font-size: 3rem;
     height: 3rem;
-        width: auto;
-        vertical-align: middle;
-        filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
-    }
-
-
+    width: auto;
+    vertical-align: middle;
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+}
 
 footer a {
-    text-decoration: none; /* Tar bort understrykningen från länkar */
-  }
+    text-decoration: none;
+}
 
 footer .fa-:hover {
- color:  var(--hotmag);
+    color: var(--hotmag);
     filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
-
- list-style-type: none;
-text-decoration: none; 
-
+    list-style-type: none;
+    text-decoration: none;
 }
 
 footer p {
-text-align: center;
+    text-align: center;
 }
 
-
-
-
-
-
+/* Media query för bredare skärmar (min-width: 850px) */
 @media (min-width: 850px) {
-  nav {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  nav li:first-child {
-    flex-basis: auto;
-    text-align: left;
-    margin-right: auto;
-  }
+    nav {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    nav li:first-child {
+        flex-basis: auto;
+        text-align: left;
+        margin-right: auto;
+    }
 }
 
-
-/* popup styles */
+/* Popup-stilar */
 
 .custom-popup {
     background-color: #0D0D0D !important;
@@ -761,10 +698,9 @@ text-align: center;
     color: white !important;
     font-family: 'Oxygen Mono', monospace;
     font-size: 1.3rem;
-       -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-     -moz-box-shadow: 1px 15px 31.5px -6px #000000;
-     box-shadow: 1px 15px 31.5px -6px #000000;
-
+    -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
+    -moz-box-shadow: 1px 15px 31.5px -6px #000000;
+    box-shadow: 1px 15px 31.5px -6px #000000;
 }
 
 .custom-confirm-button {
@@ -774,7 +710,7 @@ text-align: center;
 
 .custom-cancel-button {
     background-color: var(--aqua) !important;
-    color: white; !important;
+    color: white !important;
 }
 
 .swal2-input {
@@ -786,7 +722,6 @@ text-align: center;
     font-family: 'Oxygen Mono', monospace;
     color: white !important;
     background-color: #0D0D0D !important;
-    
 }
 
 .swal2-textarea {
@@ -796,52 +731,43 @@ text-align: center;
     border: 1px solid #BF6836;
 }
 
-
-
-
 @media (max-width: 600px) {
     .swal2-popup {
-        font-size: 1rem !important; /* Använd rem istället för px för bättre skalning */
-        width: 90% !important; /* Bredden ska vara en procentandel av skärmen */
-        max-width: 300px !important; /* Öka maxbredden om det behövs */
-        box-sizing: border-box; /* Se till att padding och border räknas in i bredden */
+        font-size: 1rem !important;
+        width: 90% !important;
+        max-width: 300px !important;
+        box-sizing: border-box;
     }
 
     .swal2-title {
-        font-size: 1.2rem !important; /* Öka lite för bättre läsbarhet */
+        font-size: 1.2rem !important;
     }
 
     .swal2-content {
-        font-size: 0.9rem !important; /* Något mindre för innehållet */
+        font-size: 0.9rem !important;
     }
 
     .swal2-styled.swal2-confirm,
     .swal2-styled.swal2-cancel {
-        font-size: 0.9rem !important; /* Något mindre för knapparna */
+        font-size: 0.9rem !important;
     }
 
     .swal2-input,
     .swal2-textarea {
-        font-size: 0.9rem !important; /* Mindre fontstorlek på input och textarea */
-        padding: 0.4rem !important; /* Minska padding för att spara utrymme */
+        font-size: 0.9rem !important;
+        padding: 0.4rem !important;
     }
-
-    /* Eventuella ytterligare stiljusteringar för andra SweetAlert2-komponenter */
 }
-
 
 /* Media queries för mobilskärmar */
 @media screen and (max-width: 600px) {
     #projects {
-        /* Justera bredden och kanske padding för att maximera utrymmet */
         width: 100%;
         padding: 0 10px;
     }
 
-
     #projects .text,
     #projects img {
-        /* Gör text och bilder staplade istället för sida vid sida */
         width: 100%;
         padding: 10px 0;
     }
@@ -849,19 +775,16 @@ text-align: center;
     .gradient-project,
     .gradient,
     .gradientTheOtherWay {
-        /* Se till att gradient-bakgrundarna sträcker sig full bredd */
         width: 100%;
     }
 
     .blackBox {
-        /* Justera bredden och kanske padding för att maximera utrymmet */
         width: 100%;
         padding: 10px;
     }
 
-    /* Det kan också vara viktigt att ställa in max-width på bilder så att de inte sträcker sig utanför sina behållare */
-img {
-    max-width: 100%;
-    height: auto;
-}
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }

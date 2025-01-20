@@ -201,13 +201,13 @@ nav .colorful:hover {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 840px) {
   .logoName {
     visibility: visible;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 839px) {
   nav a .home-mobile {
     display: block;
     cursor: pointer;
@@ -215,10 +215,6 @@ nav .colorful:hover {
     top: 30px;
     left: 25px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
     z-index: 1000; /* Ser till att menyn ligger över andra element */
-  }
-
-  .h2-min {
-    font-size: 100vw;
   }
 
   .logoName {
@@ -259,20 +255,17 @@ nav .colorful:hover {
 
   .nav-menu {
     position: fixed;
-    left: -100%;
-    top: 70px;
-    gap: 0;
-    display: flex; /* Aktiverar flexbox */
-    flex-wrap: wrap; /* Tillåter innehållet att flytta till nästa rad om det inte får plats */
-    justify-content: center; /* Centrerar items horisontellt */
-    align-items: center; /* Centrerar items vertikalt */
-    padding: 0; /* Tar bort standard padding */
-    list-style: none; /* Tar bort list-markörer */
-    margin: 0 auto; /* Centrerar listan och tar bort standardmarginal */
-    background-color: var(--black);
-    width: 100%;
-    text-align: center;
-    transition: 0.3s;
+    top: -200%; /* Startposition utanför skärmen (uppifrån) */
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--black);
+    padding-top: 20%;
+    display: flex;
+    transition: top 0.5s, opacity 0.2s; /* Övergång för top och opacity */
+
+    align-items: center; /* Centrera innehållet vertikalt */
+    justify-content: center; /* Centrera innehållet horisontellt */
   }
 
   .nav-menu li {
@@ -280,7 +273,21 @@ nav .colorful:hover {
   }
 
   .nav-menu.active {
-    left: 0;
+    top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+    opacity: 1; /* Opacitet ändras till 1 när aktiv */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center; /* Centrera innehållet vertikalt */
+    justify-content: center; /* Centrera innehållet horisontellt */
+    z-index: 999; /* Ser till att menyn ligger över andra element */
+  }
+
+  .nav-menu ul {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center; /* Centrera innehållet vertikalt */
+    gap: 1rem;
   }
 }
 

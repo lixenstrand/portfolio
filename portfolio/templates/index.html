@@ -7,14 +7,13 @@
     <meta name="google-site-verification" content="hksh30XchufP4nt-OZPrmTf3SwEe36Y_28Ujf0i0wFY" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
     <meta name="robots" content="index, follow">
-    <meta name="description"
-        content="Magnus Lixenstrand is a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML, CSS, VBA, Excel etc.">
+    <meta name="description" content="Fortfölj för Magnus Lixenstrand">
     <meta name="keywords"
         content="Magnus Lixenstrand, developer, steel trader, Javascript, Python, HTML, CSS, VBA, Excel">
     <meta name="author" content="Magnus Lixenstrand">
 
 
-    <title>Magnus Portfolio</title>
+    <title>Magnus Portfölj</title>
 
 
     <!-- Google tag (gtag.js) -->
@@ -46,12 +45,13 @@
                                 <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
                                     class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
                             </a>
+                        </li>
 
-                        <li> <a href="{{ url_for('home') }}#projects"> Projects </a> </li>
+                        <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
 
-                        <li><a href="{{ url_for('about_page') }}"> About </a> </li>
+                        <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
 
-                        <li><a href="{{ url_for('home') }}#contact"> Contact </a></li>
+                        <li><a href="{{ url_for('home') }}#contact"> Kontakt </a></li>
 
                         <li>
                             <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
@@ -68,8 +68,8 @@
                             </a>
                         </li>
 
-                        <li><a href="https://drive.google.com/file/d/1vxqDPFqPUZe-8ZkZacCVIkxwPxUADf8x/preview"
-                                target="_blank" class="button button-pulse">Resume</a></li>
+                        <li><a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank"
+                                class="button button-pulse">CV</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,16 +95,17 @@
 
 
     <!-- instructions in JavaScript block -->
-    <section id=intro>
-        <p class="name">Hi, my name is <span>Magnus Lixenstrand.</span></p>
+    <section id="intro">
+        <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
         <h2 id="element"></h2>
 
 
-        <p>I'm a developer and a steel trader, specializing in problem solving with tools like Javascript, Python, HTML,
-            CSS, VBA, Excel etc.</p>
+        <p>Jag är systemutvecklare och säljare, specialiserad på problemlösning och effektivisering med verktyg som
+            Javascript, Python, HTML, CSS, VBA, Excel etc.</p>
 
-        <p>Currently, I'm working at <a href="https://nordmet.se" target="_blank">Nordmet</a> as a steel trader and
-            studying frontend and backend developing</p>
+        <p>Just nu har jag yrkesrollen stålsäljare på <a href="https://nordmet.se" target="_blank">Nordmet</a>
+            och studerar
+            frontend- och backendutveckling.</p>
 
     </section>
 
@@ -115,31 +116,77 @@
 
 
 
-    <div class=projectBackground>
+    <div class="projectBackground">
 
         <section id="projects">
 
-            <h1 data-aos="fade-bottom">Projects I'm proud of</h1>
+            <h1 data-aos="fade-right" data-aos-offset="470">Projekt jag är stolt över</h1>
+
+
 
             <article id="first">
 
                 <div class="text">
-                    <h4 class="animated" data-aos="fade-left">Latest Project</h4>
-                    <h3 class="animated" data-aos="fade-left">Inquiry tool for steel</h3>
+                    <h4 class="animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</h4>
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Webbapp till föreningen</h3>
 
-                    <div class="blackBox animated" data-aos="fade-left">
+                    <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 
-                        <p>This multi-language tool streamlines the steel inquiry process, allowing users to quickly
-                            access and easily draft inquiries through both the
-                            website and Excel with a single click.</p>
-                        <p> It searches through historical data as well as previously manually entered information to
-                            provide a comprehensive overview of steel products, including details on dimensions,
-                            quantities, and suppliers.</p>
+                        <p>Detta är en webbapp till föreningen. Man kommer åt Föreningens dokument på ett smidigt sätt. Man kan
+                        även boka tvättider och det finns integration med valfri kalender.</p>
+                        <p>Detta ska vara en platform som framtida köpare/mäklare ska kunna hitta relevant information om föreningen,
+                        samtidigt som det är ett användbart verktyg för de boende</p>
+
+                        URL: <a href="https://österlandetnr7.se" target="_blank">Österlandet nr 7</a>
                     </div>
 
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
-                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
+                        <li>
+                            Fastapi |
+                        </li>
+                        <li>
+                            Svelte |
+                        </li>
+                        <li>
+                            Sqlite |
+                        </li>
+                        <li>
+                            Python
+                        </li>
+                    </ul>
+
+                </div>
+                <img data-aos="fade-right" data-aos-offset="489"
+                    src="{{ url_for('static', filename='images/website.png') }}"
+                    alt="Screenshot of logo for website." />
+
+            </article>
+
+
+
+            <article id="second">
+
+                <div class="text">
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h3>
+
+                    <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
+
+                        <p>Detta flerspråkiga verktyg förenklar processen för prisförfrågningar till leverantörer,
+                            vilket gör att användare snabbt kan få tillgång till personligt färdigställda förfrågningar
+                            och enkelt utarbeta förfrågningar via både webbplatsen och Excel (uträkningsverktyg) med ett
+                            enda klick.</p>
+                        <p>Verktyget söker igenom historiska data samt tidigare manuellt inmatad information för att ge
+                            en
+                            omfattande översikt över stålprodukter, inklusive detaljer om dimensioner, kvantiteter och
+                            leverantörer.</p>
+
+                    </div>
+
+
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
                         <li>
                             Javascript |
                         </li>
@@ -158,27 +205,29 @@
                     </ul>
 
                 </div>
-                <img data-aos="fade-right" data-aos-offset="400"
+                <img data-aos="fade-right" data-aos-offset="489"
                     src="{{ url_for('static', filename='images/Inquiry.png') }}"
                     alt="Screenshot Inquiry tool for steel." />
 
             </article>
 
 
-            <article id="second">
+            <article id="third">
 
                 <div class="text">
-                    <h3 data-aos="fade-right" data-aos-offset="200">Offer and order calculator</h3>
+                    <h3 data-aos="fade-right" data-aos-offset="200">Offert och order kalkylator</h3>
                     <div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
-                        <p>This projects calculates steel costs and shipping expenses, leveraging APIs for real-time
-                            freight rates.</p>
-                        <p>Integrated with Fortnox, it generates offers from Excel data, streamlining procurement from
-                            cost estimation to order processing, enhancing efficiency and accuracy. </p>
+                        <p>Detta projekt beräknar stål- och fraktkostnader automatiskt genom att utnyttja API:er för
+                            realtidsfraktkostnader.</p>
+                        <p>Integrerat med Fortnox genererar det offerter från Excel-data, vilket förenklar
+                            inköpsprocessen från
+                            kostnadsuppskattning till orderhantering, och förbättrar både effektivitet och noggrannhet.
+                        </p>
+
                     </div>
 
-
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
-                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="100">teknologier som används:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="110">
                         <li>
                             Python |
                         </li>
@@ -196,27 +245,29 @@
 
                 </div>
 
+
+
                 <img class="animated" data-aos="fade-left data-aos-offset=" 400"
                     src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator" />
-
             </article>
 
 
 
-            <article id="third">
+            <article id="fourth">
 
                 <div class="text">
-                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Internal company website</h3>
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic metal trade</h3>
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
-                        <p>This project is an internal company website, featuring a custom CRM for efficient customer
-                            data management, certificate tracking for compliance, and a transporter registry for
-                            logistics operations. </p>
-                        <p> Designed as an all-in-one solution, it aims to streamline workflow from customer management
-                            to logistics, creating a cohesive system for diverse business needs.</p>
+                        <p>Detta projekt är en intern webbapp som har ett anpassat CRM för effektiv hantering
+                            av kunddata, certifikatspårning och ett transportregister för logistikoperationer.</p>
+                        <p>Designat som en allt-i-ett-lösning syftar det till att effektivisera arbetsflödet från
+                            kundhantering till logistik och skapa ett sammanhängande system för olika affärsbehov.</p>
+
+                            <p>URL: Tyvärr kan man bara nå webbappen via företagets VPN</p>
                     </div>
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="0">Technologies used include:</h4>
-                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="0">
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="95">teknologier som används:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="100">
                         <li>
                             Javascript |
                         </li>
@@ -236,7 +287,8 @@
 
                 </div>
 
-                <img class="animated" data-aos="fade-right" data-aos-offset="400"
+
+                <img class="animated" data-aos="fade-left" data-aos-offset="400"
                     src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website" />
 
             </article>
@@ -257,13 +309,14 @@
 
     <section id="contact">
 
-        <h2 data-aos="fade-top" data-aos-offset="240">Contact me </h2>
+        <h2 data-aos="fade-top" data-aos-offset="240">Kontakta mig </h2>
 
-        <p data-aos="fade-bottom" data-aos-offset="240">I'm always interested in hearing about new opportunities where I
-            have a chance of making a difference and learning new things</p>
+        <p data-aos="fade-bottom" data-aos-offset="240">Jag är alltid intresserad av att höra om nya möjligheter där jag
+            har en
+            chans att göra skillnad och lära mig nya saker</p>
 
-        <button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Contact
-            me</button>
+        <button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Kontakta
+            mig</button>
 
     </section>
 
@@ -273,7 +326,7 @@
 
 
 
-    <section class=footer>
+    <section class="footer">
 
         <footer>
 
@@ -293,7 +346,7 @@
 
             <p>
                 <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
-            <p>
+            </p>
 
         </footer>
 

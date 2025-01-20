@@ -4,7 +4,7 @@ function init() {
     .addEventListener("click", function () {
       swal
         .fire({
-          title: "Contact Me",
+          title: "Kontakta mig",
           animation: true,
           customClass: {
             popup: "custom-popup",
@@ -12,20 +12,21 @@ function init() {
             cancelButton: "custom-cancel-button",
           },
           position: "center",
-          html: '<p style="color: white; font-family: \'Oxygen Mono\', monospace;"></p><input type="text" placeholder="Your name..." id="name" class="swal2-input" style="color: black;"> <input type="text" placeholder="Your email..." id="email" class="swal2-input"> <textarea placeholder="Your message..." id="message" class="swal2-textarea"></textarea>',
+          html: '<p style="color: white; font-family: \'Oxygen Mono\', monospace;"></p><input type="text" placeholder="Ditt namn..." id="name" class="swal2-input" style="color: black;"> <input type="text" placeholder="Din email..." id="email" class="swal2-input"> <textarea placeholder="Ditt meddelande..." id="message" class="swal2-textarea"></textarea>',
           showCancelButton: true,
-          confirmButtonText: "Send",
+          confirmButtonText: "Skicka",
+          cancelButtonText: "Avbryt",
           footer:
-            "<span style=\"color: white; font-family: 'Oxygen Mono', monospace;\">I will get back to you as soon as possible!</span>",
+            "<span style=\"color: white; font-family: 'Oxygen Mono', monospace;\">Jag kommer återkomma så snart jag kan!</span>",
 
           preConfirm: () => {
             if (!ValidateEmail(document.getElementById("email").value))
-              swal.showValidationMessage("Please enter a valid email");
+              swal.showValidationMessage("Var snäll och skriv en giltig mail.");
             else if (
               document.getElementById("name").value === "" ||
               document.getElementById("message").value === ""
             ) {
-              swal.showValidationMessage("Please fill in all the fields");
+              swal.showValidationMessage("var snäll och skriv i alla fälten.");
             } else {
               const emailData = {
                 name: document.getElementById("name").value,
@@ -50,8 +51,8 @@ function init() {
         .then((result) => {
           if (result.isConfirmed) {
             swal.fire({
-              title: "Thank you!",
-              html: `<span style="color: white; font-family: 'Oxygen Mono', monospace;">Your message has been sent</span>`,
+              title: "Tack!",
+              html: `<span style="color: white; font-family: 'Oxygen Mono', monospace;">Ditt meddelande har skickats</span>`,
               confirmButtonText: "Ok",
               customClass: {
                 popup: "custom-popup",
@@ -82,14 +83,11 @@ const element = document.querySelector("#element");
 if (window.innerWidth > 768 && element) {
   var typed = new Typed("#element", {
     strings: [
-      '<h2 class="h2-min">I code.</h2>',
-      '<h2 class="h2-min">I travel.</h2>',
-      '<h2 class="h2-min">I read.</h2>',
-      '<h2 class="h2-min">I explore.</h2>',
-      '<h2 class="h2-min">I play.</h2>',
-      '<h2 class="h2-min">I cook.</h2>',
-      '<h2 class="h2-min">I meditate.</h2>',
-      '<h2 class="h2-min">I hike.</h2>',
+      '<h2 class="h2-min">Jag kodar.</h2>',
+      '<h2 class="h2-min">Jag springer.</h2>',
+      '<h2 class="h2-min">Jag lagar mat.</h2>',
+      '<h2 class="h2-min">Jag läser.</h2>',
+      '<h2 class="h2-min">Jag vandrar.</h2>',
     ],
     typeSpeed: 100,
     backSpeed: 80,
@@ -103,13 +101,13 @@ if (window.innerWidth > 768 && element) {
 } else if (window.innerWidth < 768 && element) {
   var typed = new Typed("#element", {
     strings: [
-      '<h2 class="h2-min">I code.</h2>',
-      '<h2 class="h2-min">I run.</h2>',
-      '<h2 class="h2-min">I cook.</h2>',
-      '<h2 class="h2-min">I play.</h2>',
-      '<h2 class="h2-min">I read.</h2>',
-      '<h2 class="h2-min">I hike.</h2>',
+      '<h2 class="h2-min">Jag kodar.</h2>',
+      '<h2 class="h2-min">Jag springer.</h2>',
+      '<h2 class="h2-min">Jag lagar mat.</h2>',
+      '<h2 class="h2-min">Jag läser.</h2>',
+      '<h2 class="h2-min">Jag vandrar.</h2>',
     ],
+
     typeSpeed: 100,
     backSpeed: 80,
     smartBackspace: false,

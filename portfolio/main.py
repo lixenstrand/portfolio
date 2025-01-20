@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template,send_from_directory, redirect
 from flask_mail import Mail, Message
 import os
 
@@ -36,9 +36,11 @@ def about_page():
     return render_template('about.html')
 
 
-@app.route('/resume')
-def resume_page():
-    return render_template('resume.html')
+
+@app.route('/cv/<filename>')
+def get_cv(filename):
+    return send_from_directory('static/cv', filename)
+
 
 
 @app.route('/send_mail', methods = ['POST'])
