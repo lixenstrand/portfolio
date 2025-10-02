@@ -5,10 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
-    <meta name="description" content="5 vanligaste flaskhalsarna i SME-företag som kan automatiseras på en dag - konkreta exempel och lösningar.">
+    <meta name="description" content="4 vanligaste flaskhalsarna i SME-företag som kan automatiseras på en dag - konkreta exempel och lösningar.">
     <meta name="keywords" content="business automation, SME automation, process optimization, efficiency, Magnus Lixenstrand">
 
-    <title>5 flaskhalsar i SME-företag som kan automatiseras på en dag</title>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://magnuslixenstrand.se/blog/5-flaskhalsar-sme">
+    <meta property="og:title" content="4 flaskhalsar i SME-företag som kan automatiseras på en dag">
+    <meta property="og:description" content="Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag.">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="4 flaskhalsar i SME-företag som kan automatiseras på en dag">
+    <meta name="twitter:description" content="Konkreta lösningar för de 4 vanligaste automationsflaskhalsarna i SME-företag. Spar 10-20 timmar/vecka.">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magnuslixenstrand.se/blog/5-flaskhalsar-sme">
+
+    <title>SME Automation: 4 flaskhalsar som kan automatiseras på en dag - Magnus Lixenstrand</title>
+
+    <!-- Schema.org BlogPosting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "4 flaskhalsar i SME-företag som kan automatiseras på en dag",
+      "description": "Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag.",
+      "author": {
+        "@type": "Person",
+        "name": "Magnus Lixenstrand",
+        "url": "https://magnuslixenstrand.se"
+      },
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15",
+      "image": "https://magnuslixenstrand.se/static/images/homeassistant.png"
+    }
+    </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
@@ -59,16 +93,26 @@
     <article class="blog-article">
         <header class="article-header">
             <a href="{{ url_for('blog') }}" class="back-link">← Tillbaka till blogg</a>
-            <h1>5 flaskhalsar i SME-företag som kan automatiseras på en dag</h1>
+            <h1>4 flaskhalsar i SME-företag som kan automatiseras på en dag</h1>
             <div class="article-meta">
                 <span class="date">Januari 2025</span>
-                <span class="reading-time">8 min läsning</span>
+                <span class="reading-time">6 min läsning</span>
             </div>
         </header>
 
         <div class="article-content">
 
-            <p class="lead">Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag. Här är de 5 vanligaste flaskhalsarna jag sett – och hur du fixar dem.</p>
+            <p class="lead">Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag. Här är de 4 vanligaste flaskhalsarna jag sett – och hur du fixar dem.</p>
+
+            <div class="table-of-contents">
+                <h3>Innehåll:</h3>
+                <ol>
+                    <li><a href="#flaskhals-1">Excel-krig: "Vem har senaste versionen?"</a></li>
+                    <li><a href="#flaskhals-2">Email copy-paste helvetet</a></li>
+                    <li><a href="#flaskhals-3">Dubbelinmatning av data mellan system</a></li>
+                    <li><a href="#flaskhals-4">Prisjämförelser mellan leverantörer</a></li>
+                </ol>
+            </div>
 
             <h2 id="flaskhals-1">1. Excel-krig: "Vem har senaste versionen?"</h2>
 
@@ -137,75 +181,14 @@ Mvh,
 
             <p>Använd Apps Script i Google Sheets för att auto-fylla variabler och skicka.</p>
 
-            <hr>
-
-            <h2 id="flaskhals-3">3. Manuell rapportgenerering varje månad</h2>
-
-            <h3>Symptom:</h3>
-            <ul>
-                <li>Varje månadsslut: "Dags att göra rapporten..."</li>
-                <li>4-8 timmar att köra SQL, kopiera till Excel, göra grafer</li>
-                <li>Samma jävla rapport. Varje månad. I flera år.</li>
-            </ul>
-
-            <h3>Kostnaden:</h3>
-            <p><strong>~6-8 timmar/månad</strong> + opportunity cost (du skulle kunna göra värdeskapande saker istället).</p>
-
-            <h3>Lösning (implementation: 4-8 timmar en gång):</h3>
-
-            <h4>Steg 1: Spara SQL-queries</h4>
-            <p>Ta de SQL-queries du kör varje månad och spara dem som <code>.sql</code> filer.</p>
-
-            <h4>Steg 2: Python-script för att generera rapporten</h4>
-            <pre><code>import pandas as pd
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-# Kör saved queries
-sales_data = pd.read_sql_query(open('monthly_sales.sql').read(), conn)
-customer_data = pd.read_sql_query(open('top_customers.sql').read(), conn)
-
-# Generera grafer
-fig, ax = plt.subplots(2, 2)
-# ... din graf-kod ...
-
-# Exportera till Excel med formatting
-with pd.ExcelWriter(f'rapport_{datetime.now().strftime("%Y-%m")}.xlsx') as writer:
-    sales_data.to_excel(writer, sheet_name='Försäljning')
-    customer_data.to_excel(writer, sheet_name='Kunder')
-
-print(f"Rapport genererad på {time_elapsed:.2f} sekunder")</code></pre>
-
-            <h4>Steg 3: Schemalägg med cron/Task Scheduler</h4>
-            <pre><code># Linux/Mac (crontab)
-0 9 1 * * python /path/to/generate_report.py
-
-# Windows Task Scheduler
-# Kör första dagen varje månad kl 09:00</code></pre>
-
-            <h3>Bonus: Skicka automatiskt via mail</h3>
-            <p>Lägg till i slutet av scriptet:</p>
-            <pre><code>import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-
-# Skicka rapport till chef + team
-send_email(
-    to=['chef@företag.se', 'team@företag.se'],
-    subject=f'Månadsrapport {current_month}',
-    body='Se bifogad rapport',
-    attachment='rapport_2025-01.xlsx'
-)</code></pre>
-
-            <h3>Vad jag byggde på Nordmet:</h3>
-            <blockquote>
-                <p><strong>Före:</strong> 6 timmar varje månad att köra queries, formatera Excel, skapa grafer.<br>
-                <strong>Efter:</strong> 30 sekunder. Rapporten mailas automatiskt till VD kl 09:00 första måndagen varje månad.</p>
-            </blockquote>
+            <div class="blog-cta">
+                <p><strong>Har ni liknande utmaningar med manuella processer?</strong></p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig</a>
+            </div>
 
             <hr>
 
-            <h2 id="flaskhals-4">4. Dubbelinmatning av data mellan system</h2>
+            <h2 id="flaskhals-3">3. Dubbelinmatning av data mellan system</h2>
 
             <p>Order läggs in i ERP-systemet. Samma jävla order läggs IGEN in i faktureringssystem. Kundinfo kopieras manuellt från CRM till mail. "Varför har dessa system inte en synk-funktion?!"</p>
 
@@ -241,7 +224,7 @@ send_email(
 
             <hr>
 
-            <h2 id="flaskhals-5">5. Prisjämförelser mellan leverantörer</h2>
+            <h2 id="flaskhals-4">4. Prisjämförelser mellan leverantörer</h2>
 
             <h3>Symptom:</h3>
             <ul>
@@ -296,6 +279,11 @@ print(f"Billigast: {cheapest} ({prices[cheapest]} kr)")</code></pre>
                 <p><strong>Före:</strong> 45 min att jämföra 5 leverantörer manuellt.<br>
                 <strong>Efter:</strong> 2 minuter. Systemet visar automatiskt billigaste alternativet inkl. frakt.</p>
             </blockquote>
+
+            <div class="blog-cta">
+                <p><strong>Vill du veta mer om automation-lösningar för ert företag?</strong></p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Hör av dig</a>
+            </div>
 
             <hr>
 

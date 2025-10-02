@@ -8,7 +8,41 @@
     <meta name="description" content="Min resa från säljare till automation engineer - varför jag bytte karriär och vad jag lärt mig.">
     <meta name="keywords" content="career change, sales to tech, automation engineer, self-taught developer, Magnus Lixenstrand">
 
-    <title>Från säljare till automation engineer - Magnus Lixenstrand</title>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://magnuslixenstrand.se/blog/fran-sales-till-automation">
+    <meta property="og:title" content="Från 12 år inom försäljning till automation engineer">
+    <meta property="og:description" content="Folk frågar ofta: 'Varför bytte du från sales till tech?' Sanningen är att jag inte bytte. Jag slutade sälja produkter och började lösa problem på riktigt.">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Från säljare till automation engineer">
+    <meta name="twitter:description" content="Hur jag gick från säljare till automation engineer på 4 år - utan CS-examen. Min resa och vad sales-bakgrunden ger mig.">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magnuslixenstrand.se/blog/fran-sales-till-automation">
+
+    <title>Karriärbyte: Från säljare till automation engineer - Magnus Lixenstrand</title>
+
+    <!-- Schema.org BlogPosting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Från 12 år inom försäljning till automation engineer",
+      "description": "Folk frågar ofta: 'Varför bytte du från sales till tech?' Sanningen är att jag inte bytte. Jag slutade sälja produkter och började lösa problem på riktigt.",
+      "author": {
+        "@type": "Person",
+        "name": "Magnus Lixenstrand",
+        "url": "https://magnuslixenstrand.se"
+      },
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15",
+      "image": "https://magnuslixenstrand.se/static/images/homeassistant.png"
+    }
+    </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
@@ -119,16 +153,19 @@
 
             <p>Första scriptet jag skrev:</p>
 
-            <pre><code>import pandas as pd
+            <pre><code>from openpyxl import load_workbook
 
 # Läs Excel-fil
-df = pd.read_excel('Historiska_priser.xlsx')
+wb = load_workbook('Historiska_priser.xlsx')
+ws = wb.active
 
 # Sök efter produkt
 produkt = input("Produktkod: ")
-resultat = df[df['Produktkod'] == produkt]
 
-print(resultat)</code></pre>
+for row in ws.iter_rows(min_row=2, values_only=True):
+    if row[0] == produkt:
+        print(f"Produktkod: {row[0]}, Pris: {row[1]}")
+        break</code></pre>
 
             <p>Det funkade inte första gången. Eller andra. Tredje gången körde det – och jag kände mig som en gud.</p>
 
@@ -155,19 +192,19 @@ print(resultat)</code></pre>
             <p>Jag byggde:</p>
 
             <ul>
-                <li><strong>Offert-kalkylator:</strong> Auto-beräkning av fraktkostnader från 5 leverantörer</li>
+                <li><strong>Offert-kalkylator:</strong> Auto-beräkning av fraktkostnader från 8 leverantörer</li>
                 <li><strong>CRM-integration:</strong> Synk mellan vårt interna system och Fortnox</li>
-                <li><strong>Månadsrapporter:</strong> Automatisk generering (6h → 30 sekunder)</li>
-                <li><strong>Email-parser:</strong> Extraherar orderbekräftelser från leverantörs-mail</li>
+                <li><strong>Fraktbokning:</strong> Automatisk bokning och etikettgenerering</li>
+                <li><strong>Fakturagranskning:</strong> n8n workflow med AI som hittar avvikelser (vi förlorade pengar på emballage!)</li>
             </ul>
 
             <p>Vad jag lärde mig var inte bara Python. Jag lärde mig:</p>
 
             <ul>
                 <li><strong>SQL:</strong> För att hämta data från våra system</li>
-                <li><strong>APIs:</strong> För att integrera Fortnox, Google Translate, SMTP</li>
-                <li><strong>Flask:</strong> För att bygga web-GUI så kollegor kunde använda mina scripts</li>
-                <li><strong>n8n:</strong> För workflows jag inte orkade koda</li>
+                <li><strong>APIs:</strong> För att integrera Fortnox, SMTP och externa tjänster</li>
+                <li><strong>FastAPI:</strong> För att bygga snabba web-API:er som kollegor kunde använda</li>
+                <li><strong>n8n:</strong> För workflows och AI-integrationer (som fakturagranskning)</li>
             </ul>
 
             <p>Jag lärde mig aldrig "hur man blir utvecklare". Jag lärde mig lösa ett problem, sen nästa, sen nästa.</p>
@@ -200,38 +237,49 @@ print(resultat)</code></pre>
 
             <p>Därför har alla mina verktyg preview-funktioner så användare ser exakt vad som händer innan de trycker "Skicka". Undo-knappar så de inte är rädda för att testa. Och loggar så de kan se "det funkade!" och bygga förtroende.</p>
 
+            <div class="blog-cta">
+                <p><strong>Söker du automation engineer med business-förståelse?</strong></p>
+                <a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank" class="cta-button">Se mitt CV</a>
+            </div>
+
             <h3>4. Jag tänker ROI, inte "cool tech"</h3>
 
             <p>Många utvecklare vill använda senaste framework för att det är häftigt.</p>
 
             <p>Jag väljer teknik baserat på: <em>"Vad ger mest värde med minst komplexitet?"</em></p>
 
-            <p><strong>Exempel:</strong> Istället för att bygga en React SPA för en intern CRM byggde jag Flask + vanilla JS. Varför?</p>
+            <p><strong>Exempel:</strong> Istället för att bygga en React SPA för Nordmet Controller byggde jag FastAPI backend + vanilla JS frontend. Varför?</p>
             <ul>
-                <li>Snabbare att bygga (2 veckor vs 2 månader)</li>
-                <li>Lättare att underhålla (jag är ensam utvecklare)</li>
-                <li>Användarna bryr sig inte om att det inte är "modern tech"</li>
+                <li>Snabbare att bygga och iterera (FastAPI's auto-docs sparar timmar)</li>
+                <li>Lättare att underhålla (tydlig separation mellan API och frontend)</li>
+                <li>Användarna bryr sig inte om vilket framework som används – de vill bara att det fungerar snabbt</li>
             </ul>
 
-            <p>Sparade 6 veckors utvecklingstid = Kunde bygga 3 andra verktyg istället.</p>
+            <p>Sparade veckor av utvecklingstid jämfört med mer komplexa lösningar = Kunde bygga fler verktyg istället.</p>
 
-            <h2>2024-2025: Varför jag söker heltidsjobb som automation engineer</h2>
+            <div class="blog-cta">
+                <p><strong>Behöver ni automation-lösningar som faktiskt skapar värde?</strong></p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig</a>
+            </div>
 
-            <p>Jag älskar Nordmet. Men jag har nått en gräns:</p>
+            <h2>2024-2025: Varför jag söker nya utmaningar</h2>
+
+            <p>Jag älskar Nordmet. Idag är min roll 80% IT/automation och 20% försäljning – en stor förändring från där jag började. Men jag är redo för nästa steg:</p>
 
             <ul>
-                <li>Jag är fortfarande säljare 80% av tiden</li>
-                <li>Automation är "on the side"</li>
-                <li>Jag vill göra detta heltid</li>
+                <li>Vill jobba med automation och integration på heltid</li>
+                <li>Söker större, mer komplexa system att integrera</li>
+                <li>Vill lära mig från erfarna tech-team</li>
             </ul>
 
-            <p>Jag söker inte "junior developer"-jobb. Jag söker <strong>Automation Engineer / Integration Developer</strong> hos etablerade SME-företag som har samma problem som Nordmet hade.</p>
+            <p>Jag söker inte "junior developer"-jobb. Jag söker <strong>roller där jag får lösa problem analytiskt</strong> – vare sig det kallas Automation Engineer, Integration Developer, eller något annat – hos företag som har verkliga flaskhalsar som behöver lösas.</p>
 
-            <p>Varför etablerade företag? För att:</p>
+            <p>Det jag vill jobba med:</p>
             <ul>
-                <li>De har legacy-system som behöver integreras (min specialitet)</li>
-                <li>De har business processes jag förstår (jag har varit där)</li>
-                <li>De behöver någon som kan prata med både VD:n och IT-avdelningen (min superpower)</li>
+                <li>Ineffektiva processer som kostar tid och pengar</li>
+                <li>System som inte pratar med varandra och behöver integreras</li>
+                <li>Problem där kombinationen av business-förståelse och teknisk lösning gör skillnad</li>
+                <li>Företag som mäter värde i sparad tid och ökad effektivitet, inte bara "kodrader"</li>
             </ul>
 
             <h2>Vad jag lärt mig på resan</h2>
@@ -258,7 +306,7 @@ print(resultat)</code></pre>
 
             <p>Kanske jobbar du med sales, operations eller admin och tänker "skulle vara coolt att kunna koda men det är nog för sent..."</p>
 
-            <p>Det är inte för sent. Jag började när jag var 28. Första heltids-tech-jobbet söker jag nu vid 34.</p>
+            <p>Det är inte för sent. Jag började när jag var 31. Första heltids-tech-jobbet söker jag nu vid 36.</p>
 
             <p>Börja med problem du faktiskt har. Inte "lära mig Python" utan "automatisera denna jävla Excel-fil". Bygg något som faktiskt används, även om det bara är dig själv som använder det. Din nuvarande erfarenhet är guld – sales/ops/admin-bakgrund är en fördel, inte en nackdel. Och perfekt kod är oviktigt, solving the problem är allt. Första versionen kan vara ful. Gör den bättre sen.</p>
 

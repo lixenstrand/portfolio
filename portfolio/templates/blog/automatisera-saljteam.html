@@ -8,7 +8,41 @@
     <meta name="description" content="Hur jag automatiserade vårt säljteam från insidan - en säljares perspektiv på automation och systemintegration.">
     <meta name="keywords" content="sales automation, säljautomation, process automation, business automation, Magnus Lixenstrand">
 
-    <title>Hur jag automatiserade vårt säljteam - Magnus Lixenstrand</title>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://magnuslixenstrand.se/blog/automatisera-saljteam">
+    <meta property="og:title" content="Hur jag automatiserade vårt säljteam (från insidan)">
+    <meta property="og:description" content="Efter 12+ år inom försäljning hade jag sett samma manuella processer upprepas tusentals gånger. När jag började koda var det för att jag var trött på att slösa 2 timmar om dagen på saker en dator kunde göra på 2 minuter.">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hur jag automatiserade vårt säljteam (från insidan)">
+    <meta name="twitter:description" content="Hur jag automatiserade bort 20+ timmar/vecka för vårt säljteam med Python och automation.">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magnuslixenstrand.se/blog/automatisera-saljteam">
+
+    <title>Säljautomation: Hur jag automatiserade vårt säljteam - Magnus Lixenstrand</title>
+
+    <!-- Schema.org BlogPosting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Hur jag automatiserade vårt säljteam (från insidan)",
+      "description": "Efter 12+ år inom försäljning hade jag sett samma manuella processer upprepas tusentals gånger. Hur jag automatiserade bort 20+ timmar/vecka med Python och automation.",
+      "author": {
+        "@type": "Person",
+        "name": "Magnus Lixenstrand",
+        "url": "https://magnuslixenstrand.se"
+      },
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15",
+      "image": "https://magnuslixenstrand.se/static/images/homeassistant.png"
+    }
+    </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
@@ -76,15 +110,15 @@
 
             <ol>
                 <li>Kund ringer och vill ha offert på stålrör</li>
-                <li>Jag öppnar Excel och letar efter historiska priser (kan ta 20-40 min)</li>
-                <li>Hittar jag inget kör jag en SQL-query (om jag kommer ihåg syntaxen...)</li>
-                <li>Kopierar manuellt data till ett email-template</li>
-                <li>Översätter till engelska (våra leverantörer är polska/tyska)</li>
+                <li>Jag öppnar Excel-mallen och fyller i stålkvalitet, format, antal etc</li>
+                <li>Kopierar samma info manuellt till ett email-template</li>
+                <li>Skriver samma sak på svenska OCH engelska (våra leverantörer är polska/tyska)</li>
+                <li>Ofta skrev man fel när man kopierade mellan Excel och mail...</li>
                 <li>Skickar till 3-5 leverantörer</li>
                 <li>Väntar på svar och manuellt jämför priserna</li>
             </ol>
 
-            <p><strong>Total tid: 1.5-2 timmar per förfrågan.</strong></p>
+            <p><strong>Total tid: 5-10 minuter per förfrågan.</strong> Men gör du 10-15 förfrågningar i veckan blir det 2+ timmar bara i copy-paste och översättning.</p>
 
             <p>Vi gjorde 10-15 förfrågningar i veckan. Räkna på det.</p>
 
@@ -100,21 +134,27 @@
 
             <p>Det verkliga problemet var att <strong>alla var så vana vid smärtan att de slutat se den</strong>. Det är som att ha dålig hållning – du märker det inte förrän någon pekar på det.</p>
 
-            <h2>Lösningen (första versionen var ful som stryk)</h2>
+            <div class="blog-cta">
+                <p><strong>Känner du igen detta?</strong> Om ditt företag slösar timmar på manuella processer varje vecka kan automation hjälpa.</p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig</a>
+            </div>
 
-            <p>Jag började smått. Första versionen av förfrågningsverktyget var ett Python-script som körde i terminalen:</p>
+            <h2>Lösningen: Nordmet Controller</h2>
 
-            <pre><code>python request_quote.py "Stålrör 100x5mm" 1000</code></pre>
+            <p>Jag började smått. Första versionen av förfrågningsverktyget var ett Python-script som körde i terminalen. Men idag har det utvecklats till en fullvärdig webbapp vi kallar <strong>Nordmet Controller</strong>.</p>
 
-            <p>Det gjorde EXAKT vad mina kollegor gjorde manuellt:</p>
+            <p>Så här fungerar det nu:</p>
             <ul>
-                <li>SQL-query mot vår databas för historiska priser</li>
-                <li>Formaterade data till text</li>
-                <li>Körde Google Translate API för översättning</li>
-                <li>Skickade email via SMTP</li>
+                <li>Säljaren fyller i Excel-mallen (som vanligt)</li>
+                <li>Öppnar Nordmet Controller i webbläsaren</li>
+                <li>Systemet läser automatiskt data från Excel-mallen</li>
+                <li>Historisk sökfunktion visar tidigare priser från samma kunder/produkter</li>
+                <li>Systemet väljer automatiskt rätt språk baserat på leverantör (svenska/engelska)</li>
+                <li>Förhandsgranska email innan det skickas</li>
+                <li>Klicka "Skicka" - mailen går till alla relevanta leverantörer</li>
             </ul>
 
-            <p><strong>Tid: 2 minuter</strong> (varav 1.5 min var att vänta på email-sending).</p>
+            <p><strong>Tid: 2 minuter</strong> från Excel-mall till skickade mail. Ingen copy-paste. Inga översättningsfel.</p>
 
             <h2>Det som överraskade mig</h2>
 
@@ -144,20 +184,31 @@
 
             <p><strong>Dokumentera i säljarnas språk, inte utvecklarspråk.</strong> Inte "Kör SQL-query mot OrderHistory-tabellen med JOIN på Products". Utan "Systemet kollar automatiskt vad vi sålt tidigare till liknande kunder". Skillnaden är enorm.</p>
 
-            <h2>Resultat efter 1 år</h2>
+            <div class="blog-cta">
+                <p><strong>Vill du diskutera automation för ditt team?</strong> Låt oss prata om era flaskhalsar och hur automation kan hjälpa.</p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Hör av dig</a>
+            </div>
 
-            <p>Från det enkla förfrågningsverktyget har jag byggt ut till:</p>
+            <h2>Resultat efter 5+ år</h2>
+
+            <p>Från det enkla förfrågningsverktyget har Nordmet Controller växt till att inkludera:</p>
 
             <ul>
-                <li><strong>Förfrågningar:</strong> 2h → 15 min (87% tidsbesparing)</li>
-                <li><strong>Offertkalkyler:</strong> Automatisk fraktberäkning från 5 leverantörer</li>
-                <li><strong>CRM-synk:</strong> Kunddata uppdateras automatiskt från mail</li>
-                <li><strong>Rapporter:</strong> Månadsrapporter som tidigare tog en dag genereras på 30 sekunder</li>
+                <li><strong>Förfrågningar:</strong> 5-10 min → 2 min (80% tidsbesparing)</li>
+                <li><strong>Boka frakt:</strong> Automatisk bokning hos 8 fraktbolag med prisberäkning</li>
+                <li><strong>Skapa etiketter:</strong> Fraktlabels genereras automatiskt</li>
+                <li><strong>CRM:</strong> Kunddata och historik på ett ställe</li>
+                <li><strong>Offertkalkyler:</strong> Automatisk fraktberäkning och mallar integrerade med Fortnox</li>
             </ul>
 
-            <p><strong>Total tidsbesparing för säljteamet: ~20-25 timmar/vecka</strong></p>
+            <p><strong>Total tidsbesparing för säljteamet: ~20+ timmar/vecka</strong></p>
 
             <p>Det är en halv FTE. Vi kunde ha anställt en person till. Istället kan teamet fokusera på det de är bra på: prata med kunder och sälja.</p>
+
+            <div class="blog-cta">
+                <p><strong>Vill du spara 20+ timmar i veckan för ditt säljteam?</strong></p>
+                <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig för automation</a>
+            </div>
 
             <h2>Om du funderar på att börja</h2>
 

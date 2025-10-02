@@ -8,6 +8,23 @@
     <meta name="description" content="Artiklar om automation, systemintegration och affärsprocesser av Magnus Lixenstrand - Automation Engineer.">
     <meta name="keywords" content="automation, business processes, integration, tech blog, Magnus Lixenstrand">
 
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://magnuslixenstrand.se/blog">
+    <meta property="og:title" content="Automation & Business Insights - Magnus Lixenstrand">
+    <meta property="og:description" content="Praktiska erfarenheter från 12+ år sales och 4+ år automation engineering. Artiklar om automation, systemintegration och affärsprocesser.">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://magnuslixenstrand.se/blog">
+    <meta name="twitter:title" content="Automation & Business Insights - Magnus Lixenstrand">
+    <meta name="twitter:description" content="Praktiska erfarenheter från 12+ år sales och automation engineering.">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magnuslixenstrand.se/blog">
+
     <title>Blogg - Magnus Lixenstrand</title>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -40,6 +57,9 @@
                             <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                         </a>
                     </li>
+
+                    <li><a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank"
+                            class="button button-pulse">CV</a></li>
                 </ul>
             </div>
         </div>
@@ -81,10 +101,10 @@
         <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
             <div class="blog-card-content">
                 <span class="blog-tag">Process Optimization</span>
-                <h2><a href="{{ url_for('blog_article', article='5-flaskhalsar-sme') }}">5 flaskhalsar i SME-företag som kan automatiseras på en dag</a></h2>
-                <p>Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag. Här är de 5 vanligaste flaskhalsarna – och hur du fixar dem.</p>
+                <h2><a href="{{ url_for('blog_article', article='5-flaskhalsar-sme') }}">4 flaskhalsar i SME-företag som kan automatiseras på en dag</a></h2>
+                <p>Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag. Här är de 4 vanligaste flaskhalsarna – och hur du fixar dem.</p>
                 <div class="blog-meta">
-                    <span class="reading-time">8 min läsning</span>
+                    <span class="reading-time">6 min läsning</span>
                     <span class="date">Januari 2025</span>
                 </div>
                 <a href="{{ url_for('blog_article', article='5-flaskhalsar-sme') }}" class="read-more">Läs mer →</a>
@@ -128,6 +148,11 @@
                     </a>
                 </li>
             </ul>
+
+            <p style="margin-top: 1rem; font-family: var(--mono); color: var(--aqua);">
+                <a href="mailto:mlixenstrand@gmail.com" style="color: var(--aqua); text-decoration: none;">mlixenstrand@gmail.com</a>
+            </p>
+
             <p>
                 <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
