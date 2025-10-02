@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
-from flask import Flask, request, render_template,send_from_directory, redirect
+from flask import Flask, request, render_template, send_from_directory, redirect, Response, url_for
 from flask_mail import Mail, Message
 import os
+from datetime import datetime
 
 load_dotenv()
 
@@ -54,6 +55,47 @@ def blog_article(article):
 def get_cv(filename):
     return send_from_directory('static/cv', filename)
 
+
+@app.route('/robots.txt')
+def robots():
+    """Serve robots.txt file for search engines"""
+    return send_from_directory('..', 'robots.txt')
+
+
+@app.route('/sitemap.xml')
+def sitemap():
+    """Generate dynamic sitemap for search engines"""
+    # Base URL (uppdatera till din faktiska domän)
+    base_url = 'https://magnuslixenstrand.se'
+
+    # Lista alla sidor med prioritet och uppdateringsfrekvens
+    pages = [
+        {'url': '/', 'priority': '1.0', 'changefreq': 'weekly'},
+        {'url': '/about', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'url': '/blog', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/blog/automatisera-saljteam', 'priority': '0.7', 'changefreq': 'monthly'},
+        {'url': '/blog/fran-sales-till-automation', 'priority': '0.7', 'changefreq': 'monthly'},
+        {'url': '/blog/5-flaskhalsar-sme', 'priority': '0.7', 'changefreq': 'monthly'},
+    ]
+
+    # Generera XML
+    sitemap_xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    sitemap_xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    # Dagens datum för lastmod
+    today = datetime.now().strftime('%Y-%m-%d')
+
+    for page in pages:
+        sitemap_xml.append('  <url>')
+        sitemap_xml.append(f'    <loc>{base_url}{page["url"]}</loc>')
+        sitemap_xml.append(f'    <lastmod>{today}</lastmod>')
+        sitemap_xml.append(f'    <changefreq>{page["changefreq"]}</changefreq>')
+        sitemap_xml.append(f'    <priority>{page["priority"]}</priority>')
+        sitemap_xml.append('  </url>')
+
+    sitemap_xml.append('</urlset>')
+
+    return Response('\n'.join(sitemap_xml), mimetype='application/xml')
 
 
 @app.route('/send_mail', methods = ['POST'])

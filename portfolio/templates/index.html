@@ -12,6 +12,22 @@
         content="Magnus Lixenstrand, automation engineer, integration developer, business automation, Python, FastAPI, n8n, Home Assistant, process optimization, Jönköping">
     <meta name="author" content="Magnus Lixenstrand">
 
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://magnuslixenstrand.se/">
+    <meta property="og:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
+    <meta property="og:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://magnuslixenstrand.se/">
+    <meta name="twitter:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
+    <meta name="twitter:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration.">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magnuslixenstrand.se/">
 
     <title>Magnus Lixenstrand - Automation Engineer Portfolio</title>
 
@@ -25,6 +41,38 @@
 
         gtag('config', 'G-XVMGYMNKLV');
     </script>
+
+    <!-- Schema.org JSON-LD Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Magnus Lixenstrand",
+      "jobTitle": "Automation Engineer",
+      "description": "Automation Engineer med 12+ års säljarbakgrund som specialiserar sig på systemintegration och processautomation",
+      "url": "https://magnuslixenstrand.se",
+      "image": "https://magnuslixenstrand.se/static/images/IMG_0830.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/magnus-lixenstrand",
+        "https://github.com/lixenstrand"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Jönköping",
+        "addressCountry": "SE"
+      },
+      "knowsAbout": [
+        "Python",
+        "FastAPI",
+        "n8n",
+        "Home Assistant",
+        "Business Automation",
+        "Process Optimization",
+        "System Integration"
+      ]
+    }
+    </script>
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
@@ -170,7 +218,8 @@
                 </div>
                 <img data-aos="fade-right" data-aos-offset="489"
                     src="{{ url_for('static', filename='images/homeassistant.png') }}"
-                    alt="Screenshot of Home Assistant dashboard with automations" />
+                    alt="Screenshot of Home Assistant dashboard with automations"
+                    loading="lazy" width="1200" height="800" />
 
             </article>
 
@@ -213,7 +262,8 @@
                 </div>
                 <img data-aos="fade-right" data-aos-offset="489"
                     src="{{ url_for('static', filename='images/Inquiry.png') }}"
-                    alt="Screenshot Inquiry tool for steel." />
+                    alt="Screenshot Inquiry tool for steel."
+                    loading="lazy" width="1200" height="800" />
 
             </article>
 
@@ -254,7 +304,8 @@
 
 
                 <img class="animated" data-aos="fade-left" data-aos-offset="400"
-                    src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator" />
+                    src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator"
+                    loading="lazy" width="1200" height="800" />
             </article>
 
 
@@ -297,7 +348,8 @@
 
 
                 <img class="animated" data-aos="fade-left" data-aos-offset="400"
-                    src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website" />
+                    src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website"
+                    loading="lazy" width="1200" height="800" />
 
             </article>
 
@@ -351,6 +403,10 @@
                 </li>
 
             </ul>
+
+            <p style="margin-top: 1rem; font-family: var(--mono); color: var(--aqua);">
+                <a href="mailto:mlixenstrand@gmail.com" style="color: var(--aqua); text-decoration: none;">mlixenstrand@gmail.com</a>
+            </p>
 
             <p>
                 <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
