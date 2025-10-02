@@ -1,1 +1,12 @@
 /portfolio/google203fb45eb5fcd594.html
+
+# Python cache
+portfolio/__pycache__/
+*.pyc
+__pycache__/
+
+# Personal notes
+portfolio_interview.md
+
+# Local development
+start_portfolio.bat
