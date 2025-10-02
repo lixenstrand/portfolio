@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
@@ -7,13 +7,13 @@
     <meta name="google-site-verification" content="hksh30XchufP4nt-OZPrmTf3SwEe36Y_28Ujf0i0wFY" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Fortfölj för Magnus Lixenstrand">
+    <meta name="description" content="Magnus Lixenstrand - Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
     <meta name="keywords"
-        content="Magnus Lixenstrand, developer, steel trader, Javascript, Python, HTML, CSS, VBA, Excel">
+        content="Magnus Lixenstrand, automation engineer, integration developer, business automation, Python, FastAPI, n8n, Home Assistant, process optimization, Jönköping">
     <meta name="author" content="Magnus Lixenstrand">
 
 
-    <title>Magnus Portfölj</title>
+    <title>Magnus Lixenstrand - Automation Engineer Portfolio</title>
 
 
     <!-- Google tag (gtag.js) -->
@@ -48,6 +48,8 @@
                         </li>
 
                         <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
+
+                        <li><a href="{{ url_for('blog') }}"> Blogg </a></li>
 
                         <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
 
@@ -99,17 +101,20 @@
         <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
         <h2 id="element"></h2>
 
+        <p>Efter 12+ år inom försäljning har jag lärt mig se ineffektivitet som andra accepterat som "så gör vi det här".
+            Där de flesta ser en sten på marken plockar jag upp den och vrider på den från olika vinklar – det är ungefär så jag ser på företags system och processer också.</p>
 
-        <p>Jag är systemutvecklare och säljare, specialiserad på problemlösning och effektivisering med verktyg som
-            Javascript, Python, HTML, CSS, VBA, Excel etc.</p>
+        <p>Jag löser affärsproblem med automation och systemintegration. Men inte för att det är coolt – för att jag tröttnat på att se folk slösa timmar på repetitivt arbete som en dator kan göra på två minuter.</p>
 
-        <p>Just nu har jag yrkesrollen stålsäljare på <a href="https://nordmet.se" target="_blank">Nordmet</a>
-            och studerar
-            frontend- och backendutveckling.</p>
+        <p>Jag ser flaskhalsar i affärsprocesser och bygger verktyg som löser dem. Integrerar system som inte var tänkta att prata med varandra, och förklarar lösningarna så att både VD:n och utvecklingsteamet förstår.</p>
+
+        <p>Just nu jobbar jag som stålsäljare på <a href="https://nordmet.se" target="_blank">Nordmet</a>, men jag bygger också verktyg som sparar teamet 20+ timmar i veckan. Det började som ett sidoprojekt och har vuxit till något större.</p>
+
+        <p>Söker heltidsjobb som Automation Engineer eller Integration Developer hos etablerade företag i Jönköpingsregionen. Hybrid/på plats funkar bra.</p>
+
+        <a href="#projects" class="scroll-to-projects">Se mina projekt ↓</a>
 
     </section>
-
-    <div class="arrow"></div>
 
     <div class="gradient-project"></div>
 
@@ -123,21 +128,67 @@
             <h1 data-aos="fade-right" data-aos-offset="470">Projekt jag är stolt över</h1>
 
 
+            <article id="homeassistant">
+
+                <div class="text">
+                    <h4 class="animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</h4>
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h3>
+
+                    <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
+
+                        <p>Jag hade 15+ smarta enheter från olika tillverkare, alla med egna appar. Ville skapa intelligenta automatiseringar baserat på kontext (tid, plats, väder, vad folk gör i huset) men befintliga lösningar var låsta till ett ekosystem i taget.</p>
+
+                        <p>Byggde en central Home Assistant hub med custom automations och integrationer. Skapade kontext-medvetna system för belysning, energioptimering, säkerhet och klimatstyrning som pratar med varandra över plattformsgränser.</p>
+
+                        <p>30% lägre elförbrukning genom smart värmestyrning, 15 olika enheter/plattformar integrerade, 50+ automations som kör dagligen. Allt funkar utan att jag behöver göra något manuellt efter setup.</p>
+
+                    </div>
+
+
+                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h4>
+                    <ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
+                        <li>
+                            Home Assistant |
+                        </li>
+                        <li>
+                            YAML |
+                        </li>
+                        <li>
+                            Python |
+                        </li>
+                        <li>
+                            n8n |
+                        </li>
+                        <li>
+                            MQTT |
+                        </li>
+                        <li>
+                            REST APIs
+                        </li>
+                    </ul>
+
+                </div>
+                <img data-aos="fade-right" data-aos-offset="489"
+                    src="{{ url_for('static', filename='images/homeassistant.png') }}"
+                    alt="Screenshot of Home Assistant dashboard with automations" />
+
+            </article>
+
 
             <article id="first">
 
                 <div class="text">
-                    <h4 class="animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</h4>
                     <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Webbapp till föreningen</h3>
 
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 
-                        <p>Detta är en webbapp till föreningen. Man kommer åt Föreningens dokument på ett smidigt sätt. Man kan
-                        även boka tvättider och det finns integration med valfri kalender.</p>
-                        <p>Detta ska vara en platform som framtida köpare/mäklare ska kunna hitta relevant information om föreningen,
-                        samtidigt som det är ett användbart verktyg för de boende</p>
+                        <p>Boende i min bostadsrättsförening letade ständigt efter viktiga dokument, tvättstugebokningar skedde via lapp och penna (som försvann...), och potentiella köpare fick noll information om föreningen innan visning.</p>
 
-                        URL: <a href="https://österlandetnr7.se" target="_blank">Österlandet nr 7</a>
+                        <p>Byggde en webbapp som centraliserar all föreningsinformation, digitaliserar tvättbokningar med kalenderintegration, och ger transparens till framtida köpare och mäklare.</p>
+
+                        <p>28 lägenheter använder plattformen aktivt, 100% digitala tvättbokningar (papperssystemet är borta), centraliserad access till alla dokument, och köpare kan kolla föreningsinfo innan de ens bokar visning.</p>
+
+                        <p>URL: <a href="https://österlandetnr7.se" target="_blank">Österlandet nr 7</a></p>
                     </div>
 
 
@@ -173,14 +224,11 @@
 
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 
-                        <p>Detta flerspråkiga verktyg förenklar processen för prisförfrågningar till leverantörer,
-                            vilket gör att användare snabbt kan få tillgång till personligt färdigställda förfrågningar
-                            och enkelt utarbeta förfrågningar via både webbplatsen och Excel (uträkningsverktyg) med ett
-                            enda klick.</p>
-                        <p>Verktyget söker igenom historiska data samt tidigare manuellt inmatad information för att ge
-                            en
-                            omfattande översikt över stålprodukter, inklusive detaljer om dimensioner, kvantiteter och
-                            leverantörer.</p>
+                        <p>Säljare på Nordmet spenderade 2-3 timmar om dagen på att manuellt sammanställa prisförfrågningar till leverantörer. Historisk data fanns i olika system och krävde evigheter att hitta. Plus att förfrågningar innehöll ofta fel på grund av copy-paste mellan Excel och Outlook.</p>
+
+                        <p>Byggde ett flerspråkigt verktyg som automatiskt söker igenom historisk orderdata, integrerar med Excel, och genererar färdiga förfrågningar på flera språk med ett klick. Kombinerar webbgränssnitt och Excel-integration så folk kan jobba som de vill.</p>
+
+                        <p>Minskade förfrågningstid från 2 timmar till 15 minuter (87% reduktion). Säljteamet kan nu hantera 5x fler förfrågningar per dag och vi har nästan inga fel längre från manuell datahantering.</p>
 
                     </div>
 
@@ -217,12 +265,12 @@
                 <div class="text">
                     <h3 data-aos="fade-right" data-aos-offset="200">Offert och order kalkylator</h3>
                     <div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
-                        <p>Detta projekt beräknar stål- och fraktkostnader automatiskt genom att utnyttja API:er för
-                            realtidsfraktkostnader.</p>
-                        <p>Integrerat med Fortnox genererar det offerter från Excel-data, vilket förenklar
-                            inköpsprocessen från
-                            kostnadsuppskattning till orderhantering, och förbättrar både effektivitet och noggrannhet.
-                        </p>
+
+                        <p>Säljare spenderade 30-45 minuter per offert på att manuellt beräkna stålkostnader, ringa fraktbolag för priser, och sedan knappa in allt i Fortnox. Fraktkostnader var ofta fel eftersom vi använde gamla priser från Excel-ark.</p>
+
+                        <p>Byggde ett Excel-baserat verktyg som automatiskt beräknar stålkostnader, hämtar realtidspriser via API från fraktbolag, och genererar Fortnox-offerter direkt från kalkyldata.</p>
+
+                        <p>Minskade offerttid från 45 minuter till 10 minuter. Exakta fraktkostnader med realtidspriser istället för gissningar. Ingen manuell Fortnox-inmatning längre, vilket också innebär färre fel i kostnadsberäkningar.</p>
 
                     </div>
 
@@ -247,7 +295,7 @@
 
 
 
-                <img class="animated" data-aos="fade-left data-aos-offset=" 400"
+                <img class="animated" data-aos="fade-left" data-aos-offset="400"
                     src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator" />
             </article>
 
@@ -256,14 +304,16 @@
             <article id="fourth">
 
                 <div class="text">
-                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic metal trade</h3>
+                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic Metal Trade</h3>
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
-                        <p>Detta projekt är en intern webbapp som har ett anpassat CRM för effektiv hantering
-                            av kunddata, certifikatspårning och ett transportregister för logistikoperationer.</p>
-                        <p>Designat som en allt-i-ett-lösning syftar det till att effektivisera arbetsflödet från
-                            kundhantering till logistik och skapa ett sammanhängande system för olika affärsbehov.</p>
 
-                            <p>URL: Tyvärr kan man bara nå webbappen via företagets VPN</p>
+                        <p>Kunddata, certifikat och transportinformation fanns i separata Excel-filer och pappersarkiv. Säljare och logistik hade ingen gemensam plattform, vilket ledde till dubbelarbete, förlorade dokument och eviga mail-kedjor för att hitta information.</p>
+
+                        <p>Byggde en allt-i-ett webbapp med anpassat CRM, certifikatspårning och transportregister. Centraliserad databas med rollbaserad access för olika avdelningar så alla ser vad de behöver men inte mer.</p>
+
+                        <p>Hela säljteamet (8 personer) använder det dagligen. Spårar 500+ aktiva kundcertifikat digitalt, hanterar 100+ transporter per månad med full transparens, och minskade tid för informationssökning med ~60%.</p>
+
+                        <p><em>OBS: Webbappen är endast tillgänglig via företagets VPN</em></p>
                     </div>
 
                     <h4 class="animated" data-aos="fade-bottom" data-aos-offset="95">teknologier som används:</h4>
@@ -345,7 +395,7 @@
             </ul>
 
             <p>
-                <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
+                <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
 
         </footer>

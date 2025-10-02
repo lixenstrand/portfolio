@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
+    <meta name="description" content="5 vanligaste flaskhalsarna i SME-företag som kan automatiseras på en dag - konkreta exempel och lösningar.">
+    <meta name="keywords" content="business automation, SME automation, process optimization, efficiency, Magnus Lixenstrand">
+
+    <title>5 flaskhalsar i SME-företag som kan automatiseras på en dag</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-bar">
+            <div class="nav-menu">
+                <ul>
+                    <li class="logoName">
+                        <a href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
+                                class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                        </a>
+                    </li>
+                    <li><a href="{{ url_for('home') }}#projects">Projekt</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blogg</a></li>
+                    <li><a href="{{ url_for('about_page') }}">Om</a></li>
+                    <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                            <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                            <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
+                style="height: 1.8rem; width: auto; vertical-align: middle;">
+        </a>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <a href="{{ url_for('blog') }}" class="back-link">← Tillbaka till blogg</a>
+            <h1>5 flaskhalsar i SME-företag som kan automatiseras på en dag</h1>
+            <div class="article-meta">
+                <span class="date">Januari 2025</span>
+                <span class="reading-time">8 min läsning</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+
+            <p class="lead">Efter att ha byggt 8+ automationssystem för Nordmet har jag sett samma mönster om och om igen: Små och medelstora företag slösar 10-20 timmar i veckan på saker som kan automatiseras på en eftermiddag. Här är de 5 vanligaste flaskhalsarna jag sett – och hur du fixar dem.</p>
+
+            <h2 id="flaskhals-1">1. Excel-krig: "Vem har senaste versionen?"</h2>
+
+            <p>Du känner igen det här:</p>
+            <ul>
+                <li>Excel-filer mailas fram och tillbaka</li>
+                <li>"Kundlista_FINAL_v3_LATEST_VERKLIGEN_SENASTE.xlsx"</li>
+                <li>Folk skriver över varandras ändringar</li>
+                <li>Ingen vet vilken version som är korrekt</li>
+            </ul>
+
+            <p><strong>Kostar: ~3-5 timmar/vecka</strong> i förvirring, dubbelarbete och fel beslut baserade på gammal data.</p>
+
+            <p><strong>Hur du fixar det (2-4 timmar):</strong></p>
+
+            <p>Enklaste lösningen är Google Sheets. Flytta Excel-filen dit, dela med teamet, aktivera versionshistorik. Alla ser alltid senaste versionen. Kostar ingenting.</p>
+
+            <p>Om du vill ha lite mer kraft: Airtable (gratis upp till 1000 rader). Importera Excel-data, skapa olika vyer för olika team-medlemmar, automatiska notifieringar vid ändringar.</p>
+
+            <p>Om du har >10,000 rader: Bygg en enkel databas med SQLite eller PostgreSQL, simpel web-GUI med Flask/FastAPI, export till Excel vid behov.</p>
+
+            <blockquote>
+                <p>På Nordmet hade vår kundlista 4 olika versioner som cirkulerade. Efter vi flyttade till Google Sheets: Zero konflikter om "rätt version", sparade 4 timmar/vecka i dubbelarbete, och folk tar bättre beslut tack vare uppdaterad data.</p>
+            </blockquote>
+
+            <hr>
+
+            <h2 id="flaskhals-2">2. Email copy-paste helvetet</h2>
+
+            <p>Samma email skickas till 10 olika kunder/leverantörer. Varje mail kräver manuell copy-paste av data från system. "Glömde att ändra kundens namn i template..." Känns igen? 1-2 timmar om dagen går åt till det här.</p>
+
+            <p><strong>Kostar: ~8-10 timmar/vecka</strong> plus risken för pinsamma fel ("Hej Johan" skickat till Maria...).</p>
+
+            <p><strong>Enkel fix (3-6 timmar):</strong></p>
+
+            <p>Gmail och Outlook har inbyggd mail merge. Skapa templates med variabler: {customer_name}, {order_id}, etc. Kör batch-send från Excel/Sheets.</p>
+
+            <p>Behöver du mer avancerad automation: n8n eller Zapier.</p>
+
+            <p><strong>Exempel-workflow jag byggde för förfrågningar:</strong></p>
+            <ol>
+                <li>Säljare fyller i webformulär (produkt, kvantitet, deadline)</li>
+                <li>n8n hämtar historisk data från databas</li>
+                <li>Genererar personliga mail till 5 leverantörer (med rätt språk!)</li>
+                <li>Skickar mail automatiskt</li>
+                <li>Loggar allt i CRM</li>
+            </ol>
+
+            <p><strong>Resultat:</strong> 2 timmar → 5 minuter per förfrågan.</p>
+
+            <h3>Quick win du kan göra idag:</h3>
+            <pre><code># Gmail template med variabler
+Subject: Offertförfrågan - {produkt}
+
+Hej {leverantör},
+
+Vi söker pris på:
+Produkt: {produkt}
+Kvantitet: {kvantitet}
+Leveransdatum: {datum}
+
+Historiskt pris: {senaste_pris} (ref: {order_id})
+
+Mvh,
+{ditt_namn}</code></pre>
+
+            <p>Använd Apps Script i Google Sheets för att auto-fylla variabler och skicka.</p>
+
+            <hr>
+
+            <h2 id="flaskhals-3">3. Manuell rapportgenerering varje månad</h2>
+
+            <h3>Symptom:</h3>
+            <ul>
+                <li>Varje månadsslut: "Dags att göra rapporten..."</li>
+                <li>4-8 timmar att köra SQL, kopiera till Excel, göra grafer</li>
+                <li>Samma jävla rapport. Varje månad. I flera år.</li>
+            </ul>
+
+            <h3>Kostnaden:</h3>
+            <p><strong>~6-8 timmar/månad</strong> + opportunity cost (du skulle kunna göra värdeskapande saker istället).</p>
+
+            <h3>Lösning (implementation: 4-8 timmar en gång):</h3>
+
+            <h4>Steg 1: Spara SQL-queries</h4>
+            <p>Ta de SQL-queries du kör varje månad och spara dem som <code>.sql</code> filer.</p>
+
+            <h4>Steg 2: Python-script för att generera rapporten</h4>
+            <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+# Kör saved queries
+sales_data = pd.read_sql_query(open('monthly_sales.sql').read(), conn)
+customer_data = pd.read_sql_query(open('top_customers.sql').read(), conn)
+
+# Generera grafer
+fig, ax = plt.subplots(2, 2)
+# ... din graf-kod ...
+
+# Exportera till Excel med formatting
+with pd.ExcelWriter(f'rapport_{datetime.now().strftime("%Y-%m")}.xlsx') as writer:
+    sales_data.to_excel(writer, sheet_name='Försäljning')
+    customer_data.to_excel(writer, sheet_name='Kunder')
+
+print(f"Rapport genererad på {time_elapsed:.2f} sekunder")</code></pre>
+
+            <h4>Steg 3: Schemalägg med cron/Task Scheduler</h4>
+            <pre><code># Linux/Mac (crontab)
+0 9 1 * * python /path/to/generate_report.py
+
+# Windows Task Scheduler
+# Kör första dagen varje månad kl 09:00</code></pre>
+
+            <h3>Bonus: Skicka automatiskt via mail</h3>
+            <p>Lägg till i slutet av scriptet:</p>
+            <pre><code>import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+
+# Skicka rapport till chef + team
+send_email(
+    to=['chef@företag.se', 'team@företag.se'],
+    subject=f'Månadsrapport {current_month}',
+    body='Se bifogad rapport',
+    attachment='rapport_2025-01.xlsx'
+)</code></pre>
+
+            <h3>Vad jag byggde på Nordmet:</h3>
+            <blockquote>
+                <p><strong>Före:</strong> 6 timmar varje månad att köra queries, formatera Excel, skapa grafer.<br>
+                <strong>Efter:</strong> 30 sekunder. Rapporten mailas automatiskt till VD kl 09:00 första måndagen varje månad.</p>
+            </blockquote>
+
+            <hr>
+
+            <h2 id="flaskhals-4">4. Dubbelinmatning av data mellan system</h2>
+
+            <p>Order läggs in i ERP-systemet. Samma jävla order läggs IGEN in i faktureringssystem. Kundinfo kopieras manuellt från CRM till mail. "Varför har dessa system inte en synk-funktion?!"</p>
+
+            <p><strong>Kostar: ~5-10 timmar/vecka</strong> plus risk för fel (fel pris, fel kund, glömda orders).</p>
+
+            <p><strong>Hur du fixar det (4-12 timmar beroende på system):</strong></p>
+
+            <p>Först: Kolla om systemen har API:er. De flesta moderna system (Fortnox, Visma, HubSpot, etc) har det. Googla "[ditt system] API documentation".</p>
+
+            <p>Sen: Bygg en simpel integration.</p>
+
+            <p><strong>Exempel: Order i ERP → Faktura i Fortnox</strong></p>
+
+            <pre><code># Pseudo-kod för integration
+1. Lyssna på nya orders i ERP (webhook eller scheduled check)
+2. När ny order skapas:
+   - Hämta orderdata från ERP API
+   - Formatera till Fortnox-format
+   - Skapa faktura via Fortnox API
+   - Logga att sync lyckades
+3. Skicka notifiering till team</code></pre>
+
+            <h4>För no-code: Zapier eller n8n</h4>
+            <ul>
+                <li>n8n är gratis och self-hosted</li>
+                <li>Zapier kostar men är super enkelt</li>
+                <li>Båda har färdiga integrationer för populära system</li>
+            </ul>
+
+            <blockquote>
+                <p>På Nordmet skapades offerter i vårt interna system, men måste manuellt föras in i Fortnox för fakturering. Byggde ett Python-script som synkar varje natt. Hämtar nya offerter från vår databas, pushar till Fortnox API. Sparade 8 timmar/vecka. Zero dubbelinmatning. Färre fel.</p>
+            </blockquote>
+
+            <hr>
+
+            <h2 id="flaskhals-5">5. Prisjämförelser mellan leverantörer</h2>
+
+            <h3>Symptom:</h3>
+            <ul>
+                <li>Behöver jämföra pris från 5 leverantörer</li>
+                <li>Öppnar 5 mail, kopierar priser till Excel</li>
+                <li>Räknar manuellt vilken leverantör som är billigast</li>
+                <li>"Glömde kolla fraktkostnad hos Leverantör B..."</li>
+            </ul>
+
+            <h3>Kostnaden:</h3>
+            <p><strong>~30-60 min per prisjämförelse</strong> × 10 jämförelser/vecka = 5-10 timmar.</p>
+
+            <h3>Lösning (implementation: 6-10 timmar):</h3>
+
+            <h4>Variant A: Enkel web-scraper</h4>
+            <p>Om leverantörer har offentliga priser på sina hemsidor:</p>
+            <pre><code>import requests
+from bs4 import BeautifulSoup
+
+# Scrapa priser från leverantörernas hemsidor
+def get_price(supplier_url, product_code):
+    response = requests.get(f"{supplier_url}/products/{product_code}")
+    soup = BeautifulSoup(response.content, 'html.parser')
+    price = soup.find('span', class_='price').text
+    return float(price.replace('kr', '').strip())
+
+# Jämför 5 leverantörer
+suppliers = ['leverantör1.se', 'leverantör2.se', ...]
+prices = {s: get_price(s, 'PROD-123') for s in suppliers}
+
+cheapest = min(prices, key=prices.get)
+print(f"Billigast: {cheapest} ({prices[cheapest]} kr)")</code></pre>
+
+            <h4>Variant B: Email parsing</h4>
+            <p>Om leverantörer skickar priser via mail:</p>
+            <ul>
+                <li>Gmail/Outlook API för att läsa mail</li>
+                <li>Regex för att extracta priser</li>
+                <li>Auto-populate jämförelsetabell</li>
+            </ul>
+
+            <h4>Variant C: Centraliserad portal</h4>
+            <p>Vad jag byggde på Nordmet:</p>
+            <ul>
+                <li>Web-formulär där leverantörer själva matar in priser</li>
+                <li>Automatisk jämförelse-dashboard</li>
+                <li>Notifiering till säljare: "Nytt pris från Leverantör X"</li>
+            </ul>
+
+            <h3>ROI:</h3>
+            <blockquote>
+                <p><strong>Före:</strong> 45 min att jämföra 5 leverantörer manuellt.<br>
+                <strong>Efter:</strong> 2 minuter. Systemet visar automatiskt billigaste alternativet inkl. frakt.</p>
+            </blockquote>
+
+            <hr>
+
+            <h2>Hur du kommer igång</h2>
+
+            <p>Börja med att identifiera din största flaskhals. Fråga teamet: "Vad gör du varje dag/vecka som känns helt meningslöst och repetitivt?" Ta 30 minuter på det.</p>
+
+            <p>Sen: Mät kostnaden. Hur många timmar går åt? Vad kostar den tiden? (lön × timmar) Vad är risken för fel?</p>
+
+            <p>Välj den enklaste lösningen först. Du behöver inte bygga allt från scratch. Google Sheets för Excel-problem. Zapier/n8n för email/API-automation. Python-script för rapporter.</p>
+
+            <p>Börja smått, bevisa värde, skala upp. Fixa EN flaskhals. Mät resultatet (spara mail, skriv ner tidsbesparingar). Visa för teamet/chefen. Repetera för nästa flaskhals.</p>
+
+            <hr>
+
+            <h2>Behöver du hjälp?</h2>
+
+            <p>Om du känner igen ditt företag i dessa flaskhalsar och tänker <em>"Vi borde verkligen fixa detta..."</em> men inte vet var ni ska börja – <a href="{{ url_for('home') }}#contact">hör av dig</a>.</p>
+
+            <p>Jag har byggt dessa lösningar förut. Jag vet vad som fungerar i praktiken (och vad som låter bra men är värdelöst).</p>
+
+            <p><strong>Mitt löfte:</strong> Jag bygger inte fancy lösningar för att imponera. Jag bygger enkla lösningar som faktiskt används.</p>
+
+            <div class="article-footer">
+                <p><strong>Vill du läsa mer?</strong> Kolla in <a href="{{ url_for('blog_article', article='automatisera-saljteam') }}">hur jag automatiserade vårt säljteam från insidan</a>.</p>
+            </div>
+
+        </div>
+    </article>
+
+    <section class="footer">
+        <footer>
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
+            </ul>
+            <p>
+                <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
+            </p>
+        </footer>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/blog.js') }}"></script>
+
+</body>
+
+</html>

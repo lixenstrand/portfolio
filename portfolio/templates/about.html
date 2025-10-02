@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
-    <meta name="description" content="Magnus Lixenstrand is a full-stack developer based in Jönköping, Sweden.">
+    <meta name="description" content="Magnus Lixenstrand - Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
     <meta name="keywords"
-        content="Magnus Lixenstrand, full-stack developer, Jönköping, Sweden, front-end, back-end, web development, programming">
+        content="Magnus Lixenstrand, automation engineer, integration developer, Jönköping, business automation, process optimization, Python, n8n, Home Assistant">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV"></script>
@@ -19,7 +19,7 @@
         gtag('config', 'G-XVMGYMNKLV');
     </script>
 
-    <title>About Magnus</title>
+    <title>Om Magnus Lixenstrand - Automation Engineer & Problem Solver</title>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
@@ -44,6 +44,8 @@
                         </li>
 
                         <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
+
+                        <li><a href="{{ url_for('blog') }}"> Blogg </a></li>
 
                         <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
 
@@ -92,10 +94,8 @@
 
         <div class="hero-text">
             <h1 class="aboutMeHeader">Kort om <span class="smallScreenCapitalize">mig</span></h1>
+            <a href="#projects" class="scroll-to-projects">Se mer om mig ↓</a>
         </div>
-
-        <div class="arrow"></div>
-        <br>
 
     </section>
 
@@ -112,48 +112,65 @@
 
                 <div class="text">
                     <div class="blackBox" data-aos="fade-right" data-aos-offset="400">
-                        <p>Jag bor i Jönköping och har arbetat inom försäljning i över ett decennium. Mitt intresse för
-                            teknik har
-                            alltid varit en betydande del av mitt liv, och jag använder ofta teknologi för att lösa
-                            personliga utmaningar
-                            och utmaningar jag stöter på i mitt yrkesliv, ofta handlar det om att automatisera uppgifter
-                            för att spara tid
-                            och pengar. Nyligen har jag beslutat att omfamna denna passion ytterligare genom att studera
-                            både
-                            frontend- och backend-utveckling.</p>
-                        <p>En annan stor passion i livet är att resa, vilket jag gärna gör med min sambo. Det som lockar
-                            är att ha äventyr
-                            och upptäcka andra kulturer runt om i världen.</p>
-                        <p>Min iver att lära mig nya saker och min ovilja att ge upp inför en utmaning definierar vem
-                            jag är.</p>
 
+                        <h3 style="color: var(--aqua); margin-bottom: 1rem;">Varför automation?</h3>
+
+                        <p><strong>När folk ser en sten på marken tänker de "en sten". Jag plockar upp den och vrider på den ur olika vinklar.</strong></p>
+
+                        <p>Det är så jag ser företags system och flöden. Efter 12+ år inom försäljning har jag sett samma manuella
+                        processer upprepas dagligen. Där andra accepterar "så har vi alltid gjort" ser jag möjligheter att automatisera,
+                        integrera och effektivisera.</p>
+
+                        <h3 style="color: var(--aqua); margin-top: 2rem; margin-bottom: 1rem;">Vad 12+ år inom försäljning gett mig</h3>
+
+                        <p>Bakgrunden inom försäljning har lärt mig att lyssna på vad användare inte säger – att förstå vad folk egentligen behöver, inte bara vad de ber om. Varje lösning startar med frågan "vilket problem löser detta?" och fokus ligger på affärsvärde. Efter år av att förklara komplexa produkter till skeptiska kunder kan jag kommunicera tekniska lösningar både uppåt och nedåt i organisationen. Och jag har lärt mig se ineffektivitet som andra accepterat som "så har vi alltid gjort" – flaskhalsar som faktiskt går att fixa.</p>
+
+                        <p style="margin-top: 1.5rem;">Därför bygger jag inte bara verktyg som fungerar – jag bygger lösningar som faktiskt används
+                        och skapar mätbart värde. Mina projekt på Nordmet sparar teamet 20+ timmar i veckan, och det är inte för att jag är
+                        bäst på att koda, utan för att jag förstår affären.</p>
+
+                        <h3 style="color: var(--aqua); margin-top: 2rem; margin-bottom: 1rem;">Bortom jobbet</h3>
+
+                        <p>När jag inte automatiserar arbetsflöden på Nordmet pysslar jag med Home Assistant hemma (15+ enheter, 50+ automations),
+                        reser med min sambo för att upptäcka nya kulturer, och springer för att hålla huvudet klart.</p>
+
+                        <p>Bor i Jönköping och söker Automation Engineer / Integration Developer roller hos etablerade företag där kombinationen av affärsförståelse och teknisk problemlösning kan göra skillnad.</p>
 
                     </div>
 
 
-                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="400">Favorit teknologier:</h4>
+                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="400">Tech stack för automation:</h4>
                     <ul data-aos="fade-bottom" data-aos-offset="405">
                         <li>
-                            Javascript |
+                            Python + FastAPI |
                         </li>
                         <li>
-                            Python
+                            n8n |
+                        </li>
+                        <li>
+                            Home Assistant |
+                        </li>
+                        <li>
+                            SQL |
+                        </li>
+                        <li>
+                            REST APIs
                         </li>
                     </ul>
 
-                    <h4 class="hobbies" data-aos="fade-bottom" data-aos-offset="410">Mina hobbies:</h4>
+                    <h4 class="hobbies" data-aos="fade-bottom" data-aos-offset="410">Vad driver mig:</h4>
                     <ul data-aos="fade-bottom" data-aos-offset="415">
                         <li>
-                            Resa |
+                            Automatisera det repetitiva |
                         </li>
                         <li>
-                            Koda |
+                            Lösa verkliga problem |
                         </li>
                         <li>
-                            Träna |
+                            Kontinuerligt lärande |
                         </li>
                         <li>
-                            Läsa
+                            Se mätbara resultat
                         </li>
 
                     </ul>
@@ -195,7 +212,7 @@
             </ul>
 
             <p>
-                <smal>&copy; 2024 Magnus Lixenstrand. All rights reserved.</smal>
+                <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
 
         </footer>

@@ -36,6 +36,16 @@ def about_page():
     return render_template('about.html')
 
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+
+@app.route('/blog/<article>')
+def blog_article(article):
+    return render_template(f'blog/{article}.html')
+
+
 
 @app.route('/cv/<filename>')
 def get_cv(filename):
@@ -55,6 +65,7 @@ def send_mail():
 
         name = data.get('name')
         email = data.get('email')
+        company = data.get('company', 'Inget företag angivet')
         message = data.get('message')
 
 
@@ -64,7 +75,7 @@ def send_mail():
         subject = f"{name} har skrivit i Kontaktformuläret"
         recipient = ['magnus@nordmet.se']
         msg = Message(subject, sender=email, recipients=recipient)
-        msg.body = f"Namn: {name}\nE-post: {email}\nMeddelande: {message}"
+        msg.body = f"Namn: {name}\nE-post: {email}\nFöretag: {company}\n\nMeddelande:\n{message}"
         mail.send(msg)
 
         return 'E-postmeddelandet skickades!', 200

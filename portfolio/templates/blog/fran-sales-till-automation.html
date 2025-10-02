@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
+    <meta name="description" content="Min resa från säljare till automation engineer - varför jag bytte karriär och vad jag lärt mig.">
+    <meta name="keywords" content="career change, sales to tech, automation engineer, self-taught developer, Magnus Lixenstrand">
+
+    <title>Från säljare till automation engineer - Magnus Lixenstrand</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-bar">
+            <div class="nav-menu">
+                <ul>
+                    <li class="logoName">
+                        <a href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
+                                class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                        </a>
+                    </li>
+                    <li><a href="{{ url_for('home') }}#projects">Projekt</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blogg</a></li>
+                    <li><a href="{{ url_for('about_page') }}">Om</a></li>
+                    <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                            <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                            <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
+                style="height: 1.8rem; width: auto; vertical-align: middle;">
+        </a>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <a href="{{ url_for('blog') }}" class="back-link">← Tillbaka till blogg</a>
+            <h1>Från 12 år inom försäljning till automation engineer</h1>
+            <div class="article-meta">
+                <span class="date">Januari 2025</span>
+                <span class="reading-time">6 min läsning</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+
+            <p class="lead">Folk frågar ofta: "Varför bytte du från sales till tech?" Sanningen är att jag inte bytte. Jag slutade sälja produkter och började lösa problem på riktigt.</p>
+
+            <h2>2013-2019: Den klassiska sales-karriären</h2>
+
+            <p>Jag började sälja tidningsannonser på Eniro 2013. Ring 100 samtal om dagen. Få nej 95 gånger. Fira de 5 ja:en.</p>
+
+            <p>Efter Eniro blev det 3 Sverige (telefonabonnemang), sen AD infinitum (marknadsföring). Varje jobb var samma recept:</p>
+
+            <ul>
+                <li>Hitta leads</li>
+                <li>Ring/maila/boka möten</li>
+                <li>Pitcha lösningen</li>
+                <li>Hantera invändningar</li>
+                <li>Stäng dealen</li>
+                <li>Repetera</li>
+            </ul>
+
+            <p>Jag var <em>bra</em> på det. Fick utmärkelser. Tjänade okej. Men det fanns något som gnagde.</p>
+
+            <h2>Aha-momentet: "Varför gör vi detta manuellt?"</h2>
+
+            <p>2019 började jag på Nordmet som stålsäljare. Första veckan lärde jag mig deras process för prisförfrågningar till leverantörer.</p>
+
+            <p>Det såg ut så här:</p>
+            <ol>
+                <li>Öppna Excel-filen "Historiska_priser_2019.xlsx"</li>
+                <li>Ctrl+F efter produktkod</li>
+                <li>Kopiera senaste priset</li>
+                <li>Öppna Outlook</li>
+                <li>Kopiera in email-template</li>
+                <li>Klistra in pris och produktinfo</li>
+                <li>Översätt till engelska (Google Translate copy-paste)</li>
+                <li>Skicka till 3-5 leverantörer</li>
+            </ol>
+
+            <p><strong>Total tid: 1.5-2 timmar.</strong></p>
+
+            <p>Jag frågade min chef: "Kan vi inte automatisera detta?"</p>
+
+            <p>Hans svar: <em>"Skulle vara nice, men vi har inte budget för utvecklare."</em></p>
+
+            <p>Det var mitt lightbulb-moment. Inte "vi behöver en utvecklare". Utan: <strong>"Jag kan bli den utvecklaren."</strong></p>
+
+            <h2>2020: Python tutorials kl 22:00</h2>
+
+            <p>Jag började googla "how to automate excel python".</p>
+
+            <p>Hittade "Automate the Boring Stuff with Python" av Al Sweigart. Perfekt bok för någon som inte vill bli utvecklare – jag ville bara lösa mina problem.</p>
+
+            <p>Första scriptet jag skrev:</p>
+
+            <pre><code>import pandas as pd
+
+# Läs Excel-fil
+df = pd.read_excel('Historiska_priser.xlsx')
+
+# Sök efter produkt
+produkt = input("Produktkod: ")
+resultat = df[df['Produktkod'] == produkt]
+
+print(resultat)</code></pre>
+
+            <p>Det funkade inte första gången. Eller andra. Tredje gången körde det – och jag kände mig som en gud.</p>
+
+            <p>Istället för 20 minuter i Excel tog det 5 sekunder.</p>
+
+            <h2>Det som förändrades: Hur jag såg på problem</h2>
+
+            <p>Som säljare ser du problem genom ett filter: <em>"Kan jag sälja en lösning till detta?"</em></p>
+
+            <p>Som automation engineer ser du problem annorlunda: <em>"Kan jag bygga bort detta?"</em></p>
+
+            <h3>Exempel - Kundklagomål på leveranstid:</h3>
+
+            <p><strong>Sales-mindset:</strong> <em>"Jag ska ringa leverantören och pusha för snabbare leverans. Sen ringer jag kunden och förklarar läget."</em></p>
+
+            <p><strong>Automation-mindset:</strong> <em>"Varför har vi inte ett system som automatiskt kollar leverantörers lead times, jämför dem, och visar realtids-estimat till kunden på vår hemsida?"</em></p>
+
+            <p>Sales löser problem EN gång. Automation löser problem EN GÅNG FÖR ALLTID.</p>
+
+            <h2>2021-2023: Från hobbyist till problem solver</h2>
+
+            <p>Efter förfrågnings-scriptet började kollegorna fråga: "Kan du fixa något för [annat problem]?"</p>
+
+            <p>Jag byggde:</p>
+
+            <ul>
+                <li><strong>Offert-kalkylator:</strong> Auto-beräkning av fraktkostnader från 5 leverantörer</li>
+                <li><strong>CRM-integration:</strong> Synk mellan vårt interna system och Fortnox</li>
+                <li><strong>Månadsrapporter:</strong> Automatisk generering (6h → 30 sekunder)</li>
+                <li><strong>Email-parser:</strong> Extraherar orderbekräftelser från leverantörs-mail</li>
+            </ul>
+
+            <p>Vad jag lärde mig var inte bara Python. Jag lärde mig:</p>
+
+            <ul>
+                <li><strong>SQL:</strong> För att hämta data från våra system</li>
+                <li><strong>APIs:</strong> För att integrera Fortnox, Google Translate, SMTP</li>
+                <li><strong>Flask:</strong> För att bygga web-GUI så kollegor kunde använda mina scripts</li>
+                <li><strong>n8n:</strong> För workflows jag inte orkade koda</li>
+            </ul>
+
+            <p>Jag lärde mig aldrig "hur man blir utvecklare". Jag lärde mig lösa ett problem, sen nästa, sen nästa.</p>
+
+            <h2>Vad min sales-bakgrund ger mig som automation engineer</h2>
+
+            <p>Folk tror sales och tech är motsatser. De har fel.</p>
+
+            <h3>1. Jag förstår vad användare EGENTLIGEN behöver</h3>
+
+            <p>Som säljare lärde jag mig lyssna på vad folk <em>inte</em> säger.</p>
+
+            <p><strong>Exempel:</strong></p>
+            <ul>
+                <li>Kollega säger: "Kan du bygga en funktion för att filtrera kunder efter region?"</li>
+                <li>Vad de egentligen menar: "Jag vill snabbt hitta kunder i Småland så jag kan ringa dem före lunch"</li>
+            </ul>
+
+            <p>Jag bygger inte filterfunktionen. Jag bygger en "Ring Småland-kunder"-knapp som öppnar en lista med telefonnummer sorterade efter senaste kontakt.</p>
+
+            <h3>2. Att översätta mellan tech och business</h3>
+
+            <p>12 år av att förklara komplexa produkter till skeptiska kunder har lärt mig något: API-integrationer kan förklaras till VD:n på ett sätt som får honom att nicka istället för att somna.</p>
+
+            <h3>3. Jag bygger för verkliga människor, inte ideala användare</h3>
+
+            <p>Utvecklare utan business-bakgrund bygger ofta för "power users" som läser dokumentation och fattar komplexa UI:s.</p>
+
+            <p>Jag bygger för Lena, 54, som har använt samma Excel-mall i 10 år och är rädd för förändring.</p>
+
+            <p>Därför har alla mina verktyg preview-funktioner så användare ser exakt vad som händer innan de trycker "Skicka". Undo-knappar så de inte är rädda för att testa. Och loggar så de kan se "det funkade!" och bygga förtroende.</p>
+
+            <h3>4. Jag tänker ROI, inte "cool tech"</h3>
+
+            <p>Många utvecklare vill använda senaste framework för att det är häftigt.</p>
+
+            <p>Jag väljer teknik baserat på: <em>"Vad ger mest värde med minst komplexitet?"</em></p>
+
+            <p><strong>Exempel:</strong> Istället för att bygga en React SPA för en intern CRM byggde jag Flask + vanilla JS. Varför?</p>
+            <ul>
+                <li>Snabbare att bygga (2 veckor vs 2 månader)</li>
+                <li>Lättare att underhålla (jag är ensam utvecklare)</li>
+                <li>Användarna bryr sig inte om att det inte är "modern tech"</li>
+            </ul>
+
+            <p>Sparade 6 veckors utvecklingstid = Kunde bygga 3 andra verktyg istället.</p>
+
+            <h2>2024-2025: Varför jag söker heltidsjobb som automation engineer</h2>
+
+            <p>Jag älskar Nordmet. Men jag har nått en gräns:</p>
+
+            <ul>
+                <li>Jag är fortfarande säljare 80% av tiden</li>
+                <li>Automation är "on the side"</li>
+                <li>Jag vill göra detta heltid</li>
+            </ul>
+
+            <p>Jag söker inte "junior developer"-jobb. Jag söker <strong>Automation Engineer / Integration Developer</strong> hos etablerade SME-företag som har samma problem som Nordmet hade.</p>
+
+            <p>Varför etablerade företag? För att:</p>
+            <ul>
+                <li>De har legacy-system som behöver integreras (min specialitet)</li>
+                <li>De har business processes jag förstår (jag har varit där)</li>
+                <li>De behöver någon som kan prata med både VD:n och IT-avdelningen (min superpower)</li>
+            </ul>
+
+            <h2>Vad jag lärt mig på resan</h2>
+
+            <h3>1. Du behöver inte CS-examen för att bli bra</h3>
+
+            <p>Jag har ingen universitetsutbildning i programmering. Jag har något bättre: <strong>4+ år av att lösa verkliga problem i produktion.</strong></p>
+
+            <h3>2. Sales-skills är undervurderade i tech</h3>
+
+            <p>Folk tror att tech-jobb är "sitta ensam och koda". I verkligheten handlar det om att förstå vad användare behöver, kommunicera tekniska lösningar till icke-tekniska intressenter, hantera förväntningar, och få förankring för nya lösningar.</p>
+
+            <p>Det är sales. Bara att produkten är ett Python-script istället för ett telefonabonnemang.</p>
+
+            <h3>3. Bygg lösningar som faktiskt används</h3>
+
+            <p>Världens bästa kod är värdelös om ingen använder den.</p>
+
+            <p>Jag har sett utvecklare bygga fancy lösningar som ligger och samlar damm för att de glömde fråga: <em>"Vem ska använda detta och varför?"</em></p>
+
+            <p>Min approach: Börja med problemet, inte tekniken.</p>
+
+            <h2>Om du funderar på att byta karriär</h2>
+
+            <p>Kanske jobbar du med sales, operations eller admin och tänker "skulle vara coolt att kunna koda men det är nog för sent..."</p>
+
+            <p>Det är inte för sent. Jag började när jag var 28. Första heltids-tech-jobbet söker jag nu vid 34.</p>
+
+            <p>Börja med problem du faktiskt har. Inte "lära mig Python" utan "automatisera denna jävla Excel-fil". Bygg något som faktiskt används, även om det bara är dig själv som använder det. Din nuvarande erfarenhet är guld – sales/ops/admin-bakgrund är en fördel, inte en nackdel. Och perfekt kod är oviktigt, solving the problem är allt. Första versionen kan vara ful. Gör den bättre sen.</p>
+
+            <h2>Om du rekryterar</h2>
+
+            <p>Manuella Excel-processer som tar timmar varje dag? System som inte pratar med varandra? Rapporter som tar en dag att generera? Email-automation som inte fungerar?</p>
+
+            <p>Då är jag exakt den person ni söker.</p>
+
+            <p>Jag är inte "bara en utvecklare". Jag är någon som har suttit i era användares stolar, känt deras smärta, och byggt lösningar som faktiskt används.</p>
+
+            <p><a href="{{ url_for('home') }}#contact">Låt oss prata</a> om hur jag kan hjälpa ert team slösa mindre tid på repetitivt arbete och mer tid på det som skapar värde.</p>
+
+            <div class="article-footer">
+                <p><strong>Vill du se vad jag byggt?</strong> Kolla in <a href="{{ url_for('home') }}#projects">mina projekt</a> eller läs om <a href="{{ url_for('blog_article', article='automatisera-saljteam') }}">hur jag automatiserade vårt säljteam</a>.</p>
+            </div>
+
+        </div>
+    </article>
+
+    <section class="footer">
+        <footer>
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
+            </ul>
+            <p>
+                <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
+            </p>
+        </footer>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/blog.js') }}"></script>
+
+</body>
+
+</html>

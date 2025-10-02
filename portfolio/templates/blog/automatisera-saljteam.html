@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
+    <meta name="description" content="Hur jag automatiserade vårt säljteam från insidan - en säljares perspektiv på automation och systemintegration.">
+    <meta name="keywords" content="sales automation, säljautomation, process automation, business automation, Magnus Lixenstrand">
+
+    <title>Hur jag automatiserade vårt säljteam - Magnus Lixenstrand</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-bar">
+            <div class="nav-menu">
+                <ul>
+                    <li class="logoName">
+                        <a href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
+                                class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                        </a>
+                    </li>
+                    <li><a href="{{ url_for('home') }}#projects">Projekt</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blogg</a></li>
+                    <li><a href="{{ url_for('about_page') }}">Om</a></li>
+                    <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                            <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                            <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
+                style="height: 1.8rem; width: auto; vertical-align: middle;">
+        </a>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <a href="{{ url_for('blog') }}" class="back-link">← Tillbaka till blogg</a>
+            <h1>Hur jag automatiserade vårt säljteam (från insidan)</h1>
+            <div class="article-meta">
+                <span class="date">Januari 2025</span>
+                <span class="reading-time">5 min läsning</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+
+            <p class="lead">Efter 12+ år inom försäljning hade jag sett samma manuella processer upprepas tusentals gånger. När jag började koda var det inte för att "bli utvecklare" – det var för att jag var trött på att slösa 2 timmar om dagen på saker en dator kunde göra på 2 minuter.</p>
+
+            <h2>Problemet som alla accepterat</h2>
+
+            <p>Första dagen på Nordmet 2019 lärde jag mig "hur vi gör förfrågningar". Processen såg ut så här:</p>
+
+            <ol>
+                <li>Kund ringer och vill ha offert på stålrör</li>
+                <li>Jag öppnar Excel och letar efter historiska priser (kan ta 20-40 min)</li>
+                <li>Hittar jag inget kör jag en SQL-query (om jag kommer ihåg syntaxen...)</li>
+                <li>Kopierar manuellt data till ett email-template</li>
+                <li>Översätter till engelska (våra leverantörer är polska/tyska)</li>
+                <li>Skickar till 3-5 leverantörer</li>
+                <li>Väntar på svar och manuellt jämför priserna</li>
+            </ol>
+
+            <p><strong>Total tid: 1.5-2 timmar per förfrågan.</strong></p>
+
+            <p>Vi gjorde 10-15 förfrågningar i veckan. Räkna på det.</p>
+
+            <h2>Varför ingen fixade det</h2>
+
+            <p>Det klassiska svaret när jag frågade varför vi inte automatiserat detta:</p>
+
+            <blockquote>
+                <p>"Det är så vi alltid gjort. Det fungerar ju?"</p>
+            </blockquote>
+
+            <p>Jo, det fungerade. På samma sätt som att gå till jobbet "fungerar" – men du tar väl bilen ändå?</p>
+
+            <p>Det verkliga problemet var att <strong>alla var så vana vid smärtan att de slutat se den</strong>. Det är som att ha dålig hållning – du märker det inte förrän någon pekar på det.</p>
+
+            <h2>Lösningen (första versionen var ful som stryk)</h2>
+
+            <p>Jag började smått. Första versionen av förfrågningsverktyget var ett Python-script som körde i terminalen:</p>
+
+            <pre><code>python request_quote.py "Stålrör 100x5mm" 1000</code></pre>
+
+            <p>Det gjorde EXAKT vad mina kollegor gjorde manuellt:</p>
+            <ul>
+                <li>SQL-query mot vår databas för historiska priser</li>
+                <li>Formaterade data till text</li>
+                <li>Körde Google Translate API för översättning</li>
+                <li>Skickade email via SMTP</li>
+            </ul>
+
+            <p><strong>Tid: 2 minuter</strong> (varav 1.5 min var att vänta på email-sending).</p>
+
+            <h2>Det som överraskade mig</h2>
+
+            <p>Jag trodde folk skulle bli superglada. Hälften var skeptiska:</p>
+
+            <ul>
+                <li>"Men hur vet vi att översättningen är rätt?"</li>
+                <li>"Vad händer om systemet kraschar?"</li>
+                <li>"Jag litar mer på min egen metod"</li>
+            </ul>
+
+            <p>Här lärde jag mig något kritiskt: <strong>Det räcker inte att bygga bra verktyg. Du måste bygga förtroende.</strong></p>
+
+            <p>Så hur fick jag skeptiska säljare att faktiskt använda verktyget?</p>
+
+            <p>Jag byggde transparens in från början. Ett web-UI där de kunde se exakt vilken data som skickades. "Preview innan send" så de kunde granska allt innan det gick iväg. Sparade alla förfrågningar i en logg de kunde kolla. Och viktigast: "Testa för en vecka, sen kan ni gå tillbaka om ni vill".</p>
+
+            <p>Efter två veckor använde alla verktyget. Efter en månad frågade de: "Kan du bygga något liknande för offerter?"</p>
+
+            <h2>Saker jag lärt mig på vägen</h2>
+
+            <p><strong>Folk övervärderar risk och undervärderar tid.</strong> "Men vad händer om det går fel?" vs "Hur mycket tid slösar vi varje dag?" Svar: Om mitt script går fel förlorar vi 15 minuter. Om vi fortsätter göra manuellt förlorar vi 10 timmar i veckan.</p>
+
+            <p><strong>Börja med det som gör ont VARJE dag.</strong> Inte det som är "strategiskt viktigt" eller "skulle vara häftigt". Fixa det som folk klagat på i 3 år men ingen gjort något åt.</p>
+
+            <p><strong>Business value slår cool tech varje gång.</strong> Första versionen använde Google Translate API (kostade pengar, krävde API-nycklar). Version 2 använder en enkel mapping-tabell för de 50 vanligaste fraserna. Resultat: Lika bra översättningar, noll kostnad, fungerar offline.</p>
+
+            <p><strong>Dokumentera i säljarnas språk, inte utvecklarspråk.</strong> Inte "Kör SQL-query mot OrderHistory-tabellen med JOIN på Products". Utan "Systemet kollar automatiskt vad vi sålt tidigare till liknande kunder". Skillnaden är enorm.</p>
+
+            <h2>Resultat efter 1 år</h2>
+
+            <p>Från det enkla förfrågningsverktyget har jag byggt ut till:</p>
+
+            <ul>
+                <li><strong>Förfrågningar:</strong> 2h → 15 min (87% tidsbesparing)</li>
+                <li><strong>Offertkalkyler:</strong> Automatisk fraktberäkning från 5 leverantörer</li>
+                <li><strong>CRM-synk:</strong> Kunddata uppdateras automatiskt från mail</li>
+                <li><strong>Rapporter:</strong> Månadsrapporter som tidigare tog en dag genereras på 30 sekunder</li>
+            </ul>
+
+            <p><strong>Total tidsbesparing för säljteamet: ~20-25 timmar/vecka</strong></p>
+
+            <p>Det är en halv FTE. Vi kunde ha anställt en person till. Istället kan teamet fokusera på det de är bra på: prata med kunder och sälja.</p>
+
+            <h2>Om du funderar på att börja</h2>
+
+            <p>Om du är säljare eller jobbar med ops och aldrig kodat förut: Börja med Excel eller Google Sheets. Formler och makron räcker långt. Lär dig SQL efter det – 80% av business automation handlar om att hämta rätt data. Sen Python. Det är lätt att lära sig och kraftfullt för automation. n8n är perfekt för no-code workflows med email och APIs.</p>
+
+            <p>Om du är utvecklare som ska bygga för business users: Snacka med användarna INNAN du kodar. Sitt med dem en dag och se vad de faktiskt gör. Första versionen ska vara så enkel att en 10-åring fattar – lägg inte till features, ta bort komplexitet. Bygg förtroende, inte bara verktyg. Preview-funktioner, logging, undo-knappar. Och mät faktiskt impact. "Hur lång tid tog detta förut?" Skriv ner svaret.</p>
+
+            <h2>Varför sales-bakgrunden gör skillnad</h2>
+
+            <p>Jag började inte som utvecklare. Jag började som en less säljare som var trött på att slösa tid.</p>
+
+            <p>Det gör skillnad idag. Jag vet vad det känns som att sitta i andra änden. Vilka processer som gör ont. Vad som låter "bra i teorin" men är värdelöst i praktiken.</p>
+
+            <p>Om du jobbar på ett SME-företag och tänker "vi borde automatisera detta men vi har inte tid/budget/kompetens" – börja smått. Ett Python-script som sparar 30 minuter om dagen är värt mer än en fancy AI-lösning som ingen använder.</p>
+
+            <p>Och om du rekryterar och tänker "vi behöver någon som kan både business och tech" – <a href="{{ url_for('home') }}#contact">hör av dig</a>. Det är exakt vad jag gör.</p>
+
+            <div class="article-footer">
+                <p><strong>Vill du veta mer?</strong> Läs om de <a href="{{ url_for('blog_article', article='5-flaskhalsar-sme') }}">5 vanligaste flaskhalsarna i SME-företag som går att automatisera på en dag</a>.</p>
+            </div>
+
+        </div>
+    </article>
+
+    <section class="footer">
+        <footer>
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
+                    </a>
+                </li>
+            </ul>
+            <p>
+                <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
+            </p>
+        </footer>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/blog.js') }}"></script>
+
+</body>
+
+</html>
