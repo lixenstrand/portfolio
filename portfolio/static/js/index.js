@@ -4,7 +4,7 @@ function init() {
     .addEventListener("click", function () {
       swal
         .fire({
-          title: "Kontakta mig",
+          title: "💬 Kontakta mig",
           animation: true,
           customClass: {
             popup: "custom-popup",
@@ -12,12 +12,19 @@ function init() {
             cancelButton: "custom-cancel-button",
           },
           position: "center",
-          html: '<p style="color: white; font-family: \'Oxygen Mono\', monospace;"></p><input type="text" placeholder="Ditt namn..." id="name" class="swal2-input" style="color: black;"> <input type="text" placeholder="Din email..." id="email" class="swal2-input"> <textarea placeholder="Ditt meddelande..." id="message" class="swal2-textarea"></textarea>',
+          html: `
+            <div style="margin: 1.5rem 0;">
+              <input type="text" placeholder="Ditt namn..." id="name" class="swal2-input" style="width: 100%; box-sizing: border-box;">
+              <input type="email" placeholder="Din email..." id="email" class="swal2-input" style="width: 100%; box-sizing: border-box;">
+              <input type="text" placeholder="Eventuellt företag..." id="company" class="swal2-input" style="width: 100%; box-sizing: border-box;">
+              <textarea placeholder="Ditt meddelande..." id="message" class="swal2-textarea" style="width: 100%; box-sizing: border-box;"></textarea>
+            </div>
+          `,
           showCancelButton: true,
-          confirmButtonText: "Skicka",
+          confirmButtonText: "✉️ Skicka",
           cancelButtonText: "Avbryt",
           footer:
-            "<span style=\"color: white; font-family: 'Oxygen Mono', monospace;\">Jag kommer återkomma så snart jag kan!</span>",
+            "<span style=\"font-family: 'Oxygen Mono', monospace; color: var(--aqua);\">💡 Jag återkommer så snart jag kan!</span>",
 
           preConfirm: () => {
             if (!ValidateEmail(document.getElementById("email").value))
@@ -31,6 +38,7 @@ function init() {
               const emailData = {
                 name: document.getElementById("name").value,
                 email: document.getElementById("email").value,
+                company: document.getElementById("company").value || "Inget företag angivet",
                 message: document.getElementById("message").value,
               };
 
@@ -42,18 +50,35 @@ function init() {
                 },
                 body: JSON.stringify(emailData),
               })
-                .then((response) => response.text())
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Kunde inte skicka meddelandet");
+                  }
+                  return response.text();
+                })
                 .then((message) => console.log(message))
-                .catch((error) => console.error("Error:", error));
+                .catch((error) => {
+                  console.error("Error:", error);
+                  swal.showValidationMessage("Ett fel uppstod. Försök igen senare.");
+                });
             }
           },
         })
         .then((result) => {
           if (result.isConfirmed) {
             swal.fire({
-              title: "Tack!",
-              html: `<span style="color: white; font-family: 'Oxygen Mono', monospace;">Ditt meddelande har skickats</span>`,
-              confirmButtonText: "Ok",
+              title: "✅ Tack!",
+              html: `
+                <div style="margin: 1.5rem 0;">
+                  <p style="color: white; font-family: 'Oxygen Mono', monospace; font-size: 1.2rem;">
+                    Ditt meddelande har skickats
+                  </p>
+                  <p style="color: var(--aqua); font-family: 'Oxygen Mono', monospace; margin-top: 1rem;">
+                    Jag återkommer inom 24 timmar! 🚀
+                  </p>
+                </div>
+              `,
+              confirmButtonText: "Stäng",
               customClass: {
                 popup: "custom-popup",
                 confirmButton: "custom-confirm-button",
@@ -65,7 +90,7 @@ function init() {
 }
 
 function ValidateEmail(mail) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(mail);
 }
 
 AOS.init();
@@ -136,8 +161,20 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   );
 
+  // Klick på scroll-knapp scrollar ner till projekt
+  const scrollButton = document.querySelector(".scroll-to-projects");
+  if (scrollButton) {
+    scrollButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const projectsSection = document.querySelector("#projects");
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
   window.addEventListener("scroll", () => {
-    const arrow = document.querySelector(".arrow");
+    const gradients = document.querySelectorAll(".gradient, .gradient-project, .gradientTheOtherWay");
 
     if (hamburger.classList.contains("active")) {
       hamburger.classList.remove("active");
@@ -146,17 +183,13 @@ document.addEventListener("DOMContentLoaded", function () {
       navMenu.classList.remove("active");
     }
 
-    // en skalfaktor för att justera hur snabbt opacity minskar med scroll
-    const opacityScaleFactor = 300; // Justera detta värde efter behov
+    // Fade in gradients när användaren scrollar
+    const opacityScaleFactor = 300;
+    let gradientOpacity = window.scrollY / opacityScaleFactor;
+    gradientOpacity = Math.max(0, Math.min(1, gradientOpacity));
 
-    // Beräknar nytt opacity baserat på scroll position och skalfaktorn
-    let opacity = 1 - window.scrollY / opacityScaleFactor;
-
-    // Säkerställer att opacity-värdet ligger mellan 0 och 1
-    opacity = Math.max(0, Math.min(1, opacity));
-
-    if (arrow) {
-      arrow.style.opacity = opacity;
-    }
+    gradients.forEach((gradient) => {
+      gradient.style.opacity = gradientOpacity;
+    });
   });
 });

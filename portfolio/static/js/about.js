@@ -15,8 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   );
 
+  // Klick på scroll-knapp scrollar ner till content
+  const scrollButton = document.querySelector(".scroll-to-projects");
+  if (scrollButton) {
+    scrollButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const projectsSection = document.querySelector("#projects");
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
   window.addEventListener("scroll", () => {
-    const arrow = document.querySelector(".arrow");
+    const gradients = document.querySelectorAll(".gradient");
 
     if (hamburger.classList.contains("active")) {
       hamburger.classList.remove("active");
@@ -25,15 +37,14 @@ document.addEventListener("DOMContentLoaded", function () {
       navMenu.classList.remove("active");
     }
 
+    // Fade in gradients när användaren scrollar
     const opacityScaleFactor = 300;
+    let gradientOpacity = window.scrollY / opacityScaleFactor;
+    gradientOpacity = Math.max(0, Math.min(1, gradientOpacity));
 
-    let opacity = 1 - window.scrollY / opacityScaleFactor;
-
-    opacity = Math.max(0, Math.min(1, opacity));
-
-    if (arrow) {
-      arrow.style.opacity = opacity;
-    }
+    gradients.forEach((gradient) => {
+      gradient.style.opacity = gradientOpacity;
+    });
   });
 
   AOS.init();
