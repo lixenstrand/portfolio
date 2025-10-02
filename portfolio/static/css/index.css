@@ -30,6 +30,12 @@
     --font-size: 1.3rem;
     --mono: "Oxygen mono", monospace;
     --sans: "Oxygen", sans-serif;
+
+    /* Stjärnsystem */
+    --star-color-bright: rgba(255, 255, 255, 0.9);
+    --star-color-medium: rgba(255, 255, 255, 0.7);
+    --star-color-dim: rgba(255, 255, 255, 0.5);
+    --star-color-faint: rgba(255, 255, 255, 0.3);
 }
 
 html {
@@ -158,6 +164,12 @@ nav .fa-:hover {
     color: var(--hotmag);
 }
 
+nav a:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    transform: scale(1.05);
+}
+
 nav .fa-:hover {
     filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg) brightness(78%) contrast(90%);
 }
@@ -185,6 +197,12 @@ nav .colorful:hover {
 .button:hover {
     color: var(--black);
     background-color: var(--hotmag);
+}
+
+.button:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
 }
 
 .button-pulse {
@@ -268,6 +286,15 @@ nav .colorful:hover {
         margin: 16px 0;
     }
 
+    .nav-menu a {
+        padding: 12px 20px;
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .nav-menu.active {
         top: 0; /* När aktiv, flyttas den till toppen av skärmen */
         opacity: 1; /* Opacitet ändras till 1 när aktiv */
@@ -293,6 +320,100 @@ nav .colorful:hover {
     padding: 4rem 1rem 10rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+}
+
+/* Stjärnor med box-shadow för optimal performance */
+#intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        /* Övre vänstra hörnet - 8 stjärnor */
+        5vw 8vh 1px 0.5px var(--star-color-bright),
+        12vw 5vh 1px 0.3px var(--star-color-medium),
+        18vw 12vh 1px 0.4px var(--star-color-dim),
+        8vw 15vh 1px 0.5px var(--star-color-dim),
+        25vw 7vh 1px 0.4px var(--star-color-bright),
+        15vw 10vh 1px 0.3px var(--star-color-faint),
+        22vw 14vh 1px 0.5px var(--star-color-medium),
+        10vw 6vh 1px 0.3px var(--star-color-dim),
+        /* Övre högra hörnet - 8 stjärnor */
+        95vw 10vh 1px 0.5px var(--star-color-medium),
+        88vw 6vh 1px 0.4px var(--star-color-medium),
+        82vw 14vh 1px 0.3px var(--star-color-bright),
+        92vw 18vh 1px 0.5px var(--star-color-dim),
+        75vw 8vh 1px 0.4px var(--star-color-medium),
+        85vw 11vh 1px 0.3px var(--star-color-faint),
+        78vw 16vh 1px 0.5px var(--star-color-dim),
+        90vw 13vh 1px 0.3px var(--star-color-medium),
+        /* Mitten - 8 stjärnor */
+        30vw 20vh 1px 0.4px var(--star-color-faint),
+        45vw 18vh 1px 0.3px var(--star-color-dim),
+        60vw 22vh 1px 0.5px var(--star-color-faint),
+        38vw 25vh 1px 0.3px var(--star-color-medium),
+        52vw 15vh 1px 0.4px var(--star-color-faint),
+        68vw 28vh 1px 0.3px var(--star-color-dim),
+        42vw 12vh 1px 0.4px var(--star-color-faint),
+        55vw 24vh 1px 0.3px var(--star-color-dim),
+        /* Vänster sida - 4 stjärnor */
+        3vw 25vh 1px 0.4px var(--star-color-medium),
+        6vw 35vh 1px 0.3px var(--star-color-faint),
+        4vw 30vh 1px 0.4px var(--star-color-dim),
+        7vw 40vh 1px 0.3px var(--star-color-faint),
+        /* Höger sida - 4 stjärnor */
+        97vw 28vh 1px 0.4px var(--star-color-dim),
+        94vw 38vh 1px 0.3px var(--star-color-faint),
+        96vw 33vh 1px 0.4px var(--star-color-dim),
+        93vw 43vh 1px 0.3px var(--star-color-faint);
+    animation: starTwinkle 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Svart overlay-gradient på ::after */
+#intro::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background: radial-gradient(ellipse 150% 80% at 50% 0%,
+        transparent 0%,
+        rgba(13, 13, 13, 0.3) 25%,
+        rgba(13, 13, 13, 0.7) 45%,
+        var(--black) 65%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Stjärn-twinkle animation */
+@keyframes starTwinkle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Accessibility: respektera användarens motion-preferenser */
+@media (prefers-reduced-motion: reduce) {
+    #intro::before {
+        animation: none !important;
+    }
+}
+
+#intro > * {
+    position: relative;
+    z-index: 2;
 }
 
 #intro p {
@@ -402,15 +523,22 @@ article {
 }
 
 .blackBox {
-    background-color: var(--black);
+    background: linear-gradient(135deg, var(--dkblue) 0%, var(--plum) 100%);
+    border: 2px solid var(--aqua);
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 15px;
     color: var(--white);
     font-size: 1rem;
     line-height: 1.5;
-    -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-    -moz-box-shadow: 1px 15px 31.5px -6px #000000;
-    box-shadow: 1px 15px 31.5px -6px #000000;
+    -webkit-box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.blackBox:hover {
+    transform: translateY(-5px);
+    -webkit-box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5);
 }
 
 #projects ul {
@@ -432,7 +560,6 @@ article {
     border-radius: 25px;
     padding: 1rem;
     -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-    -moz-box-shadow: 1px 15px 31.5px -6px #000000;
     box-shadow: 1px 15px 31.5px -6px #000000;
 }
 
@@ -632,7 +759,15 @@ article {
 .contactPopUp:hover {
     background-color: var(--hotmag);
     color: var(--black);
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 0, 170, 0.5);
     transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contactPopUp:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
 }
 
 #contact p:last-child {
@@ -995,7 +1130,8 @@ footer p {
     }
 
     .contactPopUp {
-        padding: 0.75rem 1.5rem;
+        padding: 1rem 1.5rem;
         font-size: 0.85rem;
+        min-height: 44px;
     }
 }

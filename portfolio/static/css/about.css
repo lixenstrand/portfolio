@@ -31,6 +31,12 @@
   --font-size: 1.3rem;
   --mono: "Oxygen mono", monospace;
   --sans: "Oxygen", sans-serif;
+
+  /* Stjärnsystem */
+  --star-color-bright: rgba(255, 255, 255, 0.9);
+  --star-color-medium: rgba(255, 255, 255, 0.7);
+  --star-color-dim: rgba(255, 255, 255, 0.5);
+  --star-color-faint: rgba(255, 255, 255, 0.3);
 }
 
 /* border box model: https://css-tricks.com/box-sizing/ */
@@ -292,6 +298,104 @@ nav .colorful:hover {
   }
 }
 
+#hero {
+  position: relative;
+  padding: 4rem 0 6rem 0;
+}
+
+/* Stjärnor med box-shadow för optimal performance */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow:
+    /* Övre vänstra hörnet - 8 stjärnor */
+    5vw 8vh 1px 0.5px var(--star-color-bright),
+    12vw 5vh 1px 0.3px var(--star-color-medium),
+    18vw 12vh 1px 0.4px var(--star-color-dim),
+    8vw 15vh 1px 0.5px var(--star-color-dim),
+    25vw 7vh 1px 0.4px var(--star-color-bright),
+    15vw 10vh 1px 0.3px var(--star-color-faint),
+    22vw 14vh 1px 0.5px var(--star-color-medium),
+    10vw 6vh 1px 0.3px var(--star-color-dim),
+    /* Övre högra hörnet - 8 stjärnor */
+    95vw 10vh 1px 0.5px var(--star-color-medium),
+    88vw 6vh 1px 0.4px var(--star-color-medium),
+    82vw 14vh 1px 0.3px var(--star-color-bright),
+    92vw 18vh 1px 0.5px var(--star-color-dim),
+    75vw 8vh 1px 0.4px var(--star-color-medium),
+    85vw 11vh 1px 0.3px var(--star-color-faint),
+    78vw 16vh 1px 0.5px var(--star-color-dim),
+    90vw 13vh 1px 0.3px var(--star-color-medium),
+    /* Mitten - 8 stjärnor */
+    30vw 20vh 1px 0.4px var(--star-color-faint),
+    45vw 18vh 1px 0.3px var(--star-color-dim),
+    60vw 22vh 1px 0.5px var(--star-color-faint),
+    38vw 25vh 1px 0.3px var(--star-color-medium),
+    52vw 15vh 1px 0.4px var(--star-color-faint),
+    68vw 28vh 1px 0.3px var(--star-color-dim),
+    42vw 12vh 1px 0.4px var(--star-color-faint),
+    55vw 24vh 1px 0.3px var(--star-color-dim),
+    /* Vänster sida - 4 stjärnor */
+    3vw 25vh 1px 0.4px var(--star-color-medium),
+    6vw 35vh 1px 0.3px var(--star-color-faint),
+    4vw 30vh 1px 0.4px var(--star-color-dim),
+    7vw 40vh 1px 0.3px var(--star-color-faint),
+    /* Höger sida - 4 stjärnor */
+    97vw 28vh 1px 0.4px var(--star-color-dim),
+    94vw 38vh 1px 0.3px var(--star-color-faint),
+    96vw 33vh 1px 0.4px var(--star-color-dim),
+    93vw 43vh 1px 0.3px var(--star-color-faint);
+  animation: starTwinkle 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Svart overlay-gradient på ::after */
+#hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  background: radial-gradient(ellipse 150% 80% at 50% 0%,
+    transparent 0%,
+    rgba(13, 13, 13, 0.3) 25%,
+    rgba(13, 13, 13, 0.7) 45%,
+    var(--black) 65%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Stjärn-twinkle animation */
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Accessibility: respektera användarens motion-preferenser */
+@media (prefers-reduced-motion: reduce) {
+  #hero::before {
+    animation: none !important;
+  }
+}
+
+#hero > * {
+  position: relative;
+  z-index: 2;
+}
+
 .hero-text {
   font-family: var(--sans);
   margin: 0 auto;
@@ -376,15 +480,15 @@ article {
 }
 
 .blackBox {
-  background-color: var(--black);
+  background: linear-gradient(135deg, var(--dkblue) 0%, var(--plum) 100%);
+  border: 2px solid var(--aqua);
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 15px;
   color: var(--white);
   font-size: 1rem;
   line-height: 1.5;
-  -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-  -moz-box-shadow: 1px 15px 31.5px -6px #000000;
-  box-shadow: 1px 15px 31.5px -6px #000000;
+  -webkit-box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
 }
 
 #projects ul {
@@ -400,13 +504,12 @@ article {
 }
 
 #projects img {
-  margin: 2rem 0 4rem 0;
+  margin: 2rem 0 2rem 0;
   border-left: 1px solid var(--aqua);
   border-top: 1px solid var(--aqua);
   border-radius: 25px;
   padding: 1rem;
   -webkit-box-shadow: 1px 15px 31.5px -6px #000000;
-  -moz-box-shadow: 1px 15px 31.5px -6px #000000;
   box-shadow: 1px 15px 31.5px -6px #000000;
 }
 
@@ -416,22 +519,34 @@ article {
 
 @media (min-width: 550px) {
   article {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 1rem;
+    display: block;
   }
 
-  #projects #first img {
-    grid-column: 5 / 11;
-    grid-row: 1/2;
-  }
   #first .text {
-    grid-column: 8/1;
-    grid-row: 1/2;
-    order: 1;
     text-align: left;
     font-family: var(--mono);
+    overflow: auto;
   }
+
+  #first img {
+    float: right;
+    width: 350px;
+    max-width: 40%;
+    margin: 0 0 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .blackBox {
+    position: relative;
+    z-index: 2;
+  }
+
+  #first h4,
+  #first ul {
+    clear: none;
+  }
+
   #projects #first ul {
     justify-content: flex-start;
   }
