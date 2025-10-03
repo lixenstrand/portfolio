@@ -42,6 +42,7 @@
 /* border box model: https://css-tricks.com/box-sizing/ */
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 *,
 *::before,
@@ -63,7 +64,7 @@ body {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .hamburger {
@@ -82,16 +83,20 @@ body {
 #header {
   position: sticky;
   top: 0;
-  background-color: var(--black);
+  background-color: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
   width: 100%;
-  margin: 0 auto 8rem;
-  max-width: 1200px;
-  transition: box-shadow 0.3s ease;
+  margin-bottom: 8rem;
+  transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 #header.scrolled {
   box-shadow: 0 4px 20px rgba(147, 112, 219, 0.4);
+  border-bottom: 1px solid rgba(147, 112, 219, 0.15);
 }
 
 .gradient {
@@ -149,6 +154,7 @@ nav {
   font-size: 80%;
   padding: 1rem;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
 nav h1 a {
@@ -345,7 +351,8 @@ nav .colorful:hover {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 4rem 0 8rem 0;
+  justify-content: center;
+  padding: 4rem 2rem 8rem 2rem;
 }
 
 /* Stjärnor med box-shadow för optimal performance */
@@ -617,6 +624,7 @@ footer {
   font-family: var(--mono);
   font-size: 80%;
   color: var(--white);
+  text-align: center;
 }
 
 footer h1 {
@@ -627,9 +635,8 @@ footer h1 {
 
 footer ul {
   list-style-type: none;
-  margin: 0;
-  padding-top: 2.5rem;
-  padding-bottom: 1rem;
+  margin: 0 auto;
+  padding: 2.5rem 0 1rem 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

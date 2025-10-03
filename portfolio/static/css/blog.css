@@ -38,6 +38,10 @@
     --star-color-faint: rgba(255, 255, 255, 0.3);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -54,7 +58,7 @@ body {
 
 html, body {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* Skip-to-content link (WCAG 2.1) - dold tills fokuserad */
@@ -81,16 +85,20 @@ html, body {
 #header {
     position: sticky;
     top: 0;
-    background-color: var(--black);
+    background-color: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
     width: 100%;
-    margin: 0 auto 8rem;
-    max-width: 1200px;
-    transition: box-shadow 0.3s ease;
+    margin-bottom: 8rem;
+    transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 #header.scrolled {
     box-shadow: 0 4px 20px rgba(74, 88, 153, 0.4);
+    border-bottom: 1px solid rgba(74, 88, 153, 0.15);
 }
 
 /* Navigation */
@@ -98,6 +106,8 @@ nav {
     font-family: var(--mono);
     font-size: 80%;
     padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 nav h1 a {
@@ -231,21 +241,20 @@ nav .fa-:hover {
 }
 
 /* Blog Hero */
-.blog-hero {
-    text-align: center;
+#hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 5rem 2rem;
+    padding: 12rem 2rem 5rem 2rem;
     background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 100%);
     margin-bottom: 0;
-    position: relative;
 }
 
 /* Stjärnor med box-shadow för optimal performance */
-.blog-hero::before {
+#hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -297,7 +306,7 @@ nav .fa-:hover {
 }
 
 /* Svart overlay-gradient på ::after */
-.blog-hero::after {
+#hero::after {
     content: '';
     position: absolute;
     top: 0;
@@ -327,31 +336,61 @@ nav .fa-:hover {
 
 /* Accessibility: respektera användarens motion-preferenser */
 @media (prefers-reduced-motion: reduce) {
-    .blog-hero::before {
+    #hero::before {
         animation: none !important;
     }
 }
 
-.blog-hero > * {
+#hero > * {
     position: relative;
     z-index: 2;
 }
 
-.blog-hero h1 {
+.hero-text {
+    font-family: var(--sans);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0 2rem;
+}
+
+.hero-text h1 {
     font-size: clamp(2rem, 6vw, 3.5rem);
     margin: 0 0 1.5rem 0;
     color: var(--aqua);
     text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-    font-family: var(--sans);
     font-weight: bold;
 }
 
-.blog-hero p {
+.hero-text p {
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     color: var(--white);
     max-width: 800px;
     margin: 0 auto;
     opacity: 0.95;
+    line-height: 1.6;
+}
+
+.scroll-to-blog {
+    display: inline-block;
+    margin: 2rem auto 0 auto;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--aqua), var(--hotmag));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+}
+
+.scroll-to-blog:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
+    color: var(--white);
 }
 
 /* Blog List */
@@ -667,7 +706,7 @@ hr {
 .cta-button {
     display: inline-block;
     background: linear-gradient(135deg, var(--aqua), var(--hotmag));
-    color: var(--white);
+    color: var(--white) !important;
     padding: 0.75rem 2rem;
     border-radius: 8px;
     text-decoration: none;
@@ -679,6 +718,12 @@ hr {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button * {
+    position: relative;
+    z-index: 2;
 }
 
 .cta-button::before {
@@ -692,6 +737,7 @@ hr {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transition: width 0.6s, height 0.6s;
+    z-index: 0;
 }
 
 .cta-button:hover::before {
@@ -702,7 +748,7 @@ hr {
 .cta-button:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 217, 255, 0.3);
-    color: var(--white);
+    color: var(--white) !important;
     text-decoration: none;
 }
 
@@ -757,9 +803,10 @@ footer {
 footer ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -814,7 +861,7 @@ footer .footer-email-link {
 
 /* Tablet breakpoint */
 @media (min-width: 600px) and (max-width: 849px) {
-    .blog-hero {
+    #hero {
         padding: 3rem 1.5rem;
     }
 
@@ -917,7 +964,7 @@ footer .footer-email-link {
         padding: 1.5rem;
     }
 
-    .blog-hero {
+    #hero {
         padding: 3rem 1.5rem 4rem 1.5rem;
     }
 
@@ -932,7 +979,7 @@ footer .footer-email-link {
         --font-size: 1.1rem;
     }
 
-    .blog-hero {
+    #hero {
         padding: 2.5rem 1rem 3.5rem 1rem;
     }
 

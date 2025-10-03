@@ -40,6 +40,7 @@
 
 html {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 *,
 *::before,
@@ -60,7 +61,7 @@ body {
 
 html, body {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 .gradient-project {
@@ -123,20 +124,28 @@ a:hover {
 #header {
     position: sticky;
     top: 0;
-    background-color: var(--black);
+    background-color: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
     width: 100%;
-    transition: box-shadow 0.3s ease;
+    margin-bottom: 8rem;
+    transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 #header.scrolled {
     box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 217, 255, 0.1);
 }
 
 nav {
     font-family: var(--mono);
     font-size: 80%;
     padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 nav h1 a {
@@ -517,21 +526,30 @@ nav .colorful:hover {
 
 .projectBackground {
     background-color: var(--dkblue);
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
 }
 
 article {
-    padding-bottom: 2rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
 }
 
 #projects {
-    padding: 4rem 1rem;
+    padding: 0 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 #projects h1 {
     font-size: 2.5rem;
-    margin-bottom: calc(2.5rem * 1.5);
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    scroll-snap-align: start;
 }
 
 #projects h3 {
@@ -577,7 +595,7 @@ article {
 }
 
 #projects img {
-    margin: 2rem 0 4rem 0;
+    margin: 2rem 0;
     border-left: 1px solid var(--aqua);
     border-top: 1px solid var(--aqua);
     border-radius: 25px;
@@ -619,6 +637,9 @@ article {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         gap: 1rem;
+        align-items: center;
+        min-height: 100vh;
+        padding: 4rem 0;
     }
 
     /* Home Assistant projekt */
@@ -811,6 +832,7 @@ footer {
     font-family: var(--mono);
     font-size: 80%;
     color: var(--white);
+    text-align: center;
 }
 
 footer h1 {
@@ -820,9 +842,8 @@ footer h1 {
 
 footer ul {
     list-style-type: none;
-    margin: 0;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
+    margin: 0 auto;
+    padding: 2.5rem 0 1rem 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -892,17 +913,21 @@ footer .footer-email-link {
     border-radius: 20px;
     color: white !important;
     font-family: 'Oxygen Mono', monospace;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 2px solid var(--aqua);
     box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3),
                 0 0 40px rgba(0, 217, 255, 0.1) !important;
+    padding: 1.5rem !important;
+    max-width: min(600px, 90vw) !important;
+    width: auto !important;
 }
 
 .custom-popup .swal2-title {
     color: var(--aqua) !important;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 4vw, 2rem) !important;
     text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    margin-bottom: 1rem !important;
 }
 
 .custom-confirm-button {
@@ -938,16 +963,17 @@ footer .footer-email-link {
 }
 
 .swal2-input {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0 !important;
     border: 2px solid var(--aqua);
     border-radius: 10px;
-    padding: 12px;
+    padding: 0.75rem !important;
     font-family: 'Oxygen Mono', monospace;
+    font-size: 1rem !important;
     color: white !important;
     background-color: rgba(26, 31, 53, 0.6) !important;
     transition: all 0.3s ease;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
 }
 
@@ -960,16 +986,18 @@ footer .footer-email-link {
 
 .swal2-textarea {
     font-family: 'Oxygen Mono', monospace;
-    font-size: 1.3rem;
+    font-size: 1rem !important;
     color: white !important;
     border: 2px solid var(--aqua);
     border-radius: 10px;
-    padding: 12px;
+    padding: 0.75rem !important;
+    margin: 0.5rem 0 !important;
     background-color: rgba(26, 31, 53, 0.6) !important;
-    min-height: 120px;
+    min-height: 100px !important;
     resize: vertical;
     transition: all 0.3s ease;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
 }
 
@@ -996,30 +1024,41 @@ footer .footer-email-link {
 }
 
 @media (max-width: 600px) {
-    .swal2-popup {
-        font-size: 1rem !important;
-        width: 90% !important;
-        max-width: 300px !important;
-        box-sizing: border-box;
+    .custom-popup {
+        padding: 1rem !important;
+        max-width: 95vw !important;
     }
 
-    .swal2-title {
-        font-size: 1.2rem !important;
+    .custom-popup .swal2-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.5rem !important;
     }
 
-    .swal2-content {
-        font-size: 0.9rem !important;
-    }
-
-    .swal2-styled.swal2-confirm,
-    .swal2-styled.swal2-cancel {
-        font-size: 0.9rem !important;
+    .custom-confirm-button,
+    .custom-cancel-button {
+        padding: 10px 20px !important;
+        font-size: 0.95rem !important;
     }
 
     .swal2-input,
     .swal2-textarea {
-        font-size: 0.9rem !important;
-        padding: 0.4rem !important;
+        font-size: 0.95rem !important;
+        padding: 0.65rem !important;
+        margin: 0.4rem 0 !important;
+    }
+
+    .swal2-textarea {
+        min-height: 80px !important;
+    }
+
+    .swal2-html-container {
+        margin: 0.5rem 0 !important;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .custom-popup {
+        max-width: 85vw !important;
     }
 }
 

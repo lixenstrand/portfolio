@@ -1,3 +1,11 @@
+// Auto-update copyright year
+document.addEventListener('DOMContentLoaded', function() {
+  const yearSpan = document.getElementById('current-year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+});
+
 // Navbar scroll shadow effect
 window.addEventListener('scroll', function() {
   const header = document.getElementById('header');
@@ -23,11 +31,11 @@ function init() {
           },
           position: "center",
           html: `
-            <div style="margin: 1.5rem 0;">
-              <input type="text" placeholder="Ditt namn..." id="name" class="swal2-input" style="width: 100%; box-sizing: border-box;">
-              <input type="email" placeholder="Din email..." id="email" class="swal2-input" style="width: 100%; box-sizing: border-box;">
-              <input type="text" placeholder="Eventuellt företag..." id="company" class="swal2-input" style="width: 100%; box-sizing: border-box;">
-              <textarea placeholder="Ditt meddelande..." id="message" class="swal2-textarea" style="width: 100%; box-sizing: border-box;"></textarea>
+            <div style="margin: 0.5rem 0;">
+              <input type="text" placeholder="Ditt namn..." id="name" class="swal2-input">
+              <input type="email" placeholder="Din email..." id="email" class="swal2-input">
+              <input type="text" placeholder="Eventuellt företag..." id="company" class="swal2-input">
+              <textarea placeholder="Ditt meddelande..." id="message" class="swal2-textarea"></textarea>
             </div>
           `,
           showCancelButton: true,
@@ -85,11 +93,11 @@ function init() {
             swal.fire({
               title: "✅ Tack!",
               html: `
-                <div style="margin: 1.5rem 0;">
-                  <p style="color: white; font-family: 'Oxygen Mono', monospace; font-size: 1.2rem;">
+                <div style="margin: 1rem 0;">
+                  <p style="color: white; font-family: 'Oxygen Mono', monospace; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.6;">
                     Ditt meddelande har skickats
                   </p>
-                  <p style="color: var(--aqua); font-family: 'Oxygen Mono', monospace; margin-top: 1rem;">
+                  <p style="color: var(--aqua); font-family: 'Oxygen Mono', monospace; margin-top: 1rem; font-size: clamp(0.9rem, 2.5vw, 1rem);">
                     Jag återkommer inom 24 timmar! 🚀
                   </p>
                 </div>
