@@ -79,10 +79,10 @@
 
 <body>
 
+    <!-- Skip to main content link för tangentbordsnavigation (WCAG 2.1) -->
+    <a href="#main-content" class="skip-to-content">Hoppa till huvudinnehåll</a>
 
-
-    <section id="header">
-
+    <header id="header">
 
         <nav>
             <div class="nav-bar">
@@ -105,14 +105,14 @@
 
                         <li>
                             <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
-                                aria-label="LinkedIn">
+                                rel="noopener noreferrer" aria-label="LinkedIn">
                                 <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
                                     alt="LinkedIn">
                             </a>
                         </li>
 
                         <li>
-                            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                            <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                                 <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
                                     alt="Github">
                             </a>
@@ -130,19 +130,19 @@
                     style="height: 1.8rem; width: auto; vertical-align: middle;">
             </a>
 
-            <div class="hamburger">
+            <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
 
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
 
             </div>
 
         </nav>
 
-    </section>
+    </header>
 
-
+    <main id="main-content">
 
     <!-- instructions in JavaScript block -->
     <section id="intro">
@@ -156,7 +156,7 @@
 
         <p>Jag ser flaskhalsar i affärsprocesser och bygger verktyg som löser dem. Integrerar system som inte var tänkta att prata med varandra, och förklarar lösningarna så att både VD:n och utvecklingsteamet förstår.</p>
 
-        <p>Just nu jobbar jag som stålsäljare på <a href="https://nordmet.se" target="_blank">Nordmet</a>, men jag bygger också verktyg som sparar teamet 20+ timmar i veckan. Det började som ett sidoprojekt och har vuxit till något större.</p>
+        <p>Just nu jobbar jag som stålsäljare på <a href="https://nordmet.se" target="_blank" rel="noopener noreferrer">Nordmet</a>, men jag bygger också verktyg som sparar teamet 20+ timmar i veckan. Det började som ett sidoprojekt och har vuxit till något större.</p>
 
         <p>Söker heltidsjobb som Automation Engineer eller Integration Developer hos etablerade företag i Jönköpingsregionen. Hybrid/på plats funkar bra.</p>
 
@@ -180,7 +180,7 @@
 
                 <div class="text">
                     <h4 class="animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</h4>
-                    <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h3>
+                    <h2 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h2>
 
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 
@@ -227,7 +227,7 @@
             <article id="second">
 
                 <div class="text">
-                    <h3 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h3>
+                    <h2 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h2>
 
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 
@@ -271,14 +271,14 @@
             <article id="third">
 
                 <div class="text">
-                    <h3 data-aos="fade-right" data-aos-offset="200">Offert och order kalkylator</h3>
+                    <h2 data-aos="fade-right" data-aos-offset="200">Automatiserad Offert- och Orderhantering</h2>
                     <div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
 
-                        <p>Säljare spenderade 30-45 minuter per offert på att manuellt beräkna stålkostnader, ringa fraktbolag för priser, och sedan knappa in allt i Fortnox. Fraktkostnader var ofta fel eftersom vi använde gamla priser från Excel-ark.</p>
+                        <p>Säljare spenderade 20-30 minuter per offert på att manuellt beräkna stålkostnader, ringa fraktbolag för priser, och sedan knappa in allt i Fortnox. Fraktkostnader var ofta fel eftersom vi använde gamla priser från Excel-ark.</p>
 
-                        <p>Byggde ett Excel-baserat verktyg som automatiskt beräknar stålkostnader, hämtar realtidspriser via API från fraktbolag, och genererar Fortnox-offerter direkt från kalkyldata.</p>
+                        <p>Byggde ett Excel-baserat verktyg med VBA-makron och Python-integration som automatiskt beräknar stålkostnader, hämtar realtidspriser via API från fraktbolag baserat på vikt/flakmeter/sträcka, och skickar offertdata direkt till Fortnox och intern webapp via Python-scripts.</p>
 
-                        <p>Minskade offerttid från 45 minuter till 10 minuter. Exakta fraktkostnader med realtidspriser istället för gissningar. Ingen manuell Fortnox-inmatning längre, vilket också innebär färre fel i kostnadsberäkningar.</p>
+                        <p>Minskade offerttid från 25 minuter till 5 minuter (80% reduktion). Exakta fraktkostnader med realtidspriser istället för gissningar. Automatisk dataöverföring till både affärssystem och intern webapp eliminerade manuell inmatning, vilket minskade mänskliga fel med 95%.</p>
 
                     </div>
 
@@ -313,7 +313,7 @@
             <article id="fourth">
 
                 <div class="text">
-                    <h3 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic Metal Trade</h3>
+                    <h2 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic Metal Trade</h2>
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
 
                         <p>Kunddata, certifikat och transportinformation fanns i separata Excel-filer och pappersarkiv. Säljare och logistik hade ingen gemensam plattform, vilket ledde till dubbelarbete, förlorade dokument och eviga mail-kedjor för att hitta information.</p>
@@ -384,40 +384,33 @@
 
     <div class="gradientTheOtherWay"></div>
 
+    </main>
 
-
-    <section class="footer">
-
-        <footer>
+    <footer>
 
             <ul>
                 <li>
-                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                    <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                         <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                     </a>
                 </li>
 
             </ul>
 
-            <p style="margin-top: 1rem; font-family: var(--mono); color: var(--aqua);">
-                <a href="mailto:mlixenstrand@gmail.com" style="color: var(--aqua); text-decoration: none;">mlixenstrand@gmail.com</a>
+            <p class="footer-email">
+                <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
             </p>
 
             <p>
                 <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
 
-        </footer>
-
-    </section>
-
-
-
+    </footer>
 
 
 

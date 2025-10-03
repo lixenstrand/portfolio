@@ -57,6 +57,42 @@ html, body {
     overflow-x: hidden;
 }
 
+/* Skip-to-content link (WCAG 2.1) - dold tills fokuserad */
+.skip-to-content {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    background: var(--aqua);
+    color: var(--black);
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 10000;
+    border-radius: 0 0 5px 0;
+    transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
+#header {
+    position: sticky;
+    top: 0;
+    background-color: var(--black);
+    z-index: 1000;
+    width: 100%;
+    margin: 0 auto 8rem;
+    max-width: 1200px;
+    transition: box-shadow 0.3s ease;
+}
+
+#header.scrolled {
+    box-shadow: 0 4px 20px rgba(74, 88, 153, 0.4);
+}
+
 /* Navigation */
 nav {
     font-family: var(--mono);
@@ -90,14 +126,19 @@ nav a {
     display: block;
 }
 
-nav a:hover,
-nav [class*="fa-"]:hover {
-    color: var(--aqua);
+nav a:hover {
+    color: var(--magenta);
 }
 
-nav [class*="fa-"] {
-    font-size: 150%;
-    color: var(--aqua);
+nav .fa- {
+    height: 2rem;
+    width: auto;
+    vertical-align: middle;
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+}
+
+nav .fa-:hover {
+    filter: invert(38%) sepia(32%) saturate(941%) hue-rotate(199deg) brightness(90%) contrast(92%);
 }
 
 .logoName {
@@ -125,6 +166,11 @@ nav [class*="fa-"] {
     cursor: pointer;
 }
 
+.hamburger:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+}
+
 .bar {
     display: block;
     width: 25px;
@@ -135,15 +181,64 @@ nav [class*="fa-"] {
     background-color: var(--aqua);
 }
 
+/* CV Button Styling */
+.button {
+    background-color: deepskyblue;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    color: var(--black);
+    border: none;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.button:hover {
+    color: var(--black);
+    background-color: var(--hotmag);
+}
+
+.button:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+}
+
+/* CV Button Pulse Animation */
+.button-pulse {
+    animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 0 powderblue;
+    will-change: transform;
+}
+
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+    }
+}
+
 .gradient {
-    background: linear-gradient(180deg, var(--dkblue) 0%, var(--plum) 100%);
-    height: 120px;
+    background:
+        radial-gradient(ellipse 900px 200px at center top, var(--dkblue) 0%, var(--black) 100%),
+        linear-gradient(180deg, var(--black) 0%, var(--black) 100%);
+    height: 200px;
+}
+
+.gradientTheOtherWay {
+    background: radial-gradient(ellipse 900px 150px at center top, rgba(26, 31, 53, 0.8) 0%, transparent 70%);
+    height: 150px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /* Blog Hero */
 .blog-hero {
     text-align: center;
-    padding: 5rem 2rem 6rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 2rem;
     background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 100%);
     margin-bottom: 0;
     position: relative;
@@ -264,7 +359,9 @@ nav [class*="fa-"] {
     max-width: 900px;
     margin: 0 auto;
     padding: 5rem 2rem;
-    background-color: var(--plum);
+    background-color: var(--dkblue);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .blog-card {
@@ -517,37 +614,107 @@ hr {
 /* Blog CTA */
 .blog-cta {
     text-align: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(180deg, var(--plum) 0%, var(--black) 100%);
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(74, 88, 153, 0.1) 100%);
+    border: 2px solid var(--aqua);
+    border-radius: 12px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.blog-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 217, 255, 0.2);
+}
+
+.blog-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.blog-cta > * {
+    position: relative;
+    z-index: 1;
 }
 
 .blog-cta h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     color: var(--aqua);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
 }
 
 .blog-cta p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    color: rgba(247, 248, 250, 0.9);
 }
 
 .cta-button {
     display: inline-block;
     background: linear-gradient(135deg, var(--aqua), var(--hotmag));
     color: var(--white);
-    padding: 1rem 3rem;
-    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: lowercase;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cta-button:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 217, 255, 0.3);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes ctaPulse {
+    to {
+        box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4), 0 0 0 20px rgba(0, 217, 255, 0);
+    }
 }
 
 /* Footer */
@@ -577,7 +744,49 @@ hr {
 
 .footer p {
     margin-top: 1.5rem;
-    color: rgba(247, 248, 250, 0.6);
+    color: rgba(247, 248, 250, 0.9); /* Ökat från 0.6 till 0.9 för WCAG AAA kontrast (4.5:1) */
+}
+
+/* Footer element styling (WCAG 2.1 - no inline styles) */
+footer {
+    background-color: var(--black);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+footer img {
+    height: 2rem;
+    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
+}
+
+footer img:hover {
+    filter: invert(100%);
+}
+
+footer p {
+    margin-top: 1.5rem;
+    color: rgba(247, 248, 250, 0.9);
+    text-align: center;
+}
+
+footer .footer-email {
+    margin-top: 1rem;
+    font-family: var(--mono);
+    color: var(--aqua);
+}
+
+footer .footer-email-link {
+    color: var(--aqua);
+    text-decoration: none;
 }
 
 /* Responsive */
@@ -591,14 +800,6 @@ hr {
         flex-basis: auto;
         text-align: left;
         margin-right: auto;
-    }
-
-    .blog-hero {
-        padding: 6rem 2rem 8rem 2rem;
-    }
-
-    .gradient {
-        height: 150px;
     }
 
     .blog-list {
@@ -723,10 +924,6 @@ hr {
     .blog-list {
         padding: 3rem 1.5rem;
     }
-
-    .gradient {
-        height: 100px;
-    }
 }
 
 /* Small mobile breakpoint */
@@ -741,10 +938,6 @@ hr {
 
     .blog-list {
         padding: 2.5rem 1rem;
-    }
-
-    .gradient {
-        height: 80px;
     }
 
     .blog-article {

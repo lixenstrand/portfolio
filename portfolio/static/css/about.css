@@ -70,21 +70,40 @@ body {
   display: none;
 }
 
+.hamburger:focus {
+  outline: 2px solid var(--aqua);
+  outline-offset: 4px;
+}
+
 .home-mobile {
   display: none;
 }
 
 #header {
+  position: sticky;
+  top: 0;
+  background-color: var(--black);
+  z-index: 1000;
+  width: 100%;
   margin: 0 auto 8rem;
   max-width: 1200px;
+  transition: box-shadow 0.3s ease;
+}
+
+#header.scrolled {
+  box-shadow: 0 4px 20px rgba(147, 112, 219, 0.4);
 }
 
 .gradient {
-  background: linear-gradient(180deg, var(--dkblue) 0%, var(--plum) 100%);
-  height: 80px;
+  background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 100%);
+  height: 200px;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.3s ease-out;
   /* color: var(--white);*/
+}
+
+.gradientTheOtherWay {
+  background: linear-gradient(180deg, var(--dkblue) 0%, var(--black) 100%);
 }
 
 h1,
@@ -100,6 +119,27 @@ a {
 a:hover {
   color: var(--hotmag);
   text-decoration: none;
+}
+
+/* Skip-to-content link (WCAG 2.1) - dold tills fokuserad */
+.skip-to-content {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  background: var(--aqua);
+  color: var(--black);
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 10000;
+  border-radius: 0 0 5px 0;
+  transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
 }
 
 /*nav styles */
@@ -171,12 +211,12 @@ nav a {
 
 nav a:hover,
 nav [class*="fa-"]:hover {
-  color: var(--hotmag);
+  color: #9370db;
 }
 
 nav .fa-:hover {
-  filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg)
-    brightness(78%) contrast(90%);
+  filter: invert(62%) sepia(19%) saturate(1569%) hue-rotate(212deg)
+    brightness(83%) contrast(85%);
 }
 
 nav .colorful:hover {
@@ -186,10 +226,12 @@ nav .colorful:hover {
 
 .button {
   background-color: deepskyblue;
-  padding: 0.25rem;
+  padding: 0.75rem 1rem; /* Ökat från 0.25rem för att uppnå minst 44x44px touch target (WCAG 2.1) */
   border-radius: 5px;
   color: var(--black);
   border: none;
+  min-height: 44px; /* Garanterar WCAG 2.1 Level AAA touch target på alla skärmstorlekar */
+  min-width: 44px;
 }
 
 .button:hover {
@@ -235,7 +277,7 @@ nav .colorful:hover {
     top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
     right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
     z-index: 1000; /* Ser till att menyn ligger över andra element */
-    padding: 10px; /* Lägger till utrymme runt hamburgarens inre innehåll */
+    padding: 14px; /* Ökat till 14px för att säkerställa minst 44x44px touch target (WCAG 2.1 Level AAA) */
   }
 
   .bar {
@@ -300,7 +342,10 @@ nav .colorful:hover {
 
 #hero {
   position: relative;
-  padding: 4rem 0 6rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0 8rem 0;
 }
 
 /* Stjärnor med box-shadow för optimal performance */
@@ -533,6 +578,8 @@ article {
     width: 350px;
     max-width: 40%;
     margin: 0 0 2rem 2rem;
+    position: relative;
+    z-index: 20;
   }
 
   #first .blackBox {
@@ -624,6 +671,18 @@ footer p {
   text-align: center;
 }
 
+/* Footer email styling (WCAG 2.1 - no inline styles) */
+footer .footer-email {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  color: var(--aqua);
+}
+
+footer .footer-email-link {
+  color: var(--aqua);
+  text-decoration: none;
+}
+
 @media (min-width: 850px) {
   nav {
     max-width: 1500px;
@@ -633,6 +692,24 @@ footer p {
     flex-basis: auto;
     text-align: left;
     margin-right: auto;
+  }
+
+  #hero {
+    align-items: flex-start;
+    padding-top: 20vh;
+  }
+
+  .hero-text {
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    width: 100%;
+  }
+
+  .scroll-to-projects {
+    margin-top: 4rem;
+    margin-left: 0;
   }
 }
 

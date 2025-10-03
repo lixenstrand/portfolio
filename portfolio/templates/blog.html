@@ -33,6 +33,10 @@
 
 <body>
 
+    <!-- Skip to main content link för tangentbordsnavigation (WCAG 2.1) -->
+    <a href="#main-content" class="skip-to-content">Hoppa till huvudinnehåll</a>
+
+    <header id="header">
     <nav>
         <div class="nav-bar">
             <div class="nav-menu">
@@ -48,12 +52,12 @@
                     <li><a href="{{ url_for('about_page') }}">Om</a></li>
                     <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
                     <li>
-                        <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                        <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                             <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                         </a>
                     </li>
@@ -69,12 +73,15 @@
                 style="height: 1.8rem; width: auto; vertical-align: middle;">
         </a>
 
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+        <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
+            <span class="bar" aria-hidden="true"></span>
+            <span class="bar" aria-hidden="true"></span>
+            <span class="bar" aria-hidden="true"></span>
         </div>
     </nav>
+    </header>
+
+    <main id="main-content">
 
     <section class="blog-hero">
         <h1>Automation & Business Insights</h1>
@@ -126,7 +133,7 @@
 
     </section>
 
-    <div class="gradient"></div>
+    <div class="gradient gradientTheOtherWay"></div>
 
     <section class="blog-cta">
         <h2>Behöver ditt företag automation?</h2>
@@ -134,30 +141,30 @@
         <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig</a>
     </section>
 
-    <section class="footer">
-        <footer>
+    </main>
+
+    <footer>
             <ul>
                 <li>
-                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                    <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                         <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                     </a>
                 </li>
             </ul>
 
-            <p style="margin-top: 1rem; font-family: var(--mono); color: var(--aqua);">
-                <a href="mailto:mlixenstrand@gmail.com" style="color: var(--aqua); text-decoration: none;">mlixenstrand@gmail.com</a>
+            <p class="footer-email">
+                <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
             </p>
 
             <p>
                 <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
-        </footer>
-    </section>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ url_for('static', filename='js/blog.js') }}"></script>

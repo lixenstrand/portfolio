@@ -44,10 +44,10 @@
 
 <body>
 
+    <!-- Skip to main content link för tangentbordsnavigation (WCAG 2.1) -->
+    <a href="#main-content" class="skip-to-content">Hoppa till huvudinnehåll</a>
 
-
-    <section id="header">
-
+    <header id="header">
 
         <nav>
             <div class="nav-bar">
@@ -70,14 +70,14 @@
 
                         <li>
                             <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
-                                aria-label="LinkedIn">
+                                rel="noopener noreferrer" aria-label="LinkedIn">
                                 <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
                                     alt="LinkedIn">
                             </a>
                         </li>
 
                         <li>
-                            <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                            <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                                 <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
                                     alt="Github">
                             </a>
@@ -95,17 +95,19 @@
                     style="height: 1.8rem; width: auto; vertical-align: middle;">
             </a>
 
-            <div class="hamburger">
+            <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
 
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
 
             </div>
 
         </nav>
 
-    </section>
+    </header>
+
+    <main id="main-content">
 
     <section id="hero">
 
@@ -156,44 +158,24 @@
 
                         <p>Bor i Jönköping och söker Automation Engineer / Integration Developer roller hos etablerade företag där kombinationen av affärsförståelse och teknisk problemlösning kan göra skillnad.</p>
 
+                        <h4 style="color: var(--aqua); margin-top: 2rem; margin-bottom: 1rem;">Tech stack för automation:</h4>
+                        <ul style="display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-bottom: 2rem;">
+                            <li>Python + FastAPI |</li>
+                            <li>n8n |</li>
+                            <li>Home Assistant |</li>
+                            <li>SQL |</li>
+                            <li>REST APIs</li>
+                        </ul>
+
+                        <h4 style="color: var(--aqua); margin-top: 1rem; margin-bottom: 1rem;">Vad driver mig:</h4>
+                        <ul style="display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0;">
+                            <li>Automatisera det repetitiva |</li>
+                            <li>Lösa verkliga problem |</li>
+                            <li>Kontinuerligt lärande |</li>
+                            <li>Se mätbara resultat</li>
+                        </ul>
+
                     </div>
-
-
-                    <h4 class="favoritTech" data-aos="fade-bottom" data-aos-offset="400">Tech stack för automation:</h4>
-                    <ul data-aos="fade-bottom" data-aos-offset="405">
-                        <li>
-                            Python + FastAPI |
-                        </li>
-                        <li>
-                            n8n |
-                        </li>
-                        <li>
-                            Home Assistant |
-                        </li>
-                        <li>
-                            SQL |
-                        </li>
-                        <li>
-                            REST APIs
-                        </li>
-                    </ul>
-
-                    <h4 class="hobbies" data-aos="fade-bottom" data-aos-offset="410">Vad driver mig:</h4>
-                    <ul data-aos="fade-bottom" data-aos-offset="415">
-                        <li>
-                            Automatisera det repetitiva |
-                        </li>
-                        <li>
-                            Lösa verkliga problem |
-                        </li>
-                        <li>
-                            Kontinuerligt lärande |
-                        </li>
-                        <li>
-                            Se mätbara resultat
-                        </li>
-
-                    </ul>
 
                 </div>
             </article>
@@ -205,40 +187,35 @@
 
 
 
-    <div class="gradient"></div>
+    <div class="gradient gradientTheOtherWay"></div>
 
+    </main>
 
-
-
-    <section class="footer">
-
-        <footer>
+    <footer>
 
             <ul>
                 <li>
-                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/lixenstrand" target="_blank" aria-label="Github">
+                    <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
                         <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                     </a>
                 </li>
 
             </ul>
 
-            <p style="margin-top: 1rem; font-family: var(--mono); color: var(--aqua);">
-                <a href="mailto:mlixenstrand@gmail.com" style="color: var(--aqua); text-decoration: none;">mlixenstrand@gmail.com</a>
+            <p class="footer-email">
+                <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
             </p>
 
             <p>
                 <small>&copy; 2025 Magnus Lixenstrand. All rights reserved.</small>
             </p>
 
-        </footer>
-
-    </section>
+    </footer>
 
 
 

@@ -1,7 +1,17 @@
+// Navbar scroll shadow effect
+window.addEventListener('scroll', function() {
+  const header = document.getElementById('header');
+  if (window.scrollY > 0) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
 function init() {
-  document
-    .querySelector(".contactPopUp")
-    .addEventListener("click", function () {
+  const contactPopUp = document.querySelector(".contactPopUp");
+  if (contactPopUp) {
+    contactPopUp.addEventListener("click", function () {
       swal
         .fire({
           title: "💬 Kontakta mig",
@@ -27,13 +37,15 @@ function init() {
             "<span style=\"font-family: 'Oxygen Mono', monospace; color: var(--aqua);\">💡 Jag återkommer så snart jag kan!</span>",
 
           preConfirm: () => {
-            if (!ValidateEmail(document.getElementById("email").value))
+            if (!ValidateEmail(document.getElementById("email").value)) {
               swal.showValidationMessage("Var snäll och skriv en giltig mail.");
-            else if (
+              return false;
+            } else if (
               document.getElementById("name").value === "" ||
               document.getElementById("message").value === ""
             ) {
               swal.showValidationMessage("var snäll och skriv i alla fälten.");
+              return false;
             } else {
               const emailData = {
                 name: document.getElementById("name").value,
@@ -42,8 +54,11 @@ function init() {
                 message: document.getElementById("message").value,
               };
 
-              console.log(emailData);
-              fetch("/send_mail", {
+              // Visa loading spinner
+              Swal.showLoading();
+
+              // VIKTIGT: Returnera promise så SweetAlert2 väntar
+              return fetch("/send_mail", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -56,10 +71,11 @@ function init() {
                   }
                   return response.text();
                 })
-                .then((message) => console.log(message))
                 .catch((error) => {
-                  console.error("Error:", error);
-                  swal.showValidationMessage("Ett fel uppstod. Försök igen senare.");
+                  swal.showValidationMessage(
+                    `Ett fel uppstod: ${error.message}. Prova igen eller maila direkt till mlixenstrand@gmail.com`
+                  );
+                  return undefined;
                 });
             }
           },
@@ -87,79 +103,93 @@ function init() {
           }
         });
     });
+  }
 }
 
 function ValidateEmail(mail) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(mail);
 }
 
-AOS.init();
-
-AOS.init({
-  offset: 290,
-  delay: 0,
-  duration: 1200,
-  easing: "ease",
-  once: false,
-  mirror: true,
-});
-
-const element = document.querySelector("#element");
-if (window.innerWidth > 768 && element) {
-  var typed = new Typed("#element", {
-    strings: [
-      '<h2 class="h2-min">Jag kodar.</h2>',
-      '<h2 class="h2-min">Jag springer.</h2>',
-      '<h2 class="h2-min">Jag lagar mat.</h2>',
-      '<h2 class="h2-min">Jag läser.</h2>',
-      '<h2 class="h2-min">Jag vandrar.</h2>',
-    ],
-    typeSpeed: 100,
-    backSpeed: 80,
-    smartBackspace: false,
-    loop: true,
-    backDelay: 700,
-    cursorChar: "",
-    autoInsertCss: true,
-    startDelay: 1200,
-  });
-} else if (window.innerWidth < 768 && element) {
-  var typed = new Typed("#element", {
-    strings: [
-      '<h2 class="h2-min">Jag kodar.</h2>',
-      '<h2 class="h2-min">Jag springer.</h2>',
-      '<h2 class="h2-min">Jag lagar mat.</h2>',
-      '<h2 class="h2-min">Jag läser.</h2>',
-      '<h2 class="h2-min">Jag vandrar.</h2>',
-    ],
-
-    typeSpeed: 100,
-    backSpeed: 80,
-    smartBackspace: false,
-    loop: true,
-    backDelay: 700,
-    cursorChar: "",
-    autoInsertCss: true,
-  });
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+  // Initiera AOS animations
+  AOS.init({
+    offset: 290,
+    delay: 0,
+    duration: 1200,
+    easing: "ease",
+    once: false,
+    mirror: true,
+  });
+
+  // Initiera Typed.js för hero-sektion
+  const element = document.querySelector("#element");
+  let typed;
+  if (window.innerWidth > 768 && element) {
+    typed = new Typed("#element", {
+      strings: [
+        '<h2 class="h2-min">Jag kodar.</h2>',
+        '<h2 class="h2-min">Jag springer.</h2>',
+        '<h2 class="h2-min">Jag lagar mat.</h2>',
+        '<h2 class="h2-min">Jag läser.</h2>',
+        '<h2 class="h2-min">Jag vandrar.</h2>',
+      ],
+      typeSpeed: 100,
+      backSpeed: 80,
+      smartBackspace: false,
+      loop: true,
+      backDelay: 700,
+      cursorChar: "",
+      autoInsertCss: true,
+      startDelay: 1200,
+    });
+  } else if (element) {
+    typed = new Typed("#element", {
+      strings: [
+        '<h2 class="h2-min">Jag kodar.</h2>',
+        '<h2 class="h2-min">Jag springer.</h2>',
+        '<h2 class="h2-min">Jag lagar mat.</h2>',
+        '<h2 class="h2-min">Jag läser.</h2>',
+        '<h2 class="h2-min">Jag vandrar.</h2>',
+      ],
+      typeSpeed: 100,
+      backSpeed: 80,
+      smartBackspace: false,
+      loop: true,
+      backDelay: 700,
+      cursorChar: "",
+      autoInsertCss: true,
+    });
+  }
+
   init();
 
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector(".nav-menu");
 
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
+  if (hamburger && navMenu) {
+    function toggleMenu() {
+      const isActive = hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      hamburger.setAttribute("aria-expanded", isActive);
+    }
 
-  document.querySelectorAll(".nav-menu li").forEach((n) =>
-    n.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("active");
-    })
-  );
+    hamburger.addEventListener("click", toggleMenu);
+
+    hamburger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleMenu();
+      }
+    });
+
+    document.querySelectorAll(".nav-menu li").forEach((n) =>
+      n.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", false);
+      })
+    );
+  }
 
   // Klick på scroll-knapp scrollar ner till projekt
   const scrollButton = document.querySelector(".scroll-to-projects");
@@ -176,11 +206,10 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", () => {
     const gradients = document.querySelectorAll(".gradient, .gradient-project, .gradientTheOtherWay");
 
-    if (hamburger.classList.contains("active")) {
+    if (hamburger && navMenu && hamburger.classList.contains("active")) {
       hamburger.classList.remove("active");
-    }
-    if (navMenu.classList.contains("active")) {
       navMenu.classList.remove("active");
+      hamburger.setAttribute("aria-expanded", false);
     }
 
     // Fade in gradients när användaren scrollar
