@@ -64,27 +64,6 @@ html, body {
     overflow-x: clip;
 }
 
-.gradient-project {
-    background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 100%);
-    height: 100px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.gradient {
-    background: linear-gradient(180deg, var(--dkblue) 0%, var(--plum) 100%);
-    height: 80px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.gradientTheOtherWay {
-    background: linear-gradient(180deg, var(--plum) 0%, var(--black) 100%);
-    height: 100px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
 h1, h2, h3 {
     margin: 0;
 }
@@ -136,7 +115,7 @@ a:hover {
 }
 
 #header.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     border-bottom: 1px solid rgba(0, 217, 255, 0.1);
 }
 
@@ -383,43 +362,101 @@ nav .colorful:hover {
     height: 1px;
     background: transparent;
     box-shadow:
-        /* Övre vänstra hörnet - 8 stjärnor */
-        5vw 8vh 1px 0.5px var(--star-color-bright),
-        12vw 5vh 1px 0.3px var(--star-color-medium),
-        18vw 12vh 1px 0.4px var(--star-color-dim),
-        8vw 15vh 1px 0.5px var(--star-color-dim),
-        25vw 7vh 1px 0.4px var(--star-color-bright),
-        15vw 10vh 1px 0.3px var(--star-color-faint),
-        22vw 14vh 1px 0.5px var(--star-color-medium),
-        10vw 6vh 1px 0.3px var(--star-color-dim),
-        /* Övre högra hörnet - 8 stjärnor */
-        95vw 10vh 1px 0.5px var(--star-color-medium),
-        88vw 6vh 1px 0.4px var(--star-color-medium),
-        82vw 14vh 1px 0.3px var(--star-color-bright),
-        92vw 18vh 1px 0.5px var(--star-color-dim),
-        75vw 8vh 1px 0.4px var(--star-color-medium),
-        85vw 11vh 1px 0.3px var(--star-color-faint),
-        78vw 16vh 1px 0.5px var(--star-color-dim),
-        90vw 13vh 1px 0.3px var(--star-color-medium),
-        /* Mitten - 8 stjärnor */
-        30vw 20vh 1px 0.4px var(--star-color-faint),
-        45vw 18vh 1px 0.3px var(--star-color-dim),
-        60vw 22vh 1px 0.5px var(--star-color-faint),
-        38vw 25vh 1px 0.3px var(--star-color-medium),
-        52vw 15vh 1px 0.4px var(--star-color-faint),
-        68vw 28vh 1px 0.3px var(--star-color-dim),
-        42vw 12vh 1px 0.4px var(--star-color-faint),
-        55vw 24vh 1px 0.3px var(--star-color-dim),
-        /* Vänster sida - 4 stjärnor */
-        3vw 25vh 1px 0.4px var(--star-color-medium),
-        6vw 35vh 1px 0.3px var(--star-color-faint),
-        4vw 30vh 1px 0.4px var(--star-color-dim),
-        7vw 40vh 1px 0.3px var(--star-color-faint),
-        /* Höger sida - 4 stjärnor */
-        97vw 28vh 1px 0.4px var(--star-color-dim),
-        94vw 38vh 1px 0.3px var(--star-color-faint),
-        96vw 33vh 1px 0.4px var(--star-color-dim),
-        93vw 43vh 1px 0.3px var(--star-color-faint);
+        /* Stora ljusa stjärnor */
+        5vw 0vh 2px 1px var(--star-color-bright),
+        2vw 8vh 2px 1px var(--star-color-bright),
+        8vw 22vh 2px 1px var(--star-color-bright),
+        4vw 38vh 2px 1px var(--star-color-bright),
+        11vw 52vh 2px 1px var(--star-color-bright),
+        92vw 2vh 2px 1px var(--star-color-bright),
+        78vw 15vh 2px 1px var(--star-color-bright),
+        15vw 35vh 2px 1px var(--star-color-bright),
+        88vw 42vh 2px 1px var(--star-color-bright),
+        /* Medium stjärnor - toppen */
+        1vw 3vh 1px 0.5px var(--star-color-medium),
+        7vw 5vh 1px 0.5px var(--star-color-medium),
+        12vw 0vh 1px 0.5px var(--star-color-medium),
+        3vw 16vh 1px 0.5px var(--star-color-medium),
+        9vw 19vh 1px 0.5px var(--star-color-medium),
+        25vw 1vh 1px 0.5px var(--star-color-medium),
+        48vw 0vh 1px 0.5px var(--star-color-medium),
+        65vw 2vh 1px 0.5px var(--star-color-medium),
+        82vw 0vh 1px 0.5px var(--star-color-medium),
+        95vw 1vh 1px 0.5px var(--star-color-medium),
+        /* Medium stjärnor - mellan */
+        8vw 12vh 1px 0.5px var(--star-color-medium),
+        2vw 26vh 1px 0.5px var(--star-color-medium),
+        6vw 31vh 1px 0.5px var(--star-color-medium),
+        11vw 28vh 1px 0.5px var(--star-color-medium),
+        35vw 18vh 1px 0.5px var(--star-color-medium),
+        52vw 22vh 1px 0.5px var(--star-color-medium),
+        70vw 25vh 1px 0.5px var(--star-color-medium),
+        85vw 28vh 1px 0.5px var(--star-color-medium),
+        22vw 32vh 1px 0.5px var(--star-color-medium),
+        /* Medium stjärnor - längre ner */
+        5vw 42vh 1px 0.5px var(--star-color-medium),
+        10vw 46vh 1px 0.5px var(--star-color-medium),
+        3vw 51vh 1px 0.5px var(--star-color-medium),
+        42vw 38vh 1px 0.5px var(--star-color-medium),
+        68vw 45vh 1px 0.5px var(--star-color-medium),
+        18vw 48vh 1px 0.5px var(--star-color-medium),
+        /* Små svaga stjärnor - toppen */
+        1vw 2vh 1px 0.3px var(--star-color-faint),
+        3vw 1vh 1px 0.3px var(--star-color-faint),
+        5vw 6vh 1px 0.3px var(--star-color-faint),
+        8vw 4vh 1px 0.3px var(--star-color-faint),
+        11vw 3vh 1px 0.3px var(--star-color-faint),
+        18vw 0vh 1px 0.3px var(--star-color-faint),
+        32vw 2vh 1px 0.3px var(--star-color-faint),
+        55vw 0vh 1px 0.3px var(--star-color-faint),
+        72vw 1vh 1px 0.3px var(--star-color-faint),
+        88vw 3vh 1px 0.3px var(--star-color-faint),
+        /* Små svaga stjärnor - mellan */
+        2vw 11vh 1px 0.3px var(--star-color-dim),
+        4vw 14vh 1px 0.3px var(--star-color-dim),
+        6vw 15vh 1px 0.3px var(--star-color-dim),
+        9vw 10vh 1px 0.3px var(--star-color-dim),
+        12vw 17vh 1px 0.3px var(--star-color-dim),
+        7vw 24vh 1px 0.3px var(--star-color-dim),
+        10vw 21vh 1px 0.3px var(--star-color-dim),
+        4vw 29vh 1px 0.3px var(--star-color-dim),
+        8vw 35vh 1px 0.3px var(--star-color-dim),
+        20vw 20vh 1px 0.3px var(--star-color-dim),
+        38vw 24vh 1px 0.3px var(--star-color-dim),
+        58vw 28vh 1px 0.3px var(--star-color-dim),
+        75vw 32vh 1px 0.3px var(--star-color-dim),
+        90vw 35vh 1px 0.3px var(--star-color-dim),
+        /* Små svaga stjärnor - längre ner */
+        2vw 37vh 1px 0.3px var(--star-color-faint),
+        5vw 44vh 1px 0.3px var(--star-color-faint),
+        7vw 48vh 1px 0.3px var(--star-color-faint),
+        10vw 40vh 1px 0.3px var(--star-color-faint),
+        12vw 54vh 1px 0.3px var(--star-color-faint),
+        4vw 56vh 1px 0.3px var(--star-color-faint),
+        9vw 59vh 1px 0.3px var(--star-color-faint),
+        28vw 43vh 1px 0.3px var(--star-color-faint),
+        45vw 46vh 1px 0.3px var(--star-color-faint),
+        62vw 49vh 1px 0.3px var(--star-color-faint),
+        80vw 50vh 1px 0.3px var(--star-color-faint),
+        95vw 48vh 1px 0.3px var(--star-color-faint),
+        /* Extra små detaljer */
+        1vw 7vh 1px 0.2px var(--star-color-faint),
+        3vw 12vh 1px 0.2px var(--star-color-faint),
+        6vw 9vh 1px 0.2px var(--star-color-faint),
+        8vw 18vh 1px 0.2px var(--star-color-faint),
+        11vw 14vh 1px 0.2px var(--star-color-faint),
+        2vw 23vh 1px 0.2px var(--star-color-faint),
+        5vw 27vh 1px 0.2px var(--star-color-faint),
+        9vw 33vh 1px 0.2px var(--star-color-faint),
+        7vw 39vh 1px 0.2px var(--star-color-faint),
+        4vw 45vh 1px 0.2px var(--star-color-faint),
+        10vw 50vh 1px 0.2px var(--star-color-faint),
+        14vw 8vh 1px 0.2px var(--star-color-faint),
+        40vw 12vh 1px 0.2px var(--star-color-faint),
+        65vw 18vh 1px 0.2px var(--star-color-faint),
+        25vw 28vh 1px 0.2px var(--star-color-faint),
+        50vw 36vh 1px 0.2px var(--star-color-faint),
+        85vw 44vh 1px 0.2px var(--star-color-faint);
     animation: starTwinkle 8s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
@@ -500,6 +537,159 @@ nav .colorful:hover {
     }
 }
 
+/* Intro Grid Layout */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.intro-headshot {
+    position: relative;
+    z-index: 2;
+}
+
+.intro-headshot img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--aqua);
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Highlight Box */
+.intro-highlight {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 600;
+    color: var(--aqua);
+    background: rgba(0, 217, 255, 0.1);
+    padding: 1.5rem;
+    border-left: 4px solid var(--aqua);
+    margin: 2rem 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.2);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 1rem;
+    background: rgba(0, 217, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(0, 217, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+}
+
+.stat-number {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: bold;
+    color: var(--aqua);
+    font-family: var(--sans);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--grey);
+    font-family: var(--mono);
+}
+
+/* Tech Stack Badges */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid var(--aqua);
+    border-radius: 20px;
+    color: var(--aqua);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: var(--aqua);
+    color: var(--black);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
+}
+
+/* CTA Group */
+.cta-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--aqua), var(--hotmag));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 30px;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
+    color: var(--white);
+}
+
+.cta-secondary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--aqua);
+    text-decoration: none;
+    border-radius: 30px;
+    border: 2px solid var(--aqua);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cta-secondary:hover {
+    background: rgba(0, 217, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+}
+
 .scroll-to-projects {
     display: inline-block;
     margin: 2rem auto 0 auto;
@@ -528,6 +718,9 @@ nav .colorful:hover {
     background-color: var(--dkblue);
     scroll-snap-type: y mandatory;
     overflow-y: auto;
+    box-shadow:
+        0 -80px 150px 60px rgba(26, 31, 53, 0.9),
+        0 80px 150px 60px rgba(26, 31, 53, 0.9);
 }
 
 article {
@@ -738,6 +931,7 @@ article {
 #contact {
     background-color: var(--aqua);
     padding: 1rem 1rem;
+    box-shadow: 0 -100px 180px 70px rgba(0, 217, 255, 0.4);
 }
 
 #contact h2 {
@@ -1068,6 +1262,37 @@ footer .footer-email-link {
         padding: 3rem 1.5rem 8rem 1.5rem;
     }
 
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .intro-headshot {
+        margin: 0 auto;
+    }
+
+    .intro-headshot img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
     #projects h1 {
         font-size: 2rem;
     }
@@ -1121,6 +1346,58 @@ footer .footer-email-link {
 
     #intro {
         padding: 2rem 1.5rem 3rem 1.5rem;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .intro-headshot {
+        margin: 0 auto;
+    }
+
+    .intro-headshot img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .intro-highlight {
+        font-size: 1.1rem;
+        padding: 1.2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .tech-stack {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .tech-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        width: 100%;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 0.9rem 1.5rem;
     }
 
     #intro .name {

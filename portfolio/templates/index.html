@@ -146,25 +146,53 @@
 
     <!-- instructions in JavaScript block -->
     <section id="intro">
-        <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
-        <h2 id="element"></h2>
+        <div class="intro-grid">
+            <div class="intro-headshot">
+                <img src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="Magnus Lixenstrand" loading="eager" width="200" height="200">
+            </div>
 
-        <p>Efter 12+ år inom försäljning har jag lärt mig se ineffektivitet som andra accepterat som "så gör vi det här".
-            Där de flesta ser en sten på marken plockar jag upp den och vrider på den från olika vinklar – det är ungefär så jag ser på företags system och processer också.</p>
+            <div class="intro-content">
+                <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
+                <h2 id="element"></h2>
 
-        <p>Jag löser affärsproblem med automation och systemintegration. Men inte för att det är coolt – för att jag tröttnat på att se folk slösa timmar på repetitivt arbete som en dator kan göra på två minuter.</p>
+                <div class="intro-highlight">
+                    💡 Jag automatiserar bort 20+ timmar repetitivt arbete per vecka
+                </div>
 
-        <p>Jag ser flaskhalsar i affärsprocesser och bygger verktyg som löser dem. Integrerar system som inte var tänkta att prata med varandra, och förklarar lösningarna så att både VD:n och utvecklingsteamet förstår.</p>
+                <p>Efter 12 år med att hitta lösningar till företag ser jag ineffektivitet som andra accepterar som "så gör vi". Nu bygger jag verktyg som löser flaskhalsar i affärsprocesser – integrerar system som inte var tänkta att prata med varandra och förklarar lösningarna så både VD:n och utvecklarna förstår.</p>
 
-        <p>Just nu jobbar jag som stålsäljare på <a href="https://nordmet.se" target="_blank" rel="noopener noreferrer">Nordmet</a>, men jag bygger också verktyg som sparar teamet 20+ timmar i veckan. Det började som ett sidoprojekt och har vuxit till något större.</p>
+                <p>På Nordmet började det som sidoprojekt och har vuxit till något större.</p>
 
-        <p>Söker heltidsjobb som Automation Engineer eller Integration Developer hos etablerade företag i Jönköpingsregionen. Hybrid/på plats funkar bra.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">timmar/vecka</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">87%</div>
+                        <div class="stat-label">tidsreduktion</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">års erfarenhet</div>
+                    </div>
+                </div>
 
-        <a href="#projects" class="scroll-to-projects">Se mina projekt ↓</a>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">n8n</span>
+                    <span class="tech-badge">SQL</span>
+                    <span class="tech-badge">Home Assistant</span>
+                </div>
 
+                <div class="cta-group">
+                    <a href="#projects" class="cta-primary">Se projekt & resultat</a>
+                    <a href="#contact" class="cta-secondary">Kontakta mig</a>
+                </div>
+            </div>
+        </div>
     </section>
-
-    <div class="gradient-project"></div>
 
 
 
@@ -362,8 +390,6 @@
 
 
 
-    <div class="gradient"></div>
-
 
 
 
@@ -381,8 +407,6 @@
     </section>
 
 
-
-    <div class="gradientTheOtherWay"></div>
 
     </main>
 
