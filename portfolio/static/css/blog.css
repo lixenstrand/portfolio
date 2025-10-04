@@ -97,7 +97,7 @@ html, body {
 }
 
 #header.scrolled {
-    box-shadow: 0 4px 20px rgba(74, 88, 153, 0.4);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     border-bottom: 1px solid rgba(74, 88, 153, 0.15);
 }
 
@@ -256,72 +256,77 @@ nav .fa-:hover {
 /* Stjärnor med box-shadow för optimal performance */
 #hero::before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 1px;
-    height: 1px;
+    width: 100vw;
+    height: 100vh;
     background: transparent;
     box-shadow:
-        /* Övre vänstra hörnet - 8 stjärnor */
-        5vw 8vh 1px 0.5px var(--star-color-bright),
-        12vw 5vh 1px 0.3px var(--star-color-medium),
-        18vw 12vh 1px 0.4px var(--star-color-dim),
-        8vw 15vh 1px 0.5px var(--star-color-dim),
-        25vw 7vh 1px 0.4px var(--star-color-bright),
-        15vw 10vh 1px 0.3px var(--star-color-faint),
-        22vw 14vh 1px 0.5px var(--star-color-medium),
-        10vw 6vh 1px 0.3px var(--star-color-dim),
-        /* Övre högra hörnet - 8 stjärnor */
-        95vw 10vh 1px 0.5px var(--star-color-medium),
-        88vw 6vh 1px 0.4px var(--star-color-medium),
-        82vw 14vh 1px 0.3px var(--star-color-bright),
-        92vw 18vh 1px 0.5px var(--star-color-dim),
-        75vw 8vh 1px 0.4px var(--star-color-medium),
-        85vw 11vh 1px 0.3px var(--star-color-faint),
-        78vw 16vh 1px 0.5px var(--star-color-dim),
-        90vw 13vh 1px 0.3px var(--star-color-medium),
-        /* Mitten - 8 stjärnor */
-        30vw 20vh 1px 0.4px var(--star-color-faint),
-        45vw 18vh 1px 0.3px var(--star-color-dim),
-        60vw 22vh 1px 0.5px var(--star-color-faint),
-        38vw 25vh 1px 0.3px var(--star-color-medium),
-        52vw 15vh 1px 0.4px var(--star-color-faint),
-        68vw 28vh 1px 0.3px var(--star-color-dim),
-        42vw 12vh 1px 0.4px var(--star-color-faint),
-        55vw 24vh 1px 0.3px var(--star-color-dim),
-        /* Vänster sida - 4 stjärnor */
-        3vw 25vh 1px 0.4px var(--star-color-medium),
-        6vw 35vh 1px 0.3px var(--star-color-faint),
-        4vw 30vh 1px 0.4px var(--star-color-dim),
-        7vw 40vh 1px 0.3px var(--star-color-faint),
-        /* Höger sida - 4 stjärnor */
-        97vw 28vh 1px 0.4px var(--star-color-dim),
-        94vw 38vh 1px 0.3px var(--star-color-faint),
-        96vw 33vh 1px 0.4px var(--star-color-dim),
-        93vw 43vh 1px 0.3px var(--star-color-faint);
+        /* Vänster kant - extra stjärnor */
+        1vw 5vh 1px 0.4px var(--star-color-medium),
+        2vw 12vh 1px 0.3px var(--star-color-dim),
+        1vw 18vh 1px 0.4px var(--star-color-faint),
+        3vw 25vh 1px 0.3px var(--star-color-medium),
+        2vw 32vh 1px 0.4px var(--star-color-dim),
+        1vw 38vh 1px 0.3px var(--star-color-faint),
+        4vw 3vh 1px 0.3px var(--star-color-faint),
+        4vw 10vh 1px 0.4px var(--star-color-dim),
+        /* Stora ljusa stjärnor */
+        5vw 0vh 2px 1px var(--star-color-bright),
+        92vw 2vh 2px 1px var(--star-color-bright),
+        78vw 15vh 2px 1px var(--star-color-bright),
+        15vw 35vh 2px 1px var(--star-color-bright),
+        88vw 42vh 2px 1px var(--star-color-bright),
+        /* Medium stjärnor - toppen */
+        12vw 0vh 1px 0.5px var(--star-color-medium),
+        25vw 1vh 1px 0.5px var(--star-color-medium),
+        48vw 0vh 1px 0.5px var(--star-color-medium),
+        65vw 2vh 1px 0.5px var(--star-color-medium),
+        82vw 0vh 1px 0.5px var(--star-color-medium),
+        95vw 1vh 1px 0.5px var(--star-color-medium),
+        /* Medium stjärnor - mellan */
+        8vw 12vh 1px 0.5px var(--star-color-medium),
+        35vw 18vh 1px 0.5px var(--star-color-medium),
+        52vw 22vh 1px 0.5px var(--star-color-medium),
+        70vw 25vh 1px 0.5px var(--star-color-medium),
+        85vw 28vh 1px 0.5px var(--star-color-medium),
+        22vw 32vh 1px 0.5px var(--star-color-medium),
+        /* Medium stjärnor - längre ner */
+        42vw 38vh 1px 0.5px var(--star-color-medium),
+        68vw 45vh 1px 0.5px var(--star-color-medium),
+        18vw 48vh 1px 0.5px var(--star-color-medium),
+        /* Små svaga stjärnor - toppen */
+        3vw 1vh 1px 0.3px var(--star-color-faint),
+        18vw 0vh 1px 0.3px var(--star-color-faint),
+        32vw 2vh 1px 0.3px var(--star-color-faint),
+        55vw 0vh 1px 0.3px var(--star-color-faint),
+        72vw 1vh 1px 0.3px var(--star-color-faint),
+        88vw 3vh 1px 0.3px var(--star-color-faint),
+        /* Små svaga stjärnor - mellan */
+        6vw 15vh 1px 0.3px var(--star-color-dim),
+        20vw 20vh 1px 0.3px var(--star-color-dim),
+        38vw 24vh 1px 0.3px var(--star-color-dim),
+        58vw 28vh 1px 0.3px var(--star-color-dim),
+        75vw 32vh 1px 0.3px var(--star-color-dim),
+        90vw 35vh 1px 0.3px var(--star-color-dim),
+        /* Små svaga stjärnor - längre ner */
+        10vw 40vh 1px 0.3px var(--star-color-faint),
+        28vw 43vh 1px 0.3px var(--star-color-faint),
+        45vw 46vh 1px 0.3px var(--star-color-faint),
+        62vw 49vh 1px 0.3px var(--star-color-faint),
+        80vw 50vh 1px 0.3px var(--star-color-faint),
+        95vw 48vh 1px 0.3px var(--star-color-faint),
+        /* Extra små detaljer */
+        14vw 8vh 1px 0.2px var(--star-color-faint),
+        40vw 12vh 1px 0.2px var(--star-color-faint),
+        65vw 18vh 1px 0.2px var(--star-color-faint),
+        25vw 28vh 1px 0.2px var(--star-color-faint),
+        50vw 36vh 1px 0.2px var(--star-color-faint),
+        85vw 44vh 1px 0.2px var(--star-color-faint);
     animation: starTwinkle 8s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
-}
-
-/* Svart overlay-gradient på ::after */
-#hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 100%;
-    background: radial-gradient(ellipse 150% 80% at 50% 0%,
-        transparent 0%,
-        rgba(13, 13, 13, 0.3) 25%,
-        rgba(13, 13, 13, 0.7) 45%,
-        rgba(26, 31, 53, 1) 70%
-    );
-    pointer-events: none;
-    z-index: 1;
 }
 
 /* Stjärn-twinkle animation */
@@ -652,12 +657,13 @@ hr {
 
 /* Blog CTA */
 .blog-cta {
+    max-width: 900px;
+    margin: 2rem auto;
     text-align: center;
     padding: 3rem 2rem;
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(74, 88, 153, 0.1) 100%);
     border: 2px solid var(--aqua);
     border-radius: 12px;
-    margin: 2rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
