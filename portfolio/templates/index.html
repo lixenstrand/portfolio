@@ -17,30 +17,25 @@
     <meta property="og:url" content="https://magnuslixenstrand.se/">
     <meta property="og:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
     <meta property="og:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
-    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+    <meta property="og:image" content="https://magnuslixenstrand.se/static/images/IMG_0830_200.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://magnuslixenstrand.se/">
     <meta name="twitter:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
     <meta name="twitter:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration.">
-    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/homeassistant.png">
+    <meta name="twitter:image" content="https://magnuslixenstrand.se/static/images/IMG_0830_200.jpg">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://magnuslixenstrand.se/">
 
     <title>Magnus Lixenstrand - Automation Engineer Portfolio</title>
 
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-XVMGYMNKLV');
-    </script>
+    <!-- Preload LCP-kritiska resurser -->
+    <link rel="preload"
+          as="image"
+          href="{{ url_for('static', filename='images/IMG_0830_200.jpg') }}"
+          fetchpriority="high">
 
     <!-- Schema.org JSON-LD Markup -->
     <script type="application/ld+json">
@@ -51,7 +46,7 @@
       "jobTitle": "Automation Engineer",
       "description": "Automation Engineer med 12+ års säljarbakgrund som specialiserar sig på systemintegration och processautomation",
       "url": "https://magnuslixenstrand.se",
-      "image": "https://magnuslixenstrand.se/static/images/IMG_0830.jpg",
+      "image": "https://magnuslixenstrand.se/static/images/IMG_0830_200.jpg",
       "sameAs": [
         "https://www.linkedin.com/in/magnus-lixenstrand",
         "https://github.com/lixenstrand"
@@ -148,7 +143,7 @@
     <section id="intro">
         <div class="intro-grid">
             <div class="intro-headshot">
-                <img src="{{ url_for('static', filename='images/IMG_0830.jpg') }}" alt="Magnus Lixenstrand" loading="eager" width="200" height="200">
+                <img src="{{ url_for('static', filename='images/IMG_0830_200.jpg') }}" alt="Magnus Lixenstrand" loading="eager" fetchpriority="high" width="200" height="200">
             </div>
 
             <div class="intro-content">
@@ -159,7 +154,7 @@
                     💡 Jag automatiserar bort 20+ timmar repetitivt arbete per vecka
                 </div>
 
-                <p>Efter 12 år med att hitta lösningar till företag ser jag ineffektivitet som andra accepterar som "så gör vi". Nu bygger jag verktyg som löser flaskhalsar i affärsprocesser – integrerar system som inte var tänkta att prata med varandra och förklarar lösningarna så både VD:n och utvecklarna förstår.</p>
+                <p>Efter 12 år med att hitta lösningar till företag ser jag ineffektivitet som andra accepterar som "så gör vi". Nu bygger jag verktyg som löser flaskhalsar i affärsprocesser – integrerar system som inte var tänkta att prata med varandra och får alla på samma sida.</p>
 
                 <p>På Nordmet började det som sidoprojekt och har vuxit till något större.</p>
 
@@ -207,7 +202,7 @@
             <article id="homeassistant">
 
                 <div class="text">
-                    <h4 class="animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</h4>
+                    <p class="project-label animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</p>
                     <h2 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h2>
 
                     <div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
@@ -221,7 +216,7 @@
                     </div>
 
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h4>
+                    <h3 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h3>
                     <ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
                         <li>
                             Home Assistant |
@@ -268,7 +263,7 @@
                     </div>
 
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h4>
+                    <h3 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h3>
                     <ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
                         <li>
                             Javascript |
@@ -310,7 +305,7 @@
 
                     </div>
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="100">teknologier som används:</h4>
+                    <h3 class="animated" data-aos="fade-bottom" data-aos-offset="100">teknologier som används:</h3>
                     <ul class="animated" data-aos="fade-bottom" data-aos-offset="110">
                         <li>
                             Python |
@@ -353,7 +348,7 @@
                         <p><em>OBS: Webbappen är endast tillgänglig via företagets VPN</em></p>
                     </div>
 
-                    <h4 class="animated" data-aos="fade-bottom" data-aos-offset="95">teknologier som används:</h4>
+                    <h3 class="animated" data-aos="fade-bottom" data-aos-offset="95">teknologier som används:</h3>
                     <ul class="animated" data-aos="fade-bottom" data-aos-offset="100">
                         <li>
                             Javascript |
@@ -444,11 +439,35 @@
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
+    <!-- Google Analytics - requestIdleCallback optimization -->
     <script>
+    (function() {
+        // Initialisera dataLayer direkt för att fånga tidiga events
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
 
+        // Ladda GA-script när browser är idle
+        function loadGA() {
+            const gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XVMGYMNKLV';
 
+            gaScript.onload = function() {
+                // Konfigurera GA när scriptet faktiskt är laddat
+                gtag('js', new Date());
+                gtag('config', 'G-XVMGYMNKLV');
+            };
 
+            document.head.appendChild(gaScript);
+        }
 
+        // Använd requestIdleCallback med fallback för Safari
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGA, { timeout: 2000 });
+        } else {
+            setTimeout(loadGA, 1);
+        }
+    })();
     </script>
 
 </body>

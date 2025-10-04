@@ -132,40 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initiera Typed.js för hero-sektion
   const element = document.querySelector("#element");
   let typed;
-  if (window.innerWidth > 768 && element) {
+  if (element) {
+    // Unified config för både desktop och mobile
     typed = new Typed("#element", {
       strings: [
-        '<h2 class="h2-min">Jag kodar.</h2>',
-        '<h2 class="h2-min">Jag springer.</h2>',
-        '<h2 class="h2-min">Jag lagar mat.</h2>',
-        '<h2 class="h2-min">Jag läser.</h2>',
-        '<h2 class="h2-min">Jag vandrar.</h2>',
+        'Jag kodar.',
+        'Jag springer.',
+        'Jag lagar mat.',
+        'Jag läser.',
+        'Jag vandrar.',
       ],
-      typeSpeed: 100,
-      backSpeed: 80,
-      smartBackspace: false,
+      typeSpeed: 80,
+      backSpeed: 60,
+      smartBackspace: true,
       loop: true,
-      backDelay: 700,
-      cursorChar: "",
+      backDelay: 1500,
+      showCursor: false,
       autoInsertCss: true,
-      startDelay: 1200,
-    });
-  } else if (element) {
-    typed = new Typed("#element", {
-      strings: [
-        '<h2 class="h2-min">Jag kodar.</h2>',
-        '<h2 class="h2-min">Jag springer.</h2>',
-        '<h2 class="h2-min">Jag lagar mat.</h2>',
-        '<h2 class="h2-min">Jag läser.</h2>',
-        '<h2 class="h2-min">Jag vandrar.</h2>',
-      ],
-      typeSpeed: 100,
-      backSpeed: 80,
-      smartBackspace: false,
-      loop: true,
-      backDelay: 700,
-      cursorChar: "",
-      autoInsertCss: true,
+      startDelay: 800,
     });
   }
 
