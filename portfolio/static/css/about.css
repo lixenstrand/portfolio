@@ -33,7 +33,7 @@
   --sans: "Oxygen", sans-serif;
 
   /* Stjärnsystem */
-  --star-color-bright: rgba(255, 255, 255, 0.9);
+  --star-color-bright: rgba(255, 255, 255, 0.75);
   --star-color-medium: rgba(255, 255, 255, 0.7);
   --star-color-dim: rgba(255, 255, 255, 0.5);
   --star-color-faint: rgba(255, 255, 255, 0.3);
@@ -53,7 +53,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: var(--sans);
+  font-family: var(--mono);
   font-weight: 400;
   font-style: normal;
   background-color: var(--black);
@@ -68,6 +68,11 @@ body {
 }
 
 .hamburger {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
   display: none;
 }
 
@@ -321,10 +326,15 @@ nav .colorful:hover {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding-top: 20%;
-    display: none; /* Dold initialt */
-    transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
+    display: grid; /* Alltid grid för smooth transitions */
+    visibility: hidden; /* Dold för skärmläsare och tangentbord */
+    pointer-events: none; /* Förhindrar interaktion när stängd */
+    opacity: 0; /* Transparent när stängd */
+    transition: top 0.5s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Övergång för top, opacity och visibility */
     align-items: center; /* Centrera innehållet vertikalt */
     justify-content: center; /* Centrera innehållet horisontellt */
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
   }
 
   /* Overlay för djup-effekt */
@@ -383,13 +393,10 @@ nav .colorful:hover {
   }
 
   .nav-menu.active {
-    display: grid; /* Visa menyn */
     top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+    visibility: visible; /* Synlig för skärmläsare och tangentbord */
+    pointer-events: auto; /* Tillåt interaktion när öppen */
     opacity: 1; /* Opacitet ändras till 1 när aktiv */
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
-    align-items: center; /* Centrera innehållet vertikalt */
-    justify-content: center; /* Centrera innehållet horisontellt */
     z-index: 999; /* Ser till att menyn ligger över andra element */
   }
 
@@ -410,88 +417,117 @@ nav .colorful:hover {
   padding: 4rem 2rem 8rem 2rem;
 }
 
-/* Stjärnor med box-shadow för optimal performance */
-#hero::before {
-  content: '';
+/* Stjärnor begränsade till hero-sektionen via JavaScript scroll-hantering */
+body::before {
+  content: ' ';
   position: fixed;
   top: 0;
   left: 0;
   width: 1px;
   height: 1px;
   background: transparent;
+  opacity: var(--stars-opacity, 1);
+  transition: opacity 0.3s ease;
   box-shadow:
-    /* Stora ljusa stjärnor */
-    5vw 0vh 2px 1px var(--star-color-bright),
-    92vw 2vh 2px 1px var(--star-color-bright),
-    78vw 15vh 2px 1px var(--star-color-bright),
-    15vw 35vh 2px 1px var(--star-color-bright),
-    88vw 42vh 2px 1px var(--star-color-bright),
-    /* Medium stjärnor - toppen */
-    12vw 0vh 1px 0.5px var(--star-color-medium),
-    25vw 1vh 1px 0.5px var(--star-color-medium),
-    48vw 0vh 1px 0.5px var(--star-color-medium),
-    65vw 2vh 1px 0.5px var(--star-color-medium),
-    82vw 0vh 1px 0.5px var(--star-color-medium),
-    95vw 1vh 1px 0.5px var(--star-color-medium),
-    /* Medium stjärnor - mellan */
-    8vw 12vh 1px 0.5px var(--star-color-medium),
-    35vw 18vh 1px 0.5px var(--star-color-medium),
-    52vw 22vh 1px 0.5px var(--star-color-medium),
-    70vw 25vh 1px 0.5px var(--star-color-medium),
-    85vw 28vh 1px 0.5px var(--star-color-medium),
-    22vw 32vh 1px 0.5px var(--star-color-medium),
-    /* Medium stjärnor - längre ner */
-    42vw 38vh 1px 0.5px var(--star-color-medium),
-    68vw 45vh 1px 0.5px var(--star-color-medium),
-    18vw 48vh 1px 0.5px var(--star-color-medium),
-    /* Små svaga stjärnor - toppen */
-    3vw 1vh 1px 0.3px var(--star-color-faint),
-    18vw 0vh 1px 0.3px var(--star-color-faint),
-    32vw 2vh 1px 0.3px var(--star-color-faint),
-    55vw 0vh 1px 0.3px var(--star-color-faint),
-    72vw 1vh 1px 0.3px var(--star-color-faint),
-    88vw 3vh 1px 0.3px var(--star-color-faint),
-    /* Små svaga stjärnor - mellan */
-    6vw 15vh 1px 0.3px var(--star-color-dim),
-    20vw 20vh 1px 0.3px var(--star-color-dim),
-    38vw 24vh 1px 0.3px var(--star-color-dim),
-    58vw 28vh 1px 0.3px var(--star-color-dim),
-    75vw 32vh 1px 0.3px var(--star-color-dim),
-    90vw 35vh 1px 0.3px var(--star-color-dim),
-    /* Små svaga stjärnor - längre ner */
-    10vw 40vh 1px 0.3px var(--star-color-faint),
-    28vw 43vh 1px 0.3px var(--star-color-faint),
-    45vw 46vh 1px 0.3px var(--star-color-faint),
-    62vw 49vh 1px 0.3px var(--star-color-faint),
-    80vw 50vh 1px 0.3px var(--star-color-faint),
-    95vw 48vh 1px 0.3px var(--star-color-faint),
-    /* Extra små detaljer */
-    14vw 8vh 1px 0.2px var(--star-color-faint),
-    40vw 12vh 1px 0.2px var(--star-color-faint),
-    65vw 18vh 1px 0.2px var(--star-color-faint),
-    25vw 28vh 1px 0.2px var(--star-color-faint),
-    50vw 36vh 1px 0.2px var(--star-color-faint),
-    85vw 44vh 1px 0.2px var(--star-color-faint);
-  animation: starTwinkle 8s ease-in-out infinite;
+    /* Stora ljusa stjärnor (9) */
+    5vw 5vh 2px 1px var(--star-color-bright),
+    2vw 25vh 2px 1px var(--star-color-bright),
+    8vw 48vh 2px 1px var(--star-color-bright),
+    45vw 12vh 2px 1px var(--star-color-bright),
+    55vw 65vh 2px 1px var(--star-color-bright),
+    92vw 8vh 2px 1px var(--star-color-bright),
+    78vw 35vh 2px 1px var(--star-color-bright),
+    88vw 70vh 2px 1px var(--star-color-bright),
+    15vw 88vh 2px 1px var(--star-color-bright),
+    /* Medium stjärnor (10) */
+    12vw 10vh 1px 0.5px var(--star-color-medium),
+    25vw 30vh 1px 0.5px var(--star-color-medium),
+    48vw 15vh 1px 0.5px var(--star-color-medium),
+    82vw 22vh 1px 0.5px var(--star-color-medium),
+    35vw 55vh 1px 0.5px var(--star-color-medium),
+    52vw 75vh 1px 0.5px var(--star-color-medium),
+    70vw 60vh 1px 0.5px var(--star-color-medium),
+    3vw 95vh 1px 0.5px var(--star-color-medium),
+    42vw 82vh 1px 0.5px var(--star-color-medium),
+    68vw 40vh 1px 0.5px var(--star-color-medium),
+    /* Små stjärnor (6) */
+    32vw 18vh 1px 0.3px var(--star-color-faint),
+    72vw 45vh 1px 0.3px var(--star-color-faint),
+    20vw 68vh 1px 0.3px var(--star-color-dim),
+    58vw 90vh 1px 0.3px var(--star-color-dim),
+    28vw 52vh 1px 0.3px var(--star-color-faint),
+    80vw 78vh 1px 0.3px var(--star-color-faint);
+  animation: starTwinkle1 4s ease-in-out infinite;
   pointer-events: none;
-  z-index: 0;
+  z-index: 999; /* Under header (1000) men över allt annat */
 }
 
-/* Overlay gradient removed */
+/* Andra lagret av stjärnor för mer variation */
+body::after {
+  content: ' ';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  opacity: var(--stars-opacity, 1);
+  transition: opacity 0.3s ease;
+  box-shadow:
+    /* Extra stjärnor med annan timing */
+    18vw 8vh 1px 0.5px var(--star-color-medium),
+    38vw 25vh 1px 0.5px var(--star-color-medium),
+    62vw 38vh 1px 0.5px var(--star-color-medium),
+    85vw 52vh 1px 0.5px var(--star-color-medium),
+    10vw 72vh 1px 0.5px var(--star-color-medium),
+    50vw 85vh 1px 0.5px var(--star-color-medium),
+    75vw 18vh 1px 0.3px var(--star-color-faint),
+    30vw 42vh 1px 0.3px var(--star-color-faint),
+    60vw 68vh 1px 0.3px var(--star-color-faint),
+    95vw 78vh 1px 0.3px var(--star-color-faint);
+  animation: starTwinkle2 5s ease-in-out infinite 1.5s;
+  pointer-events: none;
+  z-index: 999;
+}
 
-/* Stjärn-twinkle animation */
-@keyframes starTwinkle {
+/* Stjärn-twinkle animationer med olika patterns */
+@keyframes starTwinkle1 {
   0%, 100% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes starTwinkle2 {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  25% {
     opacity: 1;
   }
   50% {
     opacity: 0.7;
   }
+  75% {
+    opacity: 0.95;
+  }
 }
 
 /* Accessibility: respektera användarens motion-preferenser */
 @media (prefers-reduced-motion: reduce) {
-  #hero::before {
+  body::before,
+  body::after {
     animation: none !important;
   }
 }
@@ -505,16 +541,20 @@ nav .colorful:hover {
   font-family: var(--sans);
   margin: 0 auto;
   max-width: 1200px;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  color: var(--aqua);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
 .aboutMeHeader {
-  margin-left: 20px;
+  margin: 0;
   font-family: var(--sans);
   font-size: clamp(2.5rem, 8vw, 4rem);
   color: var(--aqua);
-  display: block;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .smallScreenCapitalize {
@@ -533,8 +573,10 @@ nav .colorful:hover {
 }
 
 .scroll-to-projects {
-  display: inline-block;
-  margin: 2rem auto 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   padding: 1rem 2rem;
   background: linear-gradient(135deg, var(--aqua), var(--hotmag));
   color: var(--white);
@@ -543,15 +585,29 @@ nav .colorful:hover {
   font-weight: bold;
   font-size: 1.1rem;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .scroll-to-projects:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
   color: var(--white);
+  background: linear-gradient(135deg, var(--hotmag), var(--aqua));
+}
+
+.scroll-to-projects:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.5);
+}
+
+.scroll-to-projects:focus {
+  outline: 2px solid var(--aqua);
+  outline-offset: 4px;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
 }
 
 /* about styles */
@@ -597,6 +653,89 @@ article {
   line-height: 1.5;
   -webkit-box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
   box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+}
+
+/* About page content headings and text */
+.about-section-heading-first {
+  color: var(--aqua);
+  margin-bottom: 1rem;
+}
+
+.about-section-heading {
+  color: var(--aqua);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-highlight-text {
+  margin-top: 1.5rem;
+}
+
+.about-subsection-heading {
+  color: var(--aqua);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-subsection-heading-compact {
+  color: var(--aqua);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.about-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.about-badge-list li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(141, 153, 221, 0.1));
+  border: 1px solid var(--aqua);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-family: var(--mono);
+  color: var(--aqua);
+  transition: all 0.3s ease;
+}
+
+.about-badge-list li:hover {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(141, 153, 221, 0.2));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+
+.about-badge-list-no-margin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.about-badge-list-no-margin li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(141, 153, 221, 0.1));
+  border: 1px solid var(--aqua);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-family: var(--mono);
+  color: var(--aqua);
+  transition: all 0.3s ease;
+}
+
+.about-badge-list-no-margin li:hover {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(141, 153, 221, 0.2));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
 }
 
 #projects ul {
@@ -763,15 +902,20 @@ footer .footer-email-link {
   }
 
   .hero-text {
+    align-items: flex-start;
     text-align: left;
     max-width: 1200px;
     margin: 0 auto;
     padding-left: 2rem;
     width: 100%;
+    gap: 4rem;
+  }
+
+  .aboutMeHeader {
+    text-align: left;
   }
 
   .scroll-to-projects {
-    margin-top: 4rem;
     margin-left: 0;
   }
 }
@@ -783,7 +927,16 @@ footer .footer-email-link {
   }
 
   .aboutMeHeader {
-    margin-left: 15px;
+    margin: 0;
+  }
+
+  .hero-text {
+    gap: 2.5rem;
+  }
+
+  .scroll-to-projects {
+    font-size: 1.05rem;
+    padding: 0.95rem 1.9rem;
   }
 
   #projects {
@@ -810,8 +963,19 @@ footer .footer-email-link {
   }
 
   .aboutMeHeader {
-    margin-left: 10px;
+    margin: 0;
     font-size: 2.5rem;
+  }
+
+  .hero-text {
+    gap: 2rem;
+  }
+
+  .scroll-to-projects {
+    font-size: 1rem;
+    padding: 0.9rem 1.8rem;
+    width: 100%;
+    max-width: 300px;
   }
 
   #projects {
@@ -852,7 +1016,16 @@ footer .footer-email-link {
   }
 
   .aboutMeHeader {
-    margin-left: 8px;
+    margin: 0;
+  }
+
+  .hero-text {
+    gap: 1.5rem;
+  }
+
+  .scroll-to-projects {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
   }
 
   #projects {

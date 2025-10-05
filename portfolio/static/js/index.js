@@ -131,11 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Initiera Typed.js för hero-sektion
-  const element = document.querySelector("#element");
+  const element = document.querySelector("#element span[aria-hidden='true']");
   let typed;
   if (element) {
     // Unified config för både desktop och mobile
-    typed = new Typed("#element", {
+    typed = new Typed("#element span[aria-hidden='true']", {
       strings: [
         'Jag kodar.',
         'Jag springer.',
@@ -209,34 +209,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Lägg till klick-funktion på alla projektbilder (bara på mobil)
-      if (window.innerWidth <= 849) {
-        const projectImages = document.querySelectorAll('#projects img');
-        projectImages.forEach(img => {
-          img.addEventListener('click', () => {
-            openLightbox(img.src, img.alt);
-          });
+      // Lägg till klick-funktion på alla projektbilder (fungerar på alla skärmstorlekar)
+      const projectImages = document.querySelectorAll('#projects img');
+      projectImages.forEach(img => {
+        img.style.cursor = 'pointer'; // Visa att bilden är klickbar
+        img.addEventListener('click', () => {
+          openLightbox(img.src, img.alt);
         });
-      }
-
-      // Uppdatera vid resize
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const projectImages = document.querySelectorAll('#projects img');
-          projectImages.forEach(img => {
-            // Ta bort gamla listeners och lägg till nya om mobil
-            const newImg = img.cloneNode(true);
-            img.parentNode.replaceChild(newImg, img);
-
-            if (window.innerWidth <= 849) {
-              newImg.addEventListener('click', () => {
-                openLightbox(newImg.src, newImg.alt);
-              });
-            }
-          });
-        }, 250);
       });
     }
   }
@@ -301,16 +280,17 @@ document.addEventListener("DOMContentLoaded", function () {
       gradient.style.opacity = gradientOpacity;
     });
 
-    // Dölj stjärnor när man scrollar förbi intro-sektionen
+    // Dölj stjärnor när man scrollar genom intro-sektionen
     const introSection = document.querySelector('#intro');
     if (introSection) {
-      const introBottom = introSection.offsetTop + introSection.offsetHeight;
       const scrollPosition = window.scrollY;
+      const introHeight = introSection.offsetHeight;
 
-      // Fade ut stjärnorna när man når botten av intro-sektionen
-      if (scrollPosition > introBottom - window.innerHeight) {
-        const fadeStart = introBottom - window.innerHeight;
-        const fadeDistance = 300;
+      // Börja fade när man scrollat 10% av intro-sektionens höjd
+      const fadeStart = introHeight * 0.1;
+      const fadeDistance = introHeight * 0.35; // Fade över 35% av intro-höjden
+
+      if (scrollPosition > fadeStart) {
         const fadeProgress = Math.min(1, (scrollPosition - fadeStart) / fadeDistance);
         document.body.style.setProperty('--stars-opacity', 1 - fadeProgress);
       } else {

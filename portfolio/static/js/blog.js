@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Stäng hamburgermeny vid scroll + navbar shadow effect
+  // Stäng hamburgermeny vid scroll + navbar shadow effect + stjärnfade
   window.addEventListener("scroll", () => {
     const header = document.getElementById('header');
 
@@ -49,6 +49,24 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.remove("active");
       navMenu.classList.remove("active");
       hamburger.setAttribute("aria-expanded", false);
+    }
+
+    // Dölj stjärnor när man scrollar genom hero-sektionen
+    const heroSection = document.querySelector('#hero');
+    if (heroSection) {
+      const scrollPosition = window.scrollY;
+      const heroHeight = heroSection.offsetHeight;
+
+      // Börja fade när man scrollat 10% av hero-sektionens höjd
+      const fadeStart = heroHeight * 0.1;
+      const fadeDistance = heroHeight * 0.35; // Fade över 35% av hero-höjden
+
+      if (scrollPosition > fadeStart) {
+        const fadeProgress = Math.min(1, (scrollPosition - fadeStart) / fadeDistance);
+        document.body.style.setProperty('--stars-opacity', 1 - fadeProgress);
+      } else {
+        document.body.style.setProperty('--stars-opacity', 1);
+      }
     }
   });
 

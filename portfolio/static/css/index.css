@@ -102,6 +102,19 @@ a:hover {
     outline-offset: 2px;
 }
 
+/* Screen reader only - dölj visuellt men tillgänglig för skärmläsare */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Nav-stilar */
 
 #header {
@@ -203,6 +216,11 @@ nav .colorful:hover {
 }
 
 .hamburger {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
     display: none;
 }
 
@@ -316,10 +334,15 @@ nav .colorful:hover {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         padding-top: 20%;
-        display: none; /* Dold initialt */
-        transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
+        display: grid; /* Alltid grid för smooth transitions */
+        visibility: hidden; /* Dold för skärmläsare och tangentbord */
+        pointer-events: none; /* Förhindrar interaktion när stängd */
+        opacity: 0; /* Transparent när stängd */
+        transition: top 0.5s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Övergång för top, opacity och visibility */
         align-items: center; /* Centrera innehållet vertikalt */
         justify-content: center; /* Centrera innehållet horisontellt */
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
     }
 
     /* Overlay för djup-effekt */
@@ -378,13 +401,10 @@ nav .colorful:hover {
     }
 
     .nav-menu.active {
-        display: grid; /* Visa menyn */
         top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+        visibility: visible; /* Synlig för skärmläsare och tangentbord */
+        pointer-events: auto; /* Tillåt interaktion när öppen */
         opacity: 1; /* Opacitet ändras till 1 när aktiv */
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
-        align-items: center; /* Centrera innehållet vertikalt */
-        justify-content: center; /* Centrera innehållet horisontellt */
         z-index: 999; /* Ser till att menyn ligger över andra element */
     }
 
@@ -445,25 +465,77 @@ body::before {
         58vw 90vh 1px 0.3px var(--star-color-dim),
         28vw 52vh 1px 0.3px var(--star-color-faint),
         80vw 78vh 1px 0.3px var(--star-color-faint);
-    animation: starTwinkle 8s ease-in-out infinite;
+    animation: starTwinkle1 4s ease-in-out infinite;
     pointer-events: none;
     z-index: 999; /* Under header (1000) men över allt annat */
 }
 
+/* Andra lagret av stjärnor för mer variation */
+body::after {
+    content: ' ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    opacity: var(--stars-opacity, 1);
+    transition: opacity 0.3s ease;
+    box-shadow:
+        /* Extra stjärnor med annan timing */
+        18vw 8vh 1px 0.5px var(--star-color-medium),
+        38vw 25vh 1px 0.5px var(--star-color-medium),
+        62vw 38vh 1px 0.5px var(--star-color-medium),
+        85vw 52vh 1px 0.5px var(--star-color-medium),
+        10vw 72vh 1px 0.5px var(--star-color-medium),
+        50vw 85vh 1px 0.5px var(--star-color-medium),
+        75vw 18vh 1px 0.3px var(--star-color-faint),
+        30vw 42vh 1px 0.3px var(--star-color-faint),
+        60vw 68vh 1px 0.3px var(--star-color-faint),
+        95vw 78vh 1px 0.3px var(--star-color-faint);
+    animation: starTwinkle2 5s ease-in-out infinite 1.5s;
+    pointer-events: none;
+    z-index: 999;
+}
 
-/* Stjärn-twinkle animation */
-@keyframes starTwinkle {
+/* Stjärn-twinkle animationer med olika patterns */
+@keyframes starTwinkle1 {
     0%, 100% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    80% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes starTwinkle2 {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    25% {
         opacity: 1;
     }
     50% {
         opacity: 0.7;
+    }
+    75% {
+        opacity: 0.95;
     }
 }
 
 /* Accessibility: respektera användarens motion-preferenser */
 @media (prefers-reduced-motion: reduce) {
     body::before,
+    body::after,
     .button-pulse,
     .button-wiggle {
         animation: none !important;
@@ -1097,6 +1169,16 @@ footer .footer-email-link {
         flex-basis: auto;
         text-align: left;
         margin-right: auto;
+    }
+
+    /* Flyttar intro högre på desktop */
+    #header {
+        margin-bottom: 2rem;
+    }
+
+    #intro {
+        padding-top: 0;
+        margin-top: 0;
     }
 }
 

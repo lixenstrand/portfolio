@@ -112,11 +112,11 @@
                 <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile">
             </a>
 
-            <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
+            <button class="hamburger" aria-label="Navigeringsmeny" aria-expanded="false">
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
-            </div>
+            </button>
         </nav>
     </header>
 
@@ -131,7 +131,10 @@
 
             <div class="intro-content">
                 <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
-                <h2 id="element" aria-live="polite" aria-atomic="true">Automation Engineer</h2>
+                <h2 id="element">
+                    <span class="sr-only">Automation Engineer</span>
+                    <span aria-hidden="true"></span>
+                </h2>
 
                 <div class="intro-highlight">
                     💡 Jag automatiserar bort 20+ timmar repetitivt arbete per vecka

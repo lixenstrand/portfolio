@@ -32,7 +32,7 @@
     --sans: "Oxygen", sans-serif;
 
     /* Stjärnsystem */
-    --star-color-bright: rgba(255, 255, 255, 0.9);
+    --star-color-bright: rgba(255, 255, 255, 0.75);
     --star-color-medium: rgba(255, 255, 255, 0.7);
     --star-color-dim: rgba(255, 255, 255, 0.5);
     --star-color-faint: rgba(255, 255, 255, 0.3);
@@ -59,6 +59,113 @@ body {
 html, body {
     max-width: 100%;
     overflow-x: clip;
+}
+
+/* Stjärnor begränsade till hero-sektionen via JavaScript scroll-hantering */
+body::before {
+    content: ' ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    opacity: var(--stars-opacity, 1);
+    transition: opacity 0.3s ease;
+    box-shadow:
+        /* Stora ljusa stjärnor (9) */
+        5vw 5vh 2px 1px var(--star-color-bright),
+        2vw 25vh 2px 1px var(--star-color-bright),
+        8vw 48vh 2px 1px var(--star-color-bright),
+        45vw 12vh 2px 1px var(--star-color-bright),
+        55vw 65vh 2px 1px var(--star-color-bright),
+        92vw 8vh 2px 1px var(--star-color-bright),
+        78vw 35vh 2px 1px var(--star-color-bright),
+        88vw 70vh 2px 1px var(--star-color-bright),
+        15vw 88vh 2px 1px var(--star-color-bright),
+        /* Medium stjärnor (10) */
+        12vw 10vh 1px 0.5px var(--star-color-medium),
+        25vw 30vh 1px 0.5px var(--star-color-medium),
+        48vw 15vh 1px 0.5px var(--star-color-medium),
+        82vw 22vh 1px 0.5px var(--star-color-medium),
+        35vw 55vh 1px 0.5px var(--star-color-medium),
+        52vw 75vh 1px 0.5px var(--star-color-medium),
+        70vw 60vh 1px 0.5px var(--star-color-medium),
+        3vw 95vh 1px 0.5px var(--star-color-medium),
+        42vw 82vh 1px 0.5px var(--star-color-medium),
+        68vw 40vh 1px 0.5px var(--star-color-medium),
+        /* Små stjärnor (6) */
+        32vw 18vh 1px 0.3px var(--star-color-faint),
+        72vw 45vh 1px 0.3px var(--star-color-faint),
+        20vw 68vh 1px 0.3px var(--star-color-dim),
+        58vw 90vh 1px 0.3px var(--star-color-dim),
+        28vw 52vh 1px 0.3px var(--star-color-faint),
+        80vw 78vh 1px 0.3px var(--star-color-faint);
+    animation: starTwinkle1 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 999; /* Under header (1000) men över allt annat */
+}
+
+/* Andra lagret av stjärnor för mer variation */
+body::after {
+    content: ' ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    opacity: var(--stars-opacity, 1);
+    transition: opacity 0.3s ease;
+    box-shadow:
+        /* Extra stjärnor med annan timing */
+        18vw 8vh 1px 0.5px var(--star-color-medium),
+        38vw 25vh 1px 0.5px var(--star-color-medium),
+        62vw 38vh 1px 0.5px var(--star-color-medium),
+        85vw 52vh 1px 0.5px var(--star-color-medium),
+        10vw 72vh 1px 0.5px var(--star-color-medium),
+        50vw 85vh 1px 0.5px var(--star-color-medium),
+        75vw 18vh 1px 0.3px var(--star-color-faint),
+        30vw 42vh 1px 0.3px var(--star-color-faint),
+        60vw 68vh 1px 0.3px var(--star-color-faint),
+        95vw 78vh 1px 0.3px var(--star-color-faint);
+    animation: starTwinkle2 5s ease-in-out infinite 1.5s;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Stjärn-twinkle animationer med olika patterns */
+@keyframes starTwinkle1 {
+    0%, 100% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    80% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes starTwinkle2 {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    75% {
+        opacity: 0.95;
+    }
 }
 
 /* Skip-to-content link (WCAG 2.1) - dold tills fokuserad */
@@ -183,6 +290,11 @@ nav .colorful:hover {
 }
 
 .hamburger {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
     display: none;
 }
 
@@ -418,7 +530,8 @@ nav .colorful:hover {
 
 /* Accessibility: respektera användarens motion-preferenser */
 @media (prefers-reduced-motion: reduce) {
-    #hero::before {
+    body::before,
+    body::after {
         animation: none !important;
     }
 }
@@ -1041,10 +1154,15 @@ footer .footer-email-link {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         padding-top: 20%;
-        display: none; /* Dold initialt */
-        transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
+        display: grid; /* Alltid grid för smooth transitions */
+        visibility: hidden; /* Dold för skärmläsare och tangentbord */
+        pointer-events: none; /* Förhindrar interaktion när stängd */
+        opacity: 0; /* Transparent när stängd */
+        transition: top 0.5s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Övergång för top, opacity och visibility */
         align-items: center; /* Centrera innehållet vertikalt */
         justify-content: center; /* Centrera innehållet horisontellt */
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
     }
 
     /* Overlay för djup-effekt */
@@ -1103,13 +1221,10 @@ footer .footer-email-link {
     }
 
     .nav-menu.active {
-        display: grid; /* Visa menyn */
         top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+        visibility: visible; /* Synlig för skärmläsare och tangentbord */
+        pointer-events: auto; /* Tillåt interaktion när öppen */
         opacity: 1; /* Opacitet ändras till 1 när aktiv */
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
-        align-items: center; /* Centrera innehållet vertikalt */
-        justify-content: center; /* Centrera innehållet horisontellt */
         z-index: 999; /* Ser till att menyn ligger över andra element */
     }
 
