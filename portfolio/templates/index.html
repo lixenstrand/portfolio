@@ -78,7 +78,6 @@
     <a href="#main-content" class="skip-to-content">Hoppa till huvudinnehåll</a>
 
     <header id="header">
-
         <nav>
             <div class="nav-bar">
                 <div class="nav-menu">
@@ -86,55 +85,39 @@
                         <li class="logoName">
                             <a href="{{ url_for('home') }}">
                                 <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
-                                    class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                                    class="colorful">
                             </a>
                         </li>
-
-                        <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
-
-                        <li><a href="{{ url_for('blog') }}"> Blogg </a></li>
-
-                        <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
-
-                        <li><a href="{{ url_for('home') }}#contact"> Kontakt </a></li>
-
+                        <li><a href="{{ url_for('home') }}#projects">Projekt</a></li>
+                        <li><a href="{{ url_for('blog') }}">Blogg</a></li>
+                        <li><a href="{{ url_for('about_page') }}">Om</a></li>
+                        <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
                         <li>
-                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
-                                rel="noopener noreferrer" aria-label="LinkedIn">
-                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
-                                    alt="LinkedIn">
+                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                             </a>
                         </li>
-
                         <li>
                             <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
-                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
-                                    alt="Github">
+                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                             </a>
                         </li>
-
                         <li><a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank"
                                 class="button button-pulse">CV</a></li>
                     </ul>
                 </div>
             </div>
 
-
             <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
-                    style="height: 1.8rem; width: auto; vertical-align: middle;">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile">
             </a>
 
             <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
-
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
-
             </div>
-
         </nav>
-
     </header>
 
     <main id="main-content">
@@ -148,7 +131,7 @@
 
             <div class="intro-content">
                 <p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
-                <h2 id="element"></h2>
+                <h2 id="element" aria-live="polite" aria-atomic="true">Automation Engineer</h2>
 
                 <div class="intro-highlight">
                     💡 Jag automatiserar bort 20+ timmar repetitivt arbete per vecka
@@ -159,17 +142,17 @@
                 <p>På Nordmet började det som sidoprojekt och har vuxit till något större.</p>
 
                 <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">20+</div>
-                        <div class="stat-label">timmar/vecka</div>
+                    <div class="stat-item" aria-label="20 plus timmar sparade per vecka">
+                        <div class="stat-number" aria-hidden="true">20+</div>
+                        <div class="stat-label" aria-hidden="true">timmar/vecka</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">87%</div>
-                        <div class="stat-label">tidsreduktion</div>
+                    <div class="stat-item" aria-label="87 procent tidsreduktion">
+                        <div class="stat-number" aria-hidden="true">87%</div>
+                        <div class="stat-label" aria-hidden="true">tidsreduktion</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">12+</div>
-                        <div class="stat-label">års erfarenhet</div>
+                    <div class="stat-item" aria-label="12 plus års erfarenhet">
+                        <div class="stat-number" aria-hidden="true">12+</div>
+                        <div class="stat-label" aria-hidden="true">års erfarenhet</div>
                     </div>
                 </div>
 
@@ -241,7 +224,7 @@
                 </div>
                 <img data-aos="fade-right" data-aos-offset="489"
                     src="{{ url_for('static', filename='images/homeassistant.png') }}"
-                    alt="Screenshot of Home Assistant dashboard with automations"
+                    alt="Home Assistant dashboard showing smart home automations integrating 15+ devices for energy optimization and context-aware control"
                     loading="lazy" width="1200" height="800" />
 
             </article>
@@ -285,7 +268,7 @@
                 </div>
                 <img data-aos="fade-right" data-aos-offset="489"
                     src="{{ url_for('static', filename='images/Inquiry.png') }}"
-                    alt="Screenshot Inquiry tool for steel."
+                    alt="Multilingual steel inquiry tool interface showing automated quote generation that reduced processing time by 87%"
                     loading="lazy" width="1200" height="800" />
 
             </article>
@@ -327,7 +310,7 @@
 
 
                 <img class="animated" data-aos="fade-left" data-aos-offset="400"
-                    src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Screenshot excel calculator"
+                    src="{{ url_for('static', filename='images/excel.jpg') }}" alt="Excel-based quote calculator with automated freight pricing integration reducing quote time from 25 to 5 minutes"
                     loading="lazy" width="1200" height="800" />
             </article>
 
@@ -371,7 +354,7 @@
 
 
                 <img class="animated" data-aos="fade-left" data-aos-offset="400"
-                    src="{{ url_for('static', filename='images/CRM.png') }}" alt="Screenshot of crm part of website"
+                    src="{{ url_for('static', filename='images/CRM.png') }}" alt="Internal CRM web application dashboard managing customer certificates and transport logistics for Nordic Metal Trade"
                     loading="lazy" width="1200" height="800" />
 
             </article>
@@ -399,6 +382,13 @@
         <button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Kontakta
             mig</button>
 
+        <noscript>
+            <div class="noscript-contact">
+                <p><strong>JavaScript är inaktiverat.</strong> Du kan kontakta mig direkt via:</p>
+                <p><a href="mailto:mlixenstrand@gmail.com" class="noscript-email">mlixenstrand@gmail.com</a></p>
+            </div>
+        </noscript>
+
     </section>
 
 
@@ -422,7 +412,7 @@
             </ul>
 
             <p class="footer-email">
-                <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
+                <span class="footer-label">Kontakta mig:</span> <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
             </p>
 
             <p>

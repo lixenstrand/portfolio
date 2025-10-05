@@ -125,8 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
     delay: 0,
     duration: 1200,
     easing: "ease",
-    once: false,
-    mirror: true,
+    once: true,
+    mirror: false,
+    disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   });
 
   // Initiera Typed.js för hero-sektion
@@ -154,6 +155,93 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   init();
+
+  // Lightbox för bilder på mobil
+  function initLightbox() {
+    // Skapa lightbox-element om det inte finns
+    if (!document.querySelector('.lightbox')) {
+      const lightbox = document.createElement('div');
+      lightbox.className = 'lightbox';
+      lightbox.innerHTML = `
+        <div class="lightbox-content">
+          <button class="lightbox-close" aria-label="Stäng">×</button>
+          <img class="lightbox-image" src="" alt="">
+          <div class="lightbox-hint">👆 Zooma med fingrar</div>
+        </div>
+      `;
+      document.body.appendChild(lightbox);
+
+      const lightboxEl = document.querySelector('.lightbox');
+      const lightboxImg = document.querySelector('.lightbox-image');
+      const closeBtn = document.querySelector('.lightbox-close');
+
+      // Funktion för att öppna lightbox
+      function openLightbox(imgSrc, imgAlt) {
+        lightboxImg.src = imgSrc;
+        lightboxImg.alt = imgAlt;
+        lightboxEl.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Förhindra scroll
+      }
+
+      // Funktion för att stänga lightbox
+      function closeLightbox() {
+        lightboxEl.classList.remove('active');
+        document.body.style.overflow = ''; // Återställ scroll
+        setTimeout(() => {
+          lightboxImg.src = '';
+        }, 300);
+      }
+
+      // Event listeners
+      closeBtn.addEventListener('click', closeLightbox);
+
+      // Stäng vid klick på bakgrund
+      lightboxEl.addEventListener('click', (e) => {
+        if (e.target === lightboxEl) {
+          closeLightbox();
+        }
+      });
+
+      // Stäng med ESC-tangent
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxEl.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+
+      // Lägg till klick-funktion på alla projektbilder (bara på mobil)
+      if (window.innerWidth <= 849) {
+        const projectImages = document.querySelectorAll('#projects img');
+        projectImages.forEach(img => {
+          img.addEventListener('click', () => {
+            openLightbox(img.src, img.alt);
+          });
+        });
+      }
+
+      // Uppdatera vid resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const projectImages = document.querySelectorAll('#projects img');
+          projectImages.forEach(img => {
+            // Ta bort gamla listeners och lägg till nya om mobil
+            const newImg = img.cloneNode(true);
+            img.parentNode.replaceChild(newImg, img);
+
+            if (window.innerWidth <= 849) {
+              newImg.addEventListener('click', () => {
+                openLightbox(newImg.src, newImg.alt);
+              });
+            }
+          });
+        }, 250);
+      });
+    }
+  }
+
+  initLightbox();
 
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector(".nav-menu");
@@ -212,5 +300,22 @@ document.addEventListener("DOMContentLoaded", function () {
     gradients.forEach((gradient) => {
       gradient.style.opacity = gradientOpacity;
     });
+
+    // Dölj stjärnor när man scrollar förbi intro-sektionen
+    const introSection = document.querySelector('#intro');
+    if (introSection) {
+      const introBottom = introSection.offsetTop + introSection.offsetHeight;
+      const scrollPosition = window.scrollY;
+
+      // Fade ut stjärnorna när man når botten av intro-sektionen
+      if (scrollPosition > introBottom - window.innerHeight) {
+        const fadeStart = introBottom - window.innerHeight;
+        const fadeDistance = 300;
+        const fadeProgress = Math.min(1, (scrollPosition - fadeStart) / fadeDistance);
+        document.body.style.setProperty('--stars-opacity', 1 - fadeProgress);
+      } else {
+        document.body.style.setProperty('--stars-opacity', 1);
+      }
+    }
   });
 });

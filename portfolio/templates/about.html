@@ -48,7 +48,6 @@
     <a href="#main-content" class="skip-to-content">Hoppa till huvudinnehåll</a>
 
     <header id="header">
-
         <nav>
             <div class="nav-bar">
                 <div class="nav-menu">
@@ -56,55 +55,39 @@
                         <li class="logoName">
                             <a href="{{ url_for('home') }}">
                                 <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home"
-                                    class="colorful" style="height: 1.8rem; width: auto; vertical-align: middle;">
+                                    class="colorful">
                             </a>
                         </li>
-
-                        <li> <a href="{{ url_for('home') }}#projects"> Projekt </a> </li>
-
-                        <li><a href="{{ url_for('blog') }}"> Blogg </a></li>
-
-                        <li><a href="{{ url_for('about_page') }}"> Om </a> </li>
-
-                        <li><a href="{{ url_for('home') }}#contact"> Kontakt </a></li>
-
+                        <li><a href="{{ url_for('home') }}#projects">Projekt</a></li>
+                        <li><a href="{{ url_for('blog') }}">Blogg</a></li>
+                        <li><a href="{{ url_for('about_page') }}">Om</a></li>
+                        <li><a href="{{ url_for('home') }}#contact">Kontakt</a></li>
                         <li>
-                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank"
-                                rel="noopener noreferrer" aria-label="LinkedIn">
-                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-"
-                                    alt="LinkedIn">
+                            <a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <img src="{{ url_for('static', filename='icon/linkedin.svg') }}" class="fa-" alt="LinkedIn">
                             </a>
                         </li>
-
                         <li>
                             <a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
-                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-"
-                                    alt="Github">
+                                <img src="{{ url_for('static', filename='icon/square-github.svg') }}" class="fa-" alt="Github">
                             </a>
                         </li>
-
                         <li><a href="{{ url_for('get_cv', filename='magnus_lixenstrand_cv.pdf') }}" target="_blank"
                                 class="button button-pulse">CV</a></li>
-
                     </ul>
                 </div>
             </div>
 
             <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile"
-                    style="height: 1.8rem; width: auto; vertical-align: middle;">
+                <img src="{{ url_for('static', filename='icon/house-solid.svg') }}" alt="Home" class="home-mobile">
             </a>
 
             <div class="hamburger" role="button" tabindex="0" aria-label="Öppna/stäng navigeringsmeny" aria-expanded="false">
-
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
                 <span class="bar" aria-hidden="true"></span>
-
             </div>
-
         </nav>
-
     </header>
 
     <main id="main-content">

@@ -90,8 +90,7 @@ body {
   width: 100%;
   margin-bottom: 8rem;
   transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
-  will-change: transform;
-  transform: translateZ(0);
+  /* will-change borttaget - position: sticky skapar redan egen layer */
 }
 
 #header.scrolled {
@@ -203,18 +202,22 @@ nav a {
 }
 
 nav a:hover,
-nav [class*="fa-"]:hover {
-  color: #9370db;
+nav .fa-:hover {
+  color: var(--hotmag);
+}
+
+nav a:focus {
+  outline: 2px solid var(--aqua);
+  outline-offset: 4px;
+  transform: scale(1.05);
 }
 
 nav .fa-:hover {
-  filter: invert(62%) sepia(19%) saturate(1569%) hue-rotate(212deg)
-    brightness(83%) contrast(85%);
+  filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
 }
 
 nav .colorful:hover {
-  filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg)
-    brightness(78%) contrast(90%);
+  filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
 }
 
 .button {
@@ -232,10 +235,16 @@ nav .colorful:hover {
   background-color: var(--hotmag);
 }
 
+.button:focus {
+  outline: 2px solid var(--aqua);
+  outline-offset: 4px;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+}
+
 .button-pulse {
   animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
   box-shadow: 0 0 0 0 powderblue;
-  will-change: transform;
+  will-change: box-shadow; /* Korrekt property - animerar box-shadow, inte transform */
 }
 @keyframes pulse {
   to {
@@ -243,42 +252,48 @@ nav .colorful:hover {
   }
 }
 
-@media (min-width: 840px) {
+@media (min-width: 850px) {
   .logoName {
     visibility: visible;
   }
 }
 
-@media (max-width: 839px) {
+@media (max-width: 849px) {
+  /* Dölj hemknappen helt på mobil - visa bara hamburgare */
   nav a .home-mobile {
-    display: block;
-    cursor: pointer;
-    position: absolute; /* Fixerar elementet i förhållande till viewporten */
-    top: 30px;
-    left: 25px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
-    z-index: 1000; /* Ser till att menyn ligger över andra element */
+    display: none !important;
   }
 
   .logoName {
     visibility: hidden;
   }
 
+  /* Ge navbar mer höjd på mobil */
+  nav {
+    padding: 1.5rem 1rem;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hamburger {
     display: block;
     cursor: pointer;
-    position: absolute; /* Fixerar elementet i förhållande till viewporten */
-    top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
-    right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
-    z-index: 1000; /* Ser till att menyn ligger över andra element */
-    padding: 14px; /* Ökat till 14px för att säkerställa minst 44x44px touch target (WCAG 2.1 Level AAA) */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    z-index: 1000;
+    padding: 14px;
   }
 
   .bar {
     display: block;
-    width: 35px; /* Du kan behöva justera denna bredd beroende på design */
-    height: 4px; /* Du kan behöva justera denna höjd beroende på design */
+    width: 35px;
+    height: 4px;
     background-color: var(--white);
-    margin: 5px auto; /* Centrerar strecken inuti `.hamburger` containern */
+    margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
@@ -298,26 +313,79 @@ nav .colorful:hover {
   .nav-menu {
     position: fixed;
     top: -200%; /* Startposition utanför skärmen (uppifrån) */
+    left: 0;
     right: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--black);
+    background: linear-gradient(180deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding-top: 20%;
-    display: flex;
-    transition: top 0.5s, opacity 0.2s; /* Övergång för top och opacity */
-
+    display: none; /* Dold initialt */
+    transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
     align-items: center; /* Centrera innehållet vertikalt */
     justify-content: center; /* Centrera innehållet horisontellt */
   }
 
+  /* Overlay för djup-effekt */
+  .nav-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.08), transparent 50%);
+    pointer-events: none;
+  }
+
   .nav-menu li {
     margin: 16px 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Staggered animation - varje länk flyger in uppifrån */
+  .nav-menu.active li:nth-child(1) {
+    transition-delay: 0.1s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-menu.active li:nth-child(2) {
+    transition-delay: 0.15s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-menu.active li:nth-child(3) {
+    transition-delay: 0.2s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-menu.active li:nth-child(4) {
+    transition-delay: 0.25s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-menu.active li:nth-child(5) {
+    transition-delay: 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-menu a {
+    padding: 12px 20px;
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-menu.active {
+    display: grid; /* Visa menyn */
     top: 0; /* När aktiv, flyttas den till toppen av skärmen */
     opacity: 1; /* Opacitet ändras till 1 när aktiv */
-    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
     align-items: center; /* Centrera innehållet vertikalt */
@@ -328,7 +396,7 @@ nav .colorful:hover {
   .nav-menu ul {
     display: flex;
     flex-flow: column wrap;
-    justify-content: center; /* Centrera innehållet vertikalt */
+    justify-content: center;
     gap: 1rem;
   }
 }
@@ -345,7 +413,7 @@ nav .colorful:hover {
 /* Stjärnor med box-shadow för optimal performance */
 #hero::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 1px;

@@ -92,8 +92,7 @@ html, body {
     width: 100%;
     margin-bottom: 8rem;
     transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
-    will-change: transform;
-    transform: translateZ(0);
+    /* will-change borttaget - position: sticky skapar redan egen layer */
 }
 
 #header.scrolled {
@@ -115,9 +114,9 @@ nav h1 a {
 }
 
 nav ul {
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
     margin: 0;
+    padding: 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -130,16 +129,6 @@ nav li:first-child {
     text-align: center;
 }
 
-nav a {
-    color: var(--white);
-    text-decoration: none;
-    display: block;
-}
-
-nav a:hover {
-    color: var(--magenta);
-}
-
 nav .fa- {
     height: 2rem;
     width: auto;
@@ -147,8 +136,96 @@ nav .fa- {
     filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
 }
 
+nav .colorful {
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    position: relative;
+    top: -6px;
+}
+
+nav a .home-mobile {
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+}
+
+nav a .home-mobile:hover {
+    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
+}
+
+nav h1 [class*="fa-"] {
+    font-size: 100%;
+    color: var(--aqua);
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav a:hover,
 nav .fa-:hover {
-    filter: invert(38%) sepia(32%) saturate(941%) hue-rotate(199deg) brightness(90%) contrast(92%);
+    color: var(--hotmag);
+}
+
+nav a:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    transform: scale(1.05);
+}
+
+nav .fa-:hover {
+    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
+}
+
+nav .colorful:hover {
+    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
+}
+
+.hamburger {
+    display: none;
+}
+
+.hamburger:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+}
+
+.home-mobile {
+    display: none;
+}
+
+.button {
+    background-color: deepskyblue;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    color: var(--black);
+    border: none;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.button:hover {
+    color: var(--black);
+    background-color: var(--hotmag);
+}
+
+.button:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+}
+
+.button-pulse {
+    animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 0 powderblue;
+    will-change: box-shadow;
+}
+
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+    }
 }
 
 .logoName {
@@ -217,7 +294,7 @@ nav .fa-:hover {
 .button-pulse {
     animation: pulse 2s infinite 1s cubic-bezier(0.25, 0, 0, 1);
     box-shadow: 0 0 0 0 powderblue;
-    will-change: transform;
+    will-change: box-shadow; /* Korrekt property - animerar box-shadow, inte transform */
 }
 
 @keyframes pulse {
@@ -259,8 +336,8 @@ nav .fa-:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 1px;
+    height: 1px;
     background: transparent;
     box-shadow:
         /* Vänster kant - extra stjärnor */
@@ -844,6 +921,10 @@ footer .footer-email-link {
 
 /* Responsive */
 @media (min-width: 850px) {
+    .logoName {
+        visibility: visible;
+    }
+
     nav {
         max-width: 1200px;
         margin: 0 auto;
@@ -898,12 +979,43 @@ footer .footer-email-link {
 }
 
 @media (max-width: 849px) {
-    .home-mobile {
-        display: block;
+    /* Dölj hemknappen helt på mobil - visa bara hamburgare */
+    nav a .home-mobile {
+        display: none !important;
+    }
+
+    .logoName {
+        visibility: hidden;
+    }
+
+    /* Ge navbar mer höjd på mobil */
+    nav {
+        padding: 1.5rem 1rem;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hamburger {
         display: block;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        z-index: 1000;
+        padding: 14px;
+    }
+
+    .bar {
+        display: block;
+        width: 35px;
+        height: 4px;
+        background-color: var(--white);
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -911,59 +1023,101 @@ footer .footer-email-link {
     }
 
     .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(9px) rotate(45deg);
     }
 
     .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-bar {
-        width: 0;
-        height: 0;
-        overflow: visible;
-        opacity: 0;
-        pointer-events: none;
+        transform: translateY(-9px) rotate(-45deg);
     }
 
     .nav-menu {
         position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: var(--dkblue);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        z-index: 1000;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .nav-menu.active {
+        top: -200%; /* Startposition utanför skärmen (uppifrån) */
         left: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(180deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding-top: 20%;
+        display: none; /* Dold initialt */
+        transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
+        align-items: center; /* Centrera innehållet vertikalt */
+        justify-content: center; /* Centrera innehållet horisontellt */
     }
 
-    .nav-menu ul {
-        flex-direction: column;
-        gap: 0;
+    /* Overlay för djup-effekt */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.08), transparent 50%);
+        pointer-events: none;
     }
 
     .nav-menu li {
-        width: 100%;
-        padding: 1.5rem 0;
-        border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        margin: 16px 0;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .logoName {
-        display: none;
+    /* Staggered animation - varje länk flyger in uppifrån */
+    .nav-menu.active li:nth-child(1) {
+        transition-delay: 0.1s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(2) {
+        transition-delay: 0.15s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(3) {
+        transition-delay: 0.2s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(4) {
+        transition-delay: 0.25s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(5) {
+        transition-delay: 0.3s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-menu a {
+        padding: 12px 20px;
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-menu.active {
+        display: grid; /* Visa menyn */
+        top: 0; /* När aktiv, flyttas den till toppen av skärmen */
+        opacity: 1; /* Opacitet ändras till 1 när aktiv */
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        align-items: center; /* Centrera innehållet vertikalt */
+        justify-content: center; /* Centrera innehållet horisontellt */
+        z-index: 999; /* Ser till att menyn ligger över andra element */
+    }
+
+    .nav-menu ul {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        gap: 1rem;
     }
 
     .blog-card {

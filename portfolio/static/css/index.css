@@ -91,7 +91,7 @@ a:hover {
     padding: 0.75rem 1rem;
     text-decoration: none;
     font-weight: bold;
-    z-index: 10000;
+    z-index: 9999; /* Högsta nivå för accessibility - reducerat från 10000 */
     border-radius: 0 0 5px 0;
     transition: top 0.3s ease;
 }
@@ -247,31 +247,37 @@ nav .colorful:hover {
     }
 }
 
-@media (min-width: 840px) {
+@media (min-width: 850px) {
     .logoName {
         visibility: visible;
     }
 }
 
-@media (max-width: 839px) {
+@media (max-width: 849px) {
+    /* Dölj hemknappen helt på mobil - visa bara hamburgare */
     nav a .home-mobile {
-        display: block;
-        cursor: pointer;
-        position: absolute; /* Fixar elementet i förhållande till viewporten */
-        top: 30px;
-        left: 25px; /* Ökar avståndet från vänster för att göra ikonen mer synlig */
-        z-index: 1000; /* Ser till att menyn ligger över andra element */
+        display: none !important;
     }
 
     .logoName {
         visibility: hidden;
     }
 
+    /* Ge navbar mer höjd på mobil */
+    nav {
+        padding: 1.5rem 1rem;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .hamburger {
         display: block;
         cursor: pointer;
         position: absolute; /* Fixar elementet i förhållande till viewporten */
-        top: 20px; /* Ökar avståndet från toppen för att undvika klippning */
+        top: 50%; /* Centrera vertikalt */
+        transform: translateY(-50%); /* Perfekt centrering */
         right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
         z-index: 1000; /* Ser till att menyn ligger över andra element */
         padding: 14px; /* Ökat till 14px för att säkerställa minst 44x44px touch target (WCAG 2.1 Level AAA) */
@@ -302,19 +308,64 @@ nav .colorful:hover {
     .nav-menu {
         position: fixed;
         top: -200%; /* Startposition utanför skärmen (uppifrån) */
+        left: 0;
         right: 0;
         width: 100vw;
         height: 100vh;
-        background: var(--black);
+        background: linear-gradient(180deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         padding-top: 20%;
-        display: flex;
-        transition: top 0.5s, opacity 0.2s; /* Övergång för top och opacity */
+        display: none; /* Dold initialt */
+        transition: top 0.5s ease-in-out, opacity 0.3s ease; /* Övergång för top och opacity */
         align-items: center; /* Centrera innehållet vertikalt */
         justify-content: center; /* Centrera innehållet horisontellt */
     }
 
+    /* Overlay för djup-effekt */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.08), transparent 50%);
+        pointer-events: none;
+    }
+
     .nav-menu li {
         margin: 16px 0;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Staggered animation - varje länk flyger in uppifrån */
+    .nav-menu.active li:nth-child(1) {
+        transition-delay: 0.1s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(2) {
+        transition-delay: 0.15s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(3) {
+        transition-delay: 0.2s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(4) {
+        transition-delay: 0.25s;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-menu.active li:nth-child(5) {
+        transition-delay: 0.3s;
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .nav-menu a {
@@ -327,9 +378,9 @@ nav .colorful:hover {
     }
 
     .nav-menu.active {
+        display: grid; /* Visa menyn */
         top: 0; /* När aktiv, flyttas den till toppen av skärmen */
         opacity: 1; /* Opacitet ändras till 1 när aktiv */
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(5, 1fr);
         align-items: center; /* Centrera innehållet vertikalt */
@@ -354,18 +405,19 @@ nav .colorful:hover {
     position: relative;
 }
 
-/* Stjärnor med box-shadow för optimal performance */
-/* Flyttad till body::before för att täcka hela viewport-bredden */
+/* Stjärnor begränsade till intro-sektionen via JavaScript scroll-hantering */
 body::before {
-    content: '';
-    position: fixed; /* Fixed istället för absolute - lägger stjärnorna i root stacking context */
+    content: ' ';
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh; /* 100vh för konsistent viewport coverage */
+    width: 1px;
+    height: 1px;
     background: transparent;
+    opacity: var(--stars-opacity, 1);
+    transition: opacity 0.3s ease;
     box-shadow:
-        /* Stora ljusa stjärnor (9) - omfördelade för full vertikal täckning och mittgap */
+        /* Stora ljusa stjärnor (9) */
         5vw 5vh 2px 1px var(--star-color-bright),
         2vw 25vh 2px 1px var(--star-color-bright),
         8vw 48vh 2px 1px var(--star-color-bright),
@@ -375,7 +427,7 @@ body::before {
         78vw 35vh 2px 1px var(--star-color-bright),
         88vw 70vh 2px 1px var(--star-color-bright),
         15vw 88vh 2px 1px var(--star-color-bright),
-        /* Medium stjärnor (10) - spridda 0-95vh */
+        /* Medium stjärnor (10) */
         12vw 10vh 1px 0.5px var(--star-color-medium),
         25vw 30vh 1px 0.5px var(--star-color-medium),
         48vw 15vh 1px 0.5px var(--star-color-medium),
@@ -386,7 +438,7 @@ body::before {
         3vw 95vh 1px 0.5px var(--star-color-medium),
         42vw 82vh 1px 0.5px var(--star-color-medium),
         68vw 40vh 1px 0.5px var(--star-color-medium),
-        /* Små stjärnor (6) - accenter över hela höjden */
+        /* Små stjärnor (6) */
         32vw 18vh 1px 0.3px var(--star-color-faint),
         72vw 45vh 1px 0.3px var(--star-color-faint),
         20vw 68vh 1px 0.3px var(--star-color-dim),
@@ -394,8 +446,8 @@ body::before {
         28vw 52vh 1px 0.3px var(--star-color-faint),
         80vw 78vh 1px 0.3px var(--star-color-faint);
     animation: starTwinkle 8s ease-in-out infinite;
-    pointer-events: none; /* Låter användaren interagera med innehåll ovanpå */
-    z-index: 0; /* Z-index 0 i root stacking context - bakom allt positioned innehåll */
+    pointer-events: none;
+    z-index: 999; /* Under header (1000) men över allt annat */
 }
 
 
@@ -411,15 +463,14 @@ body::before {
 
 /* Accessibility: respektera användarens motion-preferenser */
 @media (prefers-reduced-motion: reduce) {
-    body::before {
+    body::before,
+    .button-pulse,
+    .button-wiggle {
         animation: none !important;
     }
 }
 
-#intro > * {
-    position: relative;
-    z-index: 1; /* Z-index 1 räcker för att ligga över body::before som har z-index 0 */
-}
+/* Borttaget: #intro > * position: relative som blockerade stjärnorna */
 
 #intro p {
     font-family: var(--mono);
@@ -570,11 +621,29 @@ body::before {
     transition: all 0.3s ease;
 }
 
-.tech-badge:hover {
-    background: var(--aqua);
-    color: var(--black);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
+/* Removed hover effect - tech badges are not interactive */
+
+/* NoScript Contact Fallback */
+.noscript-contact {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 217, 255, 0.1);
+    border: 2px solid var(--aqua);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.noscript-email {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: var(--aqua);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.noscript-email:hover {
+    color: var(--white);
 }
 
 /* CTA Group */
@@ -605,6 +674,11 @@ body::before {
     color: var(--white);
 }
 
+.cta-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.5);
+}
+
 .cta-secondary {
     display: inline-block;
     padding: 1rem 2rem;
@@ -624,6 +698,11 @@ body::before {
     background: rgba(0, 217, 255, 0.1);
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+}
+
+.cta-secondary:active {
+    transform: translateY(-1px);
+    background: rgba(0, 217, 255, 0.2);
 }
 
 .scroll-to-projects {
@@ -764,8 +843,8 @@ article {
     height: auto;
 }
 
-/* Media query för desktop-läge med grid-layout (min-width: 550px) */
-@media (min-width: 550px) {
+/* Media query för desktop-läge med grid-layout (min-width: 850px) */
+@media (min-width: 850px) {
     article {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
@@ -788,7 +867,7 @@ article {
         font-family: var(--mono);
     }
     #projects #homeassistant .blackBox {
-        z-index: 1000000;
+        z-index: 10; /* Reducerat från 1000000 - endast behöver ligga över bilden (z-index: 0) */
     }
     #projects #homeassistant ul {
         justify-content: flex-end;
@@ -808,7 +887,7 @@ article {
         font-family: var(--mono);
     }
     #projects #second .blackBox {
-        z-index: 1000000;
+        z-index: 10; /* Reducerat från 1000000 - endast behöver ligga över bilden */
     }
     #projects #second ul {
         justify-content: flex-start;
@@ -879,13 +958,13 @@ article {
 
 @keyframes wiggle {
     5%, 50% {
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
     }
     10% {
-        transform: scale(0.9);
+        transform: scale(0.9) rotate(0deg);
     }
     15% {
-        transform: scale(1.15);
+        transform: scale(1.15) rotate(0deg);
     }
     20% {
         transform: scale(1.15) rotate(-5deg);
@@ -900,9 +979,10 @@ article {
         transform: scale(1.15) rotate(2deg);
     }
     40% {
-        transform: scale(1.15) rotate(0);
+        transform: scale(1.15) rotate(0deg);
     }
 }
+/* Performance: Kombinerar scale+rotate i samma transform för att undvika multiple repaints */
 
 .contactPopUp {
     background-color: deepskyblue;
@@ -1198,7 +1278,7 @@ footer .footer-email-link {
     }
 
     .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 
@@ -1211,6 +1291,40 @@ footer .footer-email-link {
     .cta-secondary {
         width: 100%;
         text-align: center;
+    }
+
+    /* Stäng av grid på tablet - stapla element vertikalt */
+    article {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 3rem 0;
+    }
+
+    #projects .text,
+    #projects img {
+        width: 100%;
+        order: unset !important;
+        grid-column: unset !important;
+        grid-row: unset !important;
+    }
+
+    /* Text kommer alltid först, sedan bilden */
+    #projects .text {
+        order: 1 !important;
+    }
+
+    #projects img {
+        order: 2 !important;
+    }
+
+    /* Återställ textjustering till vänster på tablet */
+    #projects .text {
+        text-align: left !important;
+    }
+
+    /* Se till att tech-listor ligger till vänster */
+    #projects ul {
+        justify-content: flex-start !important;
     }
 
     #projects h1 {
@@ -1232,6 +1346,11 @@ footer .footer-email-link {
 
 /* Media queries för mobilskärmar */
 @media screen and (max-width: 600px) {
+    /* Minska header margin på mobil */
+    #header {
+        margin-bottom: 2rem;
+    }
+
     #projects {
         width: 100%;
         padding: 2rem 10px;
@@ -1242,10 +1361,39 @@ footer .footer-email-link {
         margin-bottom: 2rem;
     }
 
+    /* Stäng av grid på mobil - stapla element vertikalt */
+    article {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 2rem 0;
+    }
+
     #projects .text,
     #projects img {
         width: 100%;
         padding: 10px 0;
+        order: unset !important;
+        grid-column: unset !important;
+        grid-row: unset !important;
+    }
+
+    /* Text kommer alltid först, sedan bilden */
+    #projects .text {
+        order: 1 !important;
+    }
+
+    #projects img {
+        order: 2 !important;
+    }
+
+    /* Återställ textjustering till vänster på mobil */
+    #projects .text {
+        text-align: left !important;
+    }
+
+    /* Se till att tech-listor ligger till vänster */
+    #projects ul {
+        justify-content: flex-start !important;
     }
 
     .gradient-project,
@@ -1265,7 +1413,7 @@ footer .footer-email-link {
     }
 
     #intro {
-        padding: 0.5rem 1.5rem 3rem 1.5rem;
+        padding: 0 1.5rem 3rem 1.5rem;
     }
 
     .intro-grid {
@@ -1353,14 +1501,128 @@ footer .footer-email-link {
     }
 }
 
+/* Image Lightbox för mobil */
+@media (max-width: 849px) {
+    #projects img {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #projects img:hover {
+        transform: scale(1.02);
+    }
+
+    #projects img:active {
+        transform: scale(0.98);
+    }
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 90vh;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-image {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(0, 217, 255, 0.9);
+    color: var(--black);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    background: var(--hotmag);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.lightbox-close:active {
+    transform: rotate(90deg) scale(0.9);
+}
+
+/* Pinch-to-zoom hint på mobil */
+.lightbox-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 217, 255, 0.9);
+    color: var(--black);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    opacity: 0;
+    animation: fadeInOut 3s ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+}
+
 /* Small mobile breakpoint */
 @media screen and (max-width: 480px) {
     :root {
         --font-size: 1.1rem;
     }
 
+    #header {
+        margin-bottom: 1rem;
+    }
+
     #intro {
-        padding: 0.5rem 1rem 5rem 1rem;
+        padding: 0 1rem 3rem 1rem;
     }
 
     #intro .name {
