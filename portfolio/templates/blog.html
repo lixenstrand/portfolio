@@ -28,7 +28,7 @@
     <title>Blogg - Magnus Lixenstrand</title>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}?v=1759870612">
 </head>
 
 <body>
@@ -132,14 +132,6 @@
             </div>
         </article>
 
-    </section>
-
-    <div class="gradient gradientTheOtherWay"></div>
-
-    <section class="blog-cta">
-        <h2>Behöver ditt företag automation?</h2>
-        <p>Om du känner igen ditt företag i dessa artiklar och tänker "vi borde verkligen fixa detta..." – låt oss prata.</p>
-        <a href="{{ url_for('home') }}#contact" class="cta-button">Kontakta mig</a>
     </section>
 
     </main>
