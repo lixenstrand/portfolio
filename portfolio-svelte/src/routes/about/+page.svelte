@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import AOS from 'aos';
 
@@ -18,7 +18,23 @@
 <svelte:head>
 	<title>Om Magnus Lixenstrand - Automation Engineer & Problem Solver</title>
 	<meta name="description" content="Magnus Lixenstrand - Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
-	<link rel="canonical" href="https://magnuslixenstrand.se/about">
+	<link rel="canonical" href="https://magnuslixenstrand.com/about">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://magnuslixenstrand.com/about">
+	<meta property="og:title" content="Om Magnus Lixenstrand - Automation Engineer & Problem Solver">
+	<meta property="og:description" content="Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
+	<meta property="og:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
+	<meta property="og:locale" content="sv_SE">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://magnuslixenstrand.com/about">
+	<meta property="twitter:title" content="Om Magnus Lixenstrand - Automation Engineer & Problem Solver">
+	<meta property="twitter:description" content="Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
+	<meta property="twitter:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
+
 	<link rel="stylesheet" href="/css/about.css">
 </svelte:head>
 
@@ -34,7 +50,7 @@
 		<article id="first">
 			<div class="text">
 				<img data-aos="fade-left" data-aos-offset="400"
-					src="/images/IMG_0830.jpg" alt="A picture of the author" />
+					src="/images/IMG_0830.jpg" alt="Magnus Lixenstrand" />
 
 				<div class="blackBox" data-aos="fade-right" data-aos-offset="400">
 					<h3 class="about-section-heading-first">Varför automation?</h3>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import AOS from 'aos';
 
@@ -13,6 +13,29 @@
 			mirror: false,
 			disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
 		});
+
+		// Initiera Typed.js för hero-sektion
+		const element = document.querySelector("#element span[aria-hidden='true']");
+		if (element) {
+			const { default: Typed } = await import('typed.js');
+			new Typed("#element span[aria-hidden='true']", {
+				strings: [
+					'Jag kodar.',
+					'Jag springer.',
+					'Jag lagar mat.',
+					'Jag läser.',
+					'Jag vandrar.',
+				],
+				typeSpeed: 80,
+				backSpeed: 60,
+				smartBackspace: true,
+				loop: true,
+				backDelay: 1500,
+				showCursor: false,
+				autoInsertCss: true,
+				startDelay: 800,
+			});
+		}
 
 		// Kontakt-knapp popup
 		const contactButton = document.querySelector('.contactPopUp');
@@ -41,7 +64,23 @@
 	<meta name="description" content="Magnus Lixenstrand - Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
 	<meta name="keywords" content="Magnus Lixenstrand, automation engineer, integration developer, business automation, Python, FastAPI, n8n, Home Assistant, process optimization, Jönköping">
 	<meta name="author" content="Magnus Lixenstrand">
-	<link rel="canonical" href="https://magnuslixenstrand.se/">
+	<link rel="canonical" href="https://magnuslixenstrand.com/">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://magnuslixenstrand.com/">
+	<meta property="og:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
+	<meta property="og:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
+	<meta property="og:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
+	<meta property="og:locale" content="sv_SE">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://magnuslixenstrand.com/">
+	<meta property="twitter:title" content="Magnus Lixenstrand - Automation Engineer Portfolio">
+	<meta property="twitter:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
+	<meta property="twitter:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
+
 	<link rel="stylesheet" href="/css/index.css">
 </svelte:head>
 
