@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import 'aos/dist/aos.css';
+	import type { Snippet } from 'svelte';
 
-	let { children } = $props();
+	let { children }: { children?: Snippet } = $props();
 	let hamburgerOpen = $state(false);
 
 	function toggleMenu() {
