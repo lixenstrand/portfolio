@@ -2,31 +2,6 @@
    BASE STYLES - Shared across all pages
    =========================================== */
 
-/* Font declarations */
-@font-face {
-    font-family: 'Oxygen Mono';
-    src: url('../fonts/OxygenMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: optional;
-}
-
-@font-face {
-    font-family: 'Oxygen';
-    src: url('../fonts/Oxygen-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: optional;
-}
-
-@font-face {
-    font-family: 'Oxygen';
-    src: url('../fonts/Oxygen-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: optional;
-}
-
 /* CSS Custom Properties - Design tokens */
 :root {
     /* Color tokens */

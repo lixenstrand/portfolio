@@ -40,7 +40,7 @@ body {
     position: relative; /* Skapar positioning context för body::before */
 }
 
-/* Stjärnhimmel runt hero/header */
+/* Stjärnhimmel runt hero/header - Dold på mobil, subtil på desktop */
 body::before {
     content: ' ';
     position: fixed;
@@ -51,65 +51,35 @@ body::before {
     background: transparent;
     opacity: var(--stars-opacity, 1);
     transition: opacity 0.3s ease;
+    display: none; /* Dold på mobil som standard */
     box-shadow:
-        /* Stora ljusa stjärnor (9) */
+        /* Endast de bästa stjärnorna (12 totalt) */
         5vw 5vh 2px 1px var(--star-color-bright),
-        2vw 25vh 2px 1px var(--star-color-bright),
-        8vw 48vh 2px 1px var(--star-color-bright),
         45vw 12vh 2px 1px var(--star-color-bright),
-        55vw 65vh 2px 1px var(--star-color-bright),
         92vw 8vh 2px 1px var(--star-color-bright),
         78vw 35vh 2px 1px var(--star-color-bright),
-        88vw 70vh 2px 1px var(--star-color-bright),
         15vw 88vh 2px 1px var(--star-color-bright),
-        /* Medium stjärnor (10) */
-        12vw 10vh 1px 0.5px var(--star-color-medium),
         25vw 30vh 1px 0.5px var(--star-color-medium),
         48vw 15vh 1px 0.5px var(--star-color-medium),
         82vw 22vh 1px 0.5px var(--star-color-medium),
-        35vw 55vh 1px 0.5px var(--star-color-medium),
-        52vw 75vh 1px 0.5px var(--star-color-medium),
         70vw 60vh 1px 0.5px var(--star-color-medium),
-        3vw 95vh 1px 0.5px var(--star-color-medium),
-        42vw 82vh 1px 0.5px var(--star-color-medium),
-        68vw 40vh 1px 0.5px var(--star-color-medium),
-        /* Små stjärnor (6) */
         32vw 18vh 1px 0.3px var(--star-color-faint),
         72vw 45vh 1px 0.3px var(--star-color-faint),
-        20vw 68vh 1px 0.3px var(--star-color-dim),
-        58vw 90vh 1px 0.3px var(--star-color-dim),
-        28vw 52vh 1px 0.3px var(--star-color-faint),
-        80vw 78vh 1px 0.3px var(--star-color-faint);
+        58vw 90vh 1px 0.3px var(--star-color-dim);
     animation: starTwinkle1 4s ease-in-out infinite;
     pointer-events: none;
     z-index: 999;
 }
 
+/* Visa stjärnor bara på desktop */
+@media (min-width: 850px) {
+    body::before {
+        display: block;
+    }
+}
+
 body::after {
-    content: ' ';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    opacity: var(--stars-opacity, 1);
-    transition: opacity 0.3s ease;
-    box-shadow:
-        /* Extra stjärnor med annan timing */
-        18vw 8vh 1px 0.5px var(--star-color-medium),
-        38vw 25vh 1px 0.5px var(--star-color-medium),
-        62vw 38vh 1px 0.5px var(--star-color-medium),
-        85vw 52vh 1px 0.5px var(--star-color-medium),
-        10vw 72vh 1px 0.5px var(--star-color-medium),
-        50vw 85vh 1px 0.5px var(--star-color-medium),
-        75vw 18vh 1px 0.3px var(--star-color-faint),
-        30vw 42vh 1px 0.3px var(--star-color-faint),
-        60vw 68vh 1px 0.3px var(--star-color-faint),
-        95vw 78vh 1px 0.3px var(--star-color-faint);
-    animation: starTwinkle2 5s ease-in-out infinite 1.5s;
-    pointer-events: none;
-    z-index: 999;
+    content: none; /* Ta bort den andra stjärnlagret helt */
 }
 
 html, body {
@@ -381,24 +351,22 @@ nav .colorful:hover {
 
     .nav-menu {
         position: fixed;
-        top: -200%; /* Startposition utanför skärmen (uppifrån) */
-        left: 0;
-        right: 0;
-        width: 100vw;
+        top: 0;
+        right: -100%; /* Startposition utanför skärmen (från höger) */
+        width: 280px; /* Mindre sidebar istället för fullscreen */
         height: 100vh;
         background: linear-gradient(180deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        padding-top: 20%;
-        display: grid; /* Alltid grid för smooth transitions */
-        visibility: hidden; /* Dold för skärmläsare och tangentbord */
-        pointer-events: none; /* Förhindrar interaktion när stängd */
-        opacity: 0; /* Transparent när stängd */
-        transition: top 0.5s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Övergång för top, opacity och visibility */
-        align-items: center; /* Centrera innehållet vertikalt */
-        justify-content: center; /* Centrera innehållet horisontellt */
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
+        padding: 6rem 2rem 2rem 2rem; /* Extra padding-top för att ge plats åt close-knappen */
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
     }
 
     /* Overlay för djup-effekt */
@@ -414,61 +382,62 @@ nav .colorful:hover {
     }
 
     .nav-menu li {
-        margin: 16px 0;
+        margin: 0;
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateX(20px); /* Flyger in från höger */
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* Staggered animation - varje länk flyger in uppifrån */
+    /* Staggered animation - varje länk flyger in från höger */
     .nav-menu.active li:nth-child(1) {
         transition-delay: 0.1s;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     .nav-menu.active li:nth-child(2) {
         transition-delay: 0.15s;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     .nav-menu.active li:nth-child(3) {
         transition-delay: 0.2s;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     .nav-menu.active li:nth-child(4) {
         transition-delay: 0.25s;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     .nav-menu.active li:nth-child(5) {
         transition-delay: 0.3s;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 
     .nav-menu a {
-        padding: 12px 20px;
+        padding: 0.75rem 1rem;
         min-height: 44px;
-        min-width: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
+        text-align: left;
+        font-size: 1.1rem;
     }
 
     .nav-menu.active {
-        top: 0; /* När aktiv, flyttas den till toppen av skärmen */
-        visibility: visible; /* Synlig för skärmläsare och tangentbord */
-        pointer-events: auto; /* Tillåt interaktion när öppen */
-        opacity: 1; /* Opacitet ändras till 1 när aktiv */
-        z-index: 3000; /* Ligger över #header (2000) när öppen */
+        right: 0; /* Slider in från höger */
+        visibility: visible;
+        pointer-events: auto;
+        opacity: 1;
+        z-index: 3000;
     }
 
     .nav-menu ul {
         display: flex;
-        flex-flow: column wrap;
-        justify-content: center; /* Centrera innehållet vertikalt */
-        gap: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 }
 
@@ -530,26 +499,31 @@ nav .colorful:hover {
 
 #intro p {
     font-family: var(--mono);
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: clamp(1rem, 2.5vw, 1.2rem); /* Lite större text */
+    line-height: 1.7; /* Mer luftigt */
+    margin-bottom: 1.5rem;
 }
 
 #intro .name {
     font-family: var(--mono);
-    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: 2rem;
 }
 
 .name span {
     font-family: var(--sans);
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-size: clamp(3rem, 10vw, 5.5rem); /* Större namn */
     color: var(--aqua);
     display: block;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 0.5rem;
 }
 
 #intro h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.2rem, 6vw, 3.5rem); /* Större title */
     font-weight: normal;
+    margin-bottom: 2rem;
 }
 
 #element {
@@ -585,8 +559,8 @@ nav .colorful:hover {
 /* Intro Grid Layout */
 .intro-grid {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
+    grid-template-columns: clamp(200px, 30vw, 300px) 1fr;
+    gap: 4rem; /* Mer whitespace */
     align-items: start;
     max-width: 1200px;
     margin: 0 auto;
@@ -600,12 +574,12 @@ nav .colorful:hover {
 }
 
 .intro-headshot img {
-    width: 200px;
-    height: 200px;
+    width: clamp(200px, 30vw, 300px); /* Responsiv storlek */
+    height: clamp(200px, 30vw, 300px);
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--aqua);
-    box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+    border: 5px solid var(--aqua);
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.9);
     background: rgba(13, 13, 13, 0.65);
 }
 
@@ -675,16 +649,17 @@ nav .colorful:hover {
 .tech-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(0, 217, 255, 0.1);
-    border: 1px solid var(--aqua);
+    background: rgba(0, 217, 255, 0.15); /* Något mer solid bakgrund */
+    border: 1px solid rgba(0, 217, 255, 0.4); /* Mer synlig border */
     border-radius: 20px;
     color: var(--aqua);
     font-family: var(--mono);
     font-size: 0.85rem;
-    transition: all 0.3s ease;
+    cursor: default; /* Inte pointer - signalerar "inte klickbar" */
+    user-select: none; /* Förhindra text-selektion */
 }
 
-/* Removed hover effect - tech badges are not interactive */
+/* Ingen hover effect - tech badges är inte interaktiva */
 
 /* NoScript Contact Fallback */
 .noscript-contact {
@@ -791,6 +766,19 @@ nav .colorful:hover {
 }
 
 /* Projects-stilar */
+
+.project-tagline {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    color: var(--aqua);
+    background: rgba(0, 217, 255, 0.1);
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    display: inline-block;
+    margin: 1rem 0 1.5rem 0;
+    font-family: var(--mono);
+    font-weight: 500;
+}
 
 .projectBackground {
     background-color: var(--dkblue);
@@ -994,6 +982,53 @@ article {
     }
 }
 
+/* Sticky CTA */
+.sticky-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--aqua), var(--hotmag));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 30px;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.sticky-cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 217, 255, 0.7);
+    color: var(--white);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .sticky-cta {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 0.85rem 1.5rem;
+    }
+}
+
 /* Contact-stilar */
 
 #contact {
@@ -1102,69 +1137,114 @@ article {
 /* Footer-stilar */
 
 footer {
-    padding: 8rem 1rem 2rem 1rem;
+    background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 100%);
+    padding: 4rem 1.5rem 2rem 1.5rem;
     font-family: var(--mono);
-    font-size: 80%;
     color: var(--white);
-    text-align: center;
+    border-top: 1px solid rgba(0, 217, 255, 0.2);
 }
 
-footer h1 {
-    font-family: var(--sans);
-    text-align: center;
-}
-
-footer ul {
-    list-style-type: none;
+.footer-content {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2.5rem 0 1rem 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-footer .fa- {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 3rem;
-    font-size: 3rem;
-    height: 3rem;
-    width: auto;
-    vertical-align: middle;
-    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    margin-bottom: 3rem;
 }
 
-footer a {
+@media (min-width: 600px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 850px) {
+    .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.footer-section {
+    text-align: left;
+}
+
+.footer-section h3 {
+    color: var(--aqua);
+    font-family: var(--sans);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-nav a {
+    color: var(--white);
     text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
 }
 
-footer .fa-:hover {
-    color: var(--hotmag);
-    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
-    list-style-type: none;
+.footer-nav a:hover {
+    color: var(--aqua);
+}
+
+.footer-email-section {
+    margin-bottom: 1rem;
+}
+
+.footer-email-link {
+    color: var(--aqua);
     text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
-footer p {
-    text-align: center;
+.footer-email-link:hover {
+    color: var(--white);
 }
 
-/* Footer email styling (WCAG 2.1 - no inline styles) */
-footer .footer-email {
+.footer-social {
+    display: flex;
+    gap: 1.5rem;
     margin-top: 1rem;
-    font-family: var(--mono);
-    color: var(--aqua);
 }
 
-footer .footer-email-link {
-    color: var(--aqua);
-    text-decoration: none;
+.footer-social a {
+    transition: transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    transform: translateY(-3px);
+}
+
+.footer-social img {
+    height: 2rem;
+    width: auto;
+    filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
+    transition: filter 0.3s ease;
+}
+
+.footer-social img:hover {
+    filter: invert(67%) sepia(92%) saturate(2878%) hue-rotate(158deg) brightness(102%) contrast(101%);
+}
+
+.footer-description {
+    color: var(--magenta);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 217, 255, 0.1);
+    color: var(--magenta);
+    font-size: 0.85rem;
 }
 
 /* Media query för bredare skärmar (min-width: 850px) */

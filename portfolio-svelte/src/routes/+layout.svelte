@@ -74,24 +74,43 @@
 </main>
 
 <footer>
-	<ul>
-		<li>
-			<a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-				<img src="/icon/linkedin.svg" class="fa-" alt="LinkedIn">
-			</a>
-		</li>
-		<li>
-			<a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
-				<img src="/icon/square-github.svg" class="fa-" alt="Github">
-			</a>
-		</li>
-	</ul>
+	<div class="footer-content">
+		<div class="footer-section">
+			<h3>Navigation</h3>
+			<nav class="footer-nav" aria-label="Footer navigation">
+				<a href="/">Hem</a>
+				<a href="/#projects">Projekt</a>
+				<a href="/about">Om</a>
+				<a href="/#contact">Kontakt</a>
+			</nav>
+		</div>
 
-	<p class="footer-email">
-		<span class="footer-label">Kontakta mig:</span> <a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
-	</p>
+		<div class="footer-section">
+			<h3>Kontakt</h3>
+			<p class="footer-email-section">
+				<a href="mailto:mlixenstrand@gmail.com" class="footer-email-link">mlixenstrand@gmail.com</a>
+			</p>
+			<div class="footer-social">
+				<a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+					<img src="/icon/linkedin.svg" alt="LinkedIn">
+				</a>
+				<a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
+					<img src="/icon/square-github.svg" alt="Github">
+				</a>
+			</div>
+		</div>
 
-	<p>
-		<small>&copy; <span id="current-year"></span> Magnus Lixenstrand. All rights reserved.</small>
-	</p>
+		<div class="footer-section">
+			<h3>Om Portfolion</h3>
+			<p class="footer-description">
+				Automation Engineer som kombinerar 12+ års affärserfarenhet med teknisk problemlösning.
+			</p>
+		</div>
+	</div>
+
+	<div class="footer-bottom">
+		<p>
+			<small>&copy; <span id="current-year"></span> Magnus Lixenstrand. All rights reserved.</small>
+		</p>
+	</div>
 </footer>
