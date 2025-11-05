@@ -1,17 +1,64 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import AOS from 'aos';
 
 	onMount(() => {
-		AOS.init({
-			offset: 290,
-			delay: 0,
-			duration: 1200,
-			easing: 'ease',
-			once: true,
-			mirror: false,
-			disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		});
+		// Hantera stjärnornas opacity baserat på scroll
+		function handleStarsVisibility() {
+			const heroSection = document.querySelector("#hero");
+			if (!heroSection) return;
+
+			const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+			const scrollPosition = window.scrollY;
+
+			// Fade ut stjärnorna när vi scrollar förbi hero-sektionen
+			if (scrollPosition > heroBottom - window.innerHeight * 0.3) {
+				// Börja fade när vi är 30% från botten av hero
+				const fadeProgress = (scrollPosition - (heroBottom - window.innerHeight * 0.3)) / (window.innerHeight * 0.3);
+				const opacity = Math.max(0, 1 - fadeProgress);
+				document.documentElement.style.setProperty('--stars-opacity', opacity);
+			} else {
+				document.documentElement.style.setProperty('--stars-opacity', '1');
+			}
+		}
+
+		// Lyssna på scroll
+		window.addEventListener('scroll', handleStarsVisibility);
+		handleStarsVisibility(); // Kör en gång vid load
+
+		// Mjuk auto-scroll till innehåll
+		setTimeout(() => {
+			const projectsSection = document.querySelector("#projects");
+			if (projectsSection) {
+				const targetPosition = projectsSection.getBoundingClientRect().top + window.pageYOffset;
+				const startPosition = window.pageYOffset;
+				const distance = targetPosition - startPosition;
+				const duration = 1500; // 1.5 sekunder för mjuk scroll
+				let start = null;
+
+				function smoothScrollAnimation(currentTime) {
+					if (start === null) start = currentTime;
+					const timeElapsed = currentTime - start;
+					const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+					window.scrollTo(0, run);
+					if (timeElapsed < duration) requestAnimationFrame(smoothScrollAnimation);
+				}
+
+				// Easing function för mjuk acceleration/deceleration
+				function easeInOutCubic(t, b, c, d) {
+					t /= d / 2;
+					if (t < 1) return c / 2 * t * t * t + b;
+					t -= 2;
+					return c / 2 * (t * t * t + 2) + b;
+				}
+
+				requestAnimationFrame(smoothScrollAnimation);
+			}
+		}, 600); // 600ms delay
+
+		// Cleanup
+		return () => {
+			window.removeEventListener('scroll', handleStarsVisibility);
+		};
 	});
 </script>
 
@@ -35,13 +82,13 @@
 	<meta property="twitter:description" content="Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
 	<meta property="twitter:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
 
+	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/about.css">
 </svelte:head>
 
 <section id="hero">
 	<div class="hero-text">
 		<h1 class="aboutMeHeader">Kort om <span class="smallScreenCapitalize">mig</span></h1>
-		<a href="#projects" class="scroll-to-projects">Se mer om mig ↓</a>
 	</div>
 </section>
 
@@ -49,10 +96,9 @@
 	<section id="projects">
 		<article id="first">
 			<div class="text">
-				<img data-aos="fade-left" data-aos-offset="400"
-					src="/images/IMG_0830.jpg" alt="Magnus Lixenstrand" />
+				<img src="/images/IMG_0830.jpg" alt="Magnus Lixenstrand" />
 
-				<div class="blackBox" data-aos="fade-right" data-aos-offset="400">
+				<div class="blackBox">
 					<h3 class="about-section-heading-first">Varför automation?</h3>
 
 					<p><strong>När folk ser en sten på marken tänker de "en sten". Jag plockar upp den och vrider på den ur olika vinklar.</strong></p>
@@ -74,7 +120,7 @@
 					<p>När jag inte automatiserar arbetsflöden på Nordmet pysslar jag med Home Assistant hemma (15+ enheter, 50+ automations),
 					reser med min sambo för att upptäcka nya kulturer, och springer för att hålla huvudet klart.</p>
 
-					<p>Bor i Jönköping och söker Automation Engineer / Integration Developer roller hos etablerade företag där kombinationen av affärsförståelse och teknisk problemlösning kan göra skillnad.</p>
+					<p>Bor i Jönköping och söker roller hos etablerade företag där jag kan lösa verkliga problem genom att kombinera affärsförståelse med teknisk problemlösning.</p>
 
 					<h4 class="about-subsection-heading">Tech stack för automation:</h4>
 					<ul class="about-badge-list">

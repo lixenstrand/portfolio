@@ -1,41 +1,45 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import AOS from 'aos';
+	import Typed from 'typed.js';
 
-	onMount(async () => {
-		// Initiera AOS
-		AOS.init({
-			offset: 290,
-			delay: 0,
-			duration: 1200,
-			easing: 'ease',
-			once: true,
-			mirror: false,
-			disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		});
+	onMount(() => {
+		// Hantera hash-scrolling när man navigerar från andra sidor
+		const hash = window.location.hash;
+		if (hash) {
+			setTimeout(() => {
+				const targetElement = document.querySelector(hash);
+				if (targetElement) {
+					// Scrolla till h1 inside #projects för bättre positionering
+					const header = targetElement.querySelector('h1');
+					const scrollTarget = header || targetElement;
 
-		// Initiera Typed.js för hero-sektion
-		const element = document.querySelector("#element span[aria-hidden='true']");
-		if (element) {
-			const { default: Typed } = await import('typed.js');
-			new Typed("#element span[aria-hidden='true']", {
-				strings: [
-					'Jag kodar.',
-					'Jag springer.',
-					'Jag lagar mat.',
-					'Jag läser.',
-					'Jag vandrar.',
-				],
-				typeSpeed: 80,
-				backSpeed: 60,
-				smartBackspace: true,
-				loop: true,
-				backDelay: 1500,
-				showCursor: false,
-				autoInsertCss: true,
-				startDelay: 800,
-			});
+					// Beräkna position med offset för navbar (120px)
+					const targetPosition = scrollTarget.getBoundingClientRect().top + window.pageYOffset - 120;
+
+					window.scrollTo({
+						top: targetPosition,
+						behavior: 'smooth'
+					});
+				}
+			}, 100);
 		}
+
+		// Typed.js animation för personliga aktiviteter
+		const typed = new Typed('#element', {
+			strings: [
+				'Jag kodar',
+				'Jag läser',
+				'Jag springer',
+				'Jag tränar',
+				'Jag lagar mat',
+				'Jag automatiserar'
+			],
+			typeSpeed: 60,
+			backSpeed: 40,
+			backDelay: 1500,
+			loop: true,
+			showCursor: false
+		});
 
 		// Kontakt-knapp popup
 		const contactButton = document.querySelector('.contactPopUp');
@@ -56,6 +60,40 @@
 				});
 			});
 		}
+
+		// Smooth scroll för ankar-länkar
+		const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+		anchorLinks.forEach(link => {
+			link.addEventListener('click', function(e) {
+				const href = this.getAttribute('href');
+
+				// Skippa om det är "#" utan id
+				if (href === '#') return;
+
+				const targetElement = document.querySelector(href);
+
+				if (targetElement) {
+					e.preventDefault();
+
+					// Scrolla till h1 inside element för bättre positionering
+					const header = targetElement.querySelector('h1');
+					const scrollTarget = header || targetElement;
+
+					// Beräkna position med offset för navbar (120px)
+					const targetPosition = scrollTarget.getBoundingClientRect().top + window.pageYOffset - 120;
+
+					window.scrollTo({
+						top: targetPosition,
+						behavior: 'smooth'
+					});
+				}
+			});
+		});
+
+		return () => {
+			typed.destroy();
+		};
 	});
 
 	// Sticky CTA visibility based on scroll
@@ -115,9 +153,8 @@
 
 		<div class="intro-content">
 			<p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
-			<h2 id="element">
-				<span class="sr-only">Automation Engineer</span>
-				<span aria-hidden="true">Automation Engineer</span>
+			<h2>
+				<span id="element">Jag kodar</span>
 			</h2>
 
 			<p>Efter 12 år med att hitta lösningar till företag ser jag ineffektivitet som andra accepterar som "så gör vi". Nu bygger jag verktyg som löser flaskhalsar i affärsprocesser – integrerar system som inte var tänkta att prata med varandra och får alla på samma sida.</p>
@@ -142,7 +179,7 @@
 
 <div class="projectBackground">
 	<section id="projects">
-		<h1 data-aos="fade-right" data-aos-offset="470">Projekt jag är stolt över</h1>
+		<h1>Projekt jag är stolt över</h1>
 
 		<article id="homeassistant">
 			<div class="text">
@@ -150,7 +187,7 @@
 				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h2>
 				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">⚡ 30% lägre elförbrukning • 15+ enheter integrerade • 50+ automations</p>
 
-				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
+				<div class="blackBox animated">
 					<p>Jag hade 15+ smarta enheter från olika tillverkare, alla med egna appar. Ville skapa intelligenta automatiseringar baserat på kontext (tid, plats, väder, vad folk gör i huset) men befintliga lösningar var låsta till ett ekosystem i taget.</p>
 
 					<p>Byggde en central Home Assistant hub med custom automations och integrationer. Skapade kontext-medvetna system för belysning, energioptimering, säkerhet och klimatstyrning som pratar med varandra över plattformsgränser.</p>
@@ -158,8 +195,8 @@
 					<p>30% lägre elförbrukning genom smart värmestyrning, 15 olika enheter/plattformar integrerade, 50+ automations som kör dagligen. Allt funkar utan att jag behöver göra något manuellt efter setup.</p>
 				</div>
 
-				<h3 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h3>
-				<ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
+				<h3 class="animated">teknologier som används:</h3>
+				<ul class="animated">
 					<li>Home Assistant |</li>
 					<li>YAML |</li>
 					<li>Python |</li>
@@ -168,8 +205,7 @@
 					<li>REST APIs</li>
 				</ul>
 			</div>
-			<img data-aos="fade-right" data-aos-offset="489"
-				src="/images/homeassistant.png"
+			<img src="/images/homeassistant.png"
 				alt="Home Assistant dashboard showing smart home automations"
 				loading="lazy"
 				width="1200"
@@ -181,7 +217,7 @@
 				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h2>
 				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">🚀 87% snabbare förfrågningar • 2h → 15 min • Nära noll fel</p>
 
-				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
+				<div class="blackBox animated">
 					<p>Säljare på Nordmet spenderade 2-3 timmar om dagen på att manuellt sammanställa prisförfrågningar till leverantörer. Historisk data fanns i olika system och krävde evigheter att hitta. Plus att förfrågningar innehöll ofta fel på grund av copy-paste mellan Excel och Outlook.</p>
 
 					<p>Byggde ett flerspråkigt verktyg som automatiskt söker igenom historisk orderdata, integrerar med Excel, och genererar färdiga förfrågningar på flera språk med ett klick. Kombinerar webbgränssnitt och Excel-integration så folk kan jobba som de vill.</p>
@@ -189,8 +225,8 @@
 					<p>Minskade förfrågningstid från 2 timmar till 15 minuter (87% reduktion). Säljteamet kan nu hantera 5x fler förfrågningar per dag och vi har nästan inga fel längre från manuell datahantering.</p>
 				</div>
 
-				<h3 class="animated" data-aos="fade-bottom" data-aos-offset="300">teknologier som används:</h3>
-				<ul class="animated" data-aos="fade-bottom" data-aos-offset="310">
+				<h3 class="animated">teknologier som används:</h3>
+				<ul class="animated">
 					<li>Javascript |</li>
 					<li>Python |</li>
 					<li>SQL |</li>
@@ -198,8 +234,7 @@
 					<li>CSS</li>
 				</ul>
 			</div>
-			<img data-aos="fade-right" data-aos-offset="489"
-				src="/images/Inquiry.png"
+			<img src="/images/Inquiry.png"
 				alt="Multilingual steel inquiry tool interface"
 				loading="lazy"
 				width="1200"
@@ -218,8 +253,8 @@
 					<p>Minskade offerttid från 25 minuter till 5 minuter (80% reduktion). Exakta fraktkostnader med realtidspriser istället för gissningar. Automatisk dataöverföring till både affärssystem och intern webapp eliminerade manuell inmatning, vilket minskade mänskliga fel med 95%.</p>
 				</div>
 
-				<h3 class="animated" data-aos="fade-bottom" data-aos-offset="100">teknologier som används:</h3>
-				<ul class="animated" data-aos="fade-bottom" data-aos-offset="110">
+				<h3 class="animated">teknologier som används:</h3>
+				<ul class="animated">
 					<li>Python |</li>
 					<li>SQL |</li>
 					<li>VBA |</li>
@@ -249,8 +284,8 @@
 					<p><em>OBS: Webbappen är endast tillgänglig via företagets VPN</em></p>
 				</div>
 
-				<h3 class="animated" data-aos="fade-bottom" data-aos-offset="95">teknologier som används:</h3>
-				<ul class="animated" data-aos="fade-bottom" data-aos-offset="100">
+				<h3 class="animated">teknologier som används:</h3>
+				<ul class="animated">
 					<li>Javascript |</li>
 					<li>Python |</li>
 					<li>SQL |</li>
@@ -270,23 +305,18 @@
 </div>
 
 <section id="contact">
-	<h2 data-aos="fade-top" data-aos-offset="240">Kontakta mig</h2>
+	<h2>Kontakta mig</h2>
 
-	<p data-aos="fade-bottom" data-aos-offset="240">Jag söker möjligheter där jag kan göra verklig skillnad genom att kombinera automation, systemintegration och affärsförståelse</p>
+	<p>Jag söker möjligheter där jag kan göra verklig skillnad genom att kombinera automation, systemintegration och affärsförståelse</p>
 
-	<button class="contactButton contactPopUp button-wiggle" data-aos="fade-left" data-aos-offset="240">Kontakta mig</button>
-
-	<noscript>
-		<div class="noscript-contact">
-			<p><strong>JavaScript är inaktiverat.</strong> Du kan kontakta mig direkt via:</p>
-			<p><a href="mailto:mlixenstrand@gmail.com" class="noscript-email">mlixenstrand@gmail.com</a></p>
-		</div>
-	</noscript>
+	<div class="contact-button-wrapper">
+		<a href="mailto:mlixenstrand@gmail.com" class="contact-button">Kontakta mig här</a>
+	</div>
 </section>
 
 <!-- Sticky CTA -->
 {#if showStickyCTA}
-	<a href="/#contact" class="sticky-cta">
+	<a href="mailto:mlixenstrand@gmail.com" class="sticky-cta">
 		Kontakta mig
 	</a>
 {/if}

@@ -17,7 +17,16 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		// Initiera AOS (Animate On Scroll)
+		const AOS = (await import('aos')).default;
+		AOS.init({
+			duration: 800,
+			offset: 100,
+			once: true,
+			easing: 'ease-in-out'
+		});
+
 		// Sätt current year i footer
 		const yearSpan = document.getElementById('current-year');
 		if (yearSpan) {

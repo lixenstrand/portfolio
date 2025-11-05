@@ -452,7 +452,7 @@ body::before {
     80vw 78vh 1px 0.3px var(--star-color-faint);
   animation: starTwinkle1 4s ease-in-out infinite;
   pointer-events: none;
-  z-index: 999; /* Under header (1000) men över allt annat */
+  z-index: 1; /* Bakom allt innehåll */
 }
 
 /* Andra lagret av stjärnor för mer variation */
@@ -480,7 +480,7 @@ body::after {
     95vw 78vh 1px 0.3px var(--star-color-faint);
   animation: starTwinkle2 5s ease-in-out infinite 1.5s;
   pointer-events: none;
-  z-index: 999;
+  z-index: 1; /* Bakom allt innehåll */
 }
 
 /* Stjärn-twinkle animationer med olika patterns */
@@ -607,15 +607,29 @@ body::after {
 
 .aboutBackground {
   background-color: var(--dkblue);
+  position: relative;
+  z-index: 10;
   box-shadow:
     0 -80px 150px 60px rgba(26, 31, 53, 0.9),
     0 80px 150px 60px rgba(26, 31, 53, 0.9);
+  overflow-y: visible !important;
+  scroll-snap-type: none !important;
+  height: auto !important;
 }
 
-article {
+/* Specifika overrides för article på about-sidan */
+.aboutBackground article,
+.aboutBackground article#first {
   padding-bottom: 2rem;
   margin: 0 auto;
   max-width: 1200px;
+  min-height: auto !important;
+  height: auto !important;
+  display: block !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+  grid-template-columns: none !important;
+  overflow: visible !important;
 }
 
 #projects {
@@ -639,13 +653,20 @@ article {
 .blackBox {
   background: linear-gradient(135deg, var(--dkblue) 0%, var(--plum) 100%);
   border: 2px solid var(--aqua);
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 15px;
   color: var(--white);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.7;
   -webkit-box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
   box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+  transform: none !important;
+  transition: none !important;
+}
+
+.blackBox:hover {
+  transform: none !important;
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3) !important;
 }
 
 /* About page content headings and text */
@@ -755,17 +776,32 @@ article {
 
 #first img {
   width: 100%;
+  position: relative;
+  z-index: 9999 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Force visible overflow på text-container */
+.aboutBackground #first .text,
+.aboutBackground .text {
+  overflow: visible !important;
+  height: auto !important;
 }
 
 @media (min-width: 550px) {
-  article {
-    display: block;
+  .aboutBackground article,
+  .aboutBackground article#first {
+    display: block !important;
+    grid-template-columns: none !important;
   }
 
-  #first .text {
+  .aboutBackground #first .text {
     text-align: left;
     font-family: var(--mono);
-    overflow: auto;
+    overflow: visible !important;
   }
 
   #first img {
@@ -774,7 +810,10 @@ article {
     max-width: 40%;
     margin: 0 0 2rem 2rem;
     position: relative;
-    z-index: 20;
+    z-index: 9999 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   #first .blackBox {
@@ -803,80 +842,30 @@ article {
     text-align: left;
     margin-right: auto;
   }
+
+  /* Kritiska overrides för about page - förhindra grid layout från index.css */
+  .aboutBackground article,
+  .aboutBackground article#first {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    min-height: auto !important;
+  }
+
+  .aboutBackground #first .text {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    order: unset !important;
+    overflow: visible !important;
+  }
+
+  .aboutBackground #first img {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
 }
 
-/* footer styles */
-
-footer {
-  padding: 1rem 1rem 2rem 1rem;
-  font-family: var(--mono);
-  font-size: 80%;
-  color: var(--white);
-  text-align: center;
-}
-
-footer h1 {
-  font-family: var(--sans);
-
-  text-align: center;
-}
-
-footer ul {
-  list-style-type: none;
-  margin: 0 auto;
-  padding: 2.5rem 0 1rem 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-
-footer .fa- {
-  list-style-type: none;
-
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 3rem;
-  font-size: 3rem;
-  height: 3rem;
-  width: auto;
-  vertical-align: middle;
-  filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg)
-    brightness(95%) contrast(81%);
-}
-
-footer a {
-  text-decoration: none; /* Tar bort understrykningen från länkar */
-}
-
-footer .fa-:hover {
-  color: var(--hotmag);
-  filter: invert(60%) sepia(6%) saturate(5175%) hue-rotate(334deg)
-    brightness(78%) contrast(90%);
-
-  list-style-type: none;
-  text-decoration: none;
-}
-
-footer p {
-  text-align: center;
-}
-
-/* Footer email styling (WCAG 2.1 - no inline styles) */
-footer .footer-email {
-  margin-top: 1rem;
-  font-family: var(--mono);
-  color: var(--aqua);
-}
-
-footer .footer-email-link {
-  color: var(--aqua);
-  text-decoration: none;
-}
+/* Footer styles imported from index.css via +layout.svelte */
 
 @media (min-width: 850px) {
   nav {
@@ -1043,20 +1032,5 @@ footer .footer-email-link {
   .scroll-to-projects {
     font-size: 0.95rem;
     padding: 0.85rem 1.5rem;
-  }
-
-  footer {
-    padding: 0.75rem 0.75rem 1.5rem 0.75rem;
-  }
-
-  footer .fa- {
-    font-size: 2.5rem;
-    height: 2.5rem;
-    gap: 2rem;
-  }
-
-  footer ul {
-    padding-top: 2rem;
-    gap: 1.5rem;
   }
 }
