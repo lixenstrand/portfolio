@@ -57,6 +57,21 @@
 			});
 		}
 	});
+
+	// Sticky CTA visibility based on scroll
+	let showStickyCTA = $state(false);
+
+	onMount(() => {
+		const handleScroll = () => {
+			// Show sticky CTA after scrolling past intro section
+			const scrollPosition = window.scrollY;
+			const introHeight = document.querySelector('#intro')?.offsetHeight || 800;
+			showStickyCTA = scrollPosition > introHeight * 0.7;
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	});
 </script>
 
 <svelte:head>
@@ -87,7 +102,15 @@
 <section id="intro">
 	<div class="intro-grid">
 		<div class="intro-headshot">
-			<img src="/images/IMG_0830_200.jpg" alt="Magnus Lixenstrand" loading="eager" fetchpriority="high" width="200" height="200">
+			<img
+				src="/images/IMG_0830_200.jpg"
+				srcset="/images/IMG_0830_200.jpg 200w, /images/IMG_0830.jpg 519w"
+				sizes="(min-width: 850px) 300px, 200px"
+				alt="Magnus Lixenstrand"
+				loading="eager"
+				fetchpriority="high"
+				width="200"
+				height="200">
 		</div>
 
 		<div class="intro-content">
@@ -125,6 +148,7 @@
 			<div class="text">
 				<p class="project-label animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</p>
 				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h2>
+				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">⚡ 30% lägre elförbrukning • 15+ enheter integrerade • 50+ automations</p>
 
 				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 					<p>Jag hade 15+ smarta enheter från olika tillverkare, alla med egna appar. Ville skapa intelligenta automatiseringar baserat på kontext (tid, plats, väder, vad folk gör i huset) men befintliga lösningar var låsta till ett ekosystem i taget.</p>
@@ -147,12 +171,15 @@
 			<img data-aos="fade-right" data-aos-offset="489"
 				src="/images/homeassistant.png"
 				alt="Home Assistant dashboard showing smart home automations"
-				loading="lazy" width="1200" height="800" />
+				loading="lazy"
+				width="1200"
+				height="800" />
 		</article>
 
 		<article id="second">
 			<div class="text">
 				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h2>
+				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">🚀 87% snabbare förfrågningar • 2h → 15 min • Nära noll fel</p>
 
 				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="490">
 					<p>Säljare på Nordmet spenderade 2-3 timmar om dagen på att manuellt sammanställa prisförfrågningar till leverantörer. Historisk data fanns i olika system och krävde evigheter att hitta. Plus att förfrågningar innehöll ofta fel på grund av copy-paste mellan Excel och Outlook.</p>
@@ -174,12 +201,15 @@
 			<img data-aos="fade-right" data-aos-offset="489"
 				src="/images/Inquiry.png"
 				alt="Multilingual steel inquiry tool interface"
-				loading="lazy" width="1200" height="800" />
+				loading="lazy"
+				width="1200"
+				height="800" />
 		</article>
 
 		<article id="third">
 			<div class="text">
 				<h2 data-aos="fade-right" data-aos-offset="200">Automatiserad Offert- och Orderhantering</h2>
+				<p class="project-tagline" data-aos="fade-right" data-aos-offset="250">💰 80% snabbare offerter • Realtidspriser • 95% färre fel</p>
 				<div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
 					<p>Säljare spenderade 20-30 minuter per offert på att manuellt beräkna stålkostnader, ringa fraktbolag för priser, och sedan knappa in allt i Fortnox. Fraktkostnader var ofta fel eftersom vi använde gamla priser från Excel-ark.</p>
 
@@ -198,13 +228,17 @@
 			</div>
 
 			<img class="animated" data-aos="fade-left" data-aos-offset="400"
-				src="/images/excel.jpg" alt="Excel-based quote calculator"
-				loading="lazy" width="1200" height="800" />
+				src="/images/excel.jpg"
+				alt="Excel-based quote calculator"
+				loading="lazy"
+				width="1200"
+				height="800" />
 		</article>
 
 		<article id="fourth">
 			<div class="text">
 				<h2 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic Metal Trade</h2>
+				<p class="project-tagline" data-aos="fade-left" data-aos-offset="200">📊 8 användare dagligen • 500+ certifikat • 60% snabbare informationssökning</p>
 				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
 					<p>Kunddata, certifikat och transportinformation fanns i separata Excel-filer och pappersarkiv. Säljare och logistik hade ingen gemensam plattform, vilket ledde till dubbelarbete, förlorade dokument och eviga mail-kedjor för att hitta information.</p>
 
@@ -226,8 +260,11 @@
 			</div>
 
 			<img class="animated" data-aos="fade-left" data-aos-offset="400"
-				src="/images/CRM.png" alt="Internal CRM web application dashboard"
-				loading="lazy" width="1200" height="800" />
+				src="/images/CRM.png"
+				alt="Internal CRM web application dashboard"
+				loading="lazy"
+				width="1200"
+				height="800" />
 		</article>
 	</section>
 </div>
@@ -246,3 +283,10 @@
 		</div>
 	</noscript>
 </section>
+
+<!-- Sticky CTA -->
+{#if showStickyCTA}
+	<a href="/#contact" class="sticky-cta">
+		Kontakta mig
+	</a>
+{/if}
