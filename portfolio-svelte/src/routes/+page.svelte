@@ -154,12 +154,12 @@
 		<div class="intro-content">
 			<p class="name">Hej, mitt namn är <span>Magnus Lixenstrand.</span></p>
 			<h2>
-				<span id="element">Jag kodar</span>
+				<span id="element" aria-live="polite" aria-atomic="true" role="status">Jag kodar</span>
 			</h2>
 
-			<p>Efter 12 år med att hitta lösningar till företag ser jag ineffektivitet som andra accepterar som "så gör vi". Nu bygger jag verktyg som löser flaskhalsar i affärsprocesser – integrerar system som inte var tänkta att prata med varandra och får alla på samma sida.</p>
+			<p>12 år inom försäljning lärde mig att se när saker tar längre tid än de borde. Folk accepterar "så har vi alltid gjort" – jag bygger hellre något som fixar problemet. Oftast handlar det om att få system som aldrig var tänkta att prata med varandra att faktiskt göra det.</p>
 
-			<p>På Nordmet började det som sidoprojekt och har vuxit till något större.</p>
+			<p>Det började som sidoprojekt på Nordmet. Nu sparar mina verktyg teamet 20+ timmar i veckan.</p>
 
 			<div class="tech-stack">
 				<span class="tech-badge">Python</span>
@@ -179,24 +179,54 @@
 
 <div class="projectBackground">
 	<section id="projects">
-		<h1>Projekt jag är stolt över</h1>
+		<h1 data-aos="fade-up">Projekt jag är stolt över</h1>
+
+		<article id="mealie">
+			<div class="text">
+				<p class="project-label" data-aos="fade-right" data-aos-delay="0">Senaste projektet</p>
+				<h2 data-aos="fade-right" data-aos-delay="100">Mealie - Familjeplanering för Måltider</h2>
+				<p class="project-tagline" data-aos="fade-right" data-aos-delay="200">🍽️ Self-hosted • Automatiska inköpslistor • Familjen synkad</p>
+
+				<div class="blackBox" data-aos="fade-up" data-aos-delay="300">
+					<p>Familjen var körd med matplanering. Recept på lösa lappar, köpte saker vi redan hade hemma, slängde mat för ingen visste vad som skulle lagas. Den eviga frågan vid middagstid: "Vad ska vi äta?"</p>
+
+					<p>Hittade Mealie och satte upp det på egen server. Nu sparar vi recept från webben med ett klick, planerar veckan i en delad kalender, och får inköpslistan automatiskt. Ingen ICA-app som trackar vad vi köper.</p>
+
+					<p>Stressen är borta. Barnen kan kolla vad som blir till middag, vi slänger mindre mat, och jag slipper prenumerationer. Plus att recepten faktiskt finns kvar när man behöver dem.</p>
+				</div>
+
+				<h3 data-aos="fade-right" data-aos-delay="400">teknologier som används:</h3>
+				<ul data-aos="fade-right" data-aos-delay="450">
+					<li>Docker |</li>
+					<li>Self-hosted |</li>
+					<li>REST API |</li>
+					<li>PostgreSQL</li>
+				</ul>
+			</div>
+			<img src="/images/mealie.png"
+				alt="Mealie recepthantering och måltidsplanering"
+				loading="lazy"
+				width="1200"
+				height="800"
+				data-aos="fade-left"
+				data-aos-delay="200" />
+		</article>
 
 		<article id="homeassistant">
 			<div class="text">
-				<p class="project-label animated" data-aos="fade-left" data-aos-offset="480">Senaste projektet</p>
-				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Smart Hem Automation Platform</h2>
-				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">⚡ 30% lägre elförbrukning • 15+ enheter integrerade • 50+ automations</p>
+				<h2 data-aos="fade-left" data-aos-delay="0">Smart Hem Automation</h2>
+				<p class="project-tagline" data-aos="fade-left" data-aos-delay="100">⚡ Lägre elräkning • 15+ prylar som äntligen pratar med varandra</p>
 
-				<div class="blackBox animated">
-					<p>Jag hade 15+ smarta enheter från olika tillverkare, alla med egna appar. Ville skapa intelligenta automatiseringar baserat på kontext (tid, plats, väder, vad folk gör i huset) men befintliga lösningar var låsta till ett ekosystem i taget.</p>
+				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
+					<p>Hade köpt smarta grejer från Philips, IKEA, Shelly, Aqara – alla med egna appar som inte pratade med varandra. Ville ha enkla saker som "tänd hallen när jag kommer hem efter mörkrets inbrott" men det gick inte utan att öppna tre appar.</p>
 
-					<p>Byggde en central Home Assistant hub med custom automations och integrationer. Skapade kontext-medvetna system för belysning, energioptimering, säkerhet och klimatstyrning som pratar med varandra över plattformsgränser.</p>
+					<p>Home Assistant löste det, men det var mer jobb än jag trodde. MQTT var nytt för mig, och att debugga YAML när en automation inte triggar är inte kul. Efter några veckors pillande hade jag ett system som faktiskt fungerar.</p>
 
-					<p>30% lägre elförbrukning genom smart värmestyrning, 15 olika enheter/plattformar integrerade, 50+ automations som kör dagligen. Allt funkar utan att jag behöver göra något manuellt efter setup.</p>
+					<p>Nu mäter sensorer temperatur i varje rum och anpassar värmen automatiskt. Elräkningen sjönk runt 30% första året. Har skrivit kanske 50+ automations vid det här laget – allt från "stäng av allt när ingen är hemma" till "blinka rött om tvättmaskinen är klar".</p>
 				</div>
 
-				<h3 class="animated">teknologier som används:</h3>
-				<ul class="animated">
+				<h3 data-aos="fade-left" data-aos-delay="300">teknologier som används:</h3>
+				<ul data-aos="fade-left" data-aos-delay="350">
 					<li>Home Assistant |</li>
 					<li>YAML |</li>
 					<li>Python |</li>
@@ -209,24 +239,26 @@
 				alt="Home Assistant dashboard showing smart home automations"
 				loading="lazy"
 				width="1200"
-				height="800" />
+				height="800"
+				data-aos="fade-right"
+				data-aos-delay="150" />
 		</article>
 
 		<article id="second">
 			<div class="text">
-				<h2 class="animated" data-aos="fade-left" data-aos-offset="480">Förfrågningsverktyg för stål</h2>
-				<p class="project-tagline" data-aos="fade-left" data-aos-offset="485">🚀 87% snabbare förfrågningar • 2h → 15 min • Nära noll fel</p>
+				<h2 data-aos="fade-right" data-aos-delay="0">Förfrågningsverktyg för stål</h2>
+				<p class="project-tagline" data-aos="fade-right" data-aos-delay="100">🚀 Från 2 timmar till 15 minuter • Färre fel • Flerspråkigt</p>
 
-				<div class="blackBox animated">
-					<p>Säljare på Nordmet spenderade 2-3 timmar om dagen på att manuellt sammanställa prisförfrågningar till leverantörer. Historisk data fanns i olika system och krävde evigheter att hitta. Plus att förfrågningar innehöll ofta fel på grund av copy-paste mellan Excel och Outlook.</p>
+				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
+					<p>Säljarna la nästan två timmar om dagen på att skriva prisförfrågningar. Leta upp gamla ordrar i två system, klistra in i Word, skicka mail. Och det blev alltid något fel – fel produktkod, stavfel, eller de glömde något.</p>
 
-					<p>Byggde ett flerspråkigt verktyg som automatiskt söker igenom historisk orderdata, integrerar med Excel, och genererar färdiga förfrågningar på flera språk med ett klick. Kombinerar webbgränssnitt och Excel-integration så folk kan jobba som de vill.</p>
+					<p>Byggde ett verktyg som söker i orderhistoriken automatiskt och genererar förfrågningar på engelska, tyska eller svenska. Folk kan använda webben eller köra det direkt från Excel – vad de föredrar.</p>
 
-					<p>Minskade förfrågningstid från 2 timmar till 15 minuter (87% reduktion). Säljteamet kan nu hantera 5x fler förfrågningar per dag och vi har nästan inga fel längre från manuell datahantering.</p>
+					<p>Nu tar det ungefär 15 minuter istället för två timmar. Har inte räknat exakt, men skillnaden är tydlig. Och jag ser mycket färre fel när jag granskar förfrågningarna.</p>
 				</div>
 
-				<h3 class="animated">teknologier som används:</h3>
-				<ul class="animated">
+				<h3 data-aos="fade-right" data-aos-delay="300">teknologier som används:</h3>
+				<ul data-aos="fade-right" data-aos-delay="350">
 					<li>Javascript |</li>
 					<li>Python |</li>
 					<li>SQL |</li>
@@ -238,23 +270,25 @@
 				alt="Multilingual steel inquiry tool interface"
 				loading="lazy"
 				width="1200"
-				height="800" />
+				height="800"
+				data-aos="fade-left"
+				data-aos-delay="150" />
 		</article>
 
 		<article id="third">
 			<div class="text">
-				<h2 data-aos="fade-right" data-aos-offset="200">Automatiserad Offert- och Orderhantering</h2>
-				<p class="project-tagline" data-aos="fade-right" data-aos-offset="250">💰 80% snabbare offerter • Realtidspriser • 95% färre fel</p>
-				<div class="blackBox animated" data-aos="fade-right" data-aos-offset="300">
-					<p>Säljare spenderade 20-30 minuter per offert på att manuellt beräkna stålkostnader, ringa fraktbolag för priser, och sedan knappa in allt i Fortnox. Fraktkostnader var ofta fel eftersom vi använde gamla priser från Excel-ark.</p>
+				<h2 data-aos="fade-left" data-aos-delay="0">Automatiserad Offert- och Orderhantering</h2>
+				<p class="project-tagline" data-aos="fade-left" data-aos-delay="100">💰 Snabbare offerter • Realtidspriser från fraktbolag • Mindre handpåläggning</p>
+				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
+					<p>Offertprocessen var absurd: räkna ihop stålkostnader, ringa Schenker för fraktpris (som varierade beroende på vikt och sträcka), knappa in allt i Fortnox. Och fraktkostnaderna var ofta fel för vi använde gamla priser från ett Excel-ark som ingen uppdaterade.</p>
 
-					<p>Byggde ett Excel-baserat verktyg med VBA-makron och Python-integration som automatiskt beräknar stålkostnader, hämtar realtidspriser via API från fraktbolag baserat på vikt/flakmeter/sträcka, och skickar offertdata direkt till Fortnox och intern webapp via Python-scripts.</p>
+					<p>Började med Python-script som hämtar fraktpriser via API. Två av tre bolag hade bra API:er – för det tredje fick jag bygga web scraping som gick sönder varje gång de ändrade sin sajt. Lade till stålkostnader från vår databas och kopplade ihop allt med Excel och Fortnox.</p>
 
-					<p>Minskade offerttid från 25 minuter till 5 minuter (80% reduktion). Exakta fraktkostnader med realtidspriser istället för gissningar. Automatisk dataöverföring till både affärssystem och intern webapp eliminerade manuell inmatning, vilket minskade mänskliga fel med 95%.</p>
+					<p>Tog ett tag att få folk att använda det – fanns alltid edge cases. Men nu klarar de flesta offerter på 10-15 minuter istället för en halvtimme. Och vi slipper ringa för fraktpriser.</p>
 				</div>
 
-				<h3 class="animated">teknologier som används:</h3>
-				<ul class="animated">
+				<h3 data-aos="fade-left" data-aos-delay="300">teknologier som används:</h3>
+				<ul data-aos="fade-left" data-aos-delay="350">
 					<li>Python |</li>
 					<li>SQL |</li>
 					<li>VBA |</li>
@@ -262,30 +296,31 @@
 				</ul>
 			</div>
 
-			<img class="animated" data-aos="fade-left" data-aos-offset="400"
-				src="/images/excel.jpg"
+			<img src="/images/excel.jpg"
 				alt="Excel-based quote calculator"
 				loading="lazy"
 				width="1200"
-				height="800" />
+				height="800"
+				data-aos="fade-right"
+				data-aos-delay="150" />
 		</article>
 
 		<article id="fourth">
 			<div class="text">
-				<h2 class="animated" data-aos="fade-left" data-aos-offset="100">Intern webbapp för Nordic Metal Trade</h2>
-				<p class="project-tagline" data-aos="fade-left" data-aos-offset="200">📊 8 användare dagligen • 500+ certifikat • 60% snabbare informationssökning</p>
-				<div class="blackBox animated" data-aos="fade-left" data-aos-offset="300">
-					<p>Kunddata, certifikat och transportinformation fanns i separata Excel-filer och pappersarkiv. Säljare och logistik hade ingen gemensam plattform, vilket ledde till dubbelarbete, förlorade dokument och eviga mail-kedjor för att hitta information.</p>
+				<h2 data-aos="fade-right" data-aos-delay="0">Intern webbapp för Nordmet</h2>
+				<p class="project-tagline" data-aos="fade-right" data-aos-delay="100">📊 Alla på samma plats • 500+ certifikat digitalt • Slut på Excel-kaos</p>
+				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
+					<p>Excel-kaos: kundinfo i ett ark, certifikat i ett annat, transportdata i ett tredje som ingen uppdaterade. Logistik ringde säljare och frågade "har vi certifikatet för Svenssons order från förra året?" – svaret var alltid "jag kollar senare". Certifikat försvann, och ingen visste vad vi hade skickat till vilken kund.</p>
 
-					<p>Byggde en allt-i-ett webbapp med anpassat CRM, certifikatspårning och transportregister. Centraliserad databas med rollbaserad access för olika avdelningar så alla ser vad de behöver men inte mer.</p>
+					<p>Byggde en webbapp där allt finns på samma ställe. Kundlista, certifikatarkiv där man laddar upp PDF och kopplar till kund, transportlista för logistik. Säljare ser sina kunder, logistik ser transporter – ingen ser priser de inte ska se.</p>
 
-					<p>Hela säljteamet (8 personer) använder det dagligen. Spårar 500+ aktiva kundcertifikat digitalt, hanterar 100+ transporter per månad med full transparens, och minskade tid för informationssökning med ~60%.</p>
+					<p>Åtta personer använder det dagligen nu utan att jag behöver tjata. Tog en månad att migrera all data från Excel utan att tappa något. När revisorn frågar efter ett certifikat tar det 10 sekunder istället för att leta i pärmar.</p>
 
 					<p><em>OBS: Webbappen är endast tillgänglig via företagets VPN</em></p>
 				</div>
 
-				<h3 class="animated">teknologier som används:</h3>
-				<ul class="animated">
+				<h3 data-aos="fade-right" data-aos-delay="300">teknologier som används:</h3>
+				<ul data-aos="fade-right" data-aos-delay="350">
 					<li>Javascript |</li>
 					<li>Python |</li>
 					<li>SQL |</li>
@@ -294,22 +329,23 @@
 				</ul>
 			</div>
 
-			<img class="animated" data-aos="fade-left" data-aos-offset="400"
-				src="/images/CRM.png"
+			<img src="/images/CRM.png"
 				alt="Internal CRM web application dashboard"
 				loading="lazy"
 				width="1200"
-				height="800" />
+				height="800"
+				data-aos="fade-left"
+				data-aos-delay="150" />
 		</article>
 	</section>
 </div>
 
 <section id="contact">
-	<h2>Kontakta mig</h2>
+	<h2 data-aos="fade-up">Kontakta mig</h2>
 
-	<p>Jag söker möjligheter där jag kan göra verklig skillnad genom att kombinera automation, systemintegration och affärsförståelse</p>
+	<p data-aos="fade-up" data-aos-delay="100">Jag söker möjligheter där jag kan göra verklig skillnad genom att kombinera automation, systemintegration och affärsförståelse</p>
 
-	<div class="contact-button-wrapper">
+	<div class="contact-button-wrapper" data-aos="zoom-in" data-aos-delay="200">
 		<a href="mailto:mlixenstrand@gmail.com" class="contact-button">Kontakta mig här</a>
 	</div>
 </section>

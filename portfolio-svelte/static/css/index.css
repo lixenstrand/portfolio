@@ -319,12 +319,12 @@ nav .colorful:hover {
     .hamburger {
         display: block;
         cursor: pointer;
-        position: absolute; /* Fixar elementet i förhållande till viewporten */
-        top: 50%; /* Centrera vertikalt */
-        transform: translateY(-50%); /* Perfekt centrering */
-        right: 20px; /* Ökar avståndet från höger för att göra ikonen mer synlig */
-        z-index: 1000; /* Ser till att menyn ligger över andra element */
-        padding: 14px; /* Ökat till 14px för att säkerställa minst 44x44px touch target (WCAG 2.1 Level AAA) */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        z-index: var(--z-hamburger, 1001); /* Alltid över menyn */
+        padding: 14px; /* Minst 44x44px touch target (WCAG 2.1) */
     }
 
     .bar {
@@ -352,16 +352,17 @@ nav .colorful:hover {
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Startposition utanför skärmen (från höger) */
-        width: 280px; /* Mindre sidebar istället för fullscreen */
+        right: -100%;
+        width: 280px;
         height: 100vh;
         background: linear-gradient(180deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        padding: 6rem 2rem 2rem 2rem; /* Extra padding-top för att ge plats åt close-knappen */
+        padding: 2rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        justify-content: center; /* Centrera vertikalt */
+        align-items: center; /* Centrera horisontellt */
         visibility: hidden;
         pointer-events: none;
         opacity: 0;
@@ -384,43 +385,59 @@ nav .colorful:hover {
     .nav-menu li {
         margin: 0;
         opacity: 0;
-        transform: translateX(20px); /* Flyger in från höger */
+        transform: translateX(20px);
         transition: opacity 0.3s ease, transform 0.3s ease;
+        width: 100%;
+        text-align: center;
     }
 
     /* Staggered animation - varje länk flyger in från höger */
     .nav-menu.active li:nth-child(1) {
-        transition-delay: 0.1s;
+        transition-delay: 0.05s;
         opacity: 1;
         transform: translateX(0);
     }
     .nav-menu.active li:nth-child(2) {
-        transition-delay: 0.15s;
+        transition-delay: 0.1s;
         opacity: 1;
         transform: translateX(0);
     }
     .nav-menu.active li:nth-child(3) {
-        transition-delay: 0.2s;
+        transition-delay: 0.15s;
         opacity: 1;
         transform: translateX(0);
     }
     .nav-menu.active li:nth-child(4) {
-        transition-delay: 0.25s;
+        transition-delay: 0.2s;
         opacity: 1;
         transform: translateX(0);
     }
     .nav-menu.active li:nth-child(5) {
+        transition-delay: 0.25s;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .nav-menu.active li:nth-child(6) {
         transition-delay: 0.3s;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .nav-menu.active li:nth-child(7) {
+        transition-delay: 0.35s;
         opacity: 1;
         transform: translateX(0);
     }
 
     .nav-menu a {
-        padding: 0.75rem 1rem;
-        min-height: 44px;
-        display: block;
-        text-align: left;
-        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 500;
+        width: 100%;
     }
 
     .nav-menu.active {
@@ -428,16 +445,54 @@ nav .colorful:hover {
         visibility: visible;
         pointer-events: auto;
         opacity: 1;
-        z-index: 3000;
+        z-index: var(--z-nav-menu, 1000);
     }
 
     .nav-menu ul {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-flow: column nowrap !important;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
         padding: 0;
         margin: 0;
         list-style: none;
+        width: 100%;
+    }
+
+    .nav-menu li:first-child {
+        flex-basis: auto;
+    }
+
+    /* Overlay för att stänga menyn vid klick utanför */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: calc(var(--z-nav-menu, 1000) - 1);
+        border: none;
+        cursor: pointer;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Hover-states för menylinkar */
+    .nav-menu a:hover {
+        color: var(--hotmag);
+        background: rgba(0, 217, 255, 0.1);
+        border-radius: 8px;
+    }
+
+    .nav-menu a:active {
+        background: rgba(0, 217, 255, 0.2);
     }
 }
 
@@ -532,6 +587,7 @@ nav .colorful:hover {
     line-height: 1.3;
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
     margin: 0 0 2rem 0;
     padding: 0.25rem 0;
     border: 1px solid transparent;
@@ -910,6 +966,28 @@ article {
         padding: 4rem 0;
     }
 
+    /* Mealie projekt - bild till höger, text till vänster */
+    #projects #mealie img {
+        grid-column: 5 / 11;
+        grid-row: 1/2;
+        z-index: 0;
+    }
+    #mealie .text {
+        grid-column: 1/6;
+        grid-row: 1/2;
+        order: 1;
+        text-align: left;
+        font-family: var(--mono);
+        position: relative;
+        z-index: 20;
+    }
+    #projects #mealie .blackBox {
+        z-index: 10;
+    }
+    #projects #mealie ul {
+        justify-content: flex-start;
+    }
+
     /* Home Assistant projekt */
     #projects #homeassistant img {
         grid-column: 1 / 6;
@@ -1265,10 +1343,22 @@ footer {
 
 .footer-social a {
     transition: transform 0.3s ease;
+    /* Touch target: minst 44x44px för WCAG 2.1 Level AAA */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
 }
 
 .footer-social a:hover {
     transform: translateY(-3px);
+}
+
+.footer-social a:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
 }
 
 .footer-social img {
@@ -1295,6 +1385,79 @@ footer {
     border-top: 1px solid rgba(0, 217, 255, 0.1);
     color: var(--magenta);
     font-size: 0.85rem;
+}
+
+/* Footer mobiloptimering - under 600px */
+@media screen and (max-width: 600px) {
+    footer {
+        padding: 3rem 1rem 1.5rem 1rem;
+    }
+
+    .footer-content {
+        gap: 2rem;
+        margin-bottom: 2rem;
+        /* Centrera footer-innehållet på mobil */
+        text-align: center;
+    }
+
+    .footer-section {
+        padding: 0;
+        text-align: center;
+    }
+
+    .footer-section h3 {
+        font-size: 1.3rem; /* Lite större för bättre läsbarhet */
+        margin-bottom: 1rem;
+    }
+
+    /* Centrera navigation på mobil */
+    .footer-nav {
+        align-items: center;
+        gap: 1rem; /* Mer luftigt mellan länkar */
+    }
+
+    .footer-nav a {
+        font-size: 1rem; /* Större text för lättare läsning */
+        padding: 0.5rem 0; /* Mer klickyta */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-email-link {
+        font-size: 1.05rem; /* Större för bättre läsbarhet */
+        display: inline-block;
+        padding: 0.5rem 0;
+    }
+
+    /* Centrera och förstora social icons på mobil */
+    .footer-social {
+        justify-content: center;
+        gap: 1.5rem; /* Mer utrymme mellan ikoner */
+        margin-top: 1rem;
+    }
+
+    .footer-social a {
+        min-width: 48px; /* Lite större för lättare touchande */
+        min-height: 48px;
+        padding: 0.6rem;
+    }
+
+    .footer-social img {
+        height: 2.2rem; /* Lite större ikoner på mobil */
+        width: auto;
+    }
+
+    .footer-description {
+        font-size: 1rem; /* Större text */
+        line-height: 1.6;
+    }
+
+    .footer-bottom {
+        padding-top: 1.5rem;
+        font-size: 0.9rem; /* Lite större copyright-text */
+    }
 }
 
 /* Media query för bredare skärmar (min-width: 850px) */
@@ -1523,6 +1686,14 @@ footer {
         display: flex !important;
         flex-direction: column !important;
         padding: 3rem 0;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+    }
+
+    /* Ta bort border på sista projektet */
+    article:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
     }
 
     #projects .text,
@@ -1590,7 +1761,15 @@ footer {
     article {
         display: flex !important;
         flex-direction: column !important;
-        padding: 2rem 0;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+    }
+
+    /* Ta bort border på sista projektet */
+    article:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
     }
 
     #projects .text,
@@ -1652,8 +1831,8 @@ footer {
     }
 
     .intro-headshot img {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
     }
 
     .intro-highlight {
@@ -1676,8 +1855,8 @@ footer {
     }
 
     .tech-badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
     }
 
     .cta-group {
@@ -1689,8 +1868,9 @@ footer {
     .cta-secondary {
         width: 100%;
         text-align: center;
-        font-size: 0.95rem;
-        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        min-height: 44px; /* WCAG 2.1 touch target */
     }
 
     #intro .name {
@@ -1704,10 +1884,19 @@ footer {
     }
 
     #element {
+        width: 100%;
         height: 3rem;
         min-height: 3rem;
         margin: 0 0 1rem 0;
         padding: 0.25rem 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Se till att h2 som wrapprar #element också centreras */
+    #intro h2 {
+        text-align: center;
+        width: 100%;
     }
 
     .scroll-to-projects {
@@ -1861,10 +2050,19 @@ footer {
     }
 
     #element {
+        width: 100%;
         height: 2.5rem;
         min-height: 2.5rem;
         margin: 0 0 1.25rem 0;
         padding: 0.25rem 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Se till att h2 som wrapprar #element också centreras */
+    #intro h2 {
+        text-align: center;
+        width: 100%;
     }
 
     .blackBox {

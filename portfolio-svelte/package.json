@@ -25,6 +25,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@rollup/rollup-linux-x64-gnu": "^4.53.3",
 		"sweetalert2": "^11.26.2"
 	}
 }

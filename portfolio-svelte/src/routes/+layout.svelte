@@ -1,19 +1,32 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import 'aos/dist/aos.css';
 	import type { Snippet } from 'svelte';
 
 	let { children }: { children?: Snippet } = $props();
 	let hamburgerOpen = $state(false);
 
+	// Öppna/stäng menyn
 	function toggleMenu() {
 		hamburgerOpen = !hamburgerOpen;
-		const navMenu = document.querySelector('.nav-menu');
-		const hamburger = document.querySelector('.hamburger');
-		if (navMenu && hamburger) {
-			navMenu.classList.toggle('active');
-			hamburger.classList.toggle('active');
-			hamburger.setAttribute('aria-expanded', hamburgerOpen ? 'true' : 'false');
+		// Lås body scroll när menyn är öppen
+		if (typeof document !== 'undefined') {
+			document.body.style.overflow = hamburgerOpen ? 'hidden' : '';
+		}
+	}
+
+	// Stäng menyn
+	function closeMenu() {
+		hamburgerOpen = false;
+		if (typeof document !== 'undefined') {
+			document.body.style.overflow = '';
+		}
+	}
+
+	// Hantera Escape-tangent
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && hamburgerOpen) {
+			closeMenu();
 		}
 	}
 
@@ -32,6 +45,15 @@
 		if (yearSpan) {
 			yearSpan.textContent = new Date().getFullYear().toString();
 		}
+
+		// Lyssna på Escape-tangent
+		window.addEventListener('keydown', handleKeydown);
+	});
+
+	onDestroy(() => {
+		if (typeof window !== 'undefined') {
+			window.removeEventListener('keydown', handleKeydown);
+		}
 	});
 </script>
 
@@ -41,36 +63,52 @@
 <header id="header">
 	<nav>
 		<div class="nav-bar">
-			<div class="nav-menu">
+			<div class="nav-menu" class:active={hamburgerOpen}>
 				<ul>
 					<li class="logoName">
-						<a href="/">
+						<a href="/" onclick={closeMenu}>
 							<img src="/icon/house-solid.svg" alt="Home" class="colorful">
 						</a>
 					</li>
-					<li><a href="/#projects">Projekt</a></li>
-					<li><a href="/about">Om</a></li>
-					<li><a href="/#contact">Kontakt</a></li>
+					<li><a href="/#projects" onclick={closeMenu}>Projekt</a></li>
+					<li><a href="/about" onclick={closeMenu}>Om</a></li>
+					<li><a href="/#contact" onclick={closeMenu}>Kontakt</a></li>
 					<li>
-						<a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+						<a href="https://www.linkedin.com/in/magnus-lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" onclick={closeMenu}>
 							<img src="/icon/linkedin.svg" class="fa-" alt="LinkedIn">
 						</a>
 					</li>
 					<li>
-						<a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github">
+						<a href="https://github.com/lixenstrand" target="_blank" rel="noopener noreferrer" aria-label="Github" onclick={closeMenu}>
 							<img src="/icon/square-github.svg" class="fa-" alt="Github">
 						</a>
 					</li>
-					<li><a href="/cv/magnus_lixenstrand_cv.pdf" target="_blank" class="button button-pulse">CV</a></li>
+					<li><a href="/cv/magnus_lixenstrand_cv.pdf" target="_blank" class="button button-pulse" onclick={closeMenu}>CV</a></li>
 				</ul>
 			</div>
 		</div>
+
+		<!-- Overlay för att stänga menyn vid klick utanför -->
+		{#if hamburgerOpen}
+			<button
+				class="nav-overlay"
+				onclick={closeMenu}
+				aria-label="Stäng meny"
+				tabindex="-1"
+			></button>
+		{/if}
 
 		<a href="/">
 			<img src="/icon/house-solid.svg" alt="Home" class="home-mobile">
 		</a>
 
-		<button class="hamburger" aria-label="Navigeringsmeny" aria-expanded="false" onclick={toggleMenu}>
+		<button
+			class="hamburger"
+			class:active={hamburgerOpen}
+			aria-label="Navigeringsmeny"
+			aria-expanded={hamburgerOpen}
+			onclick={toggleMenu}
+		>
 			<span class="bar" aria-hidden="true"></span>
 			<span class="bar" aria-hidden="true"></span>
 			<span class="bar" aria-hidden="true"></span>
@@ -110,16 +148,16 @@
 		</div>
 
 		<div class="footer-section">
-			<h3>Om Portfolion</h3>
+			<h3>Om mig</h3>
 			<p class="footer-description">
-				Automation Engineer som kombinerar 12+ års affärserfarenhet med teknisk problemlösning.
+				Från försäljning till kod – jag automatiserar det som andra gör manuellt.
 			</p>
 		</div>
 	</div>
 
 	<div class="footer-bottom">
 		<p>
-			<small>&copy; <span id="current-year"></span> Magnus Lixenstrand. All rights reserved.</small>
+			<small>&copy; <span id="current-year"></span> Magnus Lixenstrand</small>
 		</p>
 	</div>
 </footer>

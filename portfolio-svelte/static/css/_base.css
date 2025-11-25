@@ -28,7 +28,8 @@
     --z-stars: 0;
     --z-content: 1;
     --z-project-overlay: 10;
-    --z-header: 1000;
+    --z-header: 100;
+    --z-nav-overlay: 999;
     --z-nav-menu: 1000;
     --z-hamburger: 1001;
     --z-skip-link: 9999;
