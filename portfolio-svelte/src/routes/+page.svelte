@@ -134,21 +134,66 @@
 	<meta property="twitter:description" content="Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration. 12+ års affärserfarenhet kombinerat med teknisk problemlösning.">
 	<meta property="twitter:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
 
+	<!-- Structured Data / Schema.org -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Magnus Lixenstrand",
+		"url": "https://magnuslixenstrand.com",
+		"image": "https://magnuslixenstrand.com/images/IMG_0830.jpg",
+		"jobTitle": "Automation Engineer",
+		"description": "Automation Engineer som sparar företag 20+ timmar/vecka genom smart systemintegration",
+		"email": "mlixenstrand@gmail.com",
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "Jönköping",
+			"addressCountry": "SE"
+		},
+		"sameAs": [
+			"https://www.linkedin.com/in/magnus-lixenstrand",
+			"https://github.com/lixenstrand"
+		],
+		"knowsAbout": ["Python", "FastAPI", "n8n", "SQL", "Home Assistant", "Process Automation", "System Integration"]
+	}
+	</script>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "Magnus Lixenstrand Portfolio",
+		"url": "https://magnuslixenstrand.com",
+		"description": "Portfolio för Magnus Lixenstrand - Automation Engineer",
+		"author": {
+			"@type": "Person",
+			"name": "Magnus Lixenstrand"
+		},
+		"inLanguage": "sv-SE"
+	}
+	</script>
+
 	<link rel="stylesheet" href="/css/index.css">
 </svelte:head>
 
 <section id="intro">
 	<div class="intro-grid">
 		<div class="intro-headshot">
-			<img
-				src="/images/IMG_0830_200.jpg"
-				srcset="/images/IMG_0830_200.jpg 200w, /images/IMG_0830.jpg 519w"
-				sizes="(min-width: 850px) 300px, 200px"
-				alt="Magnus Lixenstrand"
-				loading="eager"
-				fetchpriority="high"
-				width="200"
-				height="200">
+			<picture>
+				<source
+					type="image/webp"
+					srcset="/images/IMG_0830_200.webp 200w, /images/IMG_0830.webp 1200w"
+					sizes="(min-width: 850px) 300px, 200px">
+				<img
+					src="/images/IMG_0830_200_optimized.jpg"
+					srcset="/images/IMG_0830_200_optimized.jpg 200w, /images/IMG_0830_optimized.jpg 1200w"
+					sizes="(min-width: 850px) 300px, 200px"
+					alt="Magnus Lixenstrand"
+					loading="eager"
+					fetchpriority="high"
+					width="200"
+					height="200">
+			</picture>
 		</div>
 
 		<div class="intro-content">
@@ -235,13 +280,16 @@
 					<li>REST APIs</li>
 				</ul>
 			</div>
-			<img src="/images/homeassistant.png"
-				alt="Home Assistant dashboard showing smart home automations"
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-right"
-				data-aos-delay="150" />
+			<picture>
+				<source type="image/webp" srcset="/images/homeassistant.webp">
+				<img src="/images/homeassistant.png"
+					alt="Home Assistant dashboard showing smart home automations"
+					loading="lazy"
+					width="1200"
+					height="800"
+					data-aos="fade-right"
+					data-aos-delay="150" />
+			</picture>
 		</article>
 
 		<article id="second">
@@ -266,13 +314,16 @@
 					<li>CSS</li>
 				</ul>
 			</div>
-			<img src="/images/Inquiry.png"
-				alt="Multilingual steel inquiry tool interface"
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-left"
-				data-aos-delay="150" />
+			<picture>
+				<source type="image/webp" srcset="/images/Inquiry.webp">
+				<img src="/images/Inquiry.png"
+					alt="Multilingual steel inquiry tool interface"
+					loading="lazy"
+					width="1200"
+					height="800"
+					data-aos="fade-left"
+					data-aos-delay="150" />
+			</picture>
 		</article>
 
 		<article id="third">
@@ -296,13 +347,16 @@
 				</ul>
 			</div>
 
-			<img src="/images/excel.jpg"
-				alt="Excel-based quote calculator"
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-right"
-				data-aos-delay="150" />
+			<picture>
+				<source type="image/webp" srcset="/images/excel.webp">
+				<img src="/images/excel.jpg"
+					alt="Excel-based quote calculator"
+					loading="lazy"
+					width="1200"
+					height="800"
+					data-aos="fade-right"
+					data-aos-delay="150" />
+			</picture>
 		</article>
 
 		<article id="fourth">
@@ -329,13 +383,16 @@
 				</ul>
 			</div>
 
-			<img src="/images/CRM.png"
-				alt="Internal CRM web application dashboard"
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-left"
-				data-aos-delay="150" />
+			<picture>
+				<source type="image/webp" srcset="/images/CRM.webp">
+				<img src="/images/CRM.png"
+					alt="Internal CRM web application dashboard"
+					loading="lazy"
+					width="1200"
+					height="800"
+					data-aos="fade-left"
+					data-aos-delay="150" />
+			</picture>
 		</article>
 	</section>
 </div>
