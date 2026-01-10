@@ -1,6 +1,100 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Typed from 'typed.js';
+	import ProjectCard from '$lib/components/ProjectCard.svelte';
+	import TechBadge from '$lib/components/TechBadge.svelte';
+
+	// Project data
+	const projects = [
+		{
+			id: 'mealie',
+			label: 'Senaste projektet',
+			title: 'Mealie - Familjeplanering för Måltider',
+			tagline: '🍽️ Self-hosted • Automatiska inköpslistor • Familjen synkad',
+			descriptionParagraphs: [
+				'Familjen var körd med matplanering. Recept på lösa lappar, köpte saker vi redan hade hemma, slängde mat för ingen visste vad som skulle lagas. Den eviga frågan vid middagstid: "Vad ska vi äta?"',
+				'Hittade Mealie och satte upp det på egen server. Nu sparar vi recept från webben med ett klick, planerar veckan i en delad kalender, och får inköpslistan automatiskt. Ingen ICA-app som trackar vad vi köper.',
+				'Stressen är borta. Barnen kan kolla vad som blir till middag, vi slänger mindre mat, och jag slipper prenumerationer. Plus att recepten faktiskt finns kvar när man behöver dem.'
+			],
+			technologies: ['Docker', 'Self-hosted', 'REST API', 'PostgreSQL'],
+			image: {
+				src: '/images/mealie.png',
+				alt: 'Mealie recepthantering och måltidsplanering'
+			},
+			imageDirection: 'left' as const
+		},
+		{
+			id: 'homeassistant',
+			title: 'Smart Hem Automation',
+			tagline: '⚡ Lägre elräkning • 15+ prylar som äntligen pratar med varandra',
+			descriptionParagraphs: [
+				'Hade köpt smarta grejer från Philips, IKEA, Shelly, Aqara – alla med egna appar som inte pratade med varandra. Ville ha enkla saker som "tänd hallen när jag kommer hem efter mörkrets inbrott" men det gick inte utan att öppna tre appar.',
+				'Home Assistant löste det, men det var mer jobb än jag trodde. MQTT var nytt för mig, och att debugga YAML när en automation inte triggar är inte kul. Efter några veckors pillande hade jag ett system som faktiskt fungerar.',
+				'Nu mäter sensorer temperatur i varje rum och anpassar värmen automatiskt. Elräkningen sjönk runt 30% första året. Har skrivit kanske 50+ automations vid det här laget – allt från "stäng av allt när ingen är hemma" till "blinka rött om tvättmaskinen är klar".'
+			],
+			technologies: ['Home Assistant', 'YAML', 'Python', 'n8n', 'MQTT', 'REST APIs'],
+			image: {
+				src: '/images/homeassistant.png',
+				srcWebp: '/images/homeassistant.webp',
+				alt: 'Home Assistant dashboard showing smart home automations'
+			},
+			imageDirection: 'right' as const
+		},
+		{
+			id: 'second',
+			title: 'Förfrågningsverktyg för stål',
+			tagline: '🚀 Från 2 timmar till 15 minuter • Färre fel • Flerspråkigt',
+			descriptionParagraphs: [
+				'Säljarna la nästan två timmar om dagen på att skriva prisförfrågningar. Leta upp gamla ordrar i två system, klistra in i Word, skicka mail. Och det blev alltid något fel – fel produktkod, stavfel, eller de glömde något.',
+				'Byggde ett verktyg som söker i orderhistoriken automatiskt och genererar förfrågningar på engelska, tyska eller svenska. Folk kan använda webben eller köra det direkt från Excel – vad de föredrar.',
+				'Nu tar det ungefär 15 minuter istället för två timmar. Har inte räknat exakt, men skillnaden är tydlig. Och jag ser mycket färre fel när jag granskar förfrågningarna.'
+			],
+			technologies: ['Javascript', 'Python', 'SQL', 'HTML', 'CSS'],
+			image: {
+				src: '/images/Inquiry.png',
+				srcWebp: '/images/Inquiry.webp',
+				alt: 'Multilingual steel inquiry tool interface'
+			},
+			imageDirection: 'left' as const
+		},
+		{
+			id: 'third',
+			title: 'Automatiserad Offert- och Orderhantering',
+			tagline: '💰 Snabbare offerter • Realtidspriser från fraktbolag • Mindre handpåläggning',
+			descriptionParagraphs: [
+				'Offertprocessen var absurd: räkna ihop stålkostnader, ringa Schenker för fraktpris (som varierade beroende på vikt och sträcka), knappa in allt i Fortnox. Och fraktkostnaderna var ofta fel för vi använde gamla priser från ett Excel-ark som ingen uppdaterade.',
+				'Började med Python-script som hämtar fraktpriser via API. Två av tre bolag hade bra API:er – för det tredje fick jag bygga web scraping som gick sönder varje gång de ändrade sin sajt. Lade till stålkostnader från vår databas och kopplade ihop allt med Excel och Fortnox.',
+				'Tog ett tag att få folk att använda det – fanns alltid edge cases. Men nu klarar de flesta offerter på 10-15 minuter istället för en halvtimme. Och vi slipper ringa för fraktpriser.'
+			],
+			technologies: ['Python', 'SQL', 'VBA', 'Excel'],
+			image: {
+				src: '/images/excel.jpg',
+				srcWebp: '/images/excel.webp',
+				alt: 'Excel-based quote calculator'
+			},
+			imageDirection: 'right' as const
+		},
+		{
+			id: 'fourth',
+			title: 'Intern webbapp för Nordmet',
+			tagline: '📊 Alla på samma plats • 500+ certifikat digitalt • Slut på Excel-kaos',
+			descriptionParagraphs: [
+				'Excel-kaos: kundinfo i ett ark, certifikat i ett annat, transportdata i ett tredje som ingen uppdaterade. Logistik ringde säljare och frågade "har vi certifikatet för Svenssons order från förra året?" – svaret var alltid "jag kollar senare". Certifikat försvann, och ingen visste vad vi hade skickat till vilken kund.',
+				'Byggde en webbapp där allt finns på samma ställe. Kundlista, certifikatarkiv där man laddar upp PDF och kopplar till kund, transportlista för logistik. Säljare ser sina kunder, logistik ser transporter – ingen ser priser de inte ska se.',
+				'Åtta personer använder det dagligen nu utan att jag behöver tjata. Tog en månad att migrera all data från Excel utan att tappa något. När revisorn frågar efter ett certifikat tar det 10 sekunder istället för att leta i pärmar.',
+				'OBS: Webbappen är endast tillgänglig via företagets VPN'
+			],
+			technologies: ['Javascript', 'Python', 'SQL', 'HTML', 'CSS'],
+			image: {
+				src: '/images/CRM.png',
+				srcWebp: '/images/CRM.webp',
+				alt: 'Internal CRM web application dashboard'
+			},
+			imageDirection: 'left' as const
+		}
+	];
+
+	const mainTechStack = ['Python', 'FastAPI', 'n8n', 'SQL', 'Home Assistant'];
 
 	onMount(() => {
 		// Hantera hash-scrolling när man navigerar från andra sidor
@@ -9,31 +103,17 @@
 			setTimeout(() => {
 				const targetElement = document.querySelector(hash);
 				if (targetElement) {
-					// Scrolla till h1 inside #projects för bättre positionering
 					const header = targetElement.querySelector('h1');
 					const scrollTarget = header || targetElement;
-
-					// Beräkna position med offset för navbar (120px)
 					const targetPosition = scrollTarget.getBoundingClientRect().top + window.pageYOffset - 120;
-
-					window.scrollTo({
-						top: targetPosition,
-						behavior: 'smooth'
-					});
+					window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 				}
 			}, 100);
 		}
 
-		// Typed.js animation för personliga aktiviteter
+		// Typed.js animation
 		const typed = new Typed('#element', {
-			strings: [
-				'Jag kodar',
-				'Jag läser',
-				'Jag springer',
-				'Jag tränar',
-				'Jag lagar mat',
-				'Jag automatiserar'
-			],
+			strings: ['Jag kodar', 'Jag läser', 'Jag springer', 'Jag tränar', 'Jag lagar mat', 'Jag automatiserar'],
 			typeSpeed: 60,
 			backSpeed: 40,
 			backDelay: 1500,
@@ -41,67 +121,32 @@
 			showCursor: false
 		});
 
-		// Kontakt-knapp popup
-		const contactButton = document.querySelector('.contactPopUp');
-		if (contactButton) {
-			contactButton.addEventListener('click', async () => {
-				const { default: Swal } = await import('sweetalert2');
-				Swal.fire({
-					title: 'Kontakta mig',
-					html: `
-						<p style="margin-bottom: 15px;">Skicka ett mail till:</p>
-						<a href="mailto:mlixenstrand@gmail.com" style="font-size: 18px; color: #4A90E2; text-decoration: none; font-weight: 600;">
-							mlixenstrand@gmail.com
-						</a>
-					`,
-					icon: 'info',
-					confirmButtonText: 'Stäng',
-					confirmButtonColor: '#4A90E2'
-				});
-			});
-		}
-
 		// Smooth scroll för ankar-länkar
 		const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
 		anchorLinks.forEach(link => {
 			link.addEventListener('click', function(e) {
 				const href = this.getAttribute('href');
-
-				// Skippa om det är "#" utan id
 				if (href === '#') return;
 
 				const targetElement = document.querySelector(href);
-
 				if (targetElement) {
 					e.preventDefault();
-
-					// Scrolla till h1 inside element för bättre positionering
 					const header = targetElement.querySelector('h1');
 					const scrollTarget = header || targetElement;
-
-					// Beräkna position med offset för navbar (120px)
 					const targetPosition = scrollTarget.getBoundingClientRect().top + window.pageYOffset - 120;
-
-					window.scrollTo({
-						top: targetPosition,
-						behavior: 'smooth'
-					});
+					window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 				}
 			});
 		});
 
-		return () => {
-			typed.destroy();
-		};
+		return () => typed.destroy();
 	});
 
-	// Sticky CTA visibility based on scroll
+	// Sticky CTA visibility
 	let showStickyCTA = $state(false);
 
 	onMount(() => {
 		const handleScroll = () => {
-			// Show sticky CTA after scrolling past intro section
 			const scrollPosition = window.scrollY;
 			const introHeight = document.querySelector('#intro')?.offsetHeight || 800;
 			showStickyCTA = scrollPosition > introHeight * 0.7;
@@ -172,8 +217,6 @@
 		"inLanguage": "sv-SE"
 	}
 	</script>
-
-	<link rel="stylesheet" href="/css/index.css">
 </svelte:head>
 
 <section id="intro">
@@ -207,11 +250,9 @@
 			<p>Det började som sidoprojekt på Nordmet. Nu sparar mina verktyg teamet 20+ timmar i veckan.</p>
 
 			<div class="tech-stack">
-				<span class="tech-badge">Python</span>
-				<span class="tech-badge">FastAPI</span>
-				<span class="tech-badge">n8n</span>
-				<span class="tech-badge">SQL</span>
-				<span class="tech-badge">Home Assistant</span>
+				{#each mainTechStack as tech}
+					<TechBadge {tech} />
+				{/each}
 			</div>
 
 			<div class="cta-group">
@@ -226,180 +267,14 @@
 	<section id="projects">
 		<h1 data-aos="fade-up">Projekt jag är stolt över</h1>
 
-		<article id="mealie">
-			<div class="text">
-				<p class="project-label" data-aos="fade-right" data-aos-delay="0">Senaste projektet</p>
-				<h2 data-aos="fade-right" data-aos-delay="100">Mealie - Familjeplanering för Måltider</h2>
-				<p class="project-tagline" data-aos="fade-right" data-aos-delay="200">🍽️ Self-hosted • Automatiska inköpslistor • Familjen synkad</p>
-
-				<div class="blackBox" data-aos="fade-up" data-aos-delay="300">
-					<p>Familjen var körd med matplanering. Recept på lösa lappar, köpte saker vi redan hade hemma, slängde mat för ingen visste vad som skulle lagas. Den eviga frågan vid middagstid: "Vad ska vi äta?"</p>
-
-					<p>Hittade Mealie och satte upp det på egen server. Nu sparar vi recept från webben med ett klick, planerar veckan i en delad kalender, och får inköpslistan automatiskt. Ingen ICA-app som trackar vad vi köper.</p>
-
-					<p>Stressen är borta. Barnen kan kolla vad som blir till middag, vi slänger mindre mat, och jag slipper prenumerationer. Plus att recepten faktiskt finns kvar när man behöver dem.</p>
-				</div>
-
-				<h3 data-aos="fade-right" data-aos-delay="400">teknologier som används:</h3>
-				<ul data-aos="fade-right" data-aos-delay="450">
-					<li>Docker |</li>
-					<li>Self-hosted |</li>
-					<li>REST API |</li>
-					<li>PostgreSQL</li>
-				</ul>
-			</div>
-			<img src="/images/mealie.png"
-				alt="Mealie recepthantering och måltidsplanering"
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-left"
-				data-aos-delay="200" />
-		</article>
-
-		<article id="homeassistant">
-			<div class="text">
-				<h2 data-aos="fade-left" data-aos-delay="0">Smart Hem Automation</h2>
-				<p class="project-tagline" data-aos="fade-left" data-aos-delay="100">⚡ Lägre elräkning • 15+ prylar som äntligen pratar med varandra</p>
-
-				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
-					<p>Hade köpt smarta grejer från Philips, IKEA, Shelly, Aqara – alla med egna appar som inte pratade med varandra. Ville ha enkla saker som "tänd hallen när jag kommer hem efter mörkrets inbrott" men det gick inte utan att öppna tre appar.</p>
-
-					<p>Home Assistant löste det, men det var mer jobb än jag trodde. MQTT var nytt för mig, och att debugga YAML när en automation inte triggar är inte kul. Efter några veckors pillande hade jag ett system som faktiskt fungerar.</p>
-
-					<p>Nu mäter sensorer temperatur i varje rum och anpassar värmen automatiskt. Elräkningen sjönk runt 30% första året. Har skrivit kanske 50+ automations vid det här laget – allt från "stäng av allt när ingen är hemma" till "blinka rött om tvättmaskinen är klar".</p>
-				</div>
-
-				<h3 data-aos="fade-left" data-aos-delay="300">teknologier som används:</h3>
-				<ul data-aos="fade-left" data-aos-delay="350">
-					<li>Home Assistant |</li>
-					<li>YAML |</li>
-					<li>Python |</li>
-					<li>n8n |</li>
-					<li>MQTT |</li>
-					<li>REST APIs</li>
-				</ul>
-			</div>
-			<picture>
-				<source type="image/webp" srcset="/images/homeassistant.webp">
-				<img src="/images/homeassistant.png"
-					alt="Home Assistant dashboard showing smart home automations"
-					loading="lazy"
-					width="1200"
-					height="800"
-					data-aos="fade-right"
-					data-aos-delay="150" />
-			</picture>
-		</article>
-
-		<article id="second">
-			<div class="text">
-				<h2 data-aos="fade-right" data-aos-delay="0">Förfrågningsverktyg för stål</h2>
-				<p class="project-tagline" data-aos="fade-right" data-aos-delay="100">🚀 Från 2 timmar till 15 minuter • Färre fel • Flerspråkigt</p>
-
-				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
-					<p>Säljarna la nästan två timmar om dagen på att skriva prisförfrågningar. Leta upp gamla ordrar i två system, klistra in i Word, skicka mail. Och det blev alltid något fel – fel produktkod, stavfel, eller de glömde något.</p>
-
-					<p>Byggde ett verktyg som söker i orderhistoriken automatiskt och genererar förfrågningar på engelska, tyska eller svenska. Folk kan använda webben eller köra det direkt från Excel – vad de föredrar.</p>
-
-					<p>Nu tar det ungefär 15 minuter istället för två timmar. Har inte räknat exakt, men skillnaden är tydlig. Och jag ser mycket färre fel när jag granskar förfrågningarna.</p>
-				</div>
-
-				<h3 data-aos="fade-right" data-aos-delay="300">teknologier som används:</h3>
-				<ul data-aos="fade-right" data-aos-delay="350">
-					<li>Javascript |</li>
-					<li>Python |</li>
-					<li>SQL |</li>
-					<li>HTML |</li>
-					<li>CSS</li>
-				</ul>
-			</div>
-			<picture>
-				<source type="image/webp" srcset="/images/Inquiry.webp">
-				<img src="/images/Inquiry.png"
-					alt="Multilingual steel inquiry tool interface"
-					loading="lazy"
-					width="1200"
-					height="800"
-					data-aos="fade-left"
-					data-aos-delay="150" />
-			</picture>
-		</article>
-
-		<article id="third">
-			<div class="text">
-				<h2 data-aos="fade-left" data-aos-delay="0">Automatiserad Offert- och Orderhantering</h2>
-				<p class="project-tagline" data-aos="fade-left" data-aos-delay="100">💰 Snabbare offerter • Realtidspriser från fraktbolag • Mindre handpåläggning</p>
-				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
-					<p>Offertprocessen var absurd: räkna ihop stålkostnader, ringa Schenker för fraktpris (som varierade beroende på vikt och sträcka), knappa in allt i Fortnox. Och fraktkostnaderna var ofta fel för vi använde gamla priser från ett Excel-ark som ingen uppdaterade.</p>
-
-					<p>Började med Python-script som hämtar fraktpriser via API. Två av tre bolag hade bra API:er – för det tredje fick jag bygga web scraping som gick sönder varje gång de ändrade sin sajt. Lade till stålkostnader från vår databas och kopplade ihop allt med Excel och Fortnox.</p>
-
-					<p>Tog ett tag att få folk att använda det – fanns alltid edge cases. Men nu klarar de flesta offerter på 10-15 minuter istället för en halvtimme. Och vi slipper ringa för fraktpriser.</p>
-				</div>
-
-				<h3 data-aos="fade-left" data-aos-delay="300">teknologier som används:</h3>
-				<ul data-aos="fade-left" data-aos-delay="350">
-					<li>Python |</li>
-					<li>SQL |</li>
-					<li>VBA |</li>
-					<li>Excel</li>
-				</ul>
-			</div>
-
-			<picture>
-				<source type="image/webp" srcset="/images/excel.webp">
-				<img src="/images/excel.jpg"
-					alt="Excel-based quote calculator"
-					loading="lazy"
-					width="1200"
-					height="800"
-					data-aos="fade-right"
-					data-aos-delay="150" />
-			</picture>
-		</article>
-
-		<article id="fourth">
-			<div class="text">
-				<h2 data-aos="fade-right" data-aos-delay="0">Intern webbapp för Nordmet</h2>
-				<p class="project-tagline" data-aos="fade-right" data-aos-delay="100">📊 Alla på samma plats • 500+ certifikat digitalt • Slut på Excel-kaos</p>
-				<div class="blackBox" data-aos="fade-up" data-aos-delay="200">
-					<p>Excel-kaos: kundinfo i ett ark, certifikat i ett annat, transportdata i ett tredje som ingen uppdaterade. Logistik ringde säljare och frågade "har vi certifikatet för Svenssons order från förra året?" – svaret var alltid "jag kollar senare". Certifikat försvann, och ingen visste vad vi hade skickat till vilken kund.</p>
-
-					<p>Byggde en webbapp där allt finns på samma ställe. Kundlista, certifikatarkiv där man laddar upp PDF och kopplar till kund, transportlista för logistik. Säljare ser sina kunder, logistik ser transporter – ingen ser priser de inte ska se.</p>
-
-					<p>Åtta personer använder det dagligen nu utan att jag behöver tjata. Tog en månad att migrera all data från Excel utan att tappa något. När revisorn frågar efter ett certifikat tar det 10 sekunder istället för att leta i pärmar.</p>
-
-					<p><em>OBS: Webbappen är endast tillgänglig via företagets VPN</em></p>
-				</div>
-
-				<h3 data-aos="fade-right" data-aos-delay="300">teknologier som används:</h3>
-				<ul data-aos="fade-right" data-aos-delay="350">
-					<li>Javascript |</li>
-					<li>Python |</li>
-					<li>SQL |</li>
-					<li>HTML |</li>
-					<li>CSS</li>
-				</ul>
-			</div>
-
-			<picture>
-				<source type="image/webp" srcset="/images/CRM.webp">
-				<img src="/images/CRM.png"
-					alt="Internal CRM web application dashboard"
-					loading="lazy"
-					width="1200"
-					height="800"
-					data-aos="fade-left"
-					data-aos-delay="150" />
-			</picture>
-		</article>
+		{#each projects as project}
+			<ProjectCard {...project} />
+		{/each}
 	</section>
 </div>
 
 <section id="contact">
 	<h2 data-aos="fade-up">Kontakta mig</h2>
-
 	<p data-aos="fade-up" data-aos-delay="100">Jag söker möjligheter där jag kan göra verklig skillnad genom att kombinera automation, systemintegration och affärsförståelse</p>
 
 	<div class="contact-button-wrapper" data-aos="zoom-in" data-aos-delay="200">
@@ -407,9 +282,270 @@
 	</div>
 </section>
 
-<!-- Sticky CTA -->
 {#if showStickyCTA}
-	<a href="mailto:mlixenstrand@gmail.com" class="sticky-cta">
-		Kontakta mig
-	</a>
+	<a href="mailto:mlixenstrand@gmail.com" class="sticky-cta">Kontakta mig</a>
 {/if}
+
+<style>
+	/* Intro Section */
+	#intro {
+		padding: 0.5rem 1.5rem 10rem 1.5rem;
+		width: 100%;
+		margin: 0 auto;
+		position: relative;
+	}
+
+	.intro-grid {
+		display: grid;
+		grid-template-columns: clamp(200px, 30vw, 300px) 1fr;
+		gap: 4rem;
+		align-items: start;
+		max-width: 1200px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 2;
+	}
+
+	.intro-headshot {
+		position: relative;
+		z-index: 3;
+	}
+
+	.intro-headshot img {
+		width: clamp(200px, 30vw, 300px);
+		height: clamp(200px, 30vw, 300px);
+		border-radius: 50%;
+		object-fit: cover;
+		border: 5px solid var(--aqua);
+		box-shadow: 0 0 40px rgba(0, 217, 255, 0.9);
+		background: rgba(13, 13, 13, 0.65);
+	}
+
+	.intro-content {
+		position: relative;
+		z-index: 2;
+	}
+
+	#intro p {
+		font-family: var(--mono);
+		font-size: clamp(1rem, 2.5vw, 1.2rem);
+		line-height: 1.7;
+		margin-bottom: 1.5rem;
+	}
+
+	#intro .name {
+		font-family: var(--mono);
+		font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+		margin-bottom: 2rem;
+	}
+
+	.name span {
+		font-family: var(--sans);
+		font-size: clamp(3rem, 10vw, 5.5rem);
+		color: var(--aqua);
+		display: block;
+		font-weight: 700;
+		line-height: 1.1;
+		margin-top: 0.5rem;
+	}
+
+	#intro h2 {
+		font-size: clamp(2.2rem, 6vw, 3.5rem);
+		font-weight: normal;
+		margin-bottom: 2rem;
+	}
+
+	#element {
+		min-height: 4rem;
+		height: 4rem;
+		line-height: 1.3;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		margin: 0 0 2rem 0;
+		padding: 0.25rem 0;
+		border: 1px solid transparent;
+		overflow: visible;
+	}
+
+	.tech-stack {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin: 2rem 0;
+	}
+
+	.cta-group {
+		display: flex;
+		gap: 1rem;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.cta-primary,
+	.cta-secondary {
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		font-family: var(--sans);
+	}
+
+	.cta-primary {
+		background: linear-gradient(135deg, var(--aqua), var(--magenta));
+		color: var(--black);
+		border: none;
+	}
+
+	.cta-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(0, 217, 255, 0.4);
+	}
+
+	.cta-secondary {
+		background: transparent;
+		color: var(--aqua);
+		border: 2px solid var(--aqua);
+	}
+
+	.cta-secondary:hover {
+		background: rgba(0, 217, 255, 0.1);
+		transform: translateY(-2px);
+	}
+
+	@media (max-width: 849px) {
+		.intro-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.intro-headshot {
+			text-align: center;
+		}
+
+		.intro-headshot img {
+			margin: 0 auto;
+		}
+
+		.cta-group {
+			flex-direction: column;
+		}
+
+		.cta-primary,
+		.cta-secondary {
+			text-align: center;
+			width: 100%;
+		}
+	}
+
+	/* Projects Section */
+	.projectBackground {
+		background: linear-gradient(180deg, var(--black) 0%, var(--dkblue) 50%, var(--black) 100%);
+		padding: 4rem 0;
+		position: relative;
+	}
+
+	#projects {
+		padding: 0 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		scroll-margin-top: 180px;
+	}
+
+	#projects h1 {
+		font-size: clamp(2rem, 5vw, 2.5rem);
+		margin-bottom: 3rem;
+		padding-top: 2rem;
+		text-align: center;
+		color: var(--white);
+	}
+
+	/* Contact Section */
+	#contact {
+		padding: 6rem 2rem;
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	#contact h2 {
+		font-size: clamp(2rem, 5vw, 2.5rem);
+		margin-bottom: 1.5rem;
+		color: var(--aqua);
+	}
+
+	#contact p {
+		font-size: clamp(1rem, 2.5vw, 1.2rem);
+		line-height: 1.7;
+		margin-bottom: 2rem;
+		color: var(--white);
+	}
+
+	.contact-button-wrapper {
+		margin-top: 2rem;
+	}
+
+	.contact-button {
+		display: inline-block;
+		padding: 1.2rem 3rem;
+		background: linear-gradient(135deg, var(--aqua), var(--magenta));
+		color: var(--black);
+		font-size: 1.2rem;
+		font-weight: 700;
+		text-decoration: none;
+		border-radius: 50px;
+		transition: all 0.3s ease;
+		font-family: var(--sans);
+		box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+	}
+
+	.contact-button:hover {
+		transform: translateY(-3px) scale(1.05);
+		box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+	}
+
+	/* Sticky CTA */
+	.sticky-cta {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		padding: 1rem 2rem;
+		background: linear-gradient(135deg, var(--aqua), var(--magenta));
+		color: var(--black);
+		font-weight: 700;
+		text-decoration: none;
+		border-radius: 50px;
+		box-shadow: 0 4px 20px rgba(0, 217, 255, 0.4);
+		z-index: 1000;
+		transition: all 0.3s ease;
+		font-family: var(--sans);
+		animation: slideInUp 0.5s ease;
+	}
+
+	.sticky-cta:hover {
+		transform: translateY(-3px) scale(1.05);
+		box-shadow: 0 8px 30px rgba(0, 217, 255, 0.6);
+	}
+
+	@keyframes slideInUp {
+		from {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.sticky-cta {
+			bottom: 1rem;
+			right: 1rem;
+			padding: 0.75rem 1.5rem;
+			font-size: 0.9rem;
+		}
+	}
+</style>
