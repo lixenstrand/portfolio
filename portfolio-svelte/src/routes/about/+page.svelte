@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import TechBadge from '$lib/components/TechBadge.svelte';
+
+	const techStack = ['Python + FastAPI', 'n8n', 'Home Assistant', 'SQL', 'REST APIs'];
+	const whatDrivesMe = ['Automatisera det repetitiva', 'Lösa verkliga problem', 'Kontinuerligt lärande', 'Se mätbara resultat'];
 
 	onMount(() => {
 		// Hantera stjärnornas opacity baserat på scroll
@@ -82,8 +86,6 @@
 	<meta property="twitter:description" content="Automation Engineer som kombinerar 12+ års säljarbakgrund med teknisk problemlösning. Bygger lösningar som skapar mätbart affärsvärde.">
 	<meta property="twitter:image" content="https://magnuslixenstrand.com/images/IMG_0830.jpg">
 
-	<link rel="stylesheet" href="/css/index.css">
-	<link rel="stylesheet" href="/css/about.css">
 </svelte:head>
 
 <section id="hero">
@@ -123,23 +125,171 @@
 					<p>Bor i Jönköping och söker roller hos etablerade företag där jag kan lösa verkliga problem genom att kombinera affärsförståelse med teknisk problemlösning.</p>
 
 					<h4 class="about-subsection-heading">Tech stack för automation:</h4>
-					<ul class="about-badge-list">
-						<li>Python + FastAPI</li>
-						<li>n8n</li>
-						<li>Home Assistant</li>
-						<li>SQL</li>
-						<li>REST APIs</li>
-					</ul>
+					<div class="tech-badges">
+						{#each techStack as tech}
+							<TechBadge {tech} />
+						{/each}
+					</div>
 
 					<h4 class="about-subsection-heading-compact">Vad driver mig:</h4>
-					<ul class="about-badge-list-no-margin">
-						<li>Automatisera det repetitiva</li>
-						<li>Lösa verkliga problem</li>
-						<li>Kontinuerligt lärande</li>
-						<li>Se mätbara resultat</li>
-					</ul>
+					<div class="tech-badges">
+						{#each whatDrivesMe as item}
+							<TechBadge tech={item} />
+						{/each}
+					</div>
 				</div>
 			</div>
 		</article>
 	</section>
 </div>
+
+<style>
+	#hero {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 4rem 2rem 8rem 2rem;
+	}
+
+	.hero-text {
+		font-family: var(--sans);
+		margin: 0 auto;
+		max-width: 1200px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3rem;
+		position: relative;
+		z-index: 2;
+	}
+
+	.aboutMeHeader {
+		margin: 0;
+		font-family: var(--sans);
+		font-size: clamp(2.5rem, 8vw, 4rem);
+		color: var(--aqua);
+		line-height: 1.2;
+		text-align: center;
+	}
+
+	.smallScreenCapitalize {
+		text-transform: lowercase;
+	}
+
+	@media (max-width: 768px) {
+		.smallScreenCapitalize {
+			text-transform: capitalize;
+			color: var(--hotmag);
+			display: block;
+		}
+	}
+
+	.aboutBackground {
+		background-color: var(--dkblue);
+		position: relative;
+		z-index: 10;
+		box-shadow:
+			0 -80px 150px 60px rgba(26, 31, 53, 0.9),
+			0 80px 150px 60px rgba(26, 31, 53, 0.9);
+		overflow-y: visible !important;
+	}
+
+	.aboutBackground article {
+		padding-bottom: 2rem;
+		margin: 0 auto;
+		max-width: 1200px;
+		min-height: auto !important;
+		height: auto !important;
+		display: block !important;
+	}
+
+	#projects {
+		padding: 4rem 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	#projects h4 {
+		font-size: 1.3rem;
+		font-family: var(--mono);
+	}
+
+	.blackBox {
+		background: linear-gradient(135deg, var(--dkblue) 0%, var(--plum) 100%);
+		border: 2px solid var(--aqua);
+		padding: 2rem;
+		border-radius: 15px;
+		color: var(--white);
+		font-size: 1rem;
+		line-height: 1.7;
+		box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+	}
+
+	.about-section-heading-first {
+		color: var(--aqua);
+		margin-bottom: 1rem;
+	}
+
+	.about-section-heading {
+		color: var(--aqua);
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	.about-highlight-text {
+		margin-top: 1.5rem;
+	}
+
+	.about-subsection-heading {
+		color: var(--aqua);
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	.about-subsection-heading-compact {
+		color: var(--aqua);
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.tech-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	#projects img {
+		margin: 2rem 0 2rem 0;
+		border-left: 1px solid var(--aqua);
+		border-top: 1px solid var(--aqua);
+		border-radius: 25px;
+		padding: 1rem;
+		box-shadow: 1px 15px 31.5px -6px #000000;
+	}
+
+	#first img {
+		width: 100%;
+		position: relative;
+		z-index: 9999 !important;
+		display: block !important;
+	}
+
+	@media (min-width: 550px) {
+		#first img {
+			float: right;
+			width: 350px;
+			max-width: 40%;
+			margin: 0 0 2rem 2rem;
+		}
+
+		#first .blackBox {
+			position: relative;
+			z-index: 10;
+			clear: none;
+		}
+	}
+</style>
