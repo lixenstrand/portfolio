@@ -128,8 +128,7 @@
 	}
 
 	nav li:first-child {
-		flex-basis: 100%;
-		text-align: center;
+		margin-right: auto;
 	}
 
 	nav .fa- {
