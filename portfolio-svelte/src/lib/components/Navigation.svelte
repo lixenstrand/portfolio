@@ -140,6 +140,8 @@
 	}
 
 	nav .colorful {
+		height: 2rem;
+		width: auto;
 		filter: invert(86%) sepia(25%) saturate(179%) hue-rotate(345deg) brightness(95%) contrast(81%);
 		position: relative;
 		top: -6px;
@@ -196,6 +198,8 @@
 
 	.home-mobile {
 		display: none;
+		height: 2rem;
+		width: auto;
 	}
 
 	.button {
