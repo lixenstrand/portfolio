@@ -40,7 +40,7 @@
 
 	.description {
 		font-size: 1rem;
-		color: var(--gray);
+		color: var(--magenta);
 		margin-bottom: 2rem;
 	}
 
@@ -58,5 +58,10 @@
 	.back-button:hover {
 		transform: translateY(-3px);
 		box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+	}
+
+	.back-button:focus {
+		outline: 3px solid var(--white);
+		outline-offset: 3px;
 	}
 </style>

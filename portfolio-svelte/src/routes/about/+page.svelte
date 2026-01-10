@@ -98,7 +98,10 @@
 	<section id="projects">
 		<article id="first">
 			<div class="text">
-				<img src="/images/IMG_0830.jpg" alt="Magnus Lixenstrand" />
+				<picture>
+					<source type="image/webp" srcset="/images/IMG_0830.webp">
+					<img src="/images/IMG_0830_optimized.jpg" alt="Magnus Lixenstrand" loading="lazy" width="350" height="350" decoding="async" />
+				</picture>
 
 				<div class="blackBox">
 					<h3 class="about-section-heading-first">Varför automation?</h3>

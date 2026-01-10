@@ -416,6 +416,12 @@
 		transform: translateY(-2px);
 	}
 
+	.cta-primary:focus,
+	.cta-secondary:focus {
+		outline: 3px solid var(--white);
+		outline-offset: 3px;
+	}
+
 	@media (max-width: 849px) {
 		.intro-grid {
 			grid-template-columns: 1fr;
@@ -507,6 +513,11 @@
 		box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
 	}
 
+	.contact-button:focus {
+		outline: 3px solid var(--white);
+		outline-offset: 3px;
+	}
+
 	/* Sticky CTA */
 	.sticky-cta {
 		position: fixed;
@@ -528,6 +539,11 @@
 	.sticky-cta:hover {
 		transform: translateY(-3px) scale(1.05);
 		box-shadow: 0 8px 30px rgba(0, 217, 255, 0.6);
+	}
+
+	.sticky-cta:focus {
+		outline: 3px solid var(--white);
+		outline-offset: 3px;
 	}
 
 	@keyframes slideInUp {
