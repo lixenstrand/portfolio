@@ -103,11 +103,6 @@
 		transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
 	}
 
-	#header.scrolled {
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-		border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-	}
-
 	nav {
 		font-family: var(--mono);
 		font-size: 80%;
@@ -223,21 +218,9 @@
 	}
 
 	.button-pulse {
-		animation: pulse 2.5s ease-in-out infinite;
-		will-change: transform, box-shadow;
+		box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 		position: relative;
 		z-index: 10;
-	}
-
-	@keyframes pulse {
-		0%, 100% {
-			transform: scale(1);
-			box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.7);
-		}
-		50% {
-			transform: scale(1.05);
-			box-shadow: 0 0 0 10px rgba(0, 217, 255, 0);
-		}
 	}
 
 	@media (min-width: 850px) {

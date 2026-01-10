@@ -19,6 +19,7 @@
 			technologies: ['Docker', 'Self-hosted', 'REST API', 'PostgreSQL'],
 			image: {
 				src: '/images/mealie.png',
+				srcWebp: '/images/mealie.webp',
 				alt: 'Mealie recepthantering och måltidsplanering'
 			},
 			imageDirection: 'left' as const
