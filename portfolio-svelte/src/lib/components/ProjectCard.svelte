@@ -91,6 +91,7 @@
 			grid-template-columns: 1fr 1fr;
 			gap: 3rem;
 			padding: 3rem;
+			align-items: stretch;
 		}
 	}
 
@@ -175,10 +176,16 @@
 		font-family: var(--mono);
 	}
 
-	picture,
-	img {
+	picture {
+		display: flex;
+		align-self: stretch;
+	}
+
+	picture img,
+	article > img {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		border-radius: 8px;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
