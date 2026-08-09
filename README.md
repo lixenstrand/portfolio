@@ -1,30 +1,26 @@
-# Magnus Portfolio Website
+# Magnus Lixenstrand – portfolio
 
-Welcome to the repository for my personal portfolio website! This site is designed to showcase my work, skills, and projects I've been involved in. It serves as a central hub for potential employers, colleagues, and others interested in learning more about me and what I bring to the table.
+Personlig portfolio för Magnus Lixenstrand med fokus på automation, systemintegration och verksamhetsnära utveckling. Webbplatsen visar konkreta projekt, arbetssätt och mätbara resultat och används som stöd vid jobbsökande.
 
-## Features
+## Teknik
 
-- **Personal Introduction:** A brief introduction to who I am and what I do.
-- **Project Portfolio:** An overview of selected projects I'm extra proud of, complete with descriptions and technology stacks. Since the showcased projects are connected to my work I've chosen not to give out live demos.
-- **Contact Form:** An easy way for visitors to contact me for job offers, project inquiries, or just to say hello.
-- **Responsive Design:** The site is designed to work smoothly across devices of all sizes, from mobiles to large screens.
+- SvelteKit 2 och Svelte 5
+- TypeScript och CSS
+- Node-adapter för produktion
+- Responsiv layout, semantisk HTML och grundläggande SEO
 
-## Technologies
+## Lokal utveckling
 
-This website is built with the following technologies:
+```sh
+cd portfolio-svelte
+npm install
+npm run dev
+```
 
-- **Frontend:** HTML, Vanilla CSS, Vanilla JavaScript
-- **Backend:** Python with [Flask](https://flask.palletsprojects.com/)
-- **Deployment:** [Google App Engine](https://cloud.google.com/appengine)
+Produktionsbygge:
 
+```sh
+npm run build
+```
 
-
-## Contact
-
-For questions and collaborations, you can reach me at:
-
-
-- **LinkedIn:** https://www.linkedin.com/in/magnus-lixenstrand
-
-
-Thank you for taking the time to explore my project!
+Den publika webbplatsen finns på [magnuslixenstrand.com](https://magnuslixenstrand.com/).

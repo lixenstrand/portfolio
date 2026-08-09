@@ -1,17 +1,32 @@
 <script lang="ts">
+	interface ProjectImage {
+		src: string;
+		srcWebp?: string;
+		alt: string;
+		caption?: string;
+		fit?: 'cover' | 'contain';
+		portrait?: boolean;
+	}
+
+	interface ProjectMetric {
+		value: string;
+		label: string;
+	}
+
 	interface ProjectCardProps {
 		id: string;
 		label?: string;
 		title: string;
 		tagline: string;
 		descriptionParagraphs: string[];
+		storyLabels?: string[];
 		technologies: string[];
-		image: {
-			src: string;
-			srcWebp?: string;
-			alt: string;
-		};
+		capabilities?: string[];
+		metrics?: ProjectMetric[];
+		images: ProjectImage[];
 		imageDirection?: 'left' | 'right';
+		featured?: boolean;
+		compact?: boolean;
 	}
 
 	let {
@@ -20,195 +35,74 @@
 		title,
 		tagline,
 		descriptionParagraphs,
+		storyLabels = ['Utgångsläge', 'Det jag byggde', 'Resultat', 'Åtkomst'],
 		technologies,
-		image,
-		imageDirection = 'left'
+		capabilities = [],
+		metrics = [],
+		images,
+		imageDirection = 'left',
+		featured = false,
+		compact = false
 	}: ProjectCardProps = $props();
-
-	const textDirection = imageDirection === 'left' ? 'right' : 'left';
 </script>
 
-<article {id}>
-	<div class="text">
-		{#if label}
-			<p class="project-label" data-aos="fade-{textDirection}" data-aos-delay="0">{label}</p>
+<article {id} class="project-card" class:reverse={imageDirection === 'right'} class:featured class:compact>
+	<header class="project-heading">
+		{#if label}<p class="project-label">{label}</p>{/if}
+		<h3>{title}</h3>
+		<p class="project-tagline">{tagline}</p>
+
+		{#if metrics.length}
+			<div class="project-impact-summary">
+				<p>Resultat i korthet</p>
+				<dl class="project-impact">
+					{#each metrics as metric}
+						<div>
+							<dt>{metric.value}</dt>
+							<dd>{metric.label}</dd>
+						</div>
+					{/each}
+				</dl>
+			</div>
 		{/if}
-		<h2 data-aos="fade-{textDirection}" data-aos-delay={label ? "100" : "0"}>{title}</h2>
-		<p class="project-tagline" data-aos="fade-{textDirection}" data-aos-delay={label ? "200" : "100"}>{tagline}</p>
+	</header>
 
-		<div class="blackBox" data-aos="fade-up" data-aos-delay={label ? "300" : "200"}>
-			{#each descriptionParagraphs as paragraph}
-				<p>{paragraph}</p>
-			{/each}
-		</div>
-
-		<h3 data-aos="fade-{textDirection}" data-aos-delay={label ? "400" : "300"}>teknologier som används:</h3>
-		<ul data-aos="fade-{textDirection}" data-aos-delay={label ? "450" : "350"}>
-			{#each technologies as tech, i}
-				<li>{tech}{i < technologies.length - 1 ? ' |' : ''}</li>
-			{/each}
-		</ul>
+	<div class="project-visual" class:multi={images.length > 1}>
+		{#each images as image}
+			<figure class="project-shot">
+				{#if image.srcWebp}
+					<picture>
+						<source type="image/webp" srcset={image.srcWebp}>
+						<img src={image.src} alt={image.alt} class:contain={image.fit === 'contain'} class:portrait={image.portrait} loading="lazy" width="2048" height="1027">
+					</picture>
+				{:else}
+					<img src={image.src} alt={image.alt} class:contain={image.fit === 'contain'} class:portrait={image.portrait} loading="lazy" width="2048" height="1027">
+				{/if}
+				{#if image.caption}<figcaption>{image.caption}</figcaption>{/if}
+			</figure>
+		{/each}
 	</div>
 
-	{#if image.srcWebp}
-		<picture>
-			<source type="image/webp" srcset={image.srcWebp}>
-			<img
-				src={image.src}
-				alt={image.alt}
-				loading="lazy"
-				width="1200"
-				height="800"
-				data-aos="fade-{imageDirection}"
-				data-aos-delay={label ? "200" : "150"} />
-		</picture>
-	{:else}
-		<img
-			src={image.src}
-			alt={image.alt}
-			loading="lazy"
-			width="1200"
-			height="800"
-			data-aos="fade-{imageDirection}"
-			data-aos-delay={label ? "200" : "150"} />
-	{/if}
+	<div class="project-details">
+		<dl class="project-story">
+			{#each descriptionParagraphs as paragraph, index}
+				<div class="story-part">
+					<dt>{storyLabels[index] ?? 'Detalj'}</dt>
+					<dd>{paragraph}</dd>
+				</div>
+			{/each}
+		</dl>
+
+		{#if capabilities.length}
+			<div class="project-scope">
+				<p>Systemet omfattar bland annat</p>
+				<ul>{#each capabilities as capability}<li>{capability}</li>{/each}</ul>
+			</div>
+		{/if}
+
+		<p class="project-tech-title">Teknik</p>
+		<ul class="project-tech">
+			{#each technologies as tech}<li>{tech}</li>{/each}
+		</ul>
+	</div>
 </article>
-
-<style>
-	article {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-		margin-bottom: 4rem;
-		padding: 2rem;
-		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.02);
-		transition: all 0.3s ease;
-	}
-
-	@media (min-width: 850px) {
-		article {
-			grid-template-columns: 1fr 1fr;
-			gap: 3rem;
-			padding: 3rem;
-			align-items: stretch;
-		}
-	}
-
-	article:hover {
-		background: rgba(255, 255, 255, 0.04);
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-	}
-
-	.text {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.project-label {
-		color: var(--aqua);
-		font-weight: 600;
-		font-size: 0.9rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		margin-bottom: 0.5rem;
-	}
-
-	h2 {
-		font-size: clamp(1.8rem, 4vw, 2.5rem);
-		margin-bottom: 1rem;
-		color: var(--white);
-		line-height: 1.2;
-	}
-
-	.project-tagline {
-		color: var(--aqua);
-		font-size: 1.1rem;
-		margin-bottom: 1.5rem;
-		font-weight: 500;
-	}
-
-	.blackBox {
-		background: linear-gradient(135deg, var(--dkblue) 0%, var(--plum) 100%);
-		border: 2px solid var(--aqua);
-		padding: 1.5rem;
-		border-radius: 15px;
-		margin-bottom: 1.5rem;
-		box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-		transition: all 0.3s ease;
-	}
-
-	.blackBox p {
-		color: var(--white);
-		line-height: 1.7;
-		margin-bottom: 1rem;
-		font-size: 1rem;
-	}
-
-	.blackBox p:last-child {
-		margin-bottom: 0;
-	}
-
-	h3 {
-		font-size: 1rem;
-		color: var(--aqua);
-		margin-bottom: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		font-weight: 600;
-		font-family: var(--mono);
-	}
-
-	ul {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	li {
-		color: var(--white);
-		font-size: 0.95rem;
-		font-weight: 500;
-		font-family: var(--mono);
-	}
-
-	picture {
-		display: flex;
-		align-self: stretch;
-	}
-
-	picture img,
-	article > img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border-radius: 8px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-	}
-
-	article:hover picture,
-	article:hover img {
-		transform: translateY(-4px);
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-	}
-
-	@media (max-width: 849px) {
-		article {
-			grid-template-columns: 1fr;
-		}
-
-		picture,
-		img {
-			order: 2;
-		}
-
-		.text {
-			order: 1;
-		}
-	}
-</style>

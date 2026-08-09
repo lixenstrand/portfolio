@@ -1,115 +1,118 @@
-/* ===========================================
-   BASE STYLES - Shared across all pages
-   =========================================== */
-
-/* CSS Custom Properties - Design tokens */
 :root {
-    /* Color tokens */
-    --black: #0D0D0D;
-    --dkblue: #1a1f35;
-    --plum: #2d3561;
-    --hotmag: #00d9ff;
-    --magenta: #8599dd;
-    --aqua: #00d9ff;
-    --white: #f7f8fa;
+	--canvas: oklch(0.97 0.006 235);
+	--surface: oklch(0.99 0.003 235);
+	--surface-strong: oklch(0.93 0.012 235);
+	--ink: oklch(0.22 0.025 240);
+	--ink-soft: oklch(0.4 0.025 240);
+	--steel: oklch(0.39 0.105 245);
+	--steel-dark: oklch(0.27 0.075 245);
+	--accent: oklch(0.63 0.18 40);
+	--line: oklch(0.84 0.014 235);
+	--focus: oklch(0.52 0.15 245);
+	--sans: "Source Sans 3", sans-serif;
+	--display: "Barlow Condensed", sans-serif;
+	--content-width: 1180px;
+	--z-header: 100;
+	--z-overlay: 200;
+	--z-menu: 300;
+	--z-skip-link: 400;
 
-    /* Typography tokens */
-    --font-size: 1.3rem;
-    --mono: "Oxygen mono", monospace;
-    --sans: "Oxygen", sans-serif;
-
-    /* Star system tokens */
-    --star-color-bright: rgba(255, 255, 255, 0.75);
-    --star-color-medium: rgba(255, 255, 255, 0.7);
-    --star-color-dim: rgba(255, 255, 255, 0.5);
-    --star-color-faint: rgba(255, 255, 255, 0.3);
-
-    /* Z-index scale - Centraliserad z-index management */
-    --z-stars: 0;
-    --z-content: 1;
-    --z-project-overlay: 10;
-    --z-header: 100;
-    --z-nav-overlay: 999;
-    --z-nav-menu: 1000;
-    --z-hamburger: 1001;
-    --z-skip-link: 9999;
+	/* Legacy aliases while the remaining component CSS is retired. */
+	--black: var(--canvas);
+	--dkblue: var(--surface-strong);
+	--plum: var(--surface);
+	--hotmag: var(--accent);
+	--magenta: var(--steel);
+	--aqua: var(--steel);
+	--white: var(--ink);
+	--mono: var(--sans);
 }
 
-/* Global resets */
 html {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	scroll-padding-top: 6rem;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: var(--mono);
-    font-weight: 400;
-    font-style: normal;
-    background-color: var(--black);
-    color: var(--white);
-    font-size: var(--font-size);
+	margin: 0;
+	font-family: var(--sans);
+	font-size: 1.075rem;
+	font-weight: 400;
+	line-height: 1.6;
+	background: var(--canvas);
+	color: var(--ink);
+	-webkit-font-smoothing: antialiased;
 }
 
-html, body {
-    max-width: 100%;
-    overflow-x: clip;
+html,
+body {
+	max-width: 100%;
 }
 
-h1, h2, h3 {
-    margin: 0;
+h1,
+h2,
+h3,
+h4,
+p {
+	margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
 }
 
 a {
-    color: var(--magenta);
+	color: var(--steel);
 }
 
 a:hover {
-    color: var(--hotmag);
-    text-decoration: none;
+	color: var(--steel-dark);
 }
 
-/* Accessibility - Skip to content link (WCAG 2.1) */
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 4px;
+}
+
 .skip-to-content {
-    position: fixed;
-    top: -100px;
-    left: 0;
-    background: var(--aqua);
-    color: var(--black);
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    z-index: var(--z-skip-link);
-    border-radius: 0 0 5px 0;
-    transition: top 0.3s ease;
+	position: fixed;
+	top: -5rem;
+	left: 1rem;
+	z-index: var(--z-skip-link);
+	padding: 0.75rem 1rem;
+	background: var(--ink);
+	color: var(--surface);
+	text-decoration: none;
+	transition: top 180ms ease-out;
 }
 
 .skip-to-content:focus {
-    top: 0;
-    outline: 2px solid var(--white);
-    outline-offset: 2px;
+	top: 1rem;
 }
 
-/* Accessibility - Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
+	html {
+		scroll-behavior: auto;
+	}
 
-/* Responsive breakpoints */
-/* Small mobile: max-width: 480px */
-/* Mobile: max-width: 600px */
-/* Tablet: 600px - 849px */
-/* Desktop: min-width: 850px */
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

@@ -26,42 +26,37 @@
 
 	h1 {
 		font-size: clamp(6rem, 20vw, 12rem);
-		color: var(--aqua);
+		font-family: var(--display);
+		color: var(--steel-dark);
 		margin: 0;
 		line-height: 1;
-		text-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
 	}
 
 	.message {
 		font-size: clamp(1.2rem, 3vw, 1.8rem);
-		color: var(--white);
+		color: var(--ink);
 		margin: 1rem 0;
 	}
 
 	.description {
 		font-size: 1rem;
-		color: var(--magenta);
+		color: var(--ink-soft);
 		margin-bottom: 2rem;
 	}
 
 	.back-button {
-		display: inline-block;
+		display: inline-flex;
 		padding: 1rem 2rem;
-		background: linear-gradient(135deg, var(--aqua), var(--magenta));
-		color: var(--black);
+		background: var(--steel-dark);
+		color: var(--surface);
 		font-weight: 700;
 		text-decoration: none;
-		border-radius: 50px;
-		transition: all 0.3s ease;
+		transition: background-color 180ms ease-out, transform 180ms ease-out;
 	}
 
 	.back-button:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
-	}
-
-	.back-button:focus {
-		outline: 3px solid var(--white);
-		outline-offset: 3px;
+		background: var(--accent);
+		color: var(--ink);
+		transform: translateY(-2px);
 	}
 </style>
