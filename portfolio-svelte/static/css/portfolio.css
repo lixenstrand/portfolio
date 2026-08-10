@@ -242,7 +242,7 @@ main {
 
 /* Projects */
 .projectBackground {
-	padding: clamp(5rem, 10vw, 9rem) 0;
+	padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(5rem, 10vw, 9rem);
 	background: var(--surface);
 	border-block: 1px solid var(--line);
 }
@@ -254,18 +254,21 @@ main {
 
 .projects-intro {
 	display: grid;
-	grid-template-columns: 0.8fr 1.2fr;
-	gap: 3rem;
+	grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
+	gap: clamp(2rem, 5vw, 4.5rem);
 	align-items: end;
-	margin-bottom: clamp(4rem, 8vw, 7rem);
+	margin-bottom: clamp(3.25rem, 6vw, 5rem);
+	padding-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 #projects > .projects-intro h2 {
+	max-width: 9ch;
 	margin: 0;
 	font-family: var(--display);
-	font-size: clamp(3.2rem, 7vw, 5.4rem);
+	font-size: clamp(3.2rem, 6vw, 4.6rem);
 	line-height: 0.98;
 	letter-spacing: -0.02em;
+	text-wrap: balance;
 	color: var(--ink);
 }
 
@@ -273,6 +276,8 @@ main {
 	max-width: 55ch;
 	margin: 0;
 	font-size: 1.2rem;
+	line-height: 1.55;
+	text-wrap: pretty;
 	color: var(--ink-soft);
 }
 
@@ -291,10 +296,11 @@ main {
 }
 
 .project-card.featured {
-	grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+	grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
 	grid-template-areas:
 		"heading details"
 		"visual visual";
+	gap: clamp(2.5rem, 5vw, 4.5rem);
 	align-items: start;
 }
 
@@ -345,13 +351,14 @@ main {
 	font-weight: 700;
 	line-height: 1;
 	letter-spacing: -0.02em;
+	text-wrap: balance;
 	color: var(--ink);
 	hyphens: auto;
 }
 
 .project-card.featured h3 {
-	max-width: 13ch;
-	font-size: clamp(3.2rem, 7vw, 5.2rem);
+	max-width: 15ch;
+	font-size: clamp(3.2rem, 6vw, 4.7rem);
 }
 
 .project-tagline {
@@ -385,6 +392,14 @@ main {
 	border-top: 1px solid var(--line);
 }
 
+.project-card.featured .project-impact {
+	border-top: 1px solid var(--line);
+}
+
+.project-card.featured .project-impact > div {
+	border-top: 0;
+}
+
 .project-impact dt {
 	font-family: var(--display);
 	font-size: 1.55rem;
@@ -410,6 +425,11 @@ main {
 	gap: 1rem;
 	padding: 1rem 0;
 	border-top: 1px solid var(--line);
+}
+
+.project-card.featured .story-part:first-child {
+	padding-top: 0;
+	border-top: 0;
 }
 
 .story-part dt {
