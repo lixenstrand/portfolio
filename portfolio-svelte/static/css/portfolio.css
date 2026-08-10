@@ -253,16 +253,12 @@ main {
 }
 
 .projects-intro {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
-	gap: clamp(2rem, 5vw, 4.5rem);
-	align-items: end;
-	margin-bottom: clamp(3.25rem, 6vw, 5rem);
-	padding-bottom: clamp(1rem, 2vw, 1.5rem);
+	max-width: 48rem;
+	margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
 }
 
 #projects > .projects-intro h2 {
-	max-width: 9ch;
+	max-width: none;
 	margin: 0;
 	font-family: var(--display);
 	font-size: clamp(3.2rem, 6vw, 4.6rem);
@@ -274,7 +270,7 @@ main {
 
 .projects-intro p {
 	max-width: 55ch;
-	margin: 0;
+	margin: 1.5rem 0 0;
 	font-size: 1.2rem;
 	line-height: 1.55;
 	text-wrap: pretty;
