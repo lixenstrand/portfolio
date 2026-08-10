@@ -39,7 +39,7 @@
 				'Appen körs på min Unraid-server. Data säkerhetskopieras och en nattlig kontroll stämmer av aktuell och tolv tidigare perioder.'
 			],
 			storyLabels: ['Lösningen', 'I drift'],
-			metrics: [{ value: '13 perioder', label: 'kontrolleras varje natt' }],
+			metrics: [{ value: 'Total kontroll och överblick', label: 'över privatekonomin' }],
 			technologies: ['SvelteKit', 'FastAPI', 'Python', 'SQLite', 'Docker', 'Toshl API'],
 			images: [{ src: '/images/family-finance-dashboard.png', srcWebp: '/images/family-finance-dashboard.webp', alt: 'Familjeekonomins mobilvy med periodbudget och ekonomisk uppföljning', caption: 'Den faktiska mobilvyn – privata belopp är medvetet suddade', fit: 'contain' as const, portrait: true }],
 			imageDirection: 'right' as const,
