@@ -96,17 +96,18 @@
 	<nav class="site-nav" aria-label="Huvudnavigation">
 		<a class="brand" href="/" onclick={() => closeMenu(false)}>
 			<span class="brand-name">Magnus Lixenstrand</span>
-			<span class="brand-role">Automation & systemintegration</span>
+			<span class="brand-role">Systemutvecklare, Jönköping</span>
 		</a>
 
 		<div bind:this={menuElement} class="nav-menu" class:active={hamburgerOpen} id="primary-navigation">
 			<ul>
 				<li><a href="/#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>Projekt</a></li>
 				<li><a href="/about" class:current={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} onclick={() => closeMenu(false)}>Om mig</a></li>
-				<li><a href="https://www.linkedin.com/in/magnus-lixenstrand/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn, öppnas i ny flik" onclick={() => closeMenu(false)}>LinkedIn</a></li>
-				<li><a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>Öppna CV</a></li>
+				<li><a href="#kontakt" onclick={() => closeMenu(false)}>Kontakt</a></li>
 			</ul>
 		</div>
+
+		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="CV, PDF i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>CV</a>
 
 		<button
 			bind:this={hamburgerButton}
@@ -124,6 +125,6 @@
 	</nav>
 
 	{#if hamburgerOpen}
-		<button class="nav-overlay" tabindex="-1" onclick={() => closeMenu()} aria-label="Stäng meny"></button>
+		<button class="nav-overlay" tabindex="-1" aria-hidden="true" onclick={() => closeMenu()}></button>
 	{/if}
 </header>

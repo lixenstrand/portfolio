@@ -1,31 +1,50 @@
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 600;
+	font-display: block;
+	src: url("/fonts/BarlowCondensed-600-normal-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-display: block;
+	src: url("/fonts/BarlowCondensed-700-normal-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Source Sans 3";
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: optional;
+	src: url("/fonts/SourceSans3-variable-latin.woff2") format("woff2");
+}
+
+/* Same world as the CV: one blue ink, steel for development, clay for sales. */
 :root {
 	--canvas: oklch(0.97 0.006 235);
 	--surface: oklch(0.99 0.003 235);
 	--surface-strong: oklch(0.93 0.012 235);
 	--ink: oklch(0.22 0.025 240);
 	--ink-soft: oklch(0.4 0.025 240);
-	--steel: oklch(0.39 0.105 245);
+	--ink-quiet: oklch(0.5 0.018 240);
+	--steel: oklch(0.42 0.085 245);
 	--steel-dark: oklch(0.27 0.075 245);
-	--accent: oklch(0.63 0.18 40);
+	--clay: oklch(0.6 0.1 45);
 	--line: oklch(0.84 0.014 235);
 	--focus: oklch(0.52 0.15 245);
+	--on-dark: oklch(0.97 0.006 235);
+	--on-dark-soft: oklch(0.83 0.02 240);
 	--sans: "Source Sans 3", sans-serif;
 	--display: "Barlow Condensed", sans-serif;
 	--content-width: 1180px;
+	--gutter: max(clamp(1.25rem, 4vw, 2rem), env(safe-area-inset-left), env(safe-area-inset-right));
 	--z-header: 100;
 	--z-overlay: 200;
 	--z-menu: 300;
 	--z-skip-link: 400;
-
-	/* Legacy aliases while the remaining component CSS is retired. */
-	--black: var(--canvas);
-	--dkblue: var(--surface-strong);
-	--plum: var(--surface);
-	--hotmag: var(--accent);
-	--magenta: var(--steel);
-	--aqua: var(--steel);
-	--white: var(--ink);
-	--mono: var(--sans);
 }
 
 html {
@@ -42,6 +61,9 @@ html {
 
 body {
 	margin: 0;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
 	font-family: var(--sans);
 	font-size: 1.075rem;
 	font-weight: 400;
@@ -51,9 +73,13 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-html,
-body {
-	max-width: 100%;
+main {
+	flex: 1 0 auto;
+}
+
+::selection {
+	background: oklch(0.86 0.045 245);
+	color: var(--ink);
 }
 
 h1,
@@ -67,6 +93,8 @@ p {
 h1,
 h2,
 h3 {
+	hyphens: manual;
+	overflow-wrap: break-word;
 	text-wrap: balance;
 }
 
@@ -76,6 +104,8 @@ p {
 
 a {
 	color: var(--steel);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
 }
 
 a:hover {
@@ -87,14 +117,15 @@ a:hover {
 	outline-offset: 4px;
 }
 
-.skip-to-content {
+.skip-to-content,
+.skip-to-content:hover {
 	position: fixed;
 	top: -5rem;
 	left: 1rem;
 	z-index: var(--z-skip-link);
 	padding: 0.75rem 1rem;
 	background: var(--ink);
-	color: var(--surface);
+	color: var(--on-dark);
 	text-decoration: none;
 	transition: top 180ms ease-out;
 }
