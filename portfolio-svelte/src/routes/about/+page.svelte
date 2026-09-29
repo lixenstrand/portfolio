@@ -22,8 +22,8 @@
 	<p class="about-lede">Jag trivs bäst nära verksamheten: där en konkret frustration kan bli ett fungerande system som människor faktiskt använder. I dag utvecklar jag Nordmets interna ERP från behov och datamodell till driftsatt lösning.</p>
 	<div class="cta-group">
 		<a href="/#nordmet-erp" class="cta-primary">Se ERP-caset</a>
-		<a href="/cv/magnus_lixenstrand_cv_2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="cta-secondary">Öppna CV</a>
-		<a href="/cv/magnus_lixenstrand_cv_2026_en.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open CV in English in a new tab" class="cta-secondary" lang="en">CV in English</a>
+		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="cta-secondary">Öppna CV</a>
+		<a href="/cv/magnus_lixenstrand_cv_2026_en.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open CV in English in a new tab" class="cta-secondary" lang="en">CV in English</a>
 	</div>
 </section>
 

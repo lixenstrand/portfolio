@@ -104,7 +104,7 @@
 				<li><a href="/#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>Projekt</a></li>
 				<li><a href="/about" class:current={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} onclick={() => closeMenu(false)}>Om mig</a></li>
 				<li><a href="https://www.linkedin.com/in/magnus-lixenstrand/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn, öppnas i ny flik" onclick={() => closeMenu(false)}>LinkedIn</a></li>
-				<li><a href="/cv/magnus_lixenstrand_cv_2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>Öppna CV</a></li>
+				<li><a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>Öppna CV</a></li>
 			</ul>
 		</div>
 

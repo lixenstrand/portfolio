@@ -97,7 +97,7 @@
 			<p class="hero-proof"><strong>20+ timmar i veckan</strong> sparar ERP-systemet jag bygger på Nordmet åt teamet.</p>
 			<div class="cta-group">
 				<a href="#nordmet-erp" class="cta-primary">Se ERP-caset</a>
-				<a href="/cv/magnus_lixenstrand_cv_2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="cta-secondary">Öppna CV</a>
+				<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="cta-secondary">Öppna CV</a>
 			</div>
 			<div class="tech-stack" aria-label="Teknik jag arbetar med">
 				{#each mainTechStack as tech}<TechBadge {tech} />{/each}
