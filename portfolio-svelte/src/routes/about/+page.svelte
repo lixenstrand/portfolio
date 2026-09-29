@@ -23,6 +23,7 @@
 	<div class="cta-group">
 		<a href="/#nordmet-erp" class="cta-primary">Se ERP-caset</a>
 		<a href="/cv/magnus_lixenstrand_cv_2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV i ny flik" class="cta-secondary">Öppna CV</a>
+		<a href="/cv/magnus_lixenstrand_cv_2026_en.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open CV in English in a new tab" class="cta-secondary" lang="en">CV in English</a>
 	</div>
 </section>
 
@@ -51,7 +52,7 @@
 
 			<section>
 				<h2>Bortom jobbet</h2>
-				<p>Hemma fortsätter jag gärna experimentera. Mitt Home Assistant-system omfattar fler än 15 enheter och 50 automationer, allt från temperaturstyrning till belysning och vardagsrutiner.</p>
+				<p>Hemma fortsätter jag gärna experimentera. Mitt Home Assistant-system omfattar 232 enheter och 161 automationer, allt från temperaturstyrning till belysning och vardagsrutiner, och familjen styr det från en egen dashboard.</p>
 				<p>Jag bor i Jönköping, reser gärna med min sambo och springer för att hålla huvudet klart. Nu söker jag en roll där nyfikenhet, affärsförståelse och genomförandekraft får arbeta tillsammans.</p>
 			</section>
 

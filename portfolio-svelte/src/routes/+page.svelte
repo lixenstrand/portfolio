@@ -49,15 +49,15 @@
 			id: 'homeassistant',
 			label: 'Smart hem · Eget system',
 			title: 'Smarta hem-automationer med Home Assistant',
-			tagline: 'Ett lokalt system för fler än 15 enheter och 50 automationer',
+			tagline: 'Ett lokalt system med 232 enheter och 161 automationer i 16 rum',
 			descriptionParagraphs: [
-				'Jag samlade enheterna i Home Assistant och byggde integrationer med MQTT, YAML, Python och REST-API:er. Allt körs lokalt och går att styra och felsöka från en plats.',
-				'Sensorer reglerar nu värmen utifrån temperaturen i varje rum, belysningen följer närvaro och vardagshändelser hanteras automatiskt. Första året minskade elkostnaden med cirka 30 procent.'
+				'Jag samlade enheterna i Home Assistant via Zigbee, Matter/Thread och MQTT och byggde integrationer med YAML, Python och REST-API:er. Allt körs lokalt och går att styra och felsöka från en plats.',
+				'Sensorer reglerar värmen utifrån temperaturen i varje rum och belysningen följer närvaro. Familjen styr hemmet från Hemma, en egen dashboard i SvelteKit och FastAPI med roller för familj och gäster, pushnotiser och en AI-assistent som bara får föreslå godkända åtgärder.'
 			],
-			storyLabels: ['Lösningen', 'Resultat'],
-			metrics: [{ value: '≈30 %', label: 'lägre elkostnad första året' }],
-			technologies: ['Home Assistant', 'YAML', 'Python', 'n8n', 'MQTT', 'REST-API:er'],
-			images: [{ src: '/images/home-dashboard-live.png', srcWebp: '/images/home-dashboard-live.webp', alt: 'Magnus smarta hem-dashboard med klimat, tvättstatus, robotdammsugare, diskmaskin och energiläge', caption: 'Den faktiska dashboarden – lokalt körd och kopplad till Home Assistant', fit: 'contain' as const }],
+			storyLabels: ['Lösningen', 'I vardagen'],
+			metrics: [{ value: '161', label: 'automationer i 16 rum' }],
+			technologies: ['Home Assistant', 'SvelteKit', 'FastAPI', 'Python', 'MQTT', 'Zigbee', 'n8n'],
+			images: [{ src: '/images/home-dashboard-live.png', srcWebp: '/images/home-dashboard-live.webp', alt: 'Magnus smarta hem-dashboard med klimat, tvättstatus, robotdammsugare, diskmaskin och energiläge', caption: 'Hemma, den egna dashboarden – lokalt körd och kopplad till Home Assistant', fit: 'contain' as const }],
 			imageDirection: 'left' as const,
 			compact: true
 		}
