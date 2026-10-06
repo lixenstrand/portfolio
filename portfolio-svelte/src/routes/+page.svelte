@@ -2,21 +2,145 @@
 	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=2';
 	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=2';
 
+	// Steps with a shot switch the screenshot; the rest point to their story row
 	const flow = [
-		{ step: 'Kund och CRM' },
-		{ step: 'Material\u00ADförfrågan', result: '2 h → 15 min', detail: 'per förfrågan till leverantörer' },
-		{ step: 'Offert', result: '30 → 5 min', detail: 'per offert, 20–30 offerter i veckan' },
-		{ step: 'Order och inköp', detail: 'förs över till Fortnox utan dubbelregistrering' },
-		{ step: 'Lager och certifikat', result: '500+', detail: 'sökbara certifikat' },
-		{ step: 'Transport', detail: 'frakt bokas direkt från ordern' },
-		{ step: 'Bokföring', detail: 'i Fortnox' }
+		{ step: 'Kund och CRM', shot: 'erp-kunder', alt: 'Kundregistret i affärssystemet: kunder med land, ansvarig säljare, senaste aktivitet, omsättning, täckningsbidrag och aktiva offerter', caption: 'Kundregistret visar omsättning, täckningsbidrag och aktiva offerter per kund.' },
+		{ step: 'Material­förfrågan', shot: 'erp-materialforfragan', alt: 'Materialförfrågan: sökträffar bland leverantörer och historiska order till vänster, tre materialrader med dimension, stålkvalitet och vikt i mitten och vald leverantör till höger', caption: 'En sökning går samtidigt genom leverantörer, historiska order, offerter och produkter. Förfrågan till de valda leverantörerna skapas i samma vy.' },
+		{ step: 'Offert', shot: 'erp-offert', alt: 'Offert med offertrader, inpris, utpris och täckningsbidrag per rad, och en fraktsändning med pris från Unifaun', caption: 'Offerten räknar täckningsbidrag per rad och lägger frakten som en egen sändning med transportörens pris.' },
+		{ step: 'Order och inköp', shot: 'erp-order', alt: 'Orderöversikt som tavla med kolumner från inköp till produktion, där varje order visar inköpsstatus, frakt och kommentarer', caption: 'Orderöversikten följer varje order från inköp till leverans och flaggar det som håller på att bli försenat.' },
+		{ step: 'Lager och certifikat', shot: 'erp-lager', alt: 'Chargespårning för ett smältnummer: mottagning från leverantör och plockning på fem order', caption: 'Chargespårningen följer ett smältnummer från inleverans till varje order där materialet plockats. Det avgör vilket certifikat kunden ska ha.' },
+		{ step: 'Transport', shot: 'erp-transport', alt: 'En bokad transport i fraktplaneringen: leveransdatum, vikt och ordervärde överst, kund, leverantör och fraktben med transportör, hämtning, lossning och kostnad, samt inleveranser, artiklar och kommentarer', caption: 'En bokad transport samlar kund, leverantör, fraktben, inleveranser och kommentarer på ett ställe, med listan över alla bokningar bredvid.' },
+		{ step: 'Bokföring', row: 'integrationer' }
 	];
+	const shots = flow.filter((f) => f.shot).length;
+	let active = $state(1);
+	let prev = $state(1);
+	let playing = $state(true);
+	let reduced = $state(false);
+	let offscreen = $state(true);
+	let seen = $state(false); // load all shots once the section is near
+	let flowEl: HTMLOListElement;
+	let showEl: HTMLDivElement;
+	const shown = $derived(flow[active]);
+
+	// The truck drives on its own: slowly to the next step, where the shot changes on arrival.
+	// A click takes over: the truck goes straight there and the tour stops.
+	let at = $state(1);
+	let truck = $state({ x: 0, y: 0, back: false, driving: false, fast: true, gone: false, jump: false });
+
+	function show(i: number) {
+		if (i === active) return;
+		prev = active;
+		active = i;
+	}
+
+	function drive(i: number, fast: boolean) {
+		if (i === at) return;
+		truck.back = i < at;
+		truck.fast = fast;
+		truck.driving = !reduced;
+		at = i;
+	}
+
+	function pick(i: number) {
+		playing = false;
+		truck.gone = false;
+		drive(i, true);
+		show(i);
+	}
+
+	function toggle() {
+		playing = !playing;
+		if (playing) showEl.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+	}
+	function arrived(e: TransitionEvent) {
+		if (e.propertyName !== 'translate') return;
+		truck.driving = false;
+		show(at);
+	}
+
+	function park() {
+		const li = flowEl?.children[at] as HTMLElement | undefined;
+		if (!li) return;
+		const node = getComputedStyle(li, '::before');
+		truck.x = li.offsetLeft + parseFloat(node.left) + parseFloat(node.width) / 2;
+		truck.y = li.offsetTop + parseFloat(node.top) + parseFloat(node.height) / 2;
+	}
+
+	$effect(park);
+
+	$effect(() => {
+		if (!playing || offscreen || reduced || truck.driving || at !== active) return;
+		const t = setTimeout(() => {
+			if (at < shots - 1) return drive(at + 1, false);
+			// End of the road: fade out and start over from the first step
+			truck.gone = true;
+			setTimeout(() => {
+				truck.jump = true;
+				truck.back = false;
+				at = 0;
+				show(0);
+				requestAnimationFrame(() => requestAnimationFrame(() => (truck.jump = truck.gone = false)));
+			}, 450);
+		}, 1600);
+		return () => clearTimeout(t);
+	});
+
+	$effect(() => {
+		reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduced) playing = false;
+		const ro = new ResizeObserver(park);
+		ro.observe(flowEl);
+		const io = new IntersectionObserver(([e]) => {
+			offscreen = !e.isIntersecting;
+			seen ||= e.isIntersecting;
+		}, { threshold: 0.3 });
+		io.observe(showEl);
+		return () => (ro.disconnect(), io.disconnect());
+	});
+
+	// Hemma rolls through its views on its own until a view is picked
+	const home = [
+		{ name: 'Hem', shot: 'hemma-hem', alt: 'Startsidan i Hemma på en surfplatta: torken och disken är klara, inne- och utetemperatur och scener som Morgon, Film och Godnatt' },
+		{ name: 'Rum', shot: 'hemma-rum', alt: 'Rummen i Hemma: vardagsrummet öppnas, en lampa släcks och en annan dimmas från 36 till 10 procent' },
+		{ name: 'Klimat', shot: 'hemma-klimat', alt: 'Klimatet i Hemma: inne- och utetemperatur, luftfuktighet, värmepumpen och varmvatten med kurvor' }
+	];
+	let homeNow = $state(0);
+	let homePrev = $state(0);
+	let homeAuto = $state(true);
+	let homeOff = $state(true);
+	let homeEl: HTMLElement;
+
+	function homeShow(i: number) {
+		if (i === homeNow) return;
+		homePrev = homeNow;
+		homeNow = i;
+		clips[i].currentTime = 0;
+	}
+
+	// Each view is a short clip; the next one wipes in when it ends
+	const clips: HTMLVideoElement[] = [];
+
+	$effect(() => {
+		clips.forEach((v, i) => (i === homeNow && !homeOff && !reduced ? v.play().catch(() => {}) : v.pause()));
+	});
+
+	function clipEnded(i: number) {
+		if (homeAuto) homeShow((i + 1) % home.length);
+		else clips[i].play();
+	}
+
+	$effect(() => {
+		const io = new IntersectionObserver(([e]) => (homeOff = !e.isIntersecting), { threshold: 0.3 });
+		io.observe(homeEl);
+		return () => io.disconnect();
+	});
 
 	const story = [
 		{ label: 'Utgångsläge', text: 'Kunder, material, offerter, order, certifikat och transporter låg i separata system och Excel-filer. Samma uppgifter registrerades flera gånger och ett ärende gick inte att följa genom verksamheten.' },
 		{ label: 'Början', text: 'Som säljare automatiserade jag först offertflödet, från Excel och VBA till ett webbflöde mot Fortnox. Det blev grunden till dagens system.' },
 		{ label: 'Min roll', text: 'Produktägare, ensam utvecklare och projektledare för införandet: kravställning, datamodell, utveckling, test, utbildning och bytet från det gamla systemet.' },
-		{ label: 'Integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
+		{ label: 'Integrationer', id: 'integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
 		{ label: 'AI-assistent', text: 'Svarar kollegorna om order, lager, material och rutiner, och kan efter bekräftelse lägga upp kunder och göra om förfrågningar till offerter.' },
 		{ label: 'Teknik', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL och Docker.' }
 	];
@@ -88,34 +212,68 @@
 			<p>Nordic Metal Trade säljer stål och metall till industrikunder i Europa. Affärssystemet är skräddarsytt efter hur företaget arbetar, används varje dag av cirka tio kollegor och sparar teamet över 20&nbsp;timmar i veckan.</p>
 		</header>
 
-		<ol class="flow" aria-label="Flödet i affärssystemet">
-			{#each flow as item}
-				<li>
-					<span class="flow-step">{item.step}</span>
-					{#if item.result}<strong class="flow-result">{item.result}</strong>{/if}
-					{#if item.detail}<span class="flow-detail">{item.detail}</span>{/if}
-				</li>
-			{/each}
-		</ol>
+		<div class="erp-show" role="group" aria-label="Flödet med skärmbilder" bind:this={showEl}>
+			<div class="flow-road">
+				<ol class="flow" aria-label="Flödet i affärssystemet" bind:this={flowEl}>
+					{#each flow as item, i}
+						<li class:here={at === i && !truck.gone}>
+							{#if item.shot}
+								<button type="button" class="flow-step" aria-pressed={active === i} aria-controls="erp-skarmbild" onclick={() => pick(i)}>{item.step}</button>
+							{:else}
+								<a class="flow-step" href="#{item.row}">{item.step}</a>
+							{/if}
+						</li>
+					{/each}
+				</ol>
+				<svg class="truck" class:back={truck.back} class:driving={truck.driving} class:fast={truck.fast} class:gone={truck.gone} class:jump={truck.jump} style="--x: {truck.x}px; --y: {truck.y}px" viewBox="0 0 120 40" aria-hidden="true" ontransitionend={arrived}>
+					<g class="truck-load">
+						<rect class="plate" x="7" y="19.5" width="38" height="5.5" rx="0.8" />
+						<rect class="plate light" x="9.5" y="15.5" width="33" height="4" rx="0.8" />
+						<path class="strap" d="M17 15.5v9.5M34 15.5v9.5" />
+						<circle class="coil" cx="61" cy="17.2" r="7.8" />
+						<circle class="coil-ring" cx="61" cy="17.2" r="5.4" />
+						<circle class="coil-eye" cx="61" cy="17.2" r="2.7" />
+					</g>
+					<path class="truck-chassis" d="M3 25h78v3.4H8.5L3 27.2z" />
+					<rect class="truck-chassis" x="78.5" y="12" width="2.4" height="14" rx="0.6" />
+					<path class="truck-cab" d="M83 29.5V10.5c0-3 2.2-5.5 5.3-5.5h13.2c1.6 0 3.1.8 4 2.1l7.6 11c.6.9.9 1.9.9 3v8.4z" />
+					<path class="truck-glass" d="M103.4 8.2h.9c.9 0 1.7.4 2.2 1.2l5.9 8.6h-9z" />
+					<path class="truck-glass side" d="M93 8.2h7.6v9.8H93z" />
+					<path class="truck-trim" d="M83 23.6h32" />
+					<rect class="truck-light" x="113.2" y="21" width="2.6" height="1.6" rx="0.8" />
+					<g transform="translate(15 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
+					<g transform="translate(25 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
+					<g transform="translate(90 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
+					<g transform="translate(108 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
+				</svg>
+			</div>
+
+			<figure class="shot" id="erp-skarmbild">
+				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label="Skärmbild av {shown.step.replace('\u00AD', '').toLowerCase()}, öppnas i full storlek i ny flik">
+					<div class="shot-frame">
+						{#each flow as item, i}
+							{#if item.shot}
+								<img class:is-active={i === active} class:is-prev={i === prev && i !== active} src="/images/{item.shot}-1200.webp" srcset="/images/{item.shot}-1200.webp 1200w, /images/{item.shot}.webp 2400w" sizes="(min-width: 1212px) 1180px, calc(100vw - 2rem)" alt={i === active ? item.alt : ''} width="2400" height="1500" loading={seen ? 'eager' : 'lazy'}>
+							{/if}
+						{/each}
+					</div>
+				</a>
+				<figcaption aria-live={playing ? 'off' : 'polite'}><strong>{shown.step}.</strong> {shown.caption}</figcaption>
+			</figure>
+			<p class="shot-note">
+				Bilderna kommer från testmiljön och all data på dem är påhittad. Systemet nås bara via företagets VPN, därför visas bilder i stället för en demo.
+				<button type="button" class="shot-toggle" onclick={toggle}>{playing ? 'Pausa bildspelet' : 'Starta bildspelet'}</button>
+			</p>
+		</div>
 
 		<dl class="story">
 			{#each story as part}
-				<div>
+				<div id={part.id}>
 					<dt>{part.label}</dt>
 					<dd>{part.text}</dd>
 				</div>
 			{/each}
 		</dl>
-
-		<figure class="shot">
-			<a href="/images/erp-materialforfragan.png" target="_blank" rel="noopener" aria-label="Skärmbild av materialförfrågan, öppnas i full storlek i ny flik">
-				<picture>
-					<source type="image/webp" srcset="/images/erp-materialforfragan-1400.webp 1400w, /images/erp-materialforfragan.webp 2660w" sizes="(min-width: 1212px) 1180px, calc(100vw - 2rem)">
-					<img src="/images/erp-materialforfragan.png" alt="Materialförfrågan i affärssystemet: sökfält för leverantörer, produkter och ordernummer bredvid en tabell med produkttyp, dimension, stålkvalitet, antal och vikt" width="2660" height="900" loading="lazy">
-				</picture>
-			</a>
-			<figcaption>Materialförfrågan: en sökning går samtidigt genom leverantörer, historiska order, offerter och produkter. Systemet innehåller företagsdata och nås bara via företagets VPN, därför visas bilder i stället för en demo.</figcaption>
-		</figure>
 	</article>
 
 	<section class="side" aria-labelledby="egna-rubrik">
@@ -135,14 +293,22 @@
 					<p>En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning.</p>
 				</article>
 			</div>
-			<figure class="shot">
-				<a href="/images/home-dashboard-live.png" target="_blank" rel="noopener" aria-label="Skärmbild av Hemma, öppnas i full storlek i ny flik">
-					<picture>
-						<source type="image/webp" srcset="/images/home-dashboard-live-800.webp 800w, /images/home-dashboard-live.webp 1440w" sizes="(min-width: 821px) 36rem, calc(100vw - 2rem)">
-						<img src="/images/home-dashboard-live.png" alt="Hemma, den egna dashboarden, med inomhus- och utomhustemperatur, tvättstatus, robotdammsugare, diskmaskin och elpris" width="1440" height="1050" loading="lazy">
-					</picture>
+			<figure class="shot" bind:this={homeEl}>
+				<a href="/images/{home[homeNow].shot}.webp" target="_blank" rel="noopener" aria-label="Skärmbild av Hemma, {home[homeNow].name.toLowerCase()}, öppnas i full storlek i ny flik">
+					<div class="shot-frame">
+						{#each home as item, i}
+							<video class:is-active={i === homeNow} class:is-prev={i === homePrev && i !== homeNow} bind:this={clips[i]} src="/images/{item.shot}.mp4" poster="/images/{item.shot}-poster.webp" aria-label={i === homeNow ? item.alt : undefined} aria-hidden={i !== homeNow} width="1290" height="900" muted playsinline preload={homeOff ? 'none' : 'auto'} onended={() => clipEnded(i)}></video>
+						{/each}
+					</div>
 				</a>
-				<figcaption>Hemma körs lokalt och är kopplad till Home Assistant.</figcaption>
+				<figcaption>
+					<span class="home-steps">
+						{#each home as item, i}
+							<button type="button" class="flow-step" aria-pressed={i === homeNow} onclick={() => ((homeAuto = false), homeShow(i))}>{item.name}</button>
+						{/each}
+					</span>
+					Hemma på en surfplatta. Den körs lokalt och är kopplad till Home Assistant.
+				</figcaption>
 			</figure>
 		</div>
 	</section>
