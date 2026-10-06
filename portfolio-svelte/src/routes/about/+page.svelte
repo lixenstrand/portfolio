@@ -1,6 +1,6 @@
 <script lang="ts">
-	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=2';
-	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=2';
+	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=3';
+	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=3';
 
 	// Same roles and track lines as the CV: steel = development, clay = sales.
 	const career = [

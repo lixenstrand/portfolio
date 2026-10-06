@@ -3,7 +3,7 @@ import type { Handle } from '@sveltejs/kit';
 export const handle: Handle = async ({ event, resolve }) => {
 	// The old CV exposed a street address; send old links to the current CV.
 	if (event.url.pathname === '/cv/magnus_lixenstrand_cv.pdf') {
-		return new Response(null, { status: 301, headers: { location: '/cv/magnus_lixenstrand_cv_2026.pdf?v=2' } });
+		return new Response(null, { status: 301, headers: { location: '/cv/magnus_lixenstrand_cv_2026.pdf?v=3' } });
 	}
 
 	const response = await resolve(event);

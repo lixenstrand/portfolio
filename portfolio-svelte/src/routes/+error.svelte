@@ -16,6 +16,6 @@
 	<div class="cta-group">
 		<a href="/" class="cta-primary">Till startsidan</a>
 		<a href="/#affarssystemet" class="cta-secondary">Se affärssystemet</a>
-		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV (PDF) i ny flik" class="cta-secondary">Öppna CV (PDF)</a>
+		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=3" target="_blank" rel="noopener noreferrer" aria-label="Öppna CV (PDF) i ny flik" class="cta-secondary">Öppna CV (PDF)</a>
 	</div>
 </section>
