@@ -107,7 +107,7 @@
 			</ul>
 		</div>
 
-		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=2" target="_blank" rel="noopener noreferrer" aria-label="CV, PDF i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>CV</a>
+		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=3" target="_blank" rel="noopener noreferrer" aria-label="CV, PDF i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>CV</a>
 
 		<button
 			bind:this={hamburgerButton}
