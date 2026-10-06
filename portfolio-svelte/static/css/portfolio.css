@@ -289,32 +289,37 @@
 
 .flow-step {
 	display: block;
+	padding: 0;
+	border: 0;
+	background: none;
 	font-family: var(--display);
 	font-size: 1.35rem;
 	font-weight: 600;
 	line-height: 1.1;
-	color: var(--ink);
-}
-
-.flow-result {
-	display: block;
-	margin-top: 0.35rem;
-	font-family: var(--display);
-	font-size: 1.6rem;
-	font-weight: 700;
-	line-height: 1;
-	color: var(--steel-dark);
-	white-space: nowrap;
-}
-
-.flow-detail {
-	display: block;
-	margin-top: 0.3rem;
-	max-width: 32ch;
-	font-size: 0.95rem;
-	line-height: 1.4;
+	text-align: start;
 	color: var(--ink-soft);
+	text-decoration: none;
+	text-underline-offset: 0.2em;
+	cursor: pointer;
 }
+
+.flow-step:hover {
+	color: var(--ink);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+}
+
+.flow-step[aria-pressed="true"] {
+	color: var(--steel-dark);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+}
+
+/* The truck takes the selected step's node */
+.flow li::before {
+	transition: scale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 
 @media (min-width: 1100px) {
 	.flow {
@@ -384,7 +389,8 @@
 	cursor: zoom-in;
 }
 
-.shot img {
+.shot img,
+.shot video {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -396,6 +402,26 @@
 	font-size: 0.925rem;
 	line-height: 1.5;
 	color: var(--ink-soft);
+}
+
+.shot figcaption strong {
+	color: var(--ink);
+}
+
+.shot-note {
+	max-width: 75ch;
+	margin: 0.35rem 0 clamp(2.5rem, 5vw, 3.5rem);
+	font-size: 0.85rem;
+	line-height: 1.5;
+	color: var(--ink-quiet);
+}
+
+.story > div:target {
+	scroll-margin-top: 6rem;
+}
+
+.story > div:target dt {
+	color: var(--steel);
 }
 
 /* Own projects: short, like the CV */
@@ -908,4 +934,214 @@
 	.site-header {
 		position: static;
 	}
+}
+
+/* A steel truck drives along the flow to the step on screen */
+.flow-road {
+	position: relative;
+}
+
+/* A modern flatbed semi with a steel coil and plate bundles */
+.truck {
+	--drive: cubic-bezier(0.45, 0, 0.25, 1);
+	--w: 8.25rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: var(--w);
+	height: calc(var(--w) / 3);
+	margin: calc(var(--w) / -3 * 0.885 - 1px) 0 0 calc(var(--w) / -2);
+	translate: var(--x) var(--y);
+	transition: translate 4.2s var(--drive), scale 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out;
+	pointer-events: none;
+}
+
+.truck.fast {
+	transition-duration: 0.9s, 0.35s, 0.4s;
+}
+
+.truck.jump {
+	transition: none;
+}
+
+.truck.gone {
+	opacity: 0;
+}
+
+.truck.back {
+	scale: -1 1;
+}
+
+.truck-chassis {
+	fill: var(--ink);
+}
+
+.truck .plate {
+	fill: color-mix(in oklch, var(--steel) 70%, var(--ink-quiet));
+}
+
+.truck .plate.light {
+	fill: color-mix(in oklch, var(--steel) 45%, var(--surface-strong));
+}
+
+.truck .strap {
+	stroke: var(--clay);
+	stroke-width: 1.1;
+}
+
+.truck .coil {
+	fill: color-mix(in oklch, var(--steel) 60%, var(--ink-quiet));
+}
+
+.truck .coil-ring {
+	fill: none;
+	stroke: color-mix(in oklch, var(--steel) 35%, var(--surface));
+	stroke-width: 0.8;
+}
+
+.truck .coil-eye {
+	fill: var(--canvas);
+}
+
+.truck-cab {
+	fill: var(--steel);
+}
+
+.truck-glass {
+	fill: color-mix(in oklch, var(--steel-dark) 75%, var(--surface));
+}
+
+.truck-glass.side {
+	opacity: 0.85;
+}
+
+.truck-trim {
+	stroke: var(--steel-dark);
+	stroke-width: 1.2;
+}
+
+.truck-light {
+	fill: var(--clay);
+}
+
+.truck-wheel {
+	transform-box: fill-box;
+	transform-origin: center;
+}
+
+.truck-wheel circle {
+	fill: var(--ink);
+}
+
+.truck-wheel .rim {
+	fill: color-mix(in oklch, var(--ink-quiet) 60%, var(--surface));
+}
+
+.truck-wheel path {
+	stroke: var(--ink);
+	stroke-width: 0.7;
+}
+
+.truck.driving .truck-wheel {
+	animation: truck-roll 0.9s linear infinite;
+}
+
+.truck.driving.fast .truck-wheel {
+	animation-duration: 0.3s;
+}
+
+.truck.driving .truck-load {
+	animation: truck-rattle 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes truck-roll {
+	to {
+		rotate: 1turn;
+	}
+}
+
+@keyframes truck-rattle {
+	to {
+		translate: 0 -0.35px;
+	}
+}
+
+/* The truck takes the node it stands on */
+.flow li.here::before {
+	scale: 1 0.17;
+}
+
+/* Vertical road below desktop: the truck turns and drives downwards */
+@media (max-width: 1099px) {
+	.truck {
+		--w: 4.5rem;
+		/* Wheels on the line: shift the turned truck sideways by their offset from its centre */
+		margin: calc(var(--w) / -6) 0 0 calc(var(--w) / -2 + var(--w) / 3 * 0.385 + 1px);
+		rotate: 90deg;
+	}
+
+}
+
+/* The next screenshot wipes in behind the truck */
+.shot-frame {
+	display: grid;
+}
+
+.shot-frame > * {
+	grid-area: 1 / 1;
+	clip-path: inset(0 100% 0 0);
+}
+
+.shot-frame > *.is-prev {
+	z-index: 1;
+	clip-path: inset(0);
+}
+
+.shot-frame > *.is-active {
+	z-index: 2;
+	clip-path: inset(0);
+	transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.shot-toggle {
+	margin-left: 0.35rem;
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+	color: var(--steel);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+	cursor: pointer;
+}
+
+.shot-toggle:hover {
+	color: var(--steel-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.truck,
+	.shot-frame > *.is-active {
+		transition: none;
+	}
+
+	.truck.driving .truck-wheel,
+	.truck.driving .truck-load {
+		animation: none;
+	}
+}
+
+.erp-show {
+	scroll-margin-top: 6rem;
+}
+
+.home-steps {
+	display: flex;
+	gap: 1.25rem;
+	margin-bottom: 0.35rem;
+}
+
+.home-steps .flow-step {
+	font-size: 1.1rem;
 }
