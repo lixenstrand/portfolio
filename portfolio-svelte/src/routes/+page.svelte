@@ -17,6 +17,7 @@
 	let prev = $state(1);
 	let playing = $state(true);
 	let reduced = $state(false);
+	let bare = $state(false); // phones: no map or truck, just the rotating shot
 	let offscreen = $state(true);
 	let seen = $state(false); // load all shots once the section is near
 	let flowEl: HTMLOListElement;
@@ -38,8 +39,9 @@
 		if (i === at) return;
 		truck.back = i < at;
 		truck.fast = fast;
-		truck.driving = !reduced;
+		truck.driving = !reduced && !bare;
 		at = i;
+		if (!truck.driving) show(i);
 	}
 
 	function pick(i: number) {
@@ -82,13 +84,16 @@
 				show(0);
 				requestAnimationFrame(() => requestAnimationFrame(() => (truck.jump = truck.gone = false)));
 			}, 450);
-		}, 1600);
+		}, bare ? 4500 : 1600);
 		return () => clearTimeout(t);
 	});
 
 	$effect(() => {
 		reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		if (reduced) playing = false;
+		const phone = matchMedia('(max-width: 820px)');
+		bare = phone.matches;
+		phone.onchange = (e) => (bare = e.matches);
 		const ro = new ResizeObserver(park);
 		ro.observe(flowEl);
 		const io = new IntersectionObserver(([e]) => {
