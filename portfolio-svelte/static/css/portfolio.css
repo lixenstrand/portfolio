@@ -1145,3 +1145,9 @@
 .home-steps .flow-step {
 	font-size: 1.1rem;
 }
+
+@media (max-width: 820px) {
+	.flow-road {
+		display: none;
+	}
+}
