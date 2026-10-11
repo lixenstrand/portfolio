@@ -11,4 +11,5 @@
 		<a href="/cv/magnus_lixenstrand_cv_2026_en.pdf?v=4" target="_blank" rel="noopener noreferrer" aria-label="CV in English (PDF), opens in a new tab" lang="en">CV in English (PDF)</a>
 	</nav>
 	<p class="footer-copy">© {currentYear} Magnus Lixenstrand, Jönköping</p>
+	<p class="footer-copy">3D-lastbil: <a href="https://sketchfab.com/3d-models/scania-truck-59889032d0ad457c81d7e058c79eedf8">PAndras</a>, bearbetad, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 </footer>
