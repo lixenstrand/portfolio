@@ -40,7 +40,7 @@
 	];
 
 	const title = 'Om Magnus Lixenstrand – från försäljning till systemutveckling';
-	const description = 'Tolv år i försäljning, sedan ett eget affärssystem i daglig drift. Magnus Lixenstrands väg, roll och kompetenser.';
+	const description = 'Magnus Lixenstrand arbetade tolv år i försäljning och har sedan byggt ett affärssystem som används varje dag. Om hans bakgrund och kompetenser.';
 </script>
 
 <svelte:head>
@@ -65,7 +65,7 @@
 
 <section class="hero hero-about" aria-labelledby="om-rubrik">
 	<div class="hero-copy">
-		<h1 id="om-rubrik">Försäljning gav mig problemen. Kod gav mig verktygen.</h1>
+		<h1 id="om-rubrik">Från tolv år i försäljning till systemutveckling</h1>
 		<p class="lede">Jag trivs bäst nära verksamheten, där en konkret frustration kan bli ett system som människor använder varje dag. I dag äger jag Nordic Metal Trades affärssystem, från kravställning till drift.</p>
 		<div class="cta-group">
 			<a href="/#affarssystemet" class="cta-primary">Se affärssystemet</a>
@@ -87,7 +87,7 @@
 		<h2>Jag började där användarna är</h2>
 		<div class="about-text">
 			<p>Under tolv år i försäljning såg jag hur administration, dubbelarbete och system som inte pratade med varandra stal tid från det viktiga arbetet. Till slut började jag bygga verktygen jag själv saknade.</p>
-			<p>Den bakgrunden gör att jag inte börjar med tekniken. Jag börjar med att förstå flödet: vad händer före en knapptryckning, var fastnar arbetet och vem behöver resultatet efteråt?</p>
+			<p>Därför börjar jag med att förstå flödet: vad händer före en knapptryckning, var fastnar arbetet och vem behöver resultatet efteråt?</p>
 		</div>
 	</section>
 
@@ -96,7 +96,7 @@
 		<div class="about-text">
 			<p>Som säljare på Nordic Metal Trade automatiserade jag offertflödet. Det blev grunden till företagets affärssystem, som jag sedan planerade och byggde från grunden. Systemet samlar CRM, materialförfrågningar, offerter, order, inköp, lager, certifikat och transport, och är kopplat till Fortnox, Shiplink, Unifaun/nShift och Microsoft&nbsp;365.</p>
 			<p>Jag är produktägare och ensam utvecklare, och var projektledare för införandet: test, utbildning och bytet från det gamla systemet.</p>
-			<p class="about-result"><strong>Cirka tio användare och över 20 sparade timmar i veckan.</strong> Det är den sortens resultat jag vill skapa: lösningar som används och märks.</p>
+			<p class="about-result">Systemet har <strong>cirka tio användare och sparar teamet över 20 timmar i veckan</strong>.</p>
 		</div>
 	</section>
 
@@ -136,7 +136,7 @@
 	<section>
 		<h2>Bortom jobbet</h2>
 		<div class="about-text">
-			<p>Hemma fortsätter jag gärna experimentera. Mitt Home Assistant-system omfattar 232 enheter och 161 automationer, allt från temperaturstyrning till belysning och vardagsrutiner, och familjen styr det från en egen dashboard.</p>
+			<p>Hemma experimenterar jag vidare. Home Assistant har 232 enheter och 161 automationer för bland annat temperatur, belysning och vardagsrutiner, och familjen styr det från en egen dashboard.</p>
 			<p>Jag bor i Jönköping, reser gärna med min sambo och springer för att hålla huvudet klart.</p>
 		</div>
 	</section>

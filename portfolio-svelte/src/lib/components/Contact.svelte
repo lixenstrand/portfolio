@@ -1,5 +1,5 @@
 <section id="kontakt" class="contact" aria-labelledby="kontakt-rubrik">
-	<h2 id="kontakt-rubrik">Söker ni någon som både ser problemet och bygger lösningen?</h2>
+	<h2 id="kontakt-rubrik">Hör gärna av dig</h2>
 	<div class="contact-body">
 		<p>Jag söker roller inom affärssystem, systemintegration och automation, i&nbsp;Jönköping eller på&nbsp;distans.</p>
 		<a class="contact-email" href="mailto:mlixenstrand@gmail.com">mlixenstrand@gmail.com</a>
