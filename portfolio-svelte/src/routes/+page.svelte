@@ -1,6 +1,6 @@
 <script lang="ts">
-	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=3';
-	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=3';
+	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=4';
+	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=4';
 
 	// Steps with a shot switch the screenshot; the rest point to their story row
 	const flow = [
@@ -142,7 +142,7 @@
 	});
 
 	const story = [
-		{ label: 'Utgångsläge', text: 'Kunder, material, offerter, order, certifikat och transporter låg i separata system och Excel-filer. Samma uppgifter registrerades flera gånger och ett ärende gick inte att följa genom verksamheten.' },
+		{ label: 'Utgångsläge', text: 'Offerterna gjordes i Excel, och samma uppgifter skrevs in flera gånger. Det fanns inget ställe där man såg var ett ärende låg.' },
 		{ label: 'Början', text: 'Som säljare automatiserade jag först offertflödet, från Excel och VBA till ett webbflöde mot Fortnox. Det blev grunden till dagens system.' },
 		{ label: 'Min roll', text: 'Produktägare, ensam utvecklare och projektledare för införandet: kravställning, datamodell, utveckling, test, utbildning och bytet från det gamla systemet.' },
 		{ label: 'Integrationer', id: 'integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
@@ -150,7 +150,7 @@
 		{ label: 'Teknik', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL och Docker.' }
 	];
 
-	const title = 'Magnus Lixenstrand – systemutvecklare, affärssystem och integration';
+	const title = 'Magnus Lixenstrand – systemutvecklare, affärssystem, integration och automation';
 	const description = 'Systemutvecklare i Jönköping med tolv år i försäljning. Planerade och byggde Nordic Metal Trades affärssystem från grunden och äger det i dag som produktägare och ensam utvecklare.';
 	const jsonLd = {
 		'@context': 'https://schema.org',
@@ -214,7 +214,7 @@
 	<article id="affarssystemet" class="erp" aria-labelledby="erp-rubrik">
 		<header class="erp-head">
 			<h2 id="erp-rubrik">Ett eget affärssystem för hela flödet</h2>
-			<p>Nordic Metal Trade säljer stål och metall till industrikunder i Europa. Affärssystemet är skräddarsytt efter hur företaget arbetar, används varje dag av cirka tio kollegor och sparar teamet över 20&nbsp;timmar i veckan.</p>
+			<p>Nordic Metal Trade säljer stål och metall till industrikunder i Europa. Affärssystemet är skräddarsytt efter hur företaget arbetar.</p>
 		</header>
 
 		<div class="erp-show" role="group" aria-label="Flödet med skärmbilder" bind:this={showEl}>
@@ -294,7 +294,7 @@
 					<p>En egen dashboard i SvelteKit och FastAPI som familjen styr hemmet från i mobil och surfplatta, med roller för familj och gäster, pushnotiser och en AI-assistent som bara får föreslå godkända åtgärder.</p>
 				</article>
 				<article>
-					<h3>Familjeekonomi</h3>
+					<h3>Hushållsekonomi</h3>
 					<p>En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning.</p>
 				</article>
 			</div>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=3';
-	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=3';
+	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=4';
+	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=4';
 
 	// Same roles and track lines as the CV: steel = development, clay = sales.
 	const career = [
@@ -9,7 +9,7 @@
 			org: 'Nordic Metal Trade AB',
 			track: 'both',
 			titles: ['Systemutvecklare och systemansvarig, aug\u00A02025–nu', 'B2B-säljare med utvecklingsansvar, jul\u00A02019–jul\u00A02025 (80\u00A0% försäljning, 20\u00A0% utveckling)'],
-			text: 'Planerade och byggde företagets affärssystem och äger det som produktägare och ensam utvecklare. Som säljare stod jag 2021 för ungefär hälften av företagets försäljning.'
+			text: 'Planerade och byggde företagets affärssystem. Är i dag produktägare och ensam utvecklare. Som säljare stod jag 2021 för ungefär hälften av företagets försäljning.'
 		},
 		{
 			period: 'okt 2017–aug 2019',
@@ -25,7 +25,7 @@
 			org: 'Eniro',
 			track: 'both',
 			titles: ['Senior försäljningsledare och systemambassadör'],
-			text: 'Tre befordringar på knappt tre år. Ledde det lokala införandet av ett nytt Google-baserat affärssystem och utbildade kollegorna.'
+			text: 'Tre befordringar på knappt tre år. Ledde teamet när chefen var borta. Ledde det lokala införandet av ett nytt Google-baserat affärssystem och utbildade kollegorna.'
 		},
 		{ period: 'feb 2009–jun 2011', org: 'Sveacom AB', track: 'sales', titles: ['Telefonförsäljare'] }
 	];
@@ -40,7 +40,7 @@
 	];
 
 	const title = 'Om Magnus Lixenstrand – från försäljning till systemutveckling';
-	const description = 'Magnus Lixenstrand arbetade tolv år i försäljning och har sedan byggt ett affärssystem som används varje dag. Om hans bakgrund och kompetenser.';
+	const description = 'Magnus Lixenstrand har sålt i tolv år och byggt ett affärssystem som används varje dag. Om hans bakgrund och kompetenser.';
 </script>
 
 <svelte:head>
@@ -65,8 +65,8 @@
 
 <section class="hero hero-about" aria-labelledby="om-rubrik">
 	<div class="hero-copy">
-		<h1 id="om-rubrik">Från tolv år i försäljning till systemutveckling</h1>
-		<p class="lede">Jag trivs bäst nära verksamheten, där en konkret frustration kan bli ett system som människor använder varje dag. I dag äger jag Nordic Metal Trades affärssystem, från kravställning till drift.</p>
+		<h1 id="om-rubrik">Tolv år som säljare, nu systemutvecklare</h1>
+		<p class="lede">Säljåren lärde mig var arbetet fastnar. I dag äger jag Nordic Metal Trades affärssystem, från kravställning till drift.</p>
 		<div class="cta-group">
 			<a href="/#affarssystemet" class="cta-primary">Se affärssystemet</a>
 			<a href={cv} target="_blank" rel="noopener noreferrer" aria-label="Öppna CV (PDF) i ny flik" class="cta-secondary">Öppna CV (PDF)</a>
@@ -84,17 +84,16 @@
 
 <div class="about">
 	<section>
-		<h2>Jag började där användarna är</h2>
+		<h2>Varför jag började bygga system</h2>
 		<div class="about-text">
-			<p>Under tolv år i försäljning såg jag hur administration, dubbelarbete och system som inte pratade med varandra stal tid från det viktiga arbetet. Till slut började jag bygga verktygen jag själv saknade.</p>
-			<p>Därför börjar jag med att förstå flödet: vad händer före en knapptryckning, var fastnar arbetet och vem behöver resultatet efteråt?</p>
+			<p>Som säljare gick mycket tid åt till dubbelarbete i system som inte pratade med varandra. Till slut började jag bygga verktygen jag själv saknade.</p>
 		</div>
 	</section>
 
 	<section>
-		<h2>Från idé till daglig drift</h2>
+		<h2>Affärssystemet</h2>
 		<div class="about-text">
-			<p>Som säljare på Nordic Metal Trade automatiserade jag offertflödet. Det blev grunden till företagets affärssystem, som jag sedan planerade och byggde från grunden. Systemet samlar CRM, materialförfrågningar, offerter, order, inköp, lager, certifikat och transport, och är kopplat till Fortnox, Shiplink, Unifaun/nShift och Microsoft&nbsp;365.</p>
+			<p>På Nordic Metal Trade började jag med att automatisera offertflödet. Det blev starten på företagets affärssystem, som jag sedan planerade och byggde. Systemet samlar CRM, materialförfrågningar, offerter, order, inköp, lager, certifikat och transport, och är kopplat till Fortnox, Shiplink, Unifaun/nShift och Microsoft&nbsp;365.</p>
 			<p>Jag är produktägare och ensam utvecklare, och var projektledare för införandet: test, utbildning och bytet från det gamla systemet.</p>
 			<p class="about-result">Systemet har <strong>cirka tio användare och sparar teamet över 20 timmar i veckan</strong>.</p>
 		</div>
@@ -134,9 +133,9 @@
 	</section>
 
 	<section>
-		<h2>Bortom jobbet</h2>
+		<h2>Fritid</h2>
 		<div class="about-text">
-			<p>Hemma experimenterar jag vidare. Home Assistant har 232 enheter och 161 automationer för bland annat temperatur, belysning och vardagsrutiner, och familjen styr det från en egen dashboard.</p>
+			<p>Hemma har jag Home Assistant med 232 enheter och 161 automationer som bland annat kopplar ihop belysning, värmepumpar och elpris. Familjen styr det från en egen dashboard.</p>
 			<p>Jag bor i Jönköping, reser gärna med min sambo och springer för att hålla huvudet klart.</p>
 		</div>
 	</section>
