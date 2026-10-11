@@ -19,6 +19,7 @@
 	let reduced = $state(false);
 	let bare = $state(false); // phones: no map or truck, just the rotating shot
 	let offscreen = $state(true);
+	let hidden = $state(false);
 	let seen = $state(false); // load all shots once the section is near
 	let flowEl: HTMLOListElement;
 	let showEl: HTMLDivElement;
@@ -72,7 +73,7 @@
 	$effect(park);
 
 	$effect(() => {
-		if (!playing || offscreen || reduced || truck.driving || at !== active) return;
+		if (!playing || offscreen || hidden || reduced || truck.driving || at !== active) return;
 		const t = setTimeout(() => {
 			if (at < shots - 1) return drive(at + 1, false);
 			// End of the road: fade out and start over from the first step
@@ -89,8 +90,18 @@
 	});
 
 	$effect(() => {
-		reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (reduced) playing = false;
+		const motion = matchMedia('(prefers-reduced-motion: reduce)');
+		function updateMotion() {
+			reduced = motion.matches;
+			if (reduced) {
+				playing = false;
+				truck.driving = false;
+				show(at);
+			}
+		}
+		updateMotion();
+		motion.addEventListener('change', updateMotion);
+		hidden = document.hidden;
 		const phone = matchMedia('(max-width: 820px)');
 		bare = phone.matches;
 		phone.onchange = (e) => (bare = e.matches);
@@ -101,7 +112,12 @@
 			seen ||= e.isIntersecting;
 		}, { threshold: 0.3 });
 		io.observe(showEl);
-		return () => (ro.disconnect(), io.disconnect());
+		return () => {
+			ro.disconnect();
+			io.disconnect();
+			phone.onchange = null;
+			motion.removeEventListener('change', updateMotion);
+		};
 	});
 
 	// Hemma rolls through its views on its own until a view is picked
@@ -168,6 +184,8 @@
 	};
 </script>
 
+<svelte:document onvisibilitychange={() => (hidden = document.hidden)} />
+
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description}>
@@ -230,27 +248,9 @@
 						</li>
 					{/each}
 				</ol>
-				<svg class="truck" class:back={truck.back} class:driving={truck.driving} class:fast={truck.fast} class:gone={truck.gone} class:jump={truck.jump} style="--x: {truck.x}px; --y: {truck.y}px" viewBox="0 0 120 40" aria-hidden="true" ontransitionend={arrived}>
-					<g class="truck-load">
-						<rect class="plate" x="7" y="19.5" width="38" height="5.5" rx="0.8" />
-						<rect class="plate light" x="9.5" y="15.5" width="33" height="4" rx="0.8" />
-						<path class="strap" d="M17 15.5v9.5M34 15.5v9.5" />
-						<circle class="coil" cx="61" cy="17.2" r="7.8" />
-						<circle class="coil-ring" cx="61" cy="17.2" r="5.4" />
-						<circle class="coil-eye" cx="61" cy="17.2" r="2.7" />
-					</g>
-					<path class="truck-chassis" d="M3 25h78v3.4H8.5L3 27.2z" />
-					<rect class="truck-chassis" x="78.5" y="12" width="2.4" height="14" rx="0.6" />
-					<path class="truck-cab" d="M83 29.5V10.5c0-3 2.2-5.5 5.3-5.5h13.2c1.6 0 3.1.8 4 2.1l7.6 11c.6.9.9 1.9.9 3v8.4z" />
-					<path class="truck-glass" d="M103.4 8.2h.9c.9 0 1.7.4 2.2 1.2l5.9 8.6h-9z" />
-					<path class="truck-glass side" d="M93 8.2h7.6v9.8H93z" />
-					<path class="truck-trim" d="M83 23.6h32" />
-					<rect class="truck-light" x="113.2" y="21" width="2.6" height="1.6" rx="0.8" />
-					<g transform="translate(15 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
-					<g transform="translate(25 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
-					<g transform="translate(90 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
-					<g transform="translate(108 31)"><g class="truck-wheel"><circle r="4.2" /><circle class="rim" r="2.1" /><path d="M0-1.6v3.2M-1.6 0h3.2" /></g></g>
-				</svg>
+				<div class="truck" class:back={truck.back} class:driving={truck.driving} class:fast={truck.fast} class:gone={truck.gone} class:jump={truck.jump} class:paused={offscreen || hidden} style="--x: {truck.x}px; --y: {truck.y}px" aria-hidden="true" ontransitionend={arrived}>
+					<span class="truck-render"></span>
+				</div>
 			</div>
 
 			<figure class="shot" id="erp-skarmbild">
