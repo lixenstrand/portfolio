@@ -967,6 +967,7 @@
 }
 
 .flow-road {
+	--w: 10rem; /* the truck's drive frames */
 	position: relative;
 }
 
@@ -982,9 +983,8 @@
 	mask-image: linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2rem), transparent);
 }
 
-/* Blender frames: 24 wheel poses plus the first pose repeated for reverse playback. */
+/* Blender frames: 24 wheel poses plus the first again, so 24 steps roll the wheels a full turn. */
 .truck {
-	--w: 10rem;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1013,7 +1013,7 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	background: url('/images/truck/scania-drive.webp?v=2') 0 0 / 100% 2500% no-repeat;
+	background: url('/images/truck/scania-drive.webp?v=3') 0 0 / 100% 2500% no-repeat;
 	/* Fade the empty margins so the rendered shadow has no rectangular edge. */
 	mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
 }
@@ -1026,18 +1026,58 @@
 	animation-duration: 0.5s;
 }
 
-.truck.back .truck-render {
-	animation-direction: reverse;
+.truck.turning {
+	visibility: hidden;
 }
 
-.truck.paused .truck-render {
-	animation-play-state: paused;
+/* Facing left, the truck's stop sits as far from its tail as when it faces right */
+.truck.left {
+	margin-left: calc(var(--w) * -0.75);
 }
 
-@keyframes truck-roll {
-	to {
-		background-position-y: 100%;
-	}
+.truck.left .truck-render {
+	background-image: url('/images/truck/scania-drive-left.webp?v=1');
+}
+
+/* The three-point turn: its canvas starts where the truck faces right, scaled like the drive frames */
+.turn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: calc(var(--w) * var(--width));
+	height: calc(var(--w) * var(--height));
+	margin: calc(var(--w) / -3 * 0.81 + 4px + var(--w) * var(--top)) 0 0 calc(var(--w) / -4 + var(--w) * var(--left));
+	translate: var(--x) var(--y);
+	pointer-events: none;
+}
+
+.turn-render,
+.side-road {
+	position: absolute;
+	inset: 0;
+}
+
+.turn-render {
+	visibility: hidden;
+	background: url('/images/truck/scania-turn.webp?v=1') no-repeat;
+}
+
+.turn.turning .turn-render {
+	visibility: visible;
+}
+
+/* The side road grows out from the road, then fades once the truck has left it */
+.side-road {
+	opacity: 0;
+	background: url('/images/truck/side-road.webp?v=1') 0 0 / 100% 100% no-repeat;
+	clip-path: inset(calc((1 - var(--grown)) * var(--road-bottom) * 100%) 0 0 0);
+	transition: opacity 0.6s ease-out;
+}
+
+.side-road.open {
+	opacity: 1;
+	transition: none;
 }
 
 /* Highlight the current roadside stop. */
@@ -1048,7 +1088,8 @@
 /* Below the truck's width the flow is a plain list: no road, no truck */
 @media (max-width: 1099px) {
 	.flow-road::before,
-	.truck {
+	.truck,
+	.turn {
 		display: none;
 	}
 

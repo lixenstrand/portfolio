@@ -167,6 +167,23 @@ test('the sitemap lists every page with its version in each language', async () 
 	}
 });
 
+// The truck's frames, the road and the fonts are only named in the stylesheets
+test('every file the stylesheets use is served', async () => {
+	const sheets = tags(await get('/'), 'link').filter((l) => l.rel === 'stylesheet').map((l) => l.href);
+	const files = new Set();
+	for (const sheet of sheets) {
+		for (const [, url] of (await get(sheet)).matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
+			const file = new URL(url, base + sheet);
+			if (file.protocol !== 'data:') files.add(file.pathname + file.search);
+		}
+	}
+	assert.ok(files.size, 'no files in the stylesheets');
+	for (const file of files) {
+		const res = await fetch(base + file);
+		assert.equal(res.status, 200, `${file} answers ${res.status}`);
+	}
+});
+
 test('the old CV address leads to the Swedish CV', async () => {
 	const res = await fetch(base + '/cv/magnus_lixenstrand_cv.pdf', { redirect: 'manual' });
 	assert.equal(res.status, 301);
