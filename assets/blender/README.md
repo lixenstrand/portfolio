@@ -38,7 +38,9 @@ baklänges uppspelning får en obruten loop. CSS använder 25 rutor och 24 steg;
 - `static/images/truck/scania-drive.webp`: bildremsan som används av hemsidan.
 - `static/images/truck/scania-preview.webp`: stor stillbild för granskning.
 
-Mobilens befintliga beteende behålls: under 821 px visas endast bildspelet.
+Lastbilen och vägen visas bara från 1100 px. Mellan 821 och 1099 px står
+flödet som en lista bredvid skärmbilden, och under 821 px blir bildspelet en
+karusell som går att svepa.
 Reducerad rörelse ger en stillastående lastbil. Hjulanimationen pausas när
 sektionen eller fliken inte visas. Modellens attribution finns i sidfoten.
 
@@ -54,5 +56,5 @@ cd portfolio-svelte
 node scripts/pack-road.mjs
 ```
 
-Skriptet skriver om `road.blend` och `/tmp/magnus-road.png`. Webbversionerna
-är `road.webp` och den roterade `road-vertical.webp` för surfplattor.
+Skriptet skriver om `road.blend` och `/tmp/magnus-road.png`. Webbversionen
+är `road.webp`.

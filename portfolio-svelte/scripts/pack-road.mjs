@@ -7,4 +7,3 @@ assert.equal(width, 384);
 assert.equal(height, 192);
 assert(hasAlpha, 'Road edges must remain transparent');
 await sharp(input).webp({ quality: 90 }).toFile('static/images/truck/road.webp');
-await sharp(input).rotate(90).webp({ quality: 90 }).toFile('static/images/truck/road-vertical.webp');
