@@ -99,6 +99,13 @@ export const en: typeof sv = {
 				{ label: 'Technology', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL and Docker.' }
 			]
 		},
+		agents: {
+			title: 'The agent workflow',
+			text: [
+				'I develop the ERP system with AI coding agents that take an issue all the way to a reviewed and merged PR, with me as the final check. More than 3,200 of the system’s 10,000-plus commits were made with agents.',
+				'If the tests fail, the agent fixes the problem itself, and I only take over if the same failure remains after three attempts. Another agent reviews the plan and the code, and the agents are spread across three computers based on how much quota and capacity is left.'
+			]
+		},
 		side: {
 			title: 'Personal projects',
 			projects: [

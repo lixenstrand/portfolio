@@ -2,6 +2,7 @@
 .site-nav,
 .hero,
 .erp,
+.agents,
 .side,
 .about > section,
 .error-page {
@@ -264,6 +265,7 @@
 }
 
 .erp-head h2,
+.agents h2,
 .side h2 {
 	margin-bottom: 1rem;
 	font-family: var(--display);
@@ -273,7 +275,8 @@
 	letter-spacing: -0.015em;
 }
 
-.erp-head p {
+.erp-head p,
+.agents p {
 	max-width: 60ch;
 	margin: 0;
 	font-size: clamp(1.1rem, 0.35vw + 1rem, 1.25rem);
@@ -439,13 +442,19 @@
 	color: var(--steel);
 }
 
-/* Own projects: short, like the CV */
+.agents p + p {
+	margin-top: 1rem;
+}
+
+/* The agent workflow and own projects: short, like the CV */
+.agents,
 .side {
 	margin-top: clamp(4.5rem, 9vw, 7.5rem);
 	padding-top: clamp(3rem, 6vw, 4.5rem);
 	border-top: 1px solid var(--line);
 }
 
+.agents h2,
 .side h2 {
 	margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 	font-size: clamp(2rem, 1.6vw + 1rem, 2.75rem);

@@ -103,6 +103,13 @@ export const sv = {
 				{ label: 'Teknik', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL och Docker.' }
 			]
 		},
+		agents: {
+			title: 'Agentflödet',
+			text: [
+				'Jag utvecklar affärssystemet med AI-kodagenter som tar ett ärende hela vägen till en granskad och mergad PR, med mig som sista instans. Över 3\u00A0200 av systemets drygt 10\u00A0000 commits är gjorda med agenter.',
+				'Blir testerna röda lagar agenten felet själv, och först om samma fel kvarstår efter tre försök tar jag över. En annan agent granskar planen och koden, och agenterna fördelas över tre datorer efter hur mycket kvot och kapacitet som finns kvar.'
+			]
+		},
 		side: {
 			title: 'Egna projekt',
 			projects: [

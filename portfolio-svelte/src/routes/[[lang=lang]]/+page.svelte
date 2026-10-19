@@ -448,6 +448,11 @@
 		</dl>
 	</article>
 
+	<section class="agents" aria-labelledby="agent-rubrik">
+		<h2 id="agent-rubrik">{t.home.agents.title}</h2>
+		{#each t.home.agents.text as p}<p>{p}</p>{/each}
+	</section>
+
 	<section class="side" aria-labelledby="egna-rubrik">
 		<h2 id="egna-rubrik">{t.home.side.title}</h2>
 		<div class="side-grid">
