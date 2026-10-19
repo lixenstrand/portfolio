@@ -188,7 +188,7 @@ export const en: typeof sv = {
 			items: [
 				{ area: 'Development', items: 'Python, FastAPI, Flask, SvelteKit, TypeScript, MySQL, REST APIs, VBA' },
 				{ area: 'Operations and integration', items: 'Docker, Linux, Google Cloud, GitHub Actions, Fortnox, Microsoft 365, n8n' },
-				{ area: 'AI', items: 'Claude Code, Codex, agent workflows with code review, AI assistants' },
+				{ area: 'AI', items: 'LLM applications, AI agents, MCP, RAG, evals, Claude Code, Codex' },
 				{ area: 'Business process', items: 'Requirements analysis, process mapping, project management, system rollout, user support' },
 				{ area: 'Commercial', items: 'B2B sales, negotiation, procurement, budgeting' },
 				{ area: 'Languages', items: 'Swedish (native), English (fluent)' }
