@@ -179,7 +179,7 @@
 		name: 'Magnus Lixenstrand',
 		url: 'https://magnuslixenstrand.com',
 		image: 'https://magnuslixenstrand.com/images/IMG_0830_optimized.jpg',
-		jobTitle: t.home.jobTitle,
+		jobTitle: t.jobTitle,
 		worksFor: { '@type': 'Organization', name: 'Nordic Metal Trade AB' },
 		description: t.home.description,
 		email: 'mlixenstrand@gmail.com',
@@ -200,7 +200,11 @@
 
 <section class="hero" aria-labelledby="hero-rubrik">
 	<div class="hero-copy">
-		<h1 id="hero-rubrik">{t.home.hero.title}</h1>
+		<hgroup>
+			<h1 id="hero-rubrik">Magnus Lixenstrand</h1>
+			<p class="hero-title">{t.jobTitle}</p>
+			<p class="hero-subtitle">{t.subtitle}</p>
+		</hgroup>
 		<p class="lede">{t.home.hero.lede}</p>
 		<p class="hero-proof">{t.home.hero.proof.before}<strong>{t.home.hero.proof.strong}</strong>{t.home.hero.proof.after}</p>
 		<div class="cta-group">
