@@ -1,6 +1,6 @@
 import { cvFiles } from './cv';
 
-// The Yrkestitel and its subtitle, which follow the name everywhere
+// The Yrkestitel and its subtitle, which follow the name
 const jobTitle = 'AI-utvecklare';
 const subtitle = 'LLM:er i verkliga affärsflöden';
 
@@ -68,10 +68,10 @@ export const sv = {
 	home: {
 		title: `Magnus Lixenstrand, ${jobTitle} – ${subtitle}`,
 		description: `Magnus Lixenstrand är ${jobTitle} i Jönköping och bygger in LLM:er i verkliga affärsflöden. Han planerade och byggde Nordic Metal Trades affärssystem, som sparar teamet över 20 timmar i veckan.`,
-		// Only AI and LLM knowledge that the code shows
+		// Only AI and LLM knowledge that his code backs up
 		knowsAbout: ['LLM-applikationer', 'AI-agenter', 'Model Context Protocol (MCP)', 'Retrieval-augmented generation (RAG)', 'Evals för LLM:er'],
 		hero: {
-			lede: 'Jag bygger bort onödigt manuellt arbete, numera med LLM:er. Tolv år i försäljning lärde mig var arbetet fastnar, så jag planerade och byggde Nordic Metal Trades affärssystem från grunden. I dag är jag produktägare och ensam utvecklare. Kollegorna frågar AI:n i systemet om order, lager och rutiner, och den ändrar ingenting förrän de har godkänt det.',
+			lede: 'Jag bygger bort onödigt manuellt arbete, numera med LLM:er. Tolv år i försäljning lärde mig var arbetet fastnar, så jag planerade och byggde Nordic Metal Trades affärssystem från grunden. I dag är jag produktägare och ensam utvecklare.',
 			proof: { before: 'Systemet används varje dag av ungefär tio kollegor och sparar teamet över ', strong: '20 timmar i veckan', after: '.' }
 		},
 		erp: {

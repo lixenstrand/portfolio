@@ -68,7 +68,7 @@ export const en: typeof sv = {
 		description: `Magnus Lixenstrand is an ${jobTitle} in Jönköping, Sweden, building LLMs into real business workflows. He planned and built Nordic Metal Trade’s ERP system, which saves the team more than 20 hours a week.`,
 		knowsAbout: ['LLM applications', 'AI agents', 'Model Context Protocol (MCP)', 'Retrieval-augmented generation (RAG)', 'LLM evals'],
 		hero: {
-			lede: 'I automate away unnecessary manual work, these days with LLMs. Twelve years in sales taught me where work gets stuck, so I planned and built Nordic Metal Trade’s ERP system from scratch. Today I’m its product owner and sole developer. Colleagues ask the AI in the system about orders, stock and routines, and it changes nothing until they have approved it.',
+			lede: 'I automate away unnecessary manual work, these days with LLMs. Twelve years in sales taught me where work gets stuck, so I planned and built Nordic Metal Trade’s ERP system from scratch. Today I’m its product owner and sole developer.',
 			proof: { before: 'About ten colleagues use the system every day, and it saves the team more than ', strong: '20 hours a week', after: '.' }
 		},
 		erp: {

@@ -137,11 +137,11 @@ for (const { path, lang } of homePages) {
 		const html = await get(path);
 		const meta = tags(html, 'meta');
 		const content = (key) => meta.find((m) => m.name === key || m.property === key)?.content;
-		const titles = {
+		const snippets = {
 			title: text(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ''),
 			...Object.fromEntries(['description', 'og:title', 'og:description', 'twitter:title', 'twitter:description'].map((key) => [key, content(key)]))
 		};
-		for (const [key, value] of Object.entries(titles)) {
+		for (const [key, value] of Object.entries(snippets)) {
 			assert.ok(value?.includes('Magnus Lixenstrand'), `${key} "${value}" lacks the name`);
 			assert.ok(value.includes(jobTitleByLang[lang]), `${key} "${value}" lacks "${jobTitleByLang[lang]}"`);
 		}

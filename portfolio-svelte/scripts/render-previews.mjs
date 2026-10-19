@@ -1,12 +1,13 @@
 // Renders the preview images that shared links show, one per language, at 1200×630.
 // Usage: node scripts/render-previews.mjs (needs Chromium; set CHROMIUM if it is not on the PATH)
+import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
-// The same Yrkestitel and subtitle as jobTitle and subtitle in src/lib/content
+// The same Yrkestitel, subtitle and proof as in src/lib/content, copied because Node cannot import those modules
 const previews = {
 	sv: {
 		role: 'AI-utvecklare – LLM:er i verkliga affärsflöden',
@@ -63,7 +64,8 @@ try {
 			`file://${html}`
 		], { stdio: 'ignore' });
 		const { width, height } = await sharp(png).metadata();
-		if (width !== 1200 || height !== 630) throw new Error(`${lang}: ${width}×${height}, expected 1200×630`);
+		assert.equal(width, 1200);
+		assert.equal(height, 630);
 		await sharp(png).jpeg({ quality: 88, mozjpeg: true }).toFile(`static/images/og-magnus-lixenstrand-${lang}.jpg`);
 	}
 } finally {
