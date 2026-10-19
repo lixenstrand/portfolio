@@ -924,6 +924,13 @@
 }
 
 /* A steel truck drives along the flow to the step on screen */
+.work {
+	/* The truck and the shot it uncovers share one pace */
+	--drive: cubic-bezier(0.45, 0, 0.25, 1);
+	--drive-slow: 4.2s;
+	--drive-fast: 0.9s;
+}
+
 .flow-road {
 	position: relative;
 }
@@ -942,7 +949,6 @@
 
 /* Blender frames: 24 wheel poses plus the first pose repeated for reverse playback. */
 .truck {
-	--drive: cubic-bezier(0.45, 0, 0.25, 1);
 	--w: 10rem;
 	position: absolute;
 	top: 0;
@@ -952,12 +958,12 @@
 	height: calc(var(--w) / 3);
 	margin: calc(var(--w) / -3 * 0.81 + 4px) 0 0 calc(var(--w) / -4);
 	translate: var(--x) var(--y);
-	transition: translate 4.2s var(--drive), opacity 0.4s ease-out;
+	transition: translate var(--drive-slow) var(--drive), opacity 0.4s ease-out;
 	pointer-events: none;
 }
 
 .truck.fast {
-	transition-duration: 0.9s, 0.4s;
+	transition-duration: var(--drive-fast), 0.4s;
 }
 
 .truck.jump {
@@ -1004,49 +1010,116 @@
 	background: var(--steel-dark);
 }
 
-/* Vertical road below desktop: the truck turns and drives downwards */
+/* Below the truck's width the flow is a plain list: no road, no truck */
 @media (max-width: 1099px) {
-	.flow-road::before {
-		top: -1rem;
-		bottom: 0;
-		left: -.3rem;
-		right: auto;
-		width: 1.35rem;
-		height: auto;
-		background-image: url('/images/truck/road-vertical.webp');
-		background-size: 1.35rem 2.7rem;
-		background-repeat: repeat-y;
-		mask-image: linear-gradient(to bottom, transparent, #000 1rem, #000 calc(100% - 1rem), transparent);
-	}
-
+	.flow-road::before,
 	.truck {
-		--w: 4.5rem;
-		/* Wheels on the line: shift the turned truck sideways by their offset from its centre */
-		margin: calc(var(--w) / -6) 0 0 calc(var(--w) / -2 + var(--w) / 3 * 0.31 + 1px);
-		rotate: 90deg;
+		display: none;
 	}
 
+	.flow li {
+		padding: 0.65rem 0;
+		border-top: 1px solid var(--line);
+	}
+
+	.flow li::before {
+		display: none;
+	}
 }
 
-/* The next screenshot wipes in behind the truck */
+/* Tablets and small laptops: the list on the left, the shot on the right */
+@media (min-width: 821px) and (max-width: 1099px) {
+	.erp-show {
+		display: grid;
+		grid-template-columns: max-content minmax(0, 1fr);
+		align-items: start;
+		gap: 0 clamp(2rem, 4vw, 3rem);
+		margin-top: clamp(2.75rem, 5vw, 4rem);
+	}
+
+	.flow,
+	.erp-show .shot {
+		margin: 0;
+	}
+
+	.shot-note {
+		grid-column: 2;
+	}
+}
+
+/* The next shot uncovers the last one the way the truck drives: same direction, same pace */
 .shot-frame {
 	display: grid;
+	overflow: hidden;
 }
 
 .shot-frame > * {
 	grid-area: 1 / 1;
-	clip-path: inset(0 100% 0 0);
+	visibility: hidden;
+	animation-duration: var(--drive-fast);
+	animation-timing-function: var(--drive);
+	animation-fill-mode: both;
 }
 
-.shot-frame > *.is-prev {
+.shot-frame:where(.slow) > * {
+	animation-duration: var(--drive-slow);
+}
+
+.shot-frame > .is-prev {
 	z-index: 1;
-	clip-path: inset(0);
+	visibility: visible;
+	animation-name: shot-out;
 }
 
-.shot-frame > *.is-active {
+.shot-frame > .is-active {
 	z-index: 2;
-	clip-path: inset(0);
-	transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+	visibility: visible;
+	animation-name: shot-in;
+}
+
+.shot-frame:where(.back) > .is-prev {
+	animation-name: shot-out-back;
+}
+
+.shot-frame:where(.back) > .is-active {
+	animation-name: shot-in-back;
+}
+
+@keyframes shot-in {
+	from {
+		clip-path: inset(0 100% 0 0);
+		translate: -2% 0;
+	}
+
+	/* inset() to none would jump halfway instead of sliding */
+	to {
+		clip-path: inset(0);
+		translate: 0 0;
+	}
+}
+
+@keyframes shot-in-back {
+	from {
+		clip-path: inset(0 0 0 100%);
+		translate: 2% 0;
+	}
+
+	to {
+		clip-path: inset(0);
+		translate: 0 0;
+	}
+}
+
+@keyframes shot-out {
+	to {
+		translate: 2% 0;
+	}
+}
+
+@keyframes shot-out-back {
+	to {
+		translate: -2% 0;
+	}
 }
 
 .shot-toggle {
@@ -1066,8 +1139,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.work {
+		--drive-slow: 0s;
+		--drive-fast: 0s;
+	}
+
 	.truck,
-	.shot-frame > *.is-active {
+	.carousel-dot,
+	.carousel-dot span {
 		transition: none;
 	}
 
@@ -1090,8 +1169,111 @@
 	font-size: 1.1rem;
 }
 
+/* Phone controls: play/pause first, then one dot per shot; the current dot fills while it is shown */
+.carousel {
+	display: none;
+	align-items: center;
+	margin-top: 0.5rem;
+}
+
+.carousel-play {
+	display: grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	margin-right: 0.5rem;
+	padding: 0;
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	background: var(--surface);
+	color: var(--steel-dark);
+	cursor: pointer;
+}
+
+.carousel-play svg {
+	width: 0.875rem;
+	height: 0.875rem;
+	fill: currentColor;
+}
+
+.carousel-dot {
+	display: grid;
+	place-items: center;
+	width: 1.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-dot span {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 0.25rem;
+	background: var(--ink-quiet);
+	transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease-out;
+}
+
+.carousel-dot[aria-current="true"] {
+	width: 3rem;
+}
+
+.carousel-dot[aria-current="true"] span {
+	width: 2.25rem;
+	/* One layer, so the fill's size interpolates */
+	background: color-mix(in oklch, var(--steel) 60%, var(--surface)) linear-gradient(var(--steel-dark) 0 0) 0 0 / 100% 100% no-repeat;
+}
+
+.carousel.playing .carousel-dot[aria-current="true"] span {
+	animation: dot-fill var(--dwell) linear;
+}
+
+.carousel.paused .carousel-dot span {
+	animation-play-state: paused;
+}
+
+@keyframes dot-fill {
+	from {
+		background-size: 0 100%;
+	}
+}
+
+@media (hover: hover) {
+	.carousel-play:hover {
+		border-color: var(--steel);
+	}
+
+	.carousel-dot:not([aria-current="true"]):hover span {
+		background-color: var(--ink-soft);
+	}
+}
+
+/* Phones: no flow map, swipe between the shots */
 @media (max-width: 820px) {
-	.flow-road {
+	.flow-road,
+	.shot-toggle {
 		display: none;
+	}
+
+	.erp .shot-frame {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+	}
+
+	.erp .shot-frame > * {
+		flex: 0 0 100%;
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
+		visibility: visible;
+		animation: none;
+	}
+
+	.carousel {
+		display: flex;
 	}
 }

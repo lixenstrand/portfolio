@@ -13,25 +13,32 @@
 		{ step: 'Bokföring', row: 'integrationer' }
 	];
 	const shots = flow.filter((f) => f.shot).length;
+	const dwell = 4500; // per shot without the truck
 	let active = $state(1);
 	let prev = $state(1);
+	let back = $state(false); // the next shot uncovers the last one in the truck's direction,
+	let slow = $state(false); // at the truck's pace
 	let playing = $state(true);
 	let reduced = $state(false);
-	let bare = $state(false); // phones: no map or truck, just the rotating shot
+	let wide = $state(false); // the truck only drives where the flow fits on one row
+	let phone = $state(false); // phones swipe between the shots instead
 	let offscreen = $state(true);
 	let hidden = $state(false);
 	let seen = $state(false); // load all shots once the section is near
 	let flowEl: HTMLOListElement;
 	let showEl: HTMLDivElement;
+	let frameEl: HTMLDivElement;
 	const shown = $derived(flow[active]);
 
-	// The truck drives on its own: slowly to the next step, where the shot changes on arrival.
+	// The truck drives on its own: slowly to the next step, uncovering its shot on the way.
 	// A click takes over: the truck goes straight there and the tour stops.
 	let at = $state(1);
 	let truck = $state({ x: 0, y: 0, back: false, driving: false, fast: true, gone: false, jump: false });
 
 	function show(i: number) {
 		if (i === active) return;
+		back = i < active;
+		slow = truck.driving && !truck.fast;
 		prev = active;
 		active = i;
 	}
@@ -40,16 +47,15 @@
 		if (i === at) return;
 		truck.back = i < at;
 		truck.fast = fast;
-		truck.driving = !reduced && !bare;
+		truck.driving = wide && !reduced;
 		at = i;
-		if (!truck.driving) show(i);
+		show(i);
 	}
 
 	function pick(i: number) {
 		playing = false;
 		truck.gone = false;
 		drive(i, true);
-		show(i);
 	}
 
 	function toggle() {
@@ -57,9 +63,34 @@
 		if (playing) showEl.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
 	}
 	function arrived(e: TransitionEvent) {
-		if (e.propertyName !== 'translate') return;
-		truck.driving = false;
-		show(at);
+		if (e.propertyName === 'translate') truck.driving = false;
+	}
+
+	function advance() {
+		if (at < shots - 1) return drive(at + 1, false);
+		if (!wide) return drive(0, false);
+		// End of the road: fade out and start over from the first step
+		truck.gone = true;
+		setTimeout(() => {
+			truck.jump = true;
+			truck.back = false;
+			at = 0;
+			show(0);
+			requestAnimationFrame(() => requestAnimationFrame(() => (truck.jump = truck.gone = false)));
+		}, 450);
+	}
+
+	// Phones: the strip scrolls to the shot, and a swipe picks one once it settles
+	let settle: ReturnType<typeof setTimeout>;
+	$effect(() => {
+		if (phone) frameEl.scrollTo({ left: active * frameEl.clientWidth, behavior: reduced ? 'auto' : 'smooth' });
+	});
+	function swiped() {
+		clearTimeout(settle);
+		settle = setTimeout(() => {
+			const i = Math.round(frameEl.scrollLeft / frameEl.clientWidth);
+			if (i !== active) pick(i);
+		}, 120);
 	}
 
 	function park() {
@@ -72,20 +103,11 @@
 
 	$effect(park);
 
+	// Phones advance when the dot's progress fill ends, so the dot and the strip stay in step
 	$effect(() => {
-		if (!playing || offscreen || hidden || reduced || truck.driving || at !== active) return;
-		const t = setTimeout(() => {
-			if (at < shots - 1) return drive(at + 1, false);
-			// End of the road: fade out and start over from the first step
-			truck.gone = true;
-			setTimeout(() => {
-				truck.jump = true;
-				truck.back = false;
-				at = 0;
-				show(0);
-				requestAnimationFrame(() => requestAnimationFrame(() => (truck.jump = truck.gone = false)));
-			}, 450);
-		}, bare ? 4500 : 1600);
+		void active; // every new shot gets its full time
+		if (!playing || offscreen || hidden || phone || truck.driving) return;
+		const t = setTimeout(advance, wide ? 3000 : dwell);
 		return () => clearTimeout(t);
 	});
 
@@ -96,15 +118,20 @@
 			if (reduced) {
 				playing = false;
 				truck.driving = false;
-				show(at);
 			}
 		}
 		updateMotion();
 		motion.addEventListener('change', updateMotion);
 		hidden = document.hidden;
-		const phone = matchMedia('(max-width: 820px)');
-		bare = phone.matches;
-		phone.onchange = (e) => (bare = e.matches);
+		const truckFits = matchMedia('(min-width: 1100px)');
+		const small = matchMedia('(max-width: 820px)');
+		function updateLayout() {
+			wide = truckFits.matches;
+			phone = small.matches;
+			if (!wide) truck.driving = false; // a hidden truck never arrives
+		}
+		updateLayout();
+		truckFits.onchange = small.onchange = updateLayout;
 		const ro = new ResizeObserver(park);
 		ro.observe(flowEl);
 		const io = new IntersectionObserver(([e]) => {
@@ -115,7 +142,7 @@
 		return () => {
 			ro.disconnect();
 			io.disconnect();
-			phone.onchange = null;
+			truckFits.onchange = small.onchange = null;
 			motion.removeEventListener('change', updateMotion);
 		};
 	});
@@ -255,14 +282,28 @@
 
 			<figure class="shot" id="erp-skarmbild">
 				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label="Skärmbild av {shown.step.replace('\u00AD', '').toLowerCase()}, öppnas i full storlek i ny flik">
-					<div class="shot-frame">
+					<div class="shot-frame" class:back class:slow bind:this={frameEl} onscroll={swiped}>
 						{#each flow as item, i}
 							{#if item.shot}
-								<img class:is-active={i === active} class:is-prev={i === prev && i !== active} src="/images/{item.shot}-1200.webp" srcset="/images/{item.shot}-1200.webp 1200w, /images/{item.shot}.webp 2400w" sizes="(min-width: 1212px) 1180px, calc(100vw - 2rem)" alt={i === active ? item.alt : ''} width="2400" height="1500" loading={seen ? 'eager' : 'lazy'}>
+								<img class:is-active={i === active} class:is-prev={i === prev && i !== active} src="/images/{item.shot}-1200.webp" srcset="/images/{item.shot}-1200.webp 1200w, /images/{item.shot}.webp 2400w" sizes="(min-width: 1212px) 1180px, (min-width: 821px) 60vw, calc(100vw - 2rem)" alt={i === active ? item.alt : ''} width="2400" height="1500" loading={seen ? 'eager' : 'lazy'}>
 							{/if}
 						{/each}
 					</div>
 				</a>
+				<div class="carousel" class:playing class:paused={offscreen || hidden} style="--dwell: {dwell}ms">
+					<button type="button" class="carousel-play" aria-label={playing ? 'Pausa bildspelet' : 'Starta bildspelet'} onclick={() => (playing = !playing)}>
+						<svg viewBox="0 0 16 16" aria-hidden="true">
+							{#if playing}<path d="M4 2.5h2.75v11H4zM9.25 2.5H12v11H9.25z" />{:else}<path d="M4.5 2.25v11.5L13.5 8z" />{/if}
+						</svg>
+					</button>
+					{#each flow as item, i}
+						{#if item.shot}
+							<button type="button" class="carousel-dot" aria-current={i === active} aria-controls="erp-skarmbild" aria-label="Bild {i + 1} av {shots}: {item.step.replace('­', '')}" onclick={() => pick(i)}>
+								<span onanimationend={advance}></span>
+							</button>
+						{/if}
+					{/each}
+				</div>
 				<figcaption aria-live={playing ? 'off' : 'polite'}><strong>{shown.step}.</strong> {shown.caption}</figcaption>
 			</figure>
 			<p class="shot-note">
