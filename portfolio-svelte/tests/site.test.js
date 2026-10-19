@@ -157,6 +157,14 @@ for (const { path, lang } of homePages) {
 		assert.equal(person.jobTitle, jobTitleByLang[lang]);
 	});
 
+	// The order the spec gives: Affärssystemet, Agentflödet, then the personal projects
+	test(`${path} shows Agentflödet between Affärssystemet and the personal projects`, async () => {
+		const html = await get(path);
+		const positions = ['erp-rubrik', 'agent-rubrik', 'egna-rubrik'].map((id) => html.indexOf(`id="${id}"`));
+		assert.ok(positions.every((i) => i >= 0), `missing a heading: ${positions}`);
+		assert.deepEqual([...positions].sort((a, b) => a - b), positions);
+	});
+
 	test(`${path} presents Majo as an app Magnus develops further, in ${lang}`, async () => {
 		assert.ok(text(await get(path)).includes(majoByLang[lang]), `no "${majoByLang[lang]}"`);
 	});
