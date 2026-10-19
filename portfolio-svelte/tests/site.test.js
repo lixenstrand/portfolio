@@ -15,7 +15,7 @@ const versions = [
 	{ sv: '/about', en: '/en/about' }
 ];
 const pages = versions.flatMap((page) => ['sv', 'en'].map((lang) => ({ path: page[lang], lang, ...page })));
-const other = { sv: 'en', en: 'sv' };
+const otherByLang = { sv: 'en', en: 'sv' };
 
 const localeByLang = { sv: 'sv_SE', en: 'en_US' };
 
@@ -70,9 +70,9 @@ for (const { path, lang, sv, en } of pages) {
 		assert.equal(meta.find((m) => m.property === 'og:url')?.content, site + path);
 	});
 
-	test(`${path} switches to the same page in ${other[lang]}`, async () => {
+	test(`${path} switches to the same page in ${otherByLang[lang]}`, async () => {
 		const switches = links(await get(path)).filter((a) => a.hreflang);
-		const to = other[lang];
+		const to = otherByLang[lang];
 		assert.deepEqual(switches.map((a) => ({ href: a.href, hreflang: a.hreflang, lang: a.lang })), [{ href: { sv, en }[to], hreflang: to, lang: to }]);
 	});
 

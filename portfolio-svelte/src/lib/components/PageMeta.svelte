@@ -4,18 +4,18 @@
 	// What search engines and shared links read about a page, in the page's language
 	let { title, description, type }: { title: string; description: string; type: 'website' | 'profile' } = $props();
 	const t = $derived(texts());
-	const url = $derived(versions());
+	const urls = $derived(versions());
 </script>
 
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description}>
-	<link rel="canonical" href={url.own}>
-	<link rel="alternate" hreflang="sv" href={url.sv}>
-	<link rel="alternate" hreflang="en" href={url.en}>
-	<link rel="alternate" hreflang="x-default" href={url.sv}>
+	<link rel="canonical" href={urls.own}>
+	<link rel="alternate" hreflang="sv" href={urls.sv}>
+	<link rel="alternate" hreflang="en" href={urls.en}>
+	<link rel="alternate" hreflang="x-default" href={urls.sv}>
 	<meta property="og:type" content={type}>
-	<meta property="og:url" content={url.own}>
+	<meta property="og:url" content={urls.own}>
 	<meta property="og:title" content={title}>
 	<meta property="og:description" content={description}>
 	<meta property="og:image" content={t.preview.image}>
