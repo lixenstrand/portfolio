@@ -1,6 +1,6 @@
 import { cvFiles } from './cv';
 
-// Every text on the site in Swedish. The markup holds structure only.
+// Every text on the site in Swedish, so the markup holds nothing that needs translating.
 export const sv = {
 	locale: 'sv_SE',
 	skipLink: 'Hoppa till huvudinnehåll',
@@ -40,7 +40,7 @@ export const sv = {
 
 	contact: {
 		title: 'Hör gärna av dig',
-		text: 'Jag söker roller inom affärssystem, systemintegration och automation, i Jönköping eller på distans.',
+		text: 'Jag söker roller inom affärssystem, systemintegration och automation, i\u00A0Jönköping eller på\u00A0distans.',
 		linkedinLabel: 'LinkedIn, öppnas i ny flik'
 	},
 
@@ -76,7 +76,7 @@ export const sv = {
 			// Steps with a shot switch the screenshot; the rest point to their story row
 			flow: [
 				{ step: 'Kund och CRM', shot: 'erp-kunder', alt: 'Kundregistret i affärssystemet: kunder med land, ansvarig säljare, senaste aktivitet, omsättning, täckningsbidrag och aktiva offerter', caption: 'Kundregistret visar omsättning, täckningsbidrag och aktiva offerter per kund.' },
-				{ step: 'Material­förfrågan', shot: 'erp-materialforfragan', alt: 'Materialförfrågan: sökträffar bland leverantörer och historiska order till vänster, tre materialrader med dimension, stålkvalitet och vikt i mitten och vald leverantör till höger', caption: 'En sökning går samtidigt genom leverantörer, historiska order, offerter och produkter. Förfrågan till de valda leverantörerna skapas i samma vy.' },
+				{ step: 'Material\u00ADförfrågan', shot: 'erp-materialforfragan', alt: 'Materialförfrågan: sökträffar bland leverantörer och historiska order till vänster, tre materialrader med dimension, stålkvalitet och vikt i mitten och vald leverantör till höger', caption: 'En sökning går samtidigt genom leverantörer, historiska order, offerter och produkter. Förfrågan till de valda leverantörerna skapas i samma vy.' },
 				{ step: 'Offert', shot: 'erp-offert', alt: 'Offert med offertrader, inpris, utpris och täckningsbidrag per rad, och en fraktsändning med pris från Unifaun', caption: 'Offerten räknar täckningsbidrag per rad och lägger frakten som en egen sändning med transportörens pris.' },
 				{ step: 'Order och inköp', shot: 'erp-order', alt: 'Orderöversikt som tavla med kolumner från inköp till produktion, där varje order visar inköpsstatus, frakt och kommentarer', caption: 'Orderöversikten följer varje order från inköp till leverans och flaggar det som håller på att bli försenat.' },
 				{ step: 'Lager och certifikat', shot: 'erp-lager', alt: 'Chargespårning för ett smältnummer: mottagning från leverantör och plockning på fem order', caption: 'Chargespårningen följer ett smältnummer från inleverans till varje order där materialet plockats. Det avgör vilket certifikat kunden ska ha.' },
@@ -92,7 +92,7 @@ export const sv = {
 				{ label: 'Utgångsläge', text: 'Offerterna gjordes i Excel, och samma uppgifter skrevs in flera gånger. Det fanns inget ställe där man såg var ett ärende låg.' },
 				{ label: 'Början', text: 'Som säljare automatiserade jag först offertflödet, från Excel och VBA till ett webbflöde mot Fortnox. Det blev grunden till dagens system.' },
 				{ label: 'Min roll', text: 'Produktägare, ensam utvecklare och projektledare för införandet: kravställning, datamodell, utveckling, test, utbildning och bytet från det gamla systemet.' },
-				{ label: 'Integrationer', id: 'integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft 365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
+				{ label: 'Integrationer', id: 'integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
 				{ label: 'AI-assistent', text: 'Svarar kollegorna om order, lager, material och rutiner, och kan efter bekräftelse lägga upp kunder och göra om förfrågningar till offerter.' },
 				{ label: 'Teknik', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL och Docker.' }
 			]
@@ -100,7 +100,7 @@ export const sv = {
 		side: {
 			title: 'Egna projekt',
 			projects: [
-				{ name: 'Smart hem', text: 'Home Assistant med 232 enheter, 161 automationer och 16 rum, via Zigbee, Matter/Thread och MQTT. Automationerna kopplar ihop belysning, värmepumpar och Nord Pool-elpris.' },
+				{ name: 'Smart hem', text: 'Home Assistant med 232 enheter, 161 automationer och 16 rum, via Zigbee, Matter/Thread och MQTT. Automationerna kopplar ihop belysning, värmepumpar och Nord\u00A0Pool-elpris.' },
 				{ name: 'Hemma', text: 'En egen dashboard i SvelteKit och FastAPI som familjen styr hemmet från i mobil och surfplatta, med roller för familj och gäster, pushnotiser och en AI-assistent som bara får föreslå godkända åtgärder.' },
 				{ name: 'Hushållsekonomi', text: 'En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning.' }
 			],
@@ -130,7 +130,7 @@ export const sv = {
 		erp: {
 			title: 'Affärssystemet',
 			text: [
-				'På Nordic Metal Trade började jag med att automatisera offertflödet. Det blev starten på företagets affärssystem, som jag sedan planerade och byggde. Systemet samlar CRM, materialförfrågningar, offerter, order, inköp, lager, certifikat och transport, och är kopplat till Fortnox, Shiplink, Unifaun/nShift och Microsoft 365.',
+				'På Nordic Metal Trade började jag med att automatisera offertflödet. Det blev starten på företagets affärssystem, som jag sedan planerade och byggde. Systemet samlar CRM, materialförfrågningar, offerter, order, inköp, lager, certifikat och transport, och är kopplat till Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365.',
 				'Jag är produktägare och ensam utvecklare, och var projektledare för införandet: test, utbildning och bytet från det gamla systemet.'
 			],
 			result: { before: 'Systemet har ', strong: 'cirka tio användare och sparar teamet över 20 timmar i veckan', after: '.' }
@@ -145,7 +145,7 @@ export const sv = {
 					period: 'jul 2019–nu',
 					org: 'Nordic Metal Trade AB',
 					track: 'both',
-					titles: ['Systemutvecklare och systemansvarig, aug 2025–nu', 'B2B-säljare med utvecklingsansvar, jul 2019–jul 2025 (80 % försäljning, 20 % utveckling)'],
+					titles: ['Systemutvecklare och systemansvarig, aug\u00A02025–nu', 'B2B-säljare med utvecklingsansvar, jul\u00A02019–jul\u00A02025 (80\u00A0% försäljning, 20\u00A0% utveckling)'],
 					text: 'Planerade och byggde företagets affärssystem. Är i dag produktägare och ensam utvecklare. Som säljare stod jag 2021 för ungefär hälften av företagets försäljning.'
 				},
 				{

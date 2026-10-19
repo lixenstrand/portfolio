@@ -78,14 +78,14 @@ test('the old CV address leads to the Swedish CV', async () => {
 	assert.equal(new URL(res.headers.get('location'), base).pathname, cvByLang.sv);
 });
 
-/** The attributes of every link on the page */
+// The attributes of every link on the page
 function links(html) {
 	return [...html.matchAll(/<a\b([^>]*)>/g)].map(([, attrs]) =>
 		Object.fromEntries([...attrs.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, name, value]) => [name, value]))
 	);
 }
 
-/** What a visitor downloads for the page: the HTML and the scripts it loads, where the texts not yet shown live */
+// What a visitor downloads for the page: the HTML and the scripts it loads, where the texts not yet shown live
 async function served(path) {
 	const html = await get(path);
 	const scripts = [...new Set(html.match(/\/_app\/immutable\/[\w./-]+\.js/g))];

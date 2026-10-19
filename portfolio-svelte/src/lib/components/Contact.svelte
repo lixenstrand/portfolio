@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { content, langOf } from '$lib/content';
+	import { texts } from '$lib/content';
 
-	const t = $derived(content(langOf(page.url.pathname)));
+	const t = $derived(texts());
 </script>
 
 <section id="kontakt" class="contact" aria-labelledby="kontakt-rubrik">

@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { content, langOf } from '$lib/content';
+	import { texts } from '$lib/content';
 
-	const t = $derived(content(langOf(page.url.pathname)));
-	const h = $derived(t.home);
+	const t = $derived(texts());
 
-	const flow = $derived(h.erp.flow);
+	const flow = $derived(t.home.erp.flow);
 	const shots = $derived(flow.filter((f) => f.shot).length);
 	const dwell = 4500; // per shot without the truck
 	let active = $state(1);
@@ -142,7 +140,7 @@
 	});
 
 	// Hemma rolls through its views on its own until a view is picked
-	const home = $derived(h.side.hemma.views);
+	const home = $derived(t.home.side.hemma.views);
 	let homeNow = $state(0);
 	let homePrev = $state(0);
 	let homeAuto = $state(true);
@@ -180,27 +178,27 @@
 		name: 'Magnus Lixenstrand',
 		url: 'https://magnuslixenstrand.com',
 		image: 'https://magnuslixenstrand.com/images/IMG_0830_optimized.jpg',
-		jobTitle: h.jobTitle,
+		jobTitle: t.home.jobTitle,
 		worksFor: { '@type': 'Organization', name: 'Nordic Metal Trade AB' },
-		description: h.description,
+		description: t.home.description,
 		email: 'mlixenstrand@gmail.com',
 		address: { '@type': 'PostalAddress', addressLocality: 'Jönköping', addressCountry: 'SE' },
 		sameAs: ['https://www.linkedin.com/in/magnus-lixenstrand/'],
-		knowsAbout: h.knowsAbout
+		knowsAbout: t.home.knowsAbout
 	});
 </script>
 
 <svelte:document onvisibilitychange={() => (hidden = document.hidden)} />
 
 <svelte:head>
-	<title>{h.title}</title>
-	<meta name="description" content={h.description}>
+	<title>{t.home.title}</title>
+	<meta name="description" content={t.home.description}>
 	<meta name="author" content="Magnus Lixenstrand">
 	<link rel="canonical" href="https://magnuslixenstrand.com/">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://magnuslixenstrand.com/">
-	<meta property="og:title" content={h.title}>
-	<meta property="og:description" content={h.description}>
+	<meta property="og:title" content={t.home.title}>
+	<meta property="og:description" content={t.home.description}>
 	<meta property="og:image" content={t.preview.image}>
 	<meta property="og:image:width" content="1200">
 	<meta property="og:image:height" content="630">
@@ -208,17 +206,17 @@
 	<meta property="og:locale" content={t.locale}>
 	<meta property="og:site_name" content="Magnus Lixenstrand">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content={h.title}>
-	<meta name="twitter:description" content={h.description}>
+	<meta name="twitter:title" content={t.home.title}>
+	<meta name="twitter:description" content={t.home.description}>
 	<meta name="twitter:image" content={t.preview.image}>
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 
 <section class="hero" aria-labelledby="hero-rubrik">
 	<div class="hero-copy">
-		<h1 id="hero-rubrik">{h.hero.title}</h1>
-		<p class="lede">{h.hero.lede}</p>
-		<p class="hero-proof">{h.hero.proof.before}<strong>{h.hero.proof.strong}</strong>{h.hero.proof.after}</p>
+		<h1 id="hero-rubrik">{t.home.hero.title}</h1>
+		<p class="lede">{t.home.hero.lede}</p>
+		<p class="hero-proof">{t.home.hero.proof.before}<strong>{t.home.hero.proof.strong}</strong>{t.home.hero.proof.after}</p>
 		<div class="cta-group">
 			<a href="#affarssystemet" class="cta-primary">{t.seeErp}</a>
 			<a href={t.cv.href} target="_blank" rel="noopener noreferrer" aria-label={t.cv.openLabel} class="cta-secondary">{t.cv.open}</a>
@@ -237,13 +235,13 @@
 <section id="projects" class="work">
 	<article id="affarssystemet" class="erp" aria-labelledby="erp-rubrik">
 		<header class="erp-head">
-			<h2 id="erp-rubrik">{h.erp.title}</h2>
-			<p>{h.erp.intro}</p>
+			<h2 id="erp-rubrik">{t.home.erp.title}</h2>
+			<p>{t.home.erp.intro}</p>
 		</header>
 
-		<div class="erp-show" role="group" aria-label={h.erp.showLabel} bind:this={showEl}>
+		<div class="erp-show" role="group" aria-label={t.home.erp.showLabel} bind:this={showEl}>
 			<div class="flow-road">
-				<ol class="flow" aria-label={h.erp.flowLabel} bind:this={flowEl}>
+				<ol class="flow" aria-label={t.home.erp.flowLabel} bind:this={flowEl}>
 					{#each flow as item, i}
 						<li class:here={at === i && !truck.gone}>
 							{#if item.shot}
@@ -260,7 +258,7 @@
 			</div>
 
 			<figure class="shot" id="erp-skarmbild">
-				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label={h.erp.shotLink(shown.step.replace('\u00AD', ''))}>
+				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label={t.home.erp.shotLink(shown.step.replace('\u00AD', ''))}>
 					<div class="shot-frame" class:back class:slow bind:this={frameEl} onscroll={swiped}>
 						{#each flow as item, i}
 							{#if item.shot}
@@ -270,14 +268,14 @@
 					</div>
 				</a>
 				<div class="carousel" class:playing class:paused={offscreen || hidden} style="--dwell: {dwell}ms">
-					<button type="button" class="carousel-play" aria-label={playing ? h.erp.pause : h.erp.play} onclick={() => (playing = !playing)}>
+					<button type="button" class="carousel-play" aria-label={playing ? t.home.erp.pause : t.home.erp.play} onclick={() => (playing = !playing)}>
 						<svg viewBox="0 0 16 16" aria-hidden="true">
 							{#if playing}<path d="M4 2.5h2.75v11H4zM9.25 2.5H12v11H9.25z" />{:else}<path d="M4.5 2.25v11.5L13.5 8z" />{/if}
 						</svg>
 					</button>
 					{#each flow as item, i}
 						{#if item.shot}
-							<button type="button" class="carousel-dot" aria-current={i === active} aria-controls="erp-skarmbild" aria-label={h.erp.dot(i + 1, shots, item.step.replace('\u00AD', ''))} onclick={() => pick(i)}>
+							<button type="button" class="carousel-dot" aria-current={i === active} aria-controls="erp-skarmbild" aria-label={t.home.erp.dot(i + 1, shots, item.step.replace('\u00AD', ''))} onclick={() => pick(i)}>
 								<span onanimationend={advance}></span>
 							</button>
 						{/if}
@@ -286,13 +284,13 @@
 				<figcaption aria-live={playing ? 'off' : 'polite'}><strong>{shown.step}.</strong> {shown.caption}</figcaption>
 			</figure>
 			<p class="shot-note">
-				{h.erp.note}
-				<button type="button" class="shot-toggle" onclick={toggle}>{playing ? h.erp.pause : h.erp.play}</button>
+				{t.home.erp.note}
+				<button type="button" class="shot-toggle" onclick={toggle}>{playing ? t.home.erp.pause : t.home.erp.play}</button>
 			</p>
 		</div>
 
 		<dl class="story">
-			{#each h.erp.story as part}
+			{#each t.home.erp.story as part}
 				<div id={part.id}>
 					<dt>{part.label}</dt>
 					<dd>{part.text}</dd>
@@ -302,10 +300,10 @@
 	</article>
 
 	<section class="side" aria-labelledby="egna-rubrik">
-		<h2 id="egna-rubrik">{h.side.title}</h2>
+		<h2 id="egna-rubrik">{t.home.side.title}</h2>
 		<div class="side-grid">
 			<div class="side-list">
-				{#each h.side.projects as project}
+				{#each t.home.side.projects as project}
 					<article>
 						<h3>{project.name}</h3>
 						<p>{project.text}</p>
@@ -313,7 +311,7 @@
 				{/each}
 			</div>
 			<figure class="shot" bind:this={homeEl}>
-				<a href="/images/{home[homeNow].shot}.webp" target="_blank" rel="noopener" aria-label={h.side.hemma.link(home[homeNow].name)}>
+				<a href="/images/{home[homeNow].shot}.webp" target="_blank" rel="noopener" aria-label={t.home.side.hemma.link(home[homeNow].name)}>
 					<div class="shot-frame">
 						{#each home as item, i}
 							<video class:is-active={i === homeNow} class:is-prev={i === homePrev && i !== homeNow} bind:this={clips[i]} src="/images/{item.shot}.mp4" poster="/images/{item.shot}-poster.webp" aria-label={i === homeNow ? item.alt : undefined} aria-hidden={i !== homeNow} width="1290" height="900" muted playsinline preload={homeOff ? 'none' : 'auto'} onended={() => clipEnded(i)}></video>
@@ -326,7 +324,7 @@
 							<button type="button" class="flow-step" aria-pressed={i === homeNow} onclick={() => ((homeAuto = false), homeShow(i))}>{item.name}</button>
 						{/each}
 					</span>
-					{h.side.hemma.caption}
+					{t.home.side.hemma.caption}
 				</figcaption>
 			</figure>
 		</div>
