@@ -42,6 +42,13 @@
 		</div>
 	</section>
 
+	<section>
+		<h2>{t.about.ai.title}</h2>
+		<div class="about-text">
+			{#each t.about.ai.text as p}<p>{p}</p>{/each}
+		</div>
+	</section>
+
 	<section aria-labelledby="vag-rubrik">
 		<h2 id="vag-rubrik">{t.about.path.title}</h2>
 		<div class="about-text">

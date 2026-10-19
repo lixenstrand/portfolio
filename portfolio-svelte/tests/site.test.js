@@ -119,6 +119,21 @@ for (const { path, lang, sv, en } of pages) {
 		}
 	});
 
+	// What a search hit or a shared link shows
+	test(`${path} is titled with the name and the Yrkestitel in ${lang}`, async () => {
+		const html = await get(path);
+		const meta = tags(html, 'meta');
+		const content = (key) => meta.find((m) => m.name === key || m.property === key)?.content;
+		const snippets = {
+			title: text(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ''),
+			...Object.fromEntries(['description', 'og:title', 'og:description', 'twitter:title', 'twitter:description'].map((key) => [key, content(key)]))
+		};
+		for (const [key, value] of Object.entries(snippets)) {
+			assert.ok(value?.includes('Magnus Lixenstrand'), `${key} "${value}" lacks the name`);
+			assert.ok(value.includes(jobTitleByLang[lang]), `${key} "${value}" lacks "${jobTitleByLang[lang]}"`);
+		}
+	});
+
 	test(`${path} shows no Tailscale address`, async () => {
 		assert.equal((await served(path)).match(tailscale)?.[0], undefined);
 	});
@@ -133,21 +148,6 @@ for (const { path, lang } of homePages) {
 	test(`${path} is headed by Magnus' name`, async () => {
 		const headings = [...(await get(path)).matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)].map(([, inner]) => text(inner));
 		assert.deepEqual(headings, ['Magnus Lixenstrand']);
-	});
-
-	// What a search hit or a shared link shows
-	test(`${path} is titled with the name and the Yrkestitel in ${lang}`, async () => {
-		const html = await get(path);
-		const meta = tags(html, 'meta');
-		const content = (key) => meta.find((m) => m.name === key || m.property === key)?.content;
-		const snippets = {
-			title: text(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ''),
-			...Object.fromEntries(['description', 'og:title', 'og:description', 'twitter:title', 'twitter:description'].map((key) => [key, content(key)]))
-		};
-		for (const [key, value] of Object.entries(snippets)) {
-			assert.ok(value?.includes('Magnus Lixenstrand'), `${key} "${value}" lacks the name`);
-			assert.ok(value.includes(jobTitleByLang[lang]), `${key} "${value}" lacks "${jobTitleByLang[lang]}"`);
-		}
 	});
 
 	test(`${path} gives search engines the Yrkestitel in ${lang}`, async () => {
