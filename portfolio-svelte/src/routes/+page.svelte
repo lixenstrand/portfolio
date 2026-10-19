@@ -1,18 +1,12 @@
 <script lang="ts">
-	const cv = '/cv/magnus_lixenstrand_cv_2026.pdf?v=4';
-	const cvEn = '/cv/magnus_lixenstrand_cv_2026_en.pdf?v=4';
+	import { page } from '$app/state';
+	import { content, langOf } from '$lib/content';
 
-	// Steps with a shot switch the screenshot; the rest point to their story row
-	const flow = [
-		{ step: 'Kund och CRM', shot: 'erp-kunder', alt: 'Kundregistret i affärssystemet: kunder med land, ansvarig säljare, senaste aktivitet, omsättning, täckningsbidrag och aktiva offerter', caption: 'Kundregistret visar omsättning, täckningsbidrag och aktiva offerter per kund.' },
-		{ step: 'Material­förfrågan', shot: 'erp-materialforfragan', alt: 'Materialförfrågan: sökträffar bland leverantörer och historiska order till vänster, tre materialrader med dimension, stålkvalitet och vikt i mitten och vald leverantör till höger', caption: 'En sökning går samtidigt genom leverantörer, historiska order, offerter och produkter. Förfrågan till de valda leverantörerna skapas i samma vy.' },
-		{ step: 'Offert', shot: 'erp-offert', alt: 'Offert med offertrader, inpris, utpris och täckningsbidrag per rad, och en fraktsändning med pris från Unifaun', caption: 'Offerten räknar täckningsbidrag per rad och lägger frakten som en egen sändning med transportörens pris.' },
-		{ step: 'Order och inköp', shot: 'erp-order', alt: 'Orderöversikt som tavla med kolumner från inköp till produktion, där varje order visar inköpsstatus, frakt och kommentarer', caption: 'Orderöversikten följer varje order från inköp till leverans och flaggar det som håller på att bli försenat.' },
-		{ step: 'Lager och certifikat', shot: 'erp-lager', alt: 'Chargespårning för ett smältnummer: mottagning från leverantör och plockning på fem order', caption: 'Chargespårningen följer ett smältnummer från inleverans till varje order där materialet plockats. Det avgör vilket certifikat kunden ska ha.' },
-		{ step: 'Transport', shot: 'erp-transport', alt: 'En bokad transport i fraktplaneringen: leveransdatum, vikt och ordervärde överst, kund, leverantör och fraktben med transportör, hämtning, lossning och kostnad, samt inleveranser, artiklar och kommentarer', caption: 'En bokad transport samlar kund, leverantör, fraktben, inleveranser och kommentarer på ett ställe, med listan över alla bokningar bredvid.' },
-		{ step: 'Bokföring', row: 'integrationer' }
-	];
-	const shots = flow.filter((f) => f.shot).length;
+	const t = $derived(content(langOf(page.url.pathname)));
+	const h = $derived(t.home);
+
+	const flow = $derived(h.erp.flow);
+	const shots = $derived(flow.filter((f) => f.shot).length);
 	const dwell = 4500; // per shot without the truck
 	let active = $state(1);
 	let prev = $state(1);
@@ -148,11 +142,7 @@
 	});
 
 	// Hemma rolls through its views on its own until a view is picked
-	const home = [
-		{ name: 'Hem', shot: 'hemma-hem', alt: 'Startsidan i Hemma på en surfplatta: torken och disken är klara, inne- och utetemperatur och scener som Morgon, Film och Godnatt' },
-		{ name: 'Rum', shot: 'hemma-rum', alt: 'Rummen i Hemma: vardagsrummet öppnas, en lampa släcks och en annan dimmas från 36 till 10 procent' },
-		{ name: 'Klimat', shot: 'hemma-klimat', alt: 'Klimatet i Hemma: inne- och utetemperatur, luftfuktighet, värmepumpen och varmvatten med kurvor' }
-	];
+	const home = $derived(h.side.hemma.views);
 	let homeNow = $state(0);
 	let homePrev = $state(0);
 	let homeAuto = $state(true);
@@ -184,73 +174,62 @@
 		return () => io.disconnect();
 	});
 
-	const story = [
-		{ label: 'Utgångsläge', text: 'Offerterna gjordes i Excel, och samma uppgifter skrevs in flera gånger. Det fanns inget ställe där man såg var ett ärende låg.' },
-		{ label: 'Början', text: 'Som säljare automatiserade jag först offertflödet, från Excel och VBA till ett webbflöde mot Fortnox. Det blev grunden till dagens system.' },
-		{ label: 'Min roll', text: 'Produktägare, ensam utvecklare och projektledare för införandet: kravställning, datamodell, utveckling, test, utbildning och bytet från det gamla systemet.' },
-		{ label: 'Integrationer', id: 'integrationer', text: 'Fortnox, Shiplink, Unifaun/nShift och Microsoft\u00A0365. Order, lager och inköp förs över till Fortnox utan dubbelregistrering, och frakt bokas direkt från ordern.' },
-		{ label: 'AI-assistent', text: 'Svarar kollegorna om order, lager, material och rutiner, och kan efter bekräftelse lägga upp kunder och göra om förfrågningar till offerter.' },
-		{ label: 'Teknik', text: 'SvelteKit, TypeScript, FastAPI, Python, MySQL och Docker.' }
-	];
-
-	const title = 'Magnus Lixenstrand – systemutvecklare, affärssystem, integration och automation';
-	const description = 'Systemutvecklare i Jönköping med tolv år i försäljning. Planerade och byggde Nordic Metal Trades affärssystem från grunden och äger det i dag som produktägare och ensam utvecklare.';
-	const jsonLd = {
+	const jsonLd = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'Person',
 		name: 'Magnus Lixenstrand',
 		url: 'https://magnuslixenstrand.com',
 		image: 'https://magnuslixenstrand.com/images/IMG_0830_optimized.jpg',
-		jobTitle: 'Systemutvecklare',
+		jobTitle: h.jobTitle,
 		worksFor: { '@type': 'Organization', name: 'Nordic Metal Trade AB' },
-		description,
+		description: h.description,
 		email: 'mlixenstrand@gmail.com',
 		address: { '@type': 'PostalAddress', addressLocality: 'Jönköping', addressCountry: 'SE' },
 		sameAs: ['https://www.linkedin.com/in/magnus-lixenstrand/'],
-		knowsAbout: ['Affärssystem', 'Systemintegration', 'Processautomation', 'Python', 'FastAPI', 'SvelteKit', 'TypeScript', 'Fortnox']
-	};
+		knowsAbout: h.knowsAbout
+	});
 </script>
 
 <svelte:document onvisibilitychange={() => (hidden = document.hidden)} />
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description}>
+	<title>{h.title}</title>
+	<meta name="description" content={h.description}>
 	<meta name="author" content="Magnus Lixenstrand">
 	<link rel="canonical" href="https://magnuslixenstrand.com/">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://magnuslixenstrand.com/">
-	<meta property="og:title" content={title}>
-	<meta property="og:description" content={description}>
-	<meta property="og:image" content="https://magnuslixenstrand.com/images/og-magnus-lixenstrand.jpg">
+	<meta property="og:title" content={h.title}>
+	<meta property="og:description" content={h.description}>
+	<meta property="og:image" content={t.preview.image}>
 	<meta property="og:image:width" content="1200">
 	<meta property="og:image:height" content="630">
-	<meta property="og:image:alt" content="Magnus Lixenstrand, systemutvecklare – affärssystem, integration och automation">
-	<meta property="og:locale" content="sv_SE">
+	<meta property="og:image:alt" content={t.preview.alt}>
+	<meta property="og:locale" content={t.locale}>
 	<meta property="og:site_name" content="Magnus Lixenstrand">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content={title}>
-	<meta name="twitter:description" content={description}>
-	<meta name="twitter:image" content="https://magnuslixenstrand.com/images/og-magnus-lixenstrand.jpg">
+	<meta name="twitter:title" content={h.title}>
+	<meta name="twitter:description" content={h.description}>
+	<meta name="twitter:image" content={t.preview.image}>
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 
 <section class="hero" aria-labelledby="hero-rubrik">
 	<div class="hero-copy">
-		<h1 id="hero-rubrik">Jag bygger bort onödigt manuellt arbete</h1>
-		<p class="lede">Jag heter Magnus Lixenstrand och är systemutvecklare i Jönköping. Tolv år i försäljning lärde mig var arbetet fastnar, så jag planerade och byggde Nordic Metal Trades affärssystem från grunden. I dag äger jag det som produktägare och ensam utvecklare.</p>
-		<p class="hero-proof">Systemet används varje dag av cirka tio kollegor och sparar teamet över <strong>20 timmar i veckan</strong>.</p>
+		<h1 id="hero-rubrik">{h.hero.title}</h1>
+		<p class="lede">{h.hero.lede}</p>
+		<p class="hero-proof">{h.hero.proof.before}<strong>{h.hero.proof.strong}</strong>{h.hero.proof.after}</p>
 		<div class="cta-group">
-			<a href="#affarssystemet" class="cta-primary">Se affärssystemet</a>
-			<a href={cv} target="_blank" rel="noopener noreferrer" aria-label="Öppna CV (PDF) i ny flik" class="cta-secondary">Öppna CV (PDF)</a>
-			<a href={cvEn} target="_blank" rel="noopener noreferrer" aria-label="CV in English (PDF), opens in a new tab" class="cta-secondary" lang="en">CV in English</a>
+			<a href="#affarssystemet" class="cta-primary">{t.seeErp}</a>
+			<a href={t.cv.href} target="_blank" rel="noopener noreferrer" aria-label={t.cv.openLabel} class="cta-secondary">{t.cv.open}</a>
+			<a href={t.cvOther.href} target="_blank" rel="noopener noreferrer" aria-label={t.cvOther.label} class="cta-secondary" lang={t.cvOther.lang}>{t.cvOther.short}</a>
 		</div>
 	</div>
 
 	<figure class="hero-portrait">
 		<picture>
 			<source type="image/webp" srcset="/images/IMG_0830-480.webp 480w, /images/IMG_0830-800.webp 800w, /images/IMG_0830.webp 1200w" sizes="(min-width: 821px) 22rem, 70vw">
-			<img src="/images/IMG_0830_optimized.jpg" alt="Magnus Lixenstrand" width="1200" height="1200">
+			<img src="/images/IMG_0830_optimized.jpg" alt={t.portraitAlt} width="1200" height="1200">
 		</picture>
 	</figure>
 </section>
@@ -258,13 +237,13 @@
 <section id="projects" class="work">
 	<article id="affarssystemet" class="erp" aria-labelledby="erp-rubrik">
 		<header class="erp-head">
-			<h2 id="erp-rubrik">Ett eget affärssystem för hela flödet</h2>
-			<p>Nordic Metal Trade säljer stål och metall till industrikunder i Europa. Affärssystemet är skräddarsytt efter hur företaget arbetar.</p>
+			<h2 id="erp-rubrik">{h.erp.title}</h2>
+			<p>{h.erp.intro}</p>
 		</header>
 
-		<div class="erp-show" role="group" aria-label="Flödet med skärmbilder" bind:this={showEl}>
+		<div class="erp-show" role="group" aria-label={h.erp.showLabel} bind:this={showEl}>
 			<div class="flow-road">
-				<ol class="flow" aria-label="Flödet i affärssystemet" bind:this={flowEl}>
+				<ol class="flow" aria-label={h.erp.flowLabel} bind:this={flowEl}>
 					{#each flow as item, i}
 						<li class:here={at === i && !truck.gone}>
 							{#if item.shot}
@@ -281,7 +260,7 @@
 			</div>
 
 			<figure class="shot" id="erp-skarmbild">
-				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label="Skärmbild av {shown.step.replace('\u00AD', '').toLowerCase()}, öppnas i full storlek i ny flik">
+				<a href="/images/{shown.shot}.webp" target="_blank" rel="noopener" aria-label={h.erp.shotLink(shown.step.replace('\u00AD', ''))}>
 					<div class="shot-frame" class:back class:slow bind:this={frameEl} onscroll={swiped}>
 						{#each flow as item, i}
 							{#if item.shot}
@@ -291,14 +270,14 @@
 					</div>
 				</a>
 				<div class="carousel" class:playing class:paused={offscreen || hidden} style="--dwell: {dwell}ms">
-					<button type="button" class="carousel-play" aria-label={playing ? 'Pausa bildspelet' : 'Starta bildspelet'} onclick={() => (playing = !playing)}>
+					<button type="button" class="carousel-play" aria-label={playing ? h.erp.pause : h.erp.play} onclick={() => (playing = !playing)}>
 						<svg viewBox="0 0 16 16" aria-hidden="true">
 							{#if playing}<path d="M4 2.5h2.75v11H4zM9.25 2.5H12v11H9.25z" />{:else}<path d="M4.5 2.25v11.5L13.5 8z" />{/if}
 						</svg>
 					</button>
 					{#each flow as item, i}
 						{#if item.shot}
-							<button type="button" class="carousel-dot" aria-current={i === active} aria-controls="erp-skarmbild" aria-label="Bild {i + 1} av {shots}: {item.step.replace('­', '')}" onclick={() => pick(i)}>
+							<button type="button" class="carousel-dot" aria-current={i === active} aria-controls="erp-skarmbild" aria-label={h.erp.dot(i + 1, shots, item.step.replace('\u00AD', ''))} onclick={() => pick(i)}>
 								<span onanimationend={advance}></span>
 							</button>
 						{/if}
@@ -307,13 +286,13 @@
 				<figcaption aria-live={playing ? 'off' : 'polite'}><strong>{shown.step}.</strong> {shown.caption}</figcaption>
 			</figure>
 			<p class="shot-note">
-				Bilderna kommer från testmiljön och all data på dem är påhittad. Systemet nås bara via företagets VPN, därför visas bilder i stället för en demo.
-				<button type="button" class="shot-toggle" onclick={toggle}>{playing ? 'Pausa bildspelet' : 'Starta bildspelet'}</button>
+				{h.erp.note}
+				<button type="button" class="shot-toggle" onclick={toggle}>{playing ? h.erp.pause : h.erp.play}</button>
 			</p>
 		</div>
 
 		<dl class="story">
-			{#each story as part}
+			{#each h.erp.story as part}
 				<div id={part.id}>
 					<dt>{part.label}</dt>
 					<dd>{part.text}</dd>
@@ -323,24 +302,18 @@
 	</article>
 
 	<section class="side" aria-labelledby="egna-rubrik">
-		<h2 id="egna-rubrik">Egna projekt</h2>
+		<h2 id="egna-rubrik">{h.side.title}</h2>
 		<div class="side-grid">
 			<div class="side-list">
-				<article>
-					<h3>Smart hem</h3>
-					<p>Home Assistant med 232 enheter, 161 automationer och 16 rum, via Zigbee, Matter/Thread och MQTT. Automationerna kopplar ihop belysning, värmepumpar och Nord&nbsp;Pool-elpris.</p>
-				</article>
-				<article>
-					<h3>Hemma</h3>
-					<p>En egen dashboard i SvelteKit och FastAPI som familjen styr hemmet från i mobil och surfplatta, med roller för familj och gäster, pushnotiser och en AI-assistent som bara får föreslå godkända åtgärder.</p>
-				</article>
-				<article>
-					<h3>Hushållsekonomi</h3>
-					<p>En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning.</p>
-				</article>
+				{#each h.side.projects as project}
+					<article>
+						<h3>{project.name}</h3>
+						<p>{project.text}</p>
+					</article>
+				{/each}
 			</div>
 			<figure class="shot" bind:this={homeEl}>
-				<a href="/images/{home[homeNow].shot}.webp" target="_blank" rel="noopener" aria-label="Skärmbild av Hemma, {home[homeNow].name.toLowerCase()}, öppnas i full storlek i ny flik">
+				<a href="/images/{home[homeNow].shot}.webp" target="_blank" rel="noopener" aria-label={h.side.hemma.link(home[homeNow].name)}>
 					<div class="shot-frame">
 						{#each home as item, i}
 							<video class:is-active={i === homeNow} class:is-prev={i === homePrev && i !== homeNow} bind:this={clips[i]} src="/images/{item.shot}.mp4" poster="/images/{item.shot}-poster.webp" aria-label={i === homeNow ? item.alt : undefined} aria-hidden={i !== homeNow} width="1290" height="900" muted playsinline preload={homeOff ? 'none' : 'auto'} onended={() => clipEnded(i)}></video>
@@ -353,7 +326,7 @@
 							<button type="button" class="flow-step" aria-pressed={i === homeNow} onclick={() => ((homeAuto = false), homeShow(i))}>{item.name}</button>
 						{/each}
 					</span>
-					Hemma på en surfplatta. Den körs lokalt och är kopplad till Home Assistant.
+					{h.side.hemma.caption}
 				</figcaption>
 			</figure>
 		</div>

@@ -1,12 +1,16 @@
 import type { Handle } from '@sveltejs/kit';
+import { langOf } from '$lib/content';
+import { cvFiles } from '$lib/content/cv';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// The old CV exposed a street address; send old links to the current CV.
 	if (event.url.pathname === '/cv/magnus_lixenstrand_cv.pdf') {
-		return new Response(null, { status: 301, headers: { location: '/cv/magnus_lixenstrand_cv_2026.pdf?v=4' } });
+		return new Response(null, { status: 301, headers: { location: cvFiles.sv } });
 	}
 
-	const response = await resolve(event);
+	// Each page states its own language
+	const lang = langOf(event.url.pathname);
+	const response = await resolve(event, { transformPageChunk: ({ html }) => html.replace('%lang%', lang) });
 
 	// Security headers
 	response.headers.set('X-Content-Type-Options', 'nosniff');
