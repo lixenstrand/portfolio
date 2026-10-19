@@ -168,11 +168,15 @@
 	min-width: 0;
 }
 
+.hero hgroup {
+	margin-bottom: 1.75rem;
+}
+
 .hero h1 {
 	max-width: 13ch;
 	margin-bottom: 1.75rem;
 	font-family: var(--display);
-	/* "manuellt arbete" must stay on one line: 14.5cqi is its measured width. */
+	/* Sized to the column, so "Lixenstrand" stays on one line. */
 	font-size: clamp(2.5rem, min(14.5cqi, 14vh), 6rem);
 	font-weight: 700;
 	line-height: 0.94;
@@ -183,6 +187,29 @@
 .hero-about h1 {
 	max-width: 15ch;
 	font-size: clamp(2.5rem, min(11cqi, 12vh), 5.25rem);
+}
+
+.hero hgroup h1 {
+	margin-bottom: 1.25rem;
+}
+
+.hero-title,
+.hero-subtitle {
+	margin-bottom: 0;
+	font-family: var(--display);
+	font-weight: 600;
+	line-height: 1.1;
+}
+
+.hero-title {
+	font-size: clamp(1.75rem, 1.2vw + 1.4rem, 2.5rem);
+	color: var(--steel);
+}
+
+.hero-subtitle {
+	margin-top: 0.35rem;
+	font-size: clamp(1.3rem, 0.6vw + 1.1rem, 1.75rem);
+	color: var(--ink-soft);
 }
 
 .lede {

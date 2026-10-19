@@ -1,16 +1,21 @@
 import { cvFiles } from './cv';
 import type { sv } from './sv';
 
+const jobTitle = 'AI Engineer';
+const subtitle = 'LLMs in real business workflows';
+
 // Every text on the site in English, the same keys as the Swedish module.
 export const en: typeof sv = {
 	locale: 'en_US',
 	language: 'English',
+	jobTitle,
+	subtitle,
 	skipLink: 'Skip to main content',
 	portraitAlt: 'Magnus Lixenstrand',
 	seeErp: 'See the ERP system',
 	preview: {
-		image: 'https://magnuslixenstrand.com/images/og-magnus-lixenstrand.jpg',
-		alt: 'Magnus Lixenstrand, systems developer – ERP, integration and automation'
+		image: 'https://magnuslixenstrand.com/images/og-magnus-lixenstrand-en.jpg',
+		alt: `Magnus Lixenstrand, ${jobTitle} – ${subtitle}`
 	},
 	cv: {
 		href: cvFiles.en,
@@ -31,7 +36,7 @@ export const en: typeof sv = {
 
 	nav: {
 		label: 'Main navigation',
-		role: 'Systems developer, Jönköping',
+		role: `${jobTitle}, Jönköping`,
 		projects: 'Projects',
 		about: 'About',
 		contact: 'Contact',
@@ -41,12 +46,12 @@ export const en: typeof sv = {
 
 	contact: {
 		title: 'Get in touch',
-		text: 'I’m looking for roles in ERP, systems integration and automation, in Jönköping or remote.',
+		text: `I’m looking for ${jobTitle} roles, in Jönköping or remote.`,
 		linkedinLabel: 'LinkedIn, opens in a new tab'
 	},
 
 	footer: {
-		role: 'Systems developer – ERP, integration and automation',
+		role: `${jobTitle} – ${subtitle}`,
 		linksLabel: 'Contact and profiles',
 		truck: '3D truck',
 		edited: 'modified'
@@ -59,14 +64,11 @@ export const en: typeof sv = {
 	},
 
 	home: {
-		title: 'Magnus Lixenstrand – systems developer, ERP, integration and automation',
-		description:
-			'Systems developer in Jönköping with twelve years in sales. Planned and built Nordic Metal Trade’s ERP system from scratch and now owns it as product owner and sole developer.',
-		jobTitle: 'Systems Developer',
-		knowsAbout: ['ERP systems', 'Systems integration', 'Process automation', 'Python', 'FastAPI', 'SvelteKit', 'TypeScript', 'Fortnox'],
+		title: `Magnus Lixenstrand, ${jobTitle} – ${subtitle}`,
+		description: `Magnus Lixenstrand is an ${jobTitle} in Jönköping, Sweden, building LLMs into real business workflows. He planned and built Nordic Metal Trade’s ERP system, which saves the team more than 20 hours a week.`,
+		knowsAbout: ['LLM applications', 'AI agents', 'Model Context Protocol (MCP)', 'Retrieval-augmented generation (RAG)', 'LLM evals'],
 		hero: {
-			title: 'I automate away unnecessary manual work',
-			lede: 'I’m Magnus Lixenstrand, a systems developer in Jönköping. Twelve years in sales taught me where work gets stuck, so I planned and built Nordic Metal Trade’s ERP system from scratch. Today I’m its product owner and sole developer.',
+			lede: 'I automate away unnecessary manual work, these days with LLMs. Twelve years in sales taught me where work gets stuck, so I planned and built Nordic Metal Trade’s ERP system from scratch. Today I’m its product owner and sole developer. Colleagues ask the AI in the system about orders, stock and routines, and it changes nothing until they have approved it.',
 			proof: { before: 'About ten colleagues use the system every day, and it saves the team more than ', strong: '20 hours a week', after: '.' }
 		},
 		erp: {

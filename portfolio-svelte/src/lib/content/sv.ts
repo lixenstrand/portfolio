@@ -1,16 +1,22 @@
 import { cvFiles } from './cv';
 
+// The Yrkestitel and its subtitle, which follow the name everywhere
+const jobTitle = 'AI-utvecklare';
+const subtitle = 'LLM:er i verkliga affärsflöden';
+
 // Every text on the site in Swedish, so the markup holds nothing that needs translating.
 export const sv = {
 	locale: 'sv_SE',
 	// The language's name in itself, for the language switcher
 	language: 'Svenska',
+	jobTitle,
+	subtitle,
 	skipLink: 'Hoppa till huvudinnehåll',
 	portraitAlt: 'Magnus Lixenstrand',
 	seeErp: 'Se affärssystemet',
 	preview: {
-		image: 'https://magnuslixenstrand.com/images/og-magnus-lixenstrand.jpg',
-		alt: 'Magnus Lixenstrand, systemutvecklare – affärssystem, integration och automation'
+		image: 'https://magnuslixenstrand.com/images/og-magnus-lixenstrand-sv.jpg',
+		alt: `Magnus Lixenstrand, ${jobTitle} – ${subtitle}`
 	},
 	cv: {
 		href: cvFiles.sv,
@@ -32,7 +38,7 @@ export const sv = {
 
 	nav: {
 		label: 'Huvudnavigation',
-		role: 'Systemutvecklare, Jönköping',
+		role: `${jobTitle}, Jönköping`,
 		projects: 'Projekt',
 		about: 'Om mig',
 		contact: 'Kontakt',
@@ -42,12 +48,12 @@ export const sv = {
 
 	contact: {
 		title: 'Hör gärna av dig',
-		text: 'Jag söker roller inom affärssystem, systemintegration och automation, i\u00A0Jönköping eller på\u00A0distans.',
+		text: `Jag söker roller som ${jobTitle}, i\u00A0Jönköping eller på\u00A0distans.`,
 		linkedinLabel: 'LinkedIn, öppnas i ny flik'
 	},
 
 	footer: {
-		role: 'Systemutvecklare – affärssystem, integration och automation',
+		role: `${jobTitle} – ${subtitle}`,
 		linksLabel: 'Kontakt och profiler',
 		truck: '3D-lastbil',
 		edited: 'bearbetad'
@@ -60,15 +66,13 @@ export const sv = {
 	},
 
 	home: {
-		title: 'Magnus Lixenstrand – systemutvecklare, affärssystem, integration och automation',
-		description:
-			'Systemutvecklare i Jönköping med tolv år i försäljning. Planerade och byggde Nordic Metal Trades affärssystem från grunden och äger det i dag som produktägare och ensam utvecklare.',
-		jobTitle: 'Systemutvecklare',
-		knowsAbout: ['Affärssystem', 'Systemintegration', 'Processautomation', 'Python', 'FastAPI', 'SvelteKit', 'TypeScript', 'Fortnox'],
+		title: `Magnus Lixenstrand, ${jobTitle} – ${subtitle}`,
+		description: `Magnus Lixenstrand är ${jobTitle} i Jönköping och bygger in LLM:er i verkliga affärsflöden. Han planerade och byggde Nordic Metal Trades affärssystem, som sparar teamet över 20 timmar i veckan.`,
+		// Only AI and LLM knowledge that the code shows
+		knowsAbout: ['LLM-applikationer', 'AI-agenter', 'Model Context Protocol (MCP)', 'Retrieval-augmented generation (RAG)', 'Evals för LLM:er'],
 		hero: {
-			title: 'Jag bygger bort onödigt manuellt arbete',
-			lede: 'Jag heter Magnus Lixenstrand och är systemutvecklare i Jönköping. Tolv år i försäljning lärde mig var arbetet fastnar, så jag planerade och byggde Nordic Metal Trades affärssystem från grunden. I dag äger jag det som produktägare och ensam utvecklare.',
-			proof: { before: 'Systemet används varje dag av cirka tio kollegor och sparar teamet över ', strong: '20 timmar i veckan', after: '.' }
+			lede: 'Jag bygger bort onödigt manuellt arbete, numera med LLM:er. Tolv år i försäljning lärde mig var arbetet fastnar, så jag planerade och byggde Nordic Metal Trades affärssystem från grunden. I dag är jag produktägare och ensam utvecklare. Kollegorna frågar AI:n i systemet om order, lager och rutiner, och den ändrar ingenting förrän de har godkänt det.',
+			proof: { before: 'Systemet används varje dag av ungefär tio kollegor och sparar teamet över ', strong: '20 timmar i veckan', after: '.' }
 		},
 		erp: {
 			title: 'Ett eget affärssystem för hela flödet',

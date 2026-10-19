@@ -15,9 +15,18 @@ const versions = [
 	{ sv: '/about', en: '/en/about' }
 ];
 const pages = versions.flatMap((page) => ['sv', 'en'].map((lang) => ({ path: page[lang], lang, ...page })));
+const homePages = pages.filter((page) => page.sv === '/');
 const otherByLang = { sv: 'en', en: 'sv' };
 
 const localeByLang = { sv: 'sv_SE', en: 'en_US' };
+
+// The Yrkestitel, the title Magnus is presented with everywhere (CONTEXT.md)
+const jobTitleByLang = { sv: 'AI-utvecklare', en: 'AI Engineer' };
+
+const previewByLang = {
+	sv: '/images/og-magnus-lixenstrand-sv.jpg',
+	en: '/images/og-magnus-lixenstrand-en.jpg'
+};
 
 const cvByLang = {
 	sv: '/cv/magnus_lixenstrand_cv_2026.pdf',
@@ -70,6 +79,16 @@ for (const { path, lang, sv, en } of pages) {
 		assert.equal(meta.find((m) => m.property === 'og:url')?.content, site + path);
 	});
 
+	test(`${path} is shared with the preview image in ${lang}`, async () => {
+		const meta = tags(await get(path), 'meta');
+		for (const key of ['og:image', 'twitter:image']) {
+			assert.equal(meta.find((m) => m.property === key || m.name === key)?.content, site + previewByLang[lang], key);
+		}
+		const res = await fetch(base + previewByLang[lang]);
+		assert.equal(res.status, 200, `${previewByLang[lang]} answers ${res.status}`);
+		assert.equal(res.headers.get('content-type'), 'image/jpeg');
+	});
+
 	test(`${path} switches to the same page in ${otherByLang[lang]}`, async () => {
 		const switches = links(await get(path)).filter((a) => a.hreflang);
 		const to = otherByLang[lang];
@@ -107,6 +126,35 @@ for (const { path, lang, sv, en } of pages) {
 	});
 }
 
+for (const { path, lang } of homePages) {
+	test(`${path} is headed by Magnus' name`, async () => {
+		const headings = [...(await get(path)).matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)].map(([, inner]) => text(inner));
+		assert.deepEqual(headings, ['Magnus Lixenstrand']);
+	});
+
+	// What a search hit or a shared link shows
+	test(`${path} is titled with the name and the Yrkestitel in ${lang}`, async () => {
+		const html = await get(path);
+		const meta = tags(html, 'meta');
+		const content = (key) => meta.find((m) => m.name === key || m.property === key)?.content;
+		const titles = {
+			title: text(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ''),
+			...Object.fromEntries(['description', 'og:title', 'og:description', 'twitter:title', 'twitter:description'].map((key) => [key, content(key)]))
+		};
+		for (const [key, value] of Object.entries(titles)) {
+			assert.ok(value?.includes('Magnus Lixenstrand'), `${key} "${value}" lacks the name`);
+			assert.ok(value.includes(jobTitleByLang[lang]), `${key} "${value}" lacks "${jobTitleByLang[lang]}"`);
+		}
+	});
+
+	test(`${path} gives search engines the Yrkestitel in ${lang}`, async () => {
+		const data = [...(await get(path)).matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(([, json]) => JSON.parse(json));
+		const person = data.find((item) => item['@type'] === 'Person');
+		assert.equal(person?.name, 'Magnus Lixenstrand');
+		assert.equal(person.jobTitle, jobTitleByLang[lang]);
+	});
+}
+
 test('the sitemap lists every page with its version in each language', async () => {
 	const urls = [...(await get('/sitemap.xml')).matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, url]) => ({
 		loc: url.match(/<loc>([^<]*)<\/loc>/)?.[1],
@@ -135,6 +183,11 @@ function tags(html, name) {
 	return [...html.matchAll(new RegExp(`<${name}\\b([^>]*)>`, 'g'))].map(([, attrs]) =>
 		Object.fromEntries([...attrs.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, name, value]) => [name, value]))
 	);
+}
+
+// The text in a piece of HTML, as a reader gets it
+function text(html) {
+	return html.replace(/<!--[\s\S]*?-->|<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
 }
 
 // What a visitor downloads for the page: the HTML and the scripts it loads, where the texts not yet shown live
