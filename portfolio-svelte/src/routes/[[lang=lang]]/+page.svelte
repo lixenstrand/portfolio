@@ -163,7 +163,7 @@
 	let roadGrown = $state(0); // how far the side road has grown out from the road, 0 to 1
 	let loaded: Promise<unknown> | undefined;
 	// The same addresses as in portfolio.css, so the stylesheet finds them loaded
-	const turnImages = ['/images/truck/scania-turn.webp?v=1', '/images/truck/side-road.webp?v=1', '/images/truck/scania-drive-left.webp?v=1'];
+	const turnImages = ['/images/truck/scania-turn.webp?v=2', '/images/truck/side-road.webp?v=2', '/images/truck/scania-drive-left.webp?v=1'];
 
 	function preload() {
 		return (loaded ??= Promise.all(

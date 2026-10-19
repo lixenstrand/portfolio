@@ -1060,7 +1060,7 @@
 
 .turn-render {
 	visibility: hidden;
-	background: url('/images/truck/scania-turn.webp?v=1') no-repeat;
+	background: url('/images/truck/scania-turn.webp?v=2') no-repeat;
 }
 
 .turn.turning .turn-render {
@@ -1070,7 +1070,7 @@
 /* The side road grows out from the road, then fades once the truck has left it */
 .side-road {
 	opacity: 0;
-	background: url('/images/truck/side-road.webp?v=1') 0 0 / 100% 100% no-repeat;
+	background: url('/images/truck/side-road.webp?v=2') 0 0 / 100% 100% no-repeat;
 	clip-path: inset(calc((1 - var(--grown)) * var(--road-bottom) * 100%) 0 0 0);
 	transition: opacity 0.6s ease-out;
 }

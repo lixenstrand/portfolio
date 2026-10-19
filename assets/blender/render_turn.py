@@ -29,9 +29,9 @@ TRAILER_AXLE = -10.91 # middle of the trailer's three axles
 L2 = HITCH_X - TRAILER_AXLE
 MID = -4.625          # halfway between the cab front (4.0) and the trailer's tail (-13.25)
 WHEEL = 0.52          # tyre radius
-RADIUS, RAMP, SPUR = 6.0, 4.0, 7.0
+RADIUS, RAMP, SPUR = 9.0, 4.0, 10.0  # the whole rig backs off the road, at 48° between tractor and trailer
 FPS = 24
-FRAMES_A, PAUSE, FRAMES_B = 28, 3, 30
+FRAMES_A, PAUSE, FRAMES_B = 32, 3, 34
 
 
 def path(x, y, psi, sign, straight_before=0.0, straight_after=0.0, step=0.02):
@@ -269,7 +269,8 @@ for p in timeline:
 seen += view([(px, py, 0) for px, py in loop])
 margin = 0.03
 u0, u1 = min(v.x for v in seen) - margin, max(v.x for v in seen) + margin
-v0, v1 = min(v.y for v in seen) - margin * 3, max(v.y for v in seen) + margin * 3
+# Room below for the shadow, which falls towards the camera once the truck faces it
+v0, v1 = min(v.y for v in seen) - margin * 10, max(v.y for v in seen) + margin * 3
 width, height = round((u1 - u0) * 720 / 2) * 2, round((v1 - v0) * 240 / 2) * 2
 u1, v1 = u0 + width / 720, v0 + height / 240
 assert width > height
