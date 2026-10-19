@@ -107,8 +107,9 @@ export const sv = {
 			title: 'Egna projekt',
 			projects: [
 				{ name: 'Smart hem', text: 'Home Assistant med 232 enheter, 161 automationer och 16 rum, via Zigbee, Matter/Thread och MQTT. Automationerna kopplar ihop belysning, värmepumpar och Nord\u00A0Pool-elpris.' },
-				{ name: 'Hemma', text: 'En egen dashboard i SvelteKit och FastAPI som familjen styr hemmet från i mobil och surfplatta, med roller för familj och gäster, pushnotiser och en AI-assistent som bara får föreslå godkända åtgärder.' },
-				{ name: 'Hushållsekonomi', text: 'En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning.' }
+				{ name: 'Hemma', text: 'En egen dashboard i SvelteKit och FastAPI som familjen styr hemmet från i mobil och surfplatta, med pushnotiser och roller för familj och gäster. AI-assistenten föreslår åtgärder som knappar, och appen utför bara det förslag någon trycker på. Varje förslag kontrolleras mot husets egna lampor, brytare, scener och skript.' },
+				{ name: 'Hushållsekonomi', text: 'En webbapp i SvelteKit, FastAPI och SQLite som hämtar transaktioner från Toshl och följer budget, sparmål och lån. Den körs på egen server med nattlig avstämning. En egen MCP-server med 24 verktyg låter en AI-assistent läsa ekonomin, pröva om ett köp ryms och kategorisera om köp.' },
+				{ name: 'Majo', text: 'Jag vidareutvecklar Majo, en Android\u00A0TV-app som spelar film och serier från användarens egna Plex-, Jellyfin- och Emby-servrar. En LLM översätter undertexterna medan filmen spelas. Jag har gjort ett nytt TV-gränssnitt med taktilt fokus. Agenter bygger och släpper nya versioner när jag ber om det, och appen erbjuder dem sedan på TV:n.' }
 			],
 			hemma: {
 				views: [

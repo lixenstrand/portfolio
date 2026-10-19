@@ -103,8 +103,9 @@ export const en: typeof sv = {
 			title: 'Personal projects',
 			projects: [
 				{ name: 'Smart home', text: 'Home Assistant with 232 devices, 161 automations and 16 rooms, over Zigbee, Matter/Thread and MQTT. The automations connect lighting, heat pumps and Nord Pool electricity prices.' },
-				{ name: 'Hemma', text: 'A custom dashboard in SvelteKit and FastAPI that the family uses to run the home from phone and tablet, with roles for family and guests, push notifications and an AI assistant that can only propose approved actions.' },
-				{ name: 'Household finances', text: 'A web app in SvelteKit, FastAPI and SQLite that pulls transactions from Toshl and tracks budget, savings goals and loans. It runs on a home server with a nightly reconciliation.' }
+				{ name: 'Hemma', text: 'A custom dashboard in SvelteKit and FastAPI that the family uses to run the home from phone and tablet, with push notifications and roles for family and guests. Its AI assistant proposes actions as buttons, and the app only carries out the one someone taps. Every proposal is checked against the house’s own lights, switches, scenes and scripts.' },
+				{ name: 'Household finances', text: 'A web app in SvelteKit, FastAPI and SQLite that pulls transactions from Toshl and tracks budget, savings goals and loans. It runs on a home server with a nightly reconciliation. Its own MCP server with 24 tools lets an AI assistant read the finances, check whether a purchase fits and recategorize purchases.' },
+				{ name: 'Majo', text: 'I’m continuing to develop Majo, an Android\u00A0TV app that plays movies and shows from the user’s own Plex, Jellyfin and Emby servers. An LLM translates the subtitles while the movie plays. I’ve made a new TV interface with tactile focus. Agents build and publish new versions when I ask, and the app then offers them on the TV.' }
 			],
 			hemma: {
 				views: [
