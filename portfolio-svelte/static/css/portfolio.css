@@ -1221,7 +1221,6 @@
 	}
 
 	.truck,
-	.carousel-dot,
 	.carousel-dot span {
 		transition: none;
 	}
@@ -1257,7 +1256,7 @@
 	place-items: center;
 	width: 2.75rem;
 	height: 2.75rem;
-	margin-right: 0.5rem;
+	margin-right: 0.875rem;
 	padding: 0;
 	border: 1px solid var(--line);
 	border-radius: 50%;
@@ -1275,29 +1274,25 @@
 .carousel-dot {
 	display: grid;
 	place-items: center;
-	width: 1.75rem;
+	width: 2.25rem;
 	height: 2.75rem;
 	padding: 0;
 	border: 0;
 	background: none;
 	cursor: pointer;
-	transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Every dot is a full-width pill clipped to a circle, so the current one grows without moving the others */
 .carousel-dot span {
-	width: 0.5rem;
+	width: 100%;
 	height: 0.5rem;
-	border-radius: 0.25rem;
+	clip-path: inset(0 calc(50% - 0.25rem) round 0.25rem);
 	background: var(--ink-quiet);
-	transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease-out;
-}
-
-.carousel-dot[aria-current="true"] {
-	width: 3rem;
+	transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease-out;
 }
 
 .carousel-dot[aria-current="true"] span {
-	width: 2.25rem;
+	clip-path: inset(0 round 0.25rem);
 	/* One layer, so the fill's size interpolates */
 	background: color-mix(in oklch, var(--steel) 60%, var(--surface)) linear-gradient(var(--steel-dark) 0 0) 0 0 / 100% 100% no-repeat;
 }
