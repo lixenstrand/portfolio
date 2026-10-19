@@ -23,6 +23,9 @@ const localeByLang = { sv: 'sv_SE', en: 'en_US' };
 // The Yrkestitel, the title Magnus is presented with everywhere (CONTEXT.md)
 const jobTitleByLang = { sv: 'AI-utvecklare', en: 'AI Engineer' };
 
+// Majo is an app Magnus develops further, never one he built (CONTEXT.md)
+const majoByLang = { sv: 'Jag vidareutvecklar Majo, en Android TV-app', en: 'I’m continuing to develop Majo, an Android TV app' };
+
 const previewByLang = {
 	sv: '/images/og-magnus-lixenstrand-sv.jpg',
 	en: '/images/og-magnus-lixenstrand-en.jpg'
@@ -152,6 +155,10 @@ for (const { path, lang } of homePages) {
 		const person = data.find((item) => item['@type'] === 'Person');
 		assert.equal(person?.name, 'Magnus Lixenstrand');
 		assert.equal(person.jobTitle, jobTitleByLang[lang]);
+	});
+
+	test(`${path} presents Majo as an app Magnus develops further, in ${lang}`, async () => {
+		assert.ok(text(await get(path)).includes(majoByLang[lang]), `no "${majoByLang[lang]}"`);
 	});
 }
 
