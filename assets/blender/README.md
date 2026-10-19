@@ -64,7 +64,7 @@ Skriptet skriver om `road.blend` och `/tmp/magnus-road.png`. Webbversionen
 `render_turn.py` öppnar `truck.blend` utan att ändra filen och renderar med
 samma kamera, ljus och skala:
 
-- svängen i 62 bildrutor: lastbilen backar in på en sidoväg bakom sig och kör
+- svängen i 70 bildrutor: hela ekipaget backar in på en sidoväg bakom sig och kör
   ut åt andra hållet,
 - sidovägen ensam,
 - lastbilen vänd åt vänster, 24 hjulbilder.
