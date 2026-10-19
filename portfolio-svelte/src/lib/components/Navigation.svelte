@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/state';
+	import { texts } from '$lib/content';
+
+	const t = $derived(texts());
 
 	let hamburgerOpen = $state(false);
 	let hamburgerButton: HTMLButtonElement;
@@ -93,27 +96,27 @@
 </script>
 
 <header class="site-header">
-	<nav class="site-nav" aria-label="Huvudnavigation">
+	<nav class="site-nav" aria-label={t.nav.label}>
 		<a class="brand" href="/" onclick={() => closeMenu(false)}>
 			<span class="brand-name">Magnus Lixenstrand</span>
-			<span class="brand-role">Systemutvecklare, Jönköping</span>
+			<span class="brand-role">{t.nav.role}</span>
 		</a>
 
 		<div bind:this={menuElement} class="nav-menu" class:active={hamburgerOpen} id="primary-navigation">
 			<ul>
-				<li><a href="/#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>Projekt</a></li>
-				<li><a href="/about" class:current={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} onclick={() => closeMenu(false)}>Om mig</a></li>
-				<li><a href="#kontakt" onclick={() => closeMenu(false)}>Kontakt</a></li>
+				<li><a href="/#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>{t.nav.projects}</a></li>
+				<li><a href="/about" class:current={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} onclick={() => closeMenu(false)}>{t.nav.about}</a></li>
+				<li><a href="#kontakt" onclick={() => closeMenu(false)}>{t.nav.contact}</a></li>
 			</ul>
 		</div>
 
-		<a href="/cv/magnus_lixenstrand_cv_2026.pdf?v=4" target="_blank" rel="noopener noreferrer" aria-label="CV, PDF i ny flik" class="nav-cv" onclick={() => closeMenu(false)}>CV</a>
+		<a href={t.cv.href} target="_blank" rel="noopener noreferrer" aria-label={t.cv.navLabel} class="nav-cv" onclick={() => closeMenu(false)}>{t.cv.nav}</a>
 
 		<button
 			bind:this={hamburgerButton}
 			class="hamburger"
 			class:active={hamburgerOpen}
-			aria-label={hamburgerOpen ? 'Stäng meny' : 'Öppna meny'}
+			aria-label={hamburgerOpen ? t.nav.close : t.nav.open}
 			aria-controls="primary-navigation"
 			aria-expanded={hamburgerOpen}
 			onclick={toggleMenu}
