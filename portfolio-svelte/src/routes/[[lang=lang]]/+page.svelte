@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { texts } from '$lib/content';
 	import PageMeta from '$lib/components/PageMeta.svelte';
+	import turnFrames from '$lib/truck-turn.json';
 
 	const t = $derived(texts());
 
@@ -25,8 +26,12 @@
 
 	// The truck drives on its own: slowly to the next step, uncovering its shot on the way.
 	// A click takes over: the truck goes straight there and the tour stops.
+	// It never reverses along the road: to head the other way it makes a three-point turn.
 	let at = $state(1);
-	let truck = $state({ x: 0, y: 0, back: false, driving: false, fast: true, gone: false, jump: false });
+	let truck = $state({ x: 0, y: 0, left: false, driving: false, fast: true, gone: false, jump: false });
+	let truckEl: HTMLDivElement;
+	let trip = 0; // the latest trip; an older one stops where it is
+	let arrive: (() => void) | undefined;
 
 	function show(i: number) {
 		if (i === active) return;
@@ -38,11 +43,13 @@
 
 	function drive(i: number, fast: boolean) {
 		if (i === at) return;
-		truck.back = i < at;
+		// Without motion the truck just faces the step it jumps to
+		if (!wide || reduced) truck.left = i < at;
 		truck.fast = fast;
 		truck.driving = wide && !reduced;
 		at = i;
 		show(i);
+		void go(++trip);
 	}
 
 	function pick(i: number) {
@@ -55,22 +62,158 @@
 		playing = !playing;
 		if (playing) showEl.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
 	}
-	function arrived(e: TransitionEvent) {
-		if (e.propertyName === 'translate') truck.driving = false;
-	}
 
 	function advance() {
 		if (at < shots - 1) return drive(at + 1, false);
 		if (!wide) return drive(0, false);
-		// End of the road: fade out and start over from the first step
+		// End of the road: fade out and start over from the first step, facing right again
 		truck.gone = true;
-		setTimeout(() => {
-			truck.jump = true;
-			truck.back = false;
+		const id = ++trip;
+		setTimeout(async () => {
+			if (id !== trip) return;
 			at = 0;
 			show(0);
-			requestAnimationFrame(() => requestAnimationFrame(() => (truck.jump = truck.gone = false)));
+			truck.left = false;
+			await place(stop(0));
+			truck.gone = false;
 		}, 450);
+	}
+
+	// Drive to the step the truck is headed for, turning first if it lies behind the truck
+	async function go(id: number) {
+		await turning;
+		const to = stop(at);
+		if (id !== trip || !to) return;
+		if (!wide || reduced) {
+			await place(to);
+			truck.driving = false;
+			return;
+		}
+		await place(where()); // stop where it is if it was on its way somewhere else
+		const ahead = truck.left ? -1 : 1;
+		if (id === trip && (to.x - truck.x) * ahead < 0) {
+			// The turn ends one turn length back; without that much room, pull forward first
+			const start = to.x + ahead * turnLength();
+			if ((start - truck.x) * ahead > 0) await move({ x: start, y: to.y });
+			if (id !== trip) return;
+			await (turning = turn());
+			turning = undefined;
+		}
+		if (id !== trip) return;
+		await move(to);
+		if (id === trip) truck.driving = false;
+	}
+
+	// Where the truck stops for a step: its node on the road
+	function stop(i: number) {
+		const li = flowEl?.children[i] as HTMLElement | undefined;
+		if (!li) return;
+		const node = getComputedStyle(li, '::before');
+		return {
+			x: li.offsetLeft + parseFloat(node.left) + parseFloat(node.width) / 2,
+			y: li.offsetTop + parseFloat(node.top) + parseFloat(node.height) / 2
+		};
+	}
+
+	// Where the truck is right now, even halfway to somewhere
+	function where() {
+		const [x = 0, y = 0] = getComputedStyle(truckEl).translate.split(' ').map((v) => parseFloat(v) || 0);
+		return { x, y };
+	}
+
+	// Drive somewhere; done on arrival
+	function move(to: { x: number; y: number }) {
+		arrive?.();
+		if (Math.hypot(to.x - truck.x, to.y - truck.y) < 0.5) return Promise.resolve();
+		truck.x = to.x;
+		truck.y = to.y;
+		return new Promise<void>((done) => (arrive = done));
+	}
+
+	function arrived(e: TransitionEvent) {
+		if (e.propertyName !== 'translate') return;
+		arrive?.();
+		arrive = undefined;
+	}
+
+	// Put the truck somewhere without driving there
+	async function place(to: { x: number; y: number } | undefined) {
+		arrive?.();
+		arrive = undefined;
+		if (!to || Math.hypot(to.x - truck.x, to.y - truck.y) < 0.5) return;
+		truck.jump = true;
+		truck.x = to.x;
+		truck.y = to.y;
+		await waitFrames(2);
+		truck.jump = false;
+	}
+
+	const waitFrames = (n: number) =>
+		new Promise<void>((done) => {
+			const tick = () => (--n ? requestAnimationFrame(tick) : done());
+			requestAnimationFrame(tick);
+		});
+
+	// The three-point turn, rendered in Blender: a side road opens behind the truck,
+	// it backs in and drives out the other way. Turning back to the right plays it backwards.
+	let turning: Promise<void> | undefined;
+	let turnAt = $state({ x: 0, y: 0 }); // where the truck faces right at the turn's first frame
+	let turnFrame = $state(-1);
+	let sideRoad = $state<'' | 'open' | 'fade'>('');
+	let roadGrown = $state(0); // how far the side road has grown out from the road, 0 to 1
+	let loaded: Promise<unknown> | undefined;
+	// The same addresses as in portfolio.css, so the stylesheet finds them loaded
+	const turnImages = ['/images/truck/scania-turn.webp?v=1', '/images/truck/side-road.webp?v=1', '/images/truck/scania-drive-left.webp?v=1'];
+
+	function preload() {
+		return (loaded ??= Promise.all(
+			turnImages.map((src) => {
+				const image = new Image();
+				image.src = src;
+				return image.decode().catch(() => {});
+			})
+		));
+	}
+
+	// How far along the road a turn moves the truck's stop, in pixels
+	function turnLength() {
+		return (turnFrames.shift - 0.5) * truckEl.offsetWidth;
+	}
+
+	async function turn() {
+		const toLeft = !truck.left;
+		const right = toLeft ? truck.x : truck.x + turnLength();
+		turnAt = { x: right, y: truck.y };
+		sideRoad = 'open';
+		await Promise.all([preload(), tween(450, (t) => (roadGrown = 1 - (1 - t) ** 3))]);
+		const { frames: count, fps } = turnFrames;
+		await tween((count / fps) * 1000, (t) => {
+			const k = Math.min(count - 1, Math.floor(t * count));
+			turnFrame = toLeft ? k : count - 1 - k;
+		});
+		truck.left = toLeft;
+		await place({ x: toLeft ? right - turnLength() : right, y: truck.y });
+		turnFrame = -1;
+		sideRoad = 'fade';
+		setTimeout(() => {
+			if (sideRoad !== 'fade') return;
+			sideRoad = '';
+			roadGrown = 0;
+		}, 700);
+	}
+
+	// Call step with the time passed, 0 to 1, once a frame for ms milliseconds
+	function tween(ms: number, step: (t: number) => void) {
+		return new Promise<void>((done) => {
+			const start = performance.now();
+			const tick = (now: number) => {
+				const t = Math.min(1, (now - start) / ms);
+				step(t);
+				if (t < 1) requestAnimationFrame(tick);
+				else done();
+			};
+			requestAnimationFrame(tick);
+		});
 	}
 
 	// Phones: the strip scrolls to the shot, and a swipe picks one once it settles
@@ -86,15 +229,17 @@
 		}, 120);
 	}
 
+	// Without a trip under way, the truck stays on its step when the layout changes
 	function park() {
-		const li = flowEl?.children[at] as HTMLElement | undefined;
-		if (!li) return;
-		const node = getComputedStyle(li, '::before');
-		truck.x = li.offsetLeft + parseFloat(node.left) + parseFloat(node.width) / 2;
-		truck.y = li.offsetTop + parseFloat(node.top) + parseFloat(node.height) / 2;
+		if (!truck.driving) void place(stop(at));
 	}
 
-	$effect(park);
+	// A hidden or motionless truck never arrives: stop the trip and put it on its step
+	function halt() {
+		trip++;
+		truck.driving = false;
+		void place(stop(at));
+	}
 
 	// Phones advance when the dot's progress fill ends, so the dot and the strip stay in step
 	$effect(() => {
@@ -110,7 +255,7 @@
 			reduced = motion.matches;
 			if (reduced) {
 				playing = false;
-				truck.driving = false;
+				halt();
 			}
 		}
 		updateMotion();
@@ -121,10 +266,11 @@
 		function updateLayout() {
 			wide = truckFits.matches;
 			phone = small.matches;
-			if (!wide) truck.driving = false; // a hidden truck never arrives
+			if (!wide) halt();
 		}
 		updateLayout();
 		truckFits.onchange = small.onchange = updateLayout;
+		park();
 		const ro = new ResizeObserver(park);
 		ro.observe(flowEl);
 		const io = new IntersectionObserver(([e]) => {
@@ -231,7 +377,8 @@
 
 		<div class="erp-show" role="group" aria-label={t.home.erp.showLabel} bind:this={showEl}>
 			<div class="flow-road">
-				<ol class="flow" aria-label={t.home.erp.flowLabel} bind:this={flowEl}>
+				<!-- Only a visitor about to pick a step can make the truck turn: load the turn then -->
+				<ol class="flow" aria-label={t.home.erp.flowLabel} bind:this={flowEl} onpointerenter={() => wide && preload()} onfocusin={() => wide && preload()}>
 					{#each flow as item, i}
 						<li class:here={at === i && !truck.gone}>
 							{#if item.shot}
@@ -242,7 +389,19 @@
 						</li>
 					{/each}
 				</ol>
-				<div class="truck" class:back={truck.back} class:driving={truck.driving} class:fast={truck.fast} class:gone={truck.gone} class:jump={truck.jump} class:paused={offscreen || hidden} style="--x: {truck.x}px; --y: {truck.y}px" aria-hidden="true" ontransitionend={arrived}>
+				<div
+					class="turn"
+					class:turning={turnFrame >= 0}
+					style="--x: {turnAt.x}px; --y: {turnAt.y}px; --left: {turnFrames.left}; --top: {turnFrames.top}; --width: {turnFrames.width}; --height: {turnFrames.height}; --road-bottom: {turnFrames.roadBottom}"
+					aria-hidden="true"
+				>
+					<span class="side-road {sideRoad}" style="--grown: {roadGrown}"></span>
+					<span
+						class="turn-render"
+						style="background-size: {turnFrames.columns * 100}% {turnFrames.rows * 100}%; background-position: {((Math.max(turnFrame, 0) % turnFrames.columns) * 100) / (turnFrames.columns - 1)}% {(Math.floor(Math.max(turnFrame, 0) / turnFrames.columns) * 100) / (turnFrames.rows - 1)}%"
+					></span>
+				</div>
+				<div class="truck" class:left={truck.left} class:turning={turnFrame >= 0} class:driving={truck.driving} class:fast={truck.fast} class:gone={truck.gone} class:jump={truck.jump} class:paused={offscreen || hidden} style="--x: {truck.x}px; --y: {truck.y}px" aria-hidden="true" bind:this={truckEl} ontransitionend={arrived} ontransitioncancel={arrived}>
 					<span class="truck-render"></span>
 				</div>
 			</div>

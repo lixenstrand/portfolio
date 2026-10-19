@@ -369,8 +369,7 @@ bpy.ops.render.render(write_still=True)
 if '--preview' not in args:
     scene.cycles.samples=48
     scene.render.resolution_x,scene.render.resolution_y=720,240
-    scene.render.filepath=str(OUT/'truck-')
     bpy.context.preferences.filepaths.save_version = 0
     bpy.data.orphans_purge(do_recursive=True)
+    # render_turn.py renders the web frames from this scene, in both directions and turning
     bpy.ops.wm.save_as_mainfile(filepath=str(BASE/'truck.blend'))
-    bpy.ops.render.render(animation=True)
