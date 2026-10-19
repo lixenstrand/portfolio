@@ -3,8 +3,10 @@
 // `npm test` builds first. Set BASE_URL to check a server that is already running instead.
 import { after, before, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { execFileSync, spawn } from 'node:child_process';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { createServer } from 'node:net';
 
 const site = 'https://magnuslixenstrand.com';
@@ -199,6 +201,22 @@ test('every file the stylesheets use is served', async () => {
 	}
 });
 
+// What a recruiter reads in the CV, as pdftotext gets it
+for (const [lang, cv] of Object.entries(cvByLang)) {
+	test(`the CV in ${lang} carries the Yrkestitel`, async () => {
+		assert.ok((await pdfText(cv)).includes(jobTitleByLang[lang]), `${cv} lacks "${jobTitleByLang[lang]}"`);
+	});
+
+	test(`the CV in ${lang} shows no Tailscale address`, async () => {
+		assert.equal((await pdfText(cv)).match(tailscale)?.[0], undefined);
+	});
+
+	test(`the CV in ${lang} contains no word from the local blocklist`, { skip: !blocklist && 'no .private/spärrord.txt' }, async () => {
+		const text = (await pdfText(cv)).toLowerCase();
+		assert.deepEqual(blocklist.filter((word) => text.includes(word)), []);
+	});
+}
+
 test('the old CV address leads to the Swedish CV', async () => {
 	const res = await fetch(base + '/cv/magnus_lixenstrand_cv.pdf', { redirect: 'manual' });
 	assert.equal(res.status, 301);
@@ -227,6 +245,19 @@ async function served(path) {
 	const html = await get(path);
 	const scripts = [...new Set(html.match(/\/_app\/immutable\/[\w./-]+\.js/g))];
 	return [html, ...(await Promise.all(scripts.map(get)))].join('\n');
+}
+
+// The text of a served PDF, through pdftotext
+async function pdfText(path) {
+	const res = await fetch(base + path);
+	assert.equal(res.status, 200, `${path} answers ${res.status}`);
+	const dir = mkdtempSync(join(tmpdir(), 'cv-'));
+	try {
+		writeFileSync(join(dir, 'cv.pdf'), Buffer.from(await res.arrayBuffer()));
+		return execFileSync('pdftotext', ['-enc', 'UTF-8', join(dir, 'cv.pdf'), '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
+	} finally {
+		rmSync(dir, { recursive: true });
+	}
 }
 
 async function get(path) {

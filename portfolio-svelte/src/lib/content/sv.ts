@@ -193,7 +193,7 @@ export const sv = {
 			items: [
 				{ area: 'Utveckling', items: 'Python, FastAPI, Flask, SvelteKit, TypeScript, MySQL, REST-API:er, VBA' },
 				{ area: 'Drift och integration', items: 'Docker, Linux, Google Cloud, GitHub Actions, Fortnox, Microsoft 365, n8n' },
-				{ area: 'AI', items: 'Claude Code, Codex, agentflöden med kodgranskning, AI-assistenter' },
+				{ area: 'AI', items: 'LLM-applikationer, AI-agenter, MCP, RAG, evals, Claude Code, Codex' },
 				{ area: 'Verksamhet', items: 'Kravanalys, processkartläggning, projektledning, systeminförande, användarstöd' },
 				{ area: 'Affär', items: 'B2B-försäljning, förhandling, upphandling, budget' },
 				{ area: 'Språk', items: 'Svenska (modersmål), engelska (flytande)' }
