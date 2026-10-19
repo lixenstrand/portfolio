@@ -10,3 +10,6 @@ portfolio_interview.md
 
 # Local development
 start_portfolio.bat
+
+# Lokala anteckningar och spärrord som inte ska publiceras
+.private/
