@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/state';
-	import { texts } from '$lib/content';
+	import { pathTo, switcher, texts } from '$lib/content';
 
 	const t = $derived(texts());
+	const other = $derived(switcher());
 
 	let hamburgerOpen = $state(false);
 	let hamburgerButton: HTMLButtonElement;
 	let menuElement: HTMLDivElement;
 	let lastFocusedElement: HTMLElement | null = null;
 	let desktopMediaQuery: MediaQueryList | null = null;
-	let projectCurrent = $derived(page.url.pathname === '/' && page.url.hash === '#projects');
+	let projectCurrent = $derived(page.url.pathname === pathTo('home') && page.url.hash === '#projects');
+	let aboutCurrent = $derived(page.url.pathname === pathTo('about'));
 
 	function setBackgroundInert(inert: boolean) {
 		if (typeof document === 'undefined') return;
@@ -97,16 +99,17 @@
 
 <header class="site-header">
 	<nav class="site-nav" aria-label={t.nav.label}>
-		<a class="brand" href="/" onclick={() => closeMenu(false)}>
+		<a class="brand" href={pathTo('home')} onclick={() => closeMenu(false)}>
 			<span class="brand-name">Magnus Lixenstrand</span>
 			<span class="brand-role">{t.nav.role}</span>
 		</a>
 
 		<div bind:this={menuElement} class="nav-menu" class:active={hamburgerOpen} id="primary-navigation">
 			<ul>
-				<li><a href="/#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>{t.nav.projects}</a></li>
-				<li><a href="/about" class:current={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} onclick={() => closeMenu(false)}>{t.nav.about}</a></li>
+				<li><a href="{pathTo('home')}#projects" class:current={projectCurrent} aria-current={projectCurrent ? 'location' : undefined} onclick={() => closeMenu(false)}>{t.nav.projects}</a></li>
+				<li><a href={pathTo('about')} class:current={aboutCurrent} aria-current={aboutCurrent ? 'page' : undefined} onclick={() => closeMenu(false)}>{t.nav.about}</a></li>
 				<li><a href="#kontakt" onclick={() => closeMenu(false)}>{t.nav.contact}</a></li>
+				<li><a href={other.href} hreflang={other.lang} lang={other.lang} onclick={() => closeMenu(false)}>{other.name}</a></li>
 			</ul>
 		</div>
 

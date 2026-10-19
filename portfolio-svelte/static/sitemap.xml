@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
 	<!-- Home Page -->
 	<url>
 		<loc>https://magnuslixenstrand.com/</loc>
-		<lastmod>2026-09-29</lastmod>
+		<xhtml:link rel="alternate" hreflang="sv" href="https://magnuslixenstrand.com/" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://magnuslixenstrand.com/en" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://magnuslixenstrand.com/" />
+		<lastmod>2026-10-19</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://magnuslixenstrand.com/en</loc>
+		<xhtml:link rel="alternate" hreflang="sv" href="https://magnuslixenstrand.com/" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://magnuslixenstrand.com/en" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://magnuslixenstrand.com/" />
+		<lastmod>2026-10-19</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
 	</url>
@@ -15,7 +25,19 @@
 	<!-- About Page -->
 	<url>
 		<loc>https://magnuslixenstrand.com/about</loc>
-		<lastmod>2026-09-29</lastmod>
+		<xhtml:link rel="alternate" hreflang="sv" href="https://magnuslixenstrand.com/about" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://magnuslixenstrand.com/en/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://magnuslixenstrand.com/about" />
+		<lastmod>2026-10-19</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://magnuslixenstrand.com/en/about</loc>
+		<xhtml:link rel="alternate" hreflang="sv" href="https://magnuslixenstrand.com/about" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://magnuslixenstrand.com/en/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://magnuslixenstrand.com/about" />
+		<lastmod>2026-10-19</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>

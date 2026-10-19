@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { texts } from '$lib/content';
+	import PageMeta from '$lib/components/PageMeta.svelte';
 
 	const t = $derived(texts());
 
@@ -190,25 +191,10 @@
 
 <svelte:document onvisibilitychange={() => (hidden = document.hidden)} />
 
+<PageMeta title={t.home.title} description={t.home.description} type="website" />
+
 <svelte:head>
-	<title>{t.home.title}</title>
-	<meta name="description" content={t.home.description}>
 	<meta name="author" content="Magnus Lixenstrand">
-	<link rel="canonical" href="https://magnuslixenstrand.com/">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://magnuslixenstrand.com/">
-	<meta property="og:title" content={t.home.title}>
-	<meta property="og:description" content={t.home.description}>
-	<meta property="og:image" content={t.preview.image}>
-	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="630">
-	<meta property="og:image:alt" content={t.preview.alt}>
-	<meta property="og:locale" content={t.locale}>
-	<meta property="og:site_name" content="Magnus Lixenstrand">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content={t.home.title}>
-	<meta name="twitter:description" content={t.home.description}>
-	<meta name="twitter:image" content={t.preview.image}>
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 

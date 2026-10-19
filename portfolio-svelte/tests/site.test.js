@@ -7,10 +7,17 @@ import { spawn } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { createServer } from 'node:net';
 
-const pages = [
-	{ path: '/', lang: 'sv' },
-	{ path: '/about', lang: 'sv' }
+const site = 'https://magnuslixenstrand.com';
+
+// Every page in both languages: Swedish at the root paths, English under /en
+const versions = [
+	{ sv: '/', en: '/en' },
+	{ sv: '/about', en: '/en/about' }
 ];
+const pages = versions.flatMap((page) => ['sv', 'en'].map((lang) => ({ path: page[lang], lang, ...page })));
+const other = { sv: 'en', en: 'sv' };
+
+const localeByLang = { sv: 'sv_SE', en: 'en_US' };
 
 const cvByLang = {
 	sv: '/cv/magnus_lixenstrand_cv_2026.pdf',
@@ -43,10 +50,38 @@ before(async () => {
 
 after(() => server?.kill());
 
-for (const { path, lang } of pages) {
+for (const { path, lang, sv, en } of pages) {
 	test(`${path} is served in ${lang}`, async () => {
 		const html = await get(path);
 		assert.equal(html.match(/<html\b[^>]*\blang="([^"]*)"/)?.[1], lang);
+	});
+
+	// Search engines show the version in the searcher's language; Swedish is the default
+	test(`${path} names its own URL and the page in each language`, async () => {
+		const head = tags(await get(path), 'link');
+		const alternates = Object.fromEntries(head.filter((l) => l.rel === 'alternate').map((l) => [l.hreflang, l.href]));
+		assert.deepEqual(alternates, { sv: site + sv, en: site + en, 'x-default': site + sv });
+		assert.equal(head.find((l) => l.rel === 'canonical')?.href, site + path);
+	});
+
+	test(`${path} is shared as ${localeByLang[lang]}`, async () => {
+		const meta = tags(await get(path), 'meta');
+		assert.equal(meta.find((m) => m.property === 'og:locale')?.content, localeByLang[lang]);
+		assert.equal(meta.find((m) => m.property === 'og:url')?.content, site + path);
+	});
+
+	test(`${path} switches to the same page in ${other[lang]}`, async () => {
+		const switches = links(await get(path)).filter((a) => a.hreflang);
+		const to = other[lang];
+		assert.deepEqual(switches.map((a) => ({ href: a.href, hreflang: a.hreflang, lang: a.lang })), [{ href: { sv, en }[to], hreflang: to, lang: to }]);
+	});
+
+	// Only the language switcher leaves the page's language
+	test(`${path} links to the site's pages in ${lang}`, async () => {
+		const sitePages = versions.flatMap((page) => [page.sv, page.en]);
+		const pageLinks = links(await get(path)).filter((a) => !a.hreflang && sitePages.includes(a.href?.split('#')[0]));
+		assert.ok(pageLinks.length, 'no links to the site\'s pages');
+		for (const a of pageLinks) assert.ok(versions.some((page) => page[lang] === a.href.split('#')[0]), `"${a.href}" is not in ${lang}`);
 	});
 
 	// A CV link opens the CV in the language the link is written in: the page's, unless the link says otherwise
@@ -72,6 +107,18 @@ for (const { path, lang } of pages) {
 	});
 }
 
+test('the sitemap lists every page with its version in each language', async () => {
+	const urls = [...(await get('/sitemap.xml')).matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, url]) => ({
+		loc: url.match(/<loc>([^<]*)<\/loc>/)?.[1],
+		alternates: Object.fromEntries(tags(url, 'xhtml:link').map((l) => [l.hreflang, l.href]))
+	}));
+	assert.deepEqual(urls.map((url) => url.loc).sort(), pages.map((page) => site + page.path).sort());
+	for (const { path, sv, en } of pages) {
+		const url = urls.find((url) => url.loc === site + path);
+		assert.deepEqual(url.alternates, { sv: site + sv, en: site + en, 'x-default': site + sv }, path);
+	}
+});
+
 test('the old CV address leads to the Swedish CV', async () => {
 	const res = await fetch(base + '/cv/magnus_lixenstrand_cv.pdf', { redirect: 'manual' });
 	assert.equal(res.status, 301);
@@ -80,7 +127,12 @@ test('the old CV address leads to the Swedish CV', async () => {
 
 // The attributes of every link on the page
 function links(html) {
-	return [...html.matchAll(/<a\b([^>]*)>/g)].map(([, attrs]) =>
+	return tags(html, 'a');
+}
+
+// The attributes of every tag with this name
+function tags(html, name) {
+	return [...html.matchAll(new RegExp(`<${name}\\b([^>]*)>`, 'g'))].map(([, attrs]) =>
 		Object.fromEntries([...attrs.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, name, value]) => [name, value]))
 	);
 }
