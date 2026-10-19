@@ -120,11 +120,11 @@ export const en: typeof sv = {
 	},
 
 	about: {
-		title: 'About Magnus Lixenstrand – from sales to systems development',
-		description: 'Magnus Lixenstrand spent twelve years in sales and built an ERP system that is used every day. About his background and skills.',
+		title: `About Magnus Lixenstrand, ${jobTitle} – from sales to AI`,
+		description: `Magnus Lixenstrand is an ${jobTitle}. He spent twelve years in sales, planned and built Nordic Metal Trade’s ERP system and now builds LLMs into it. About his background and skills.`,
 		hero: {
-			title: 'Twelve years in sales, now a systems developer',
-			lede: 'My years in sales taught me where work gets stuck. Today I own Nordic Metal Trade’s ERP system, from requirements to operations.'
+			title: `Twelve years in sales, now an ${jobTitle}`,
+			lede: 'My years in sales taught me where work gets stuck. I built Nordic Metal Trade’s ERP system and own it today, from requirements to operations. Now I’m building LLMs into it.'
 		},
 		why: {
 			title: 'Why I started building systems',
@@ -137,6 +137,13 @@ export const en: typeof sv = {
 				'I’m the product owner and sole developer, and I was project lead for the rollout: testing, training and the switch from the old system.'
 			],
 			result: { before: 'The system has ', strong: 'about ten users and saves the team more than 20 hours a week', after: '.' }
+		},
+		ai: {
+			title: 'From systems to AI',
+			text: [
+				'Today I also build LLMs into the ERP system. Its AI assistant answers colleagues’ questions about orders, stock, materials and routines. It can also create customers and turn enquiries into quotes, but only once the user confirms.',
+				'I develop with AI coding agents that take an issue all the way to a reviewed and merged PR, and I’m the final check.'
+			]
 		},
 		path: {
 			title: 'How I got here',

@@ -124,11 +124,11 @@ export const sv = {
 	},
 
 	about: {
-		title: 'Om Magnus Lixenstrand – från försäljning till systemutveckling',
-		description: 'Magnus Lixenstrand har sålt i tolv år och byggt ett affärssystem som används varje dag. Om hans bakgrund och kompetenser.',
+		title: `Om Magnus Lixenstrand, ${jobTitle} – från försäljning till AI`,
+		description: `Magnus Lixenstrand är ${jobTitle}. Han sålde i tolv år, planerade och byggde Nordic Metal Trades affärssystem och bygger nu in LLM:er i det. Om hans bakgrund och kompetenser.`,
 		hero: {
-			title: 'Tolv år som säljare, nu systemutvecklare',
-			lede: 'Säljåren lärde mig var arbetet fastnar. I dag äger jag Nordic Metal Trades affärssystem, från kravställning till drift.'
+			title: `Tolv år som säljare, nu ${jobTitle}`,
+			lede: 'Säljåren lärde mig var arbetet fastnar. Jag byggde Nordic Metal Trades affärssystem och äger det i dag, från kravställning till drift. Nu bygger jag in LLM:er i det.'
 		},
 		why: {
 			title: 'Varför jag började bygga system',
@@ -141,6 +141,13 @@ export const sv = {
 				'Jag är produktägare och ensam utvecklare, och var projektledare för införandet: test, utbildning och bytet från det gamla systemet.'
 			],
 			result: { before: 'Systemet har ', strong: 'cirka tio användare och sparar teamet över 20 timmar i veckan', after: '.' }
+		},
+		ai: {
+			title: 'Från system till AI',
+			text: [
+				'I dag bygger jag också in LLM:er i affärssystemet. AI-assistenten i systemet svarar kollegorna om order, lager, material och rutiner. Den kan också lägga upp kunder och göra om förfrågningar till offerter, men först när användaren har bekräftat.',
+				'Jag utvecklar med AI-kodagenter som tar ett ärende hela vägen till en granskad och mergad PR, och jag är sista instans.'
+			]
 		},
 		path: {
 			title: 'Vägen hit',
