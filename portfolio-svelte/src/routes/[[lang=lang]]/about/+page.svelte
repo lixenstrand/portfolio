@@ -1,35 +1,18 @@
 <script lang="ts">
-	import { texts } from '$lib/content';
+	import { pathTo, texts } from '$lib/content';
+	import PageMeta from '$lib/components/PageMeta.svelte';
 
 	const t = $derived(texts());
 </script>
 
-<svelte:head>
-	<title>{t.about.title}</title>
-	<meta name="description" content={t.about.description}>
-	<link rel="canonical" href="https://magnuslixenstrand.com/about">
-	<meta property="og:type" content="profile">
-	<meta property="og:url" content="https://magnuslixenstrand.com/about">
-	<meta property="og:title" content={t.about.title}>
-	<meta property="og:description" content={t.about.description}>
-	<meta property="og:image" content={t.preview.image}>
-	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="630">
-	<meta property="og:image:alt" content={t.preview.alt}>
-	<meta property="og:locale" content={t.locale}>
-	<meta property="og:site_name" content="Magnus Lixenstrand">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content={t.about.title}>
-	<meta name="twitter:description" content={t.about.description}>
-	<meta name="twitter:image" content={t.preview.image}>
-</svelte:head>
+<PageMeta title={t.about.title} description={t.about.description} type="profile" />
 
 <section class="hero hero-about" aria-labelledby="om-rubrik">
 	<div class="hero-copy">
 		<h1 id="om-rubrik">{t.about.hero.title}</h1>
 		<p class="lede">{t.about.hero.lede}</p>
 		<div class="cta-group">
-			<a href="/#affarssystemet" class="cta-primary">{t.seeErp}</a>
+			<a href="{pathTo('home')}#affarssystemet" class="cta-primary">{t.seeErp}</a>
 			<a href={t.cv.href} target="_blank" rel="noopener noreferrer" aria-label={t.cv.openLabel} class="cta-secondary">{t.cv.open}</a>
 			<a href={t.cvOther.href} target="_blank" rel="noopener noreferrer" aria-label={t.cvOther.label} class="cta-secondary" lang={t.cvOther.lang}>{t.cvOther.short}</a>
 		</div>

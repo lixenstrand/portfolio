@@ -73,6 +73,7 @@
 	font-size: 0.975rem;
 	font-weight: 600;
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 .nav-menu a:hover {
@@ -774,6 +775,13 @@
 
 .error-page p:not(.error-code) {
 	color: var(--ink-soft);
+}
+
+/* Narrow desktop: room for the menu and the language switcher next to the role */
+@media (min-width: 821px) and (max-width: 959px) {
+	.nav-menu ul {
+		gap: 1.25rem;
+	}
 }
 
 /* Tablet and phone */

@@ -3,6 +3,8 @@ import { cvFiles } from './cv';
 // Every text on the site in Swedish, so the markup holds nothing that needs translating.
 export const sv = {
 	locale: 'sv_SE',
+	// The language's name in itself, for the language switcher
+	language: 'Svenska',
 	skipLink: 'Hoppa till huvudinnehåll',
 	portraitAlt: 'Magnus Lixenstrand',
 	seeErp: 'Se affärssystemet',

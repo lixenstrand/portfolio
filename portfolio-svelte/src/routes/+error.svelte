@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { texts } from '$lib/content';
+	import { pathTo, texts } from '$lib/content';
 
 	const t = $derived(texts());
 	const message = $derived(page.status === 404 ? t.error.notFound : t.error.failed);
@@ -16,8 +16,8 @@
 	<h1 id="fel-rubrik">{message.title}</h1>
 	<p>{message.text}</p>
 	<div class="cta-group">
-		<a href="/" class="cta-primary">{t.error.home}</a>
-		<a href="/#affarssystemet" class="cta-secondary">{t.seeErp}</a>
+		<a href={pathTo('home')} class="cta-primary">{t.error.home}</a>
+		<a href="{pathTo('home')}#affarssystemet" class="cta-secondary">{t.seeErp}</a>
 		<a href={t.cv.href} target="_blank" rel="noopener noreferrer" aria-label={t.cv.openLabel} class="cta-secondary">{t.cv.open}</a>
 	</div>
 </section>
